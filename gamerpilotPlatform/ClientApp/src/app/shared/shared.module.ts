@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { RouterExtService } from './RouterExtService';
 
 
 
@@ -25,6 +26,9 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     RouterModule,
     LoadingSpinnerComponent
 
-  ]
+  ],
+  providers: [
+    RouterExtService
+  ],
 })
 export class SharedModule {}

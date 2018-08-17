@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
+import { RouterExtService } from '../../shared/RouterExtService';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private _auth: AuthService,
     private router: Router,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private routerExtService: RouterExtService,
   ) {}
 
   ngOnInit() {
@@ -37,17 +40,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.login$.unsubscribe();
     }
   }
-
-    // tslint:disable-next-line:use-life-cycle-interface
-/*     ngAfterViewInit() {
-      this.elementRef.nativeElement.querySelector('#email')
-        .addEventListener('change', this.clearError);
-
-
-    } */
-
-  /*   document.getElementById('email').addEventListener('change', doThing);
-   */
 
   createFormControls() {
     (this.email = new FormControl('', [
@@ -66,8 +58,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-
-
   loginUser() {
     // clear any existing data
      this._auth.logout();
@@ -76,12 +66,18 @@ export class LoginComponent implements OnInit, OnDestroy {
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
 
-      console.log(email + password);
-
       // set loading to true and then false if error
       this.showSpinner = true;
       this.login$ = this._auth.login(email, password).subscribe(() => {
-        /* this.router.navigateByUrl('/books'); */
+
+      // on successful auth redirect to previous url
+      let previous = this.routerExtService.getPreviousUrl();
+
+      if (previous) {
+        this.router.navigateByUrl(previous);
+      } else {
+        this.router.navigateByUrl('/');
+      }
       },
       err => {
         console.log(err.status);

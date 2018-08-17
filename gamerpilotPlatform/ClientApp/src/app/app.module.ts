@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './components/login/login.component';
+import { RouterExtService } from './shared/RouterExtService';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,9 @@ import { LoginComponent } from './components/login/login.component';
    bootstrap: [AppComponent]
 
 })
-export class AppModule { }
+export class AppModule {
+    constructor(private routerExtService: RouterExtService) {}
+
+}
 
 
