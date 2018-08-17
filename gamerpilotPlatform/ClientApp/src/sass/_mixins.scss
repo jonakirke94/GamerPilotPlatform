@@ -1,1 +1,7 @@
-$red: #ff6a00;
+
+
+@mixin transition($property) {
+    -webkit-transition: background-color $property linear;
+    -ms-transition: background-color $property linear;
+    transition: background-color $property linear;
+}

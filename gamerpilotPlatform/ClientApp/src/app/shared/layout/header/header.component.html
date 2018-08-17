@@ -30,29 +30,38 @@
       </ul>
     </div>
 </nav> -->
-<h1 class="test">Test</h1>
-<h2>COLOR ME</h2>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar fixed-top navbar-expand-lg" id="navbar">
   <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" (click)="toggleCollapsed()" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <ul class="nav navbar-nav mr-auto">
-      <li class="nav-item active">
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+
+
+
+  <ul *ngIf="isAuthed" class="nav navbar-nav ml-auto" >
+      <li class="nav-item">
+          <a class="nav-link" href="#">Personlighedstest</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Books</a>
+    </li>  
+    <li class="nav-item">
+      <a class="nav-link" (click)="logout()">Logud</a>
+  </li>
+  </ul>
+
+  <ul *ngIf="!isAuthed" class="nav navbar-nav ml-auto">
+      <li class="nav-item">
           <a class="nav-link" href="#">Home</a>
       </li>
-      <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+      <li class="nav-item highlight-link">
+          <a class="nav-link " href="#">Kursus</a>
       </li>
-      <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-      </li>
-  </ul>
-  <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item">
-          <a class="nav-link" href="#">Link on the Right</a>
-      </li>
-  </ul>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Til forældre</a>
+    </li>
+ 
+</ul>
   </div>
 </nav>

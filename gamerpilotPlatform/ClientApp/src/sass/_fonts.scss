@@ -1,0 +1,30 @@
+$font-stack: Work Sans Med, Trebuchet MS, Arial, Verdana, sans-serif;
+
+
+@font-face {
+    font-family: "Work Sans Med";
+    src: url("assets/fonts/WorkSans-Medium.otf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Work Sans Reg";
+    src: url("assets/fonts/WorkSans-Regular.otf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Abel";
+    src: url("/assetsfonts/Abel.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Work Sans Light";
+    src: url("/assetsfonts/WorkSans-Light.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }

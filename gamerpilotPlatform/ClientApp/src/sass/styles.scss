@@ -1,7 +1,11 @@
 @import './variables';
 @import './mixins';
+@import './fonts';
 
 
-h1 {
-  color: $red;
+body {
+  background-color: $main;
+  font-family: $font-stack;
+  padding-top: 70px;
 }
+
