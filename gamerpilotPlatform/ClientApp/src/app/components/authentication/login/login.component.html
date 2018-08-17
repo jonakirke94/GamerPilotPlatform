@@ -8,7 +8,7 @@
       Login
     </div>
 
-    <i class="far fa-user auth-icon"></i>
+    <i class="fas fa-user auth-icon"></i>
 
 
     <div class="content">
@@ -17,7 +17,7 @@
         <form [formGroup]="loginForm" novalidate (ngSubmit)="loginUser()">
           <div class="field">
             <div class="control">
-              <input [ngClass]="{'is-invalid': email.invalid  && (email.dirty || email.touched)}" autofill="false" id="email" type="email" name="email" title="email" placeholder="Email" formControlName="email" autocomplete="email">
+              <input [ngClass]="{'is-invalid': email.invalid  && email.dirty && email.touched}" id="email" type="email" name="email" title="email" placeholder="Email" formControlName="email" autocomplete="email">
               <span class="text-danger" *ngIf="email.errors  && (email.dirty || email.touched)">
                 <p *ngIf="email.errors.pattern">Please enter a valid email</p>
               </span>

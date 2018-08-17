@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
-import { RouterExtService } from '../../shared/RouterExtService';
-import { IfStmt } from '@angular/compiler';
-import { flyInOut } from '../../shared/animation';
+
+import { flyInOut } from '../../../shared/animation';
+import { AuthService } from '../../../core/services/auth.service';
+import { RouterExtService } from '../../../shared/RouterExtService';
+import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-spinner.component';
+
 
 @Component({
   selector: 'app-login',

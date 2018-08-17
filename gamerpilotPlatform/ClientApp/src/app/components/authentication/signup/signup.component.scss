@@ -1,0 +1,90 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
+
+.auth-container {
+    border: 1px solid lighten($blue, 5%); 
+    margin-top: 200px;
+    padding: 50px;
+    box-shadow: 10px 10px 40px 0 rgba(0,0,0,.6);
+}
+
+input {
+    border: none;
+    padding: 0 25px;
+    color: #414351;
+    font-size: 15px;
+    border-radius: 0;
+    -webkit-appearance: none;
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    height: 48px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.text-danger {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.btn-blue {
+    @include btn-gp;
+    width: 100%;
+    background-color: $blue;
+    border-radius: 0;
+    border: .0625rem solid $blue;
+    padding: 0.8rem 4rem 0.8rem 4rem; //top-right-bot-left
+}
+
+.auth-icon {
+    color: white;
+    font-size: 96px;
+    padding: 40px;
+}
+
+.auth-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -20px;
+    padding:  1.2rem 6rem 1.2rem 6rem;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: $font-stack;
+    background: $blue;
+    color: white;
+    outline: 0;
+}
+
+.error-txt {
+    display: block;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    clear: both;
+}
+
+.is-valid {
+    border-left: 8px solid $success;
+}
+
+.is-invalid {
+    border-left: 8px solid $danger;
+}
+
+
+.link-box-top a {
+    margin-top: 10px;
+    padding-bottom: 30px;
+    color: $blue;
+}
+
+.link-box-bottom a {
+    margin-top: 10px;
+    padding-top: 15px;
+    color: $blue;
+    display: block;
+}
+
+

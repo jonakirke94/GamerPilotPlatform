@@ -13,7 +13,6 @@ import { FetchDataComponent } from './components/fetch-data/fetch-data.component
 import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
-import { LoginComponent } from './components/login/login.component';
 import { RouterExtService } from './shared/RouterExtService';
 
 @NgModule({
@@ -22,8 +21,7 @@ import { RouterExtService } from './shared/RouterExtService';
       FetchDataComponent,
       HomeComponent,
       HeaderComponent,
-      BooksComponent,
-      LoginComponent,
+      BooksComponent
   ],
   imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
