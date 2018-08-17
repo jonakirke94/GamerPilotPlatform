@@ -3,9 +3,10 @@
 @import '~sass/fonts';
 
 .auth-container {
-    border: 1px solid $blue;
+    border: 1px solid lighten($blue, 5%); 
     margin-top: 200px;
     padding: 50px;
+    box-shadow: 10px 10px 40px 0 rgba(0,0,0,.6);
 }
 
 input {
@@ -19,8 +20,13 @@ input {
     font-size: 100%;
     line-height: 1.15;
     height: 48px;
-    margin-bottom: 10px;
+    margin-top: 10px;
     width: 100%;
+}
+
+.text-danger {
+    text-align: left;
+    margin-top: 5px;
 }
 
 .btn-blue {
@@ -52,12 +58,30 @@ input {
     outline: 0;
 }
 
+.error-txt {
+    display: block;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    clear: both;
+}
+
+.is-valid {
+    border-left: 8px solid $success;
+}
+
+.is-invalid {
+    border-left: 8px solid $danger;
+}
+
+
 .link-box-top a {
+    margin-top: 10px;
     padding-bottom: 30px;
     color: $blue;
 }
 
 .link-box-bottom a {
+    margin-top: 10px;
     padding-top: 15px;
     color: $blue;
     display: block;

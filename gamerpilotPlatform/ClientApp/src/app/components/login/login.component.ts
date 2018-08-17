@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient,
     private _auth: AuthService,
-    private router: Router
+    private router: Router,
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -37,10 +38,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
+    // tslint:disable-next-line:use-life-cycle-interface
+/*     ngAfterViewInit() {
+      this.elementRef.nativeElement.querySelector('#email')
+        .addEventListener('change', this.clearError);
+
+
+    } */
+
+  /*   document.getElementById('email').addEventListener('change', doThing);
+   */
+
   createFormControls() {
     (this.email = new FormControl('', [
       Validators.required,
-     /*  Validators.pattern('[^ @]*@[^ *]*') */
+      Validators.pattern('[^ @]*@[^ *]*')
     ])),
       (this.password = new FormControl('', [
         Validators.required,
@@ -53,6 +65,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: this.password
     });
   }
+
+
 
   loginUser() {
     // clear any existing data
@@ -67,11 +81,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       // set loading to true and then false if error
       this.showSpinner = true;
       this.login$ = this._auth.login(email, password).subscribe(() => {
-        this.router.navigateByUrl('/books');
+        /* this.router.navigateByUrl('/books'); */
       },
       err => {
-        console.log('caught error');
+        console.log(err.status);
         this.error = err.status === 400 ? 'Please check your email and password' : 'Error';
+        console.log(this.error);
         this.showSpinner = false;
       });
     }

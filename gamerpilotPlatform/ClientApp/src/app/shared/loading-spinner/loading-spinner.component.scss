@@ -1,13 +1,15 @@
+@import '~sass/variables';
+
 .spinner {
     margin: 100px auto;
-    width: 50px;
-    height: 40px;
+    width: 200px;
+    height: 80px;
     text-align: center;
-    font-size: 10px;
+    font-size: 40px;
   }
   
   .spinner > div {
-    background-color: #333;
+    background-color: $blue;
     height: 100%;
     width: 6px;
     display: inline-block;

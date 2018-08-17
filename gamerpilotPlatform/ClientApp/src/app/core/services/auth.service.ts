@@ -72,7 +72,6 @@ export class AuthService {
 
   logout() {
     this.IsAuthed.emit(false);
-
     this._storage.destroyTokens();
   }
 }

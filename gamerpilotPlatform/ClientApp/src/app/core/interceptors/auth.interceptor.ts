@@ -33,13 +33,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
     private logout() {
         this._auth.logout();
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/login');
     }
 
     intercept(req: HttpRequest<any>,
         next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(this.applyCredentials(req)).pipe(
             catchError(err => {
+                console.log('Caught error in interceptor');
 
                 if (err instanceof HttpErrorResponse) {
 
@@ -64,15 +65,15 @@ export class AuthInterceptor implements HttpInterceptor {
                           // resend request with updated header
                           return next.handle(this.applyCredentials(req));
                         }));
-                    } else {
+                    }
+                    // if 401 redirect to login
+                    if (err.status === 401) {
                         this.logout();
                     }
 
                 }
 
                 return Observable.throw(err);
-
-
             })
 
 

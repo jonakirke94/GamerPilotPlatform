@@ -2,7 +2,7 @@
 <div class="col-lg-3 col-md-4 col-sm-6 text-center auth-container">
 
 <div id="login">
-  <div class="login-card text-center">
+  <div class="login-card text-center ">
 
     <div class="auth-title ">
       Login
@@ -17,9 +17,8 @@
         <form [formGroup]="loginForm" novalidate (ngSubmit)="loginUser()">
           <div class="field">
             <div class="control">
-              <input [ngClass]="{'is-invalid': email.invalid  && (email.dirty || email.touched),'is-valid': email.valid && (email.dirty || email.touched)
-            }" id="email" type="email" name="email" title="email" placeholder="Email" formControlName="email" autocomplete="email">
-              <span class="help is-danger has-text-left" *ngIf="email.errors  && (email.dirty || email.touched)">
+              <input [ngClass]="{'is-invalid': email.invalid  && (email.dirty || email.touched)}" autofill="false" id="email" type="email" name="email" title="email" placeholder="Email" formControlName="email" autocomplete="email">
+              <span class="text-danger" *ngIf="email.errors  && (email.dirty || email.touched)">
                 <p *ngIf="email.errors.pattern">Please enter a valid email</p>
               </span>
 
@@ -32,12 +31,15 @@
             </div>
           </div>
 
+          <span *ngIf="error && loginForm.untouched">
+            <p  class="text-danger error-txt">{{error}}</p>
+          </span>
+
           <div class="link-box-top d-none d-lg-block text-center">
             <a class="float-md-left" href="../">Need help?</a> 
             <a class="float-md-right" href="../">Forgot Password?</a> 
           </div>
 
-          <div *ngIf="error" class="help is-danger has-text-left error-text">{{error}}</div>
 
           <button class="btn btn-blue" [disabled]="!loginForm.valid">Login</button>
 
