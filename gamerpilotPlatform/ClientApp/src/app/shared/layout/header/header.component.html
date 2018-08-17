@@ -1,37 +1,8 @@
-<!-- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul *ngIf="isAuthed" class="nav navbar-nav">
-      <li class="active">
-        <a routerLink="home" href="#">Home</a>
-      </li>
-      <li class="active">
-        <a href="#">Kurser</a>
-      </li>
-      <li class="active">
-        <a routerLink="/books" href="#">Books</a>
-      </li>
-      <li (click)="logout()"><a href="#">Logout</a></li>
+<nav *ngIf="showNav" class="navbar fixed-top navbar-expand-lg" id="navbar">
 
-    </ul>
-
-    <ul *ngIf="!isAuthed" class="nav navbar-nav">
-        <li class="active">
-          <a routerLink="/home" href="#">Home</a>
-        </li>
-        <li class="active">
-          <a  routerLink="/fetch-data" href="#">Login</a>
-        </li>
-        <li class="active">
-          <a href="#">Signup</a>
-        </li>
-      </ul>
-    </div>
-</nav> -->
-<nav *ngIf="!showNav" class="navbar fixed-top navbar-expand-lg" id="navbar">
-  <a class="navbar-brand" href="#">Navbar</a>
+ <a class="navbar-brand" href="#">
+    <img src="assets/images/gp-logo-c.png" class="d-inline-block align-top" height="30" alt="GamerPilot Logo">
+  </a>
 
   <div (click)="toggleOverlay()" class="navbar-toggler">
     <i *ngIf="!showOverlay" class="fas fa-bars nav-icon"  aria-expanded="false" aria-label="Toggle navigation"></i>
@@ -47,7 +18,7 @@
           <a class="nav-link" href="#">Personlighedstest</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Books</a>
+        <a class="nav-link" routerLink="/books">Books</a>
     </li>  
     <li class="nav-item">
       <a class="nav-link" (click)="logout()">Logud</a>
@@ -58,8 +29,8 @@
       <li class="nav-item">
           <a class="nav-link" href="#">Home</a>
       </li>
-      <li class="nav-item highlight-link">
-          <a class="nav-link " href="#">Kursus</a>
+      <li class="nav-item highlight-link" >
+          <a class="nav-link" [routerLink]="['/books']">Books</a>
       </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Til forældre</a>

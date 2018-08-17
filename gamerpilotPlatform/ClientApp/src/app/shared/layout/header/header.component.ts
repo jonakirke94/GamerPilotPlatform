@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-layout-header',
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   isAuthed: boolean;
 
   showNav = true;
-  showOverlay = true;
+  showOverlay = false;
 
     constructor(private _auth: AuthService,
       private router: Router) {
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
     // changing navbar background on scroll
     @HostListener('window:scroll', [])
     onWindowScroll() {
-      if (!this.showNav) {
+      if (this.showNav) {
         const myNav = document.getElementById('navbar');
         if (document.documentElement.scrollTop || document.body.scrollTop > window.innerHeight) {
           myNav.classList.add('navbarScroll');

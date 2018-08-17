@@ -8,11 +8,12 @@ import { HomeComponent } from './components/home/home.component';
 const routes: Routes = [
     { path: '', component: HomeComponent }, // index
     { path: 'home', component: HomeComponent },
-    { path: 'books', canActivate: [AuthGuard], component: BooksComponent },
-
+/*     { path: 'books', canActivate: [AuthGuard], component: BooksComponent },
+ */
+    { path: 'books', component: BooksComponent },
     { path: 'fetch-data', component: FetchDataComponent },
-    { path: '**', redirectTo: 'home' }
-
+/*     { path: '**', redirectTo: 'home' }
+ */
   ];
 
   @NgModule({

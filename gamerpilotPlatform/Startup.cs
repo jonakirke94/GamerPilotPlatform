@@ -110,7 +110,7 @@ namespace gamerpilotPlatform
 
                 if (env.IsDevelopment())
                 {
-                    spa.Options.StartupTimeout = new TimeSpan(0, 0, 80);
+                    spa.Options.StartupTimeout = new TimeSpan(0, 2, 0);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });

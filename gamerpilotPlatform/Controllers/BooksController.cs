@@ -12,7 +12,7 @@ namespace gamerpilotPlatform.Controllers
     {
 
 
-        [HttpGet("[action]"), Authorize]
+        [HttpGet("[action]")]
         public IEnumerable<Book> GetAll()
         {
             var resultBookList = new Book[] {
