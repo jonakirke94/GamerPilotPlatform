@@ -13,6 +13,9 @@ export class HeaderComponent implements OnInit {
   isLoggedin$: Observable<boolean>;
   isAuthed: boolean;
 
+  showNav = true;
+  showOverlay = true;
+
     constructor(private _auth: AuthService,
       private router: Router) {
 
@@ -26,22 +29,23 @@ export class HeaderComponent implements OnInit {
       this.isAuthed = status;
   }
 
-    // tslint:disable-next-line:member-ordering
-    collapsed = true;
-     toggleCollapsed(): void {
-       this.collapsed = !this.collapsed;
+  toggleOverlay(): void {
+       this.showOverlay = !this.showOverlay;
+       this.showNav = !this.showNav;
      }
 
     // changing navbar background on scroll
     @HostListener('window:scroll', [])
     onWindowScroll() {
-      const myNav = document.getElementById('navbar');
-      if (document.documentElement.scrollTop || document.body.scrollTop > window.innerHeight) {
-        myNav.classList.add('navbarScroll');
-        myNav.classList.remove('navbarTransparent');
-      } else {
-        myNav.classList.add('navbarTransparent');
-        myNav.classList.remove('navbarScroll');
+      if (!this.showNav) {
+        const myNav = document.getElementById('navbar');
+        if (document.documentElement.scrollTop || document.body.scrollTop > window.innerHeight) {
+          myNav.classList.add('navbarScroll');
+          myNav.classList.remove('navbarTransparent');
+        } else {
+          myNav.classList.add('navbarTransparent');
+          myNav.classList.remove('navbarScroll');
+        }
       }
     }
 

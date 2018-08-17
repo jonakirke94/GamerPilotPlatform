@@ -30,12 +30,15 @@
       </ul>
     </div>
 </nav> -->
-<nav class="navbar fixed-top navbar-expand-lg" id="navbar">
+<nav *ngIf="!showNav" class="navbar fixed-top navbar-expand-lg" id="navbar">
   <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" (click)="toggleCollapsed()" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+
+  <div (click)="toggleOverlay()" class="navbar-toggler">
+    <i *ngIf="!showOverlay" class="fas fa-bars nav-icon"  aria-expanded="false" aria-label="Toggle navigation"></i>
+
+
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
 
 
@@ -65,3 +68,25 @@
 </ul>
   </div>
 </nav>
+
+
+<!-- The overlay -->
+<div id="myNav" class="overlay" *ngIf="showOverlay">
+
+  <a href="javascript:void(0)" class="closebtn" (click)="toggleOverlay()">&times;</a>
+
+  <!-- Overlay content -->
+  <div *ngIf="isAuthed" class="overlay-content">
+    <a href="#">Personlighedstest</a>
+    <a href="#">Books</a>
+    <a href="#">Logud</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <div *ngIf="!isAuthed" class="overlay-content">
+      <a href="#">Home</a>
+      <a href="#">Kursus</a>
+      <a href="#">Til forældre</a>
+    </div>
+
+</div>
