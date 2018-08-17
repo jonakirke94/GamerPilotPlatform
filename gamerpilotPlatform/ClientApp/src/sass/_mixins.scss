@@ -5,3 +5,24 @@
     -ms-transition: background-color $property linear;
     transition: background-color $property linear;
 }
+
+@mixin btn-gp {
+    display: inline-block !important;
+    padding: 1.3rem 4rem 1.3rem 4rem; //top-right-bot-left
+    font-family: inherit;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    border-radius: 2.1875rem;
+    cursor: pointer;
+    -webkit-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+

@@ -27,7 +27,7 @@
 
   <ul *ngIf="!isAuthed" class="nav navbar-nav ml-auto">
       <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" routerLink='/login'>Login</a>
       </li>
       <li class="nav-item highlight-link" >
           <a class="nav-link" [routerLink]="['/books']">Books</a>

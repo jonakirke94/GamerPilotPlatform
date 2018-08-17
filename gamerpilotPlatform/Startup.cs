@@ -110,6 +110,7 @@ namespace gamerpilotPlatform
 
                 if (env.IsDevelopment())
                 {
+                    //delay timeout 2 min to avoid timeout
                     spa.Options.StartupTimeout = new TimeSpan(0, 2, 0);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
