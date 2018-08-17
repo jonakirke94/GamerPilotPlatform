@@ -6,11 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { RouterExtService } from '../../shared/RouterExtService';
 import { IfStmt } from '@angular/compiler';
+import { flyInOut } from '../../shared/animation';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [flyInOut]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
@@ -71,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.login$ = this._auth.login(email, password).subscribe(() => {
 
       // on successful auth redirect to previous url
-      let previous = this.routerExtService.getPreviousUrl();
+      const previous = this.routerExtService.getPreviousUrl();
 
       if (previous) {
         this.router.navigateByUrl(previous);
@@ -80,9 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
       },
       err => {
-        console.log(err.status);
         this.error = err.status === 400 ? 'Please check your email and password' : 'Error';
-        console.log(this.error);
         this.showSpinner = false;
       });
     }

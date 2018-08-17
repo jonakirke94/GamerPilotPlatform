@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -31,6 +32,7 @@ import { RouterExtService } from './shared/RouterExtService';
       FormsModule,
       AppRoutingModule,
       CoreModule,
+      BrowserAnimationsModule,
       SharedModule
   ],
    providers: [
