@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using gamerpilotPlatform.Data;
 using gamerpilotPlatform.Model;
 using gamerpilotPlatform.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gamerpilotPlatform.Controllers
@@ -26,17 +27,24 @@ namespace gamerpilotPlatform.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Signup([FromBody] User sentUser)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Username == sentUser.Username);
-            if (user != null) return StatusCode(409);
-
-            _context.Users.Add(new User
+            var user = _context.Users.SingleOrDefault(u => u.Email == sentUser.Email);
+            if (user != null) return StatusCode(409, Json(sentUser.Email + " already exists."));
+   
+            try
             {
-                Username = sentUser.Username,
-                Password = _passwordHasher.GenerateIdentityV3Hash(sentUser.Password)
-            });
+                _context.Users.Add(new User
+                {
+                    Username = sentUser.Username,
+                    Email = sentUser.Email,
+                    Password = _passwordHasher.GenerateIdentityV3Hash(sentUser.Password)
+                });
 
-
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
 
             return Ok(user);
         }

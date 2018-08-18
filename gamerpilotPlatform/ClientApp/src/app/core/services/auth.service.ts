@@ -24,9 +24,10 @@ export class AuthService {
     this.baseUrl = _baseUrl;
   }
 
-  signup(username: string, password: string) {
+  signup(email: string, username: string, password: string) {
     return this.http
       .post(this.baseUrl + 'api/account/signup', {
+        email,
         username,
         password
       }).pipe(

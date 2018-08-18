@@ -1,15 +1,11 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center no-gutters">
 <div class="col-lg-3 col-md-4 col-sm-6 text-center auth-container" [@flyInOut]>
-
-<div id="login">
-  <div class="login-card text-center ">
 
     <div class="auth-title ">
       Login
     </div>
 
     <i class="fas fa-user auth-icon"></i>
-
 
     <div class="content">
       <span *ngIf="!showSpinner">
@@ -50,11 +46,12 @@
 
         </form>
 
+
       </span>
       <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
     </div>
-  </div>
-</div>
+
+
 
 </div>
 </div>

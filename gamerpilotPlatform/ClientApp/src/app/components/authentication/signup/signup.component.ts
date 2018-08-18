@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterExtService } from '../../../shared/RouterExtService';
 import { AuthService } from '../../../core/services/auth.service';
@@ -15,19 +15,23 @@ import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-s
 
 })
 export class SignupComponent implements OnInit, OnDestroy {
-  loginForm: FormGroup;
+  signupForm: FormGroup;
+  passwords: FormGroup;
   email: FormControl;
   password: FormControl;
+  confirm: FormControl;
+  username: FormControl;
   showSpinner = false;
   error = '';
 
+
   login$;
+  signup$;
 
   constructor(
     private http: HttpClient,
     private _auth: AuthService,
     private router: Router,
-    private elementRef: ElementRef,
     private routerExtService: RouterExtService,
   ) {}
 
@@ -37,56 +41,92 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // unsubscribe to prevent memory leaks
-    if (this.login$ && this.login$ !== 'undefined') {
+  // unsubscribe to prevent memory leaks
+    if (this.login$ && this.login$ !== 'undefined' && this.signup$ && this.signup$ !== 'undefined') {
       this.login$.unsubscribe();
+      this.signup$.unsubscribe();
     }
   }
 
   createFormControls() {
-    (this.email = new FormControl('', [
+    this.email = new FormControl('', [
       Validators.required,
-      Validators.pattern('[^ @]*@[^ *]*')
-    ])),
-      (this.password = new FormControl('', [
+      Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
+    ]),
+      this.password = new FormControl('', [
         Validators.required,
-      ]));
+        Validators.minLength(8)
+      ]),
+      this.confirm = new FormControl('', [
+         Validators.required,
+      ]),
+      this.username = new FormControl('', [
+        Validators.required,
+      ]);
   }
 
   createForm() {
-    this.loginForm = new FormGroup({
+    // creating the password group first so we can assign it to a variable
+    // this makes validation expressions shorter
+    this.passwords = new FormGroup({
+      password: this.password,
+      confirm: this.confirm
+    }, this.areEqual);
+
+    this.signupForm = new FormGroup({
+      username: this.username,
       email: this.email,
-      password: this.password
+      passwords: this.passwords
     });
   }
 
-  loginUser() {
-    // clear any existing data
-     this._auth.logout();
+  // used to determine whether the passwords match
+  private areEqual(c: AbstractControl): ValidationErrors | null {
+    const keys: string[] = Object.keys(c.value);
+    for (const i in keys) {
+      if (i !== '0' && c.value[keys[+i - 1]] !== c.value[keys[i]]) {
+        return { areEqual: true };
+      }
+    }
+  }
 
-    if (this.loginForm.valid) {
-      const email = this.loginForm.value.email;
-      const password = this.loginForm.value.password;
+  signupUser() {
+    if (this.signupForm.valid) {
+      const username = this.signupForm.value.username;
+      const email = this.signupForm.value.email;
+      const password = this.passwords.value.password;
 
       // set loading to true and then false if error
       this.showSpinner = true;
-      this.login$ = this._auth.login(email, password).subscribe(() => {
+      this.signup$ = this._auth.signup(username, email, password).subscribe(
+        () => {
+          // logging the user in after we signed him up
+          this.login$ = this._auth.login(email, password).subscribe(() => {
+               // on successful auth redirect to previous url
+              const previous = this.routerExtService.getPreviousUrl();
+              if (previous) {
+                this.router.navigateByUrl(previous);
+              } else {
+                this.router.navigateByUrl('/');
+              }
 
-      // on successful auth redirect to previous url
-      const previous = this.routerExtService.getPreviousUrl();
-
-      if (previous) {
-        this.router.navigateByUrl(previous);
-      } else {
-        this.router.navigateByUrl('/');
-      }
-      },
-      err => {
-        this.error = err.status === 400 ? 'Please check your email and password' : 'Error';
-        this.showSpinner = false;
-      });
+          }),
+            // tslint:disable-next-line:no-unused-expression
+            err => {
+              this.error = 'Error logging in';
+              this.showSpinner = false;
+            };
+        },
+        err => {
+          if (err.status === 409) {
+            // 409 is sent if email wasn't unique
+            this.error = err.error.value;
+          } else {
+            this.error = 'Server Error';
+          }
+          this.showSpinner = false;
+        }
+      );
     }
-
-    this.loginForm.reset();
   }
 }

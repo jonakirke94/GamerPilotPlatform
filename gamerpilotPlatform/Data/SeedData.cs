@@ -20,13 +20,15 @@ namespace gamerpilotPlatform.Data
             context.Users.AddRange(
                  new User
                  {
+                     Email = "Test@Test.dk",
                      Username = "TestUser",
-                     Password = "123"
+                     Password = "AQAAAAEAACcQAAAAENuhnbOeQxFUC7dJYhi7C7lLH7dwXWzZ8EtLSkrouqbN8SBw6t43z36wFlnXfx1g=="
                  },
                     new User
                     {
+                        Email = "Dum@Dum.dk",
                         Username = "DumUser",
-                        Password = "123"
+                        Password = "AQAAAAEAACcQAAAAENuhnbOeQxFUC7dJYhi7C7lLH7dwXWzZ8EtLSkrouqbN8SBw6t43z36wFlnXfx1g=="
                     }
 
             );
