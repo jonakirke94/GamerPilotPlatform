@@ -24,7 +24,7 @@ export class AuthService {
     this.baseUrl = _baseUrl;
   }
 
-  signup(email: string, username: string, password: string) {
+  signup(username: string, email: string, password: string) {
     return this.http
       .post(this.baseUrl + 'api/account/signup', {
         email,
@@ -32,18 +32,18 @@ export class AuthService {
         password
       }).pipe(
       tap(res => {
-        this.login(username, password);
+        this.setSession(res);
       }),
       shareReplay()
     );
   }
 
-  login(username: string, password: string) {
+  login(email: string, password: string) {
     this.logout();
 
     return this.http
       .post(this.baseUrl + 'api/account/login', {
-        username,
+        email,
         password
       }).pipe(
       tap(res => {

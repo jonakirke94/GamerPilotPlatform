@@ -100,22 +100,13 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.showSpinner = true;
       this.signup$ = this._auth.signup(username, email, password).subscribe(
         () => {
-          // logging the user in after we signed him up
-          this.login$ = this._auth.login(email, password).subscribe(() => {
-               // on successful auth redirect to previous url
+            // on successful auth redirect to previous url
               const previous = this.routerExtService.getPreviousUrl();
               if (previous) {
                 this.router.navigateByUrl(previous);
               } else {
                 this.router.navigateByUrl('/');
               }
-
-          }),
-            // tslint:disable-next-line:no-unused-expression
-            err => {
-              this.error = 'Error logging in';
-              this.showSpinner = false;
-            };
         },
         err => {
           if (err.status === 409) {
@@ -130,3 +121,4 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
   }
 }
+

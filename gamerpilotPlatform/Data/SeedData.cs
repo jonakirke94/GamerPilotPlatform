@@ -22,13 +22,13 @@ namespace gamerpilotPlatform.Data
                  {
                      Email = "Test@Test.dk",
                      Username = "TestUser",
-                     Password = "AQAAAAEAACcQAAAAENuhnbOeQxFUC7dJYhi7C7lLH7dwXWzZ8EtLSkrouqbN8SBw6t43z36wFlnXfx1g=="
+                     Password = "AQAAAAEAACcQAAAAEBEbjTr4E7rEPlOgmMZArDU1IHpxlvwk7faTxwJ2TXHfR1C8FpB/6JkzRTVnzzRdKg=="
                  },
                     new User
                     {
                         Email = "Dum@Dum.dk",
                         Username = "DumUser",
-                        Password = "AQAAAAEAACcQAAAAENuhnbOeQxFUC7dJYhi7C7lLH7dwXWzZ8EtLSkrouqbN8SBw6t43z36wFlnXfx1g=="
+                        Password = "AQAAAAEAACcQAAAAEBEbjTr4E7rEPlOgmMZArDU1IHpxlvwk7faTxwJ2TXHfR1C8FpB/6JkzRTVnzzRdKg=="
                     }
 
             );

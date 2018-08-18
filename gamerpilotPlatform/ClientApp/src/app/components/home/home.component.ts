@@ -44,7 +44,7 @@ export class HomeComponent {
     });
 
   }
-  
+
   goCourse(id: string) {
     console.log(id);
   }

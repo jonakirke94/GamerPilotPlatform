@@ -1,7 +1,7 @@
 <nav *ngIf="showNav" class="navbar fixed-top navbar-expand-lg" id="navbar">
 
  <a class="navbar-brand" href="#">
-    <img src="assets/images/gp-logo-c.png" class="d-inline-block align-top" height="30" alt="GamerPilot Logo">
+    <img src="assets/images/gp-logo-c.png" class="d-inline-block align-top" height="38" alt="GamerPilot Logo">
   </a>
 
   <div (click)="toggleOverlay()" class="navbar-toggler">
@@ -21,23 +21,25 @@
         <a class="nav-link" routerLink="/books">Books</a>
     </li>  
     <li class="nav-item">
-      <a class="nav-link" (click)="logout()">Logud</a>
-  </li>
-  </ul>
+            <a class="nav-link" [routerLink]="['/login']" (click)="logout()">Log out</a>
+        </li>  
+   </ul>
 
   <ul *ngIf="!isAuthed" class="nav navbar-nav ml-auto">
-      <li class="nav-item">
-          <a class="nav-link" routerLink='/login'>Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/signup'>Signup</a>
-    </li>
-      <li class="nav-item highlight-link" >
+
+      <li class="nav-item" >
           <a class="nav-link" [routerLink]="['/books']">Books</a>
       </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Til forældre</a>
+        <a class="nav-link" href="#">Læringsgrundlag</a>
     </li>
+
+    <li class="nav-item nav-divide">
+            <a class="nav-link" routerLink='/login'>Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link highlight-link" routerLink='/signup'>Signup</a>
+      </li>
  
 </ul>
   </div>

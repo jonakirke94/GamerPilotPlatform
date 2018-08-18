@@ -29,11 +29,20 @@ namespace gamerpilotPlatform.Controllers
         {
             var user = _context.Users.SingleOrDefault(u => u.Email == sentUser.Email);
             if (user != null) return StatusCode(409, Json(sentUser.Email + " already exists."));
-   
+
+            var usersClaims = new[]
+            {
+                new Claim(ClaimTypes.Name, sentUser.Username),
+            };
+
+            var jwtToken = _tokenService.GenerateAccessToken(usersClaims);
+            var refreshToken = _tokenService.GenerateRefreshToken();
+         
             try
             {
                 _context.Users.Add(new User
                 {
+                    RefreshToken = refreshToken,
                     Username = sentUser.Username,
                     Email = sentUser.Email,
                     Password = _passwordHasher.GenerateIdentityV3Hash(sentUser.Password)
@@ -46,13 +55,18 @@ namespace gamerpilotPlatform.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            return Ok(user);
+            return new ObjectResult(new
+            {
+                token = jwtToken,
+                refreshToken = refreshToken
+            });
+
         }
 
         [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody] User sentUser)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Username == sentUser.Username);
+            var user = _context.Users.SingleOrDefault(u => u.Email == sentUser.Email);
             if (user == null || !_passwordHasher.VerifyIdentityV3Hash(sentUser.Password, user.Password)) return BadRequest();
 
             var usersClaims = new[]

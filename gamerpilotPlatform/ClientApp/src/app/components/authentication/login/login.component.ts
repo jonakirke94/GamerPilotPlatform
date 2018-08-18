@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
       },
       err => {
-        this.error = err.status === 400 ? 'Please check your email and password' : 'Error';
+        this.error = err.status === 400 ? 'Please check your email and password' : 'Server Error';
         this.showSpinner = false;
       });
     }
