@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { RouterExtService } from './RouterExtService';
+import { CourseCardComponent } from './course-card/course-card.component';
 
 
 
@@ -17,14 +18,16 @@ import { RouterExtService } from './RouterExtService';
     RouterModule
   ],
   declarations: [
-  LoadingSpinnerComponent],
+  LoadingSpinnerComponent,
+  CourseCardComponent],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    CourseCardComponent
 
   ],
   providers: [
