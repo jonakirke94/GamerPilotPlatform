@@ -23,13 +23,9 @@
  }
 
  .highlight-link {
-   margin-top: -3px;
+  border: 1px solid $blue;
+  margin-top: -3px;
   padding: 10px 20px 10px 20px !important;
-  font-family: inherit;
-  font-weight: 500;
-  color: #fff !important; /* prevent hover color*/
-  white-space: nowrap;
-  background-color: $blue;
  }
 
  .navbar-brand {
