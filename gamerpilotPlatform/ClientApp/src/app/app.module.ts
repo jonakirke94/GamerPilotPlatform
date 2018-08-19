@@ -20,7 +20,6 @@ import { RouterExtService } from './shared/RouterExtService';
       AppComponent,
       FetchDataComponent,
       HomeComponent,
-      HeaderComponent,
       BooksComponent
   ],
   imports: [

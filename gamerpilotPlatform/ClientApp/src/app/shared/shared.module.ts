@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { RouterExtService } from './RouterExtService';
 import { CourseCardComponent } from './course-card/course-card.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
 
 
 
@@ -19,7 +21,9 @@ import { CourseCardComponent } from './course-card/course-card.component';
   ],
   declarations: [
   LoadingSpinnerComponent,
-  CourseCardComponent],
+  CourseCardComponent,
+  HeaderComponent,
+  FooterComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -27,7 +31,9 @@ import { CourseCardComponent } from './course-card/course-card.component';
     HttpClientModule,
     RouterModule,
     LoadingSpinnerComponent,
-    CourseCardComponent
+    CourseCardComponent,
+    HeaderComponent,
+  FooterComponent
 
   ],
   providers: [
