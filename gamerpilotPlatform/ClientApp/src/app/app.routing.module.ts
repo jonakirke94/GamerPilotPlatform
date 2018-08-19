@@ -6,6 +6,7 @@ import { FetchDataComponent } from './components/fetch-data/fetch-data.component
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/authentication/signup/signup.component';
 import { LoginComponent } from './components/authentication/login/login.component';
+import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent }, // index
@@ -14,8 +15,8 @@ const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'login', component: LoginComponent },
     { path: 'fetch-data', component: FetchDataComponent },
-/*     { path: '**', redirectTo: 'home' }
- */
+    { path: 'learningbasis', component: LearningbasisComponent },
+    { path: '**', redirectTo: 'home' }
   ];
 
   @NgModule({

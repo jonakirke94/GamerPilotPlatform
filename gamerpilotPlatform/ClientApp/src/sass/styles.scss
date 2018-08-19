@@ -9,3 +9,20 @@ body {
   padding-top: 70px;
 }
 
+h1 {
+  @include title;
+  font-size: 48px;
+  line-height: 57px;
+}
+
+h3 {
+  @include title;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 33px;
+}
+
+.text {
+  color: $white;
+  line-height: 30px;
+}

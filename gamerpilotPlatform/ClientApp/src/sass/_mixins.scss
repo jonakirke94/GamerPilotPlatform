@@ -1,4 +1,5 @@
-
+@import './fonts';
+@import './variables';
 
 @mixin transition($property) {
     -webkit-transition: background-color $property linear;
@@ -26,3 +27,17 @@
     user-select: none;
 }
 
+
+@mixin title {
+    font-family: 'Work Sans Light', helvetica, arial, sans-serif;
+    color: $white;
+    margin-bottom: 15px;
+  }
+
+  @mixin block {
+    padding: 20px;
+    padding-top: 0;
+    border-left: 5px solid;
+    border-radius: 3px;
+    text-align: left;
+}

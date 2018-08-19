@@ -1,0 +1,94 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
+
+.intro {
+    background-color: $main;
+    padding: 50px;
+}
+
+
+.block-blue {
+    @include block;
+    margin-top: 50px;
+    border-left-color: $blue;
+}
+
+.intro-bg {
+    background: url("/assets/images/bg-dots.svg") repeat;
+    height: 100%;
+    width: 100%;
+}
+
+.intro h1 {
+    padding: 100px;
+}
+
+@media screen and (max-width: $mobile) {
+    .intro h1 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.card {
+    width: 320px;
+    margin: auto;
+    margin-top: 100px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 10px 10px 40px 0 rgba(0,0,0,.6);
+}
+
+.card-header {
+    background-color: lighten($main, 5%);
+    color: $white;
+    font-size: 20px;
+    padding: 15px;
+}
+
+.card-body {
+    background-color: #f8f8f8;
+    padding: 10px;
+    padding-bottom: 25px;
+}
+
+.card-element {
+    margin-top: 15px;
+    text-align: left;
+    margin-left: 15px;
+}
+
+.card-icon {
+    color: $blue;
+    font-size: 20px;
+}
+
+
+/* LIFE SKILLS */
+
+#life-skills {
+    background-color: $white;
+    padding: 50px;
+}
+
+.fa-globe-americas {
+    margin-top: 130px;
+    font-size: 158px;
+    color: $main;
+}
+
+.block-main {
+    @include block;
+    margin-top: 50px;
+    border-left-color: $main;
+}
+
+.block-main h3 {
+    color: $main;
+    font-weight: bold;
+}
+
+.block-main p {
+    color: $main;
+}

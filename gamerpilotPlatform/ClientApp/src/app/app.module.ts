@@ -14,13 +14,15 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterExtService } from './shared/RouterExtService';
+import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
 
 @NgModule({
   declarations: [
       AppComponent,
       FetchDataComponent,
       HomeComponent,
-      BooksComponent
+      BooksComponent,
+      LearningbasisComponent
   ],
   imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
