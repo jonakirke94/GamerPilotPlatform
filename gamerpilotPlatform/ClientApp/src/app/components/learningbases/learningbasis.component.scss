@@ -96,18 +96,19 @@
 
 /* learning theories*/
 .block-left {
-    height: 500px;
-    width: 100%;
     background-color: darken($main, 5%);
+    padding: 100px;
     margin-top: -50px;
+    margin-bottom: 50px;
 }
 
 .block-right {
-    height: 500px;
-    width: 100%;
     background-color: lighten($main, 5%);
-    
+    padding: 100px;  
+}
 
+hr {
+    border-color: $white;
 }
 
 
