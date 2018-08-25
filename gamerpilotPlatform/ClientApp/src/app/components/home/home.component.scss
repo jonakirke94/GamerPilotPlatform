@@ -4,25 +4,7 @@
 @import '~sass/main';
 @import '~sass/animate';
 
-/* */
-.box {
-    height: 700px;
-    width: 100%;
-    background-color: lightcoral;
-    margin-top: 72vh;
-}
 
-
-.stuck {
-    transition: all 0.25s ease-in;
-}
-
-/* style for when sitcky is applied */
-.stuck  {
-    background-color: #222 !important;
-    padding-top: 3px !important;
-    padding-bottom: 3px !important;
-}
 
 .nav-item {
     width: 100px;
@@ -616,9 +598,9 @@ h1 {
       }
 
 .feature-icon {
-  color: $blue;
-  font-size: 48px;
-  padding-bottom: 15px;
+  color: black;
+  font-size: 30px;
+  padding-bottom: 10px;
 }
 
 .icon-right {

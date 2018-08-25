@@ -1,4 +1,43 @@
-<nav *ngIf="showNav" class="navbar navbar-expand-lg" id="navbar">
+
+
+<header class="header home-header">
+<div class="row header-nav-bar home-nav-bar">
+        <div class="logo-block header-logo-block">
+          <a href="#">
+            <img class="logo header-logo" src="/assets/images/gp-brand.png" alt="logo">
+          </a>
+          <span class="logo-text">GamerPilot</span>
+        </div>
+        <nav class="main-nav">
+          <img class="close-btn mobile-menu-toggle" hidden src="/assets/images/close-icon.svg" alt="Close button" role="button">
+          <ul class="nav home-nav">
+            <li class="nav-link active-link">
+              <a href="index.html">Home</a>
+            </li>
+            <li class="nav-link">
+              <a href="how.html">How it works</a>
+            </li>
+            <li class="nav-link">
+              <a href="pricing.html">Pricing</a>
+            </li>
+            <li class="nav-link">
+              <a href="https://docs.verifypayments.com/">Documentation</a>
+            </li>
+            <li class="nav-link sign-link-mobile" hidden>
+                    <a href="#subscribe">Log in</a>
+            </li>
+            <li class="nav-link sign-link-mobile" hidden>
+              <a href="#subscribe">Sign up</a>
+            </li>
+          </ul>
+        </nav>
+        <a href="#subscribe" class="btn nav-btn sign-link-desktop" role="button">Log in</a>
+        <a href="#subscribe" class="btn nav-btn sign-link-desktop" role="button">Sign up</a>
+        <img class="mobile-menu-toggle" hidden src="/assets/images/mobile-menu-icon.svg" alt="Mobile menu button" role="button">
+      </div>
+    </header>
+
+<!-- <nav *ngIf="showNav" class="navbar navbar-expand-lg" id="navbar">
 
  <a class="navbar-brand" href="#">
     <img src="assets/images/gp-logo-c.png" class="d-inline-block align-top" height="38" alt="GamerPilot Logo">
@@ -46,12 +85,12 @@
 </nav>
 
 
-<!-- The overlay -->
+
 <div id="myNav" class="overlay" *ngIf="showOverlay">
 
   <a href="javascript:void(0)" class="closebtn" (click)="toggleOverlay()">&times;</a>
 
-  <!-- Overlay content -->
+
   <div *ngIf="isAuthed" class="overlay-content">
     <a href="#">Personlighedstest</a>
     <a href="#">Books</a>
@@ -66,3 +105,4 @@
     </div>
 
 </div>
+ -->

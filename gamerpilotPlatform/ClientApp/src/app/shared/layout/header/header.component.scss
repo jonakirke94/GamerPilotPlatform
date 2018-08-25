@@ -1,115 +1,221 @@
 @import '~sass/variables';
 @import '~sass/mixins';
 
-.navbar {
-  height: 62px;
-}
 
-.nav-item {
-  margin-right: 20px;
-  margin-top: 5px;
- }
-
- .nav-link {
-  font-family: 'Work Sans Reg';
-  font-size: 18px;
-  color: $white;
-  font-weight: bold;
-  line-height: 20px;
- }
-
- .nav-link:hover {
-   color: $blue;
- }
-
- .highlight-link {
-  border: 1px solid $blue;
-  margin-top: -3px;
-  padding: 10px 20px 10px 20px !important;
- }
-
- .navbar-brand {
-  height: 50px;
-  padding: 15px;
-  line-height: 20px;
-  margin-top: -15px !important;
- }
-
- .nav-divide {
-   border-left: 1px solid white;
-   padding-left: 15px;
- }
-
-  .navbarTransparent {
-    background-color: transparent;
-    @include transition(200ms);
-  }
-  
-  .navbarScroll {
-    background-color: $main;
-    @include transition(200ms);
-  }
-
-  .nav-icon {
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-  }
-
-
-/* The Overlay (background) */
-.overlay {
-  /* Height & width depends on how you want to reveal the overlay (see JS below) */    
-  height: 100%;
-  width: 100%;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  background-color: rgb(0,0,0); /* Black fallback color */
-  background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
-  overflow-x: hidden;
-  transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
-}
-
-/* Position the content inside the overlay */
-.overlay-content {
+.home-header {
+  display: block;
   position: relative;
-  top: 25%; /* 25% from the top */
-  width: 100%; /* 100% width */
-  text-align: center; /* Centered text/links */
-  margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
 }
 
-/* The navigation links inside the overlay */
-.overlay a {
-  padding: 8px;
+.header {
+  text-align: center;
+  -webkit-background-size: 100% 100%;
+  background-size: 100%;
+}
+
+.home-nav-bar {
+  margin-bottom: 12vh;
+}
+
+.header-nav-bar {
+  position: relative;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 15px 100px 0;
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.logo-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.main-nav {
+  margin-left: auto;
+}
+
+.nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.nav-link:not(:last-child) {
+  margin-right: 40px;
+}
+
+.nav-link {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.active-link {
+  color: #4BC16B;
+}
+
+.nav-btn {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.93px;
+  height: 40px;
+  padding: 10px 23px;
+  color: #032327;
+  border: 1px solid #DFDFDF;
+  opacity: 0.8;
+  margin-left: 10px;
+  
+}
+
+.nav-btn:hover {
+  border: 1px solid #70DA93;
+  color: #00B275;
+}
+
+.main-nav {
+  margin-left: auto;
+}
+
+.header-logo {
+  max-height: 50px;
+}
+
+.btn {
+  text-transform: uppercase;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+
+a {
+  color: inherit;
   text-decoration: none;
-  font-size: 36px;
-  color: #818181;
-  display: block; /* Display block instead of inline */
-  transition: 0.3s; /* Transition effects on hover (color) */
 }
 
-/* When you mouse over the navigation links, change their color */
-.overlay a:hover, .overlay a:focus {
-  color: #f1f1f1;
+.nav-link:not(:last-child) {
+  margin-right: 40px;
 }
 
-/* Position the close button (top right corner) */
-.overlay .closebtn {
+.logo-text {
+  padding-left: 10px;
+}
+
+
+@media (max-width: 768px) {
+
+.nav-link:not(:last-child) {
+  margin-right: 0 !important;
+  border-bottom: 1px solid #DDEAE7;
+}
+
+.nav-link {
+  font-size: 18px;
+  color: #032327;
+  line-height: 52px;
+}
+
+.logo-text {
+  padding-left: 0;
+  padding-top: 3px;
+}
+
+.active.main-nav {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: 30px;
+  background-color: #ffffff;
+  z-index: 10;
+}
+
+.main-nav {
+  display: none;
+}
+
+.header-logo-block {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; 
+}
+
+.header-logo {
+  max-height: 50px;
+  margin-bottom: 5px; 
+}
+
+.sign-link-desktop {
+  display: none; 
+} 
+
+.sign-link-mobile {
+  display: inline-block; 
+}
+
+.active.main-nav .close-btn {
+  display: block;
+  right: 40px;
   position: absolute;
-  top: 0px;
-  right: 45px;
-  font-size: 60px;
 }
 
-/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
-@media screen and (max-height: 450px) {
-  .overlay a {font-size: 20px}
-  .overlay .closebtn {
-      font-size: 40px;
-      top: 15px;
-      right: 35px;
-  }
+.mobile-menu-toggle {
+  display: block !important;
+  right: 50px;
+  top: 30px;
+  position: absolute;
 }
+
+.nav {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 0;
+  width: 100%;
+}
+
+} /* mobile end */
+
+@media (max-width: 1200px) {
+.main-nav {
+    width: 100%;
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+}
+
+.nav {
+  margin-top: 50px;
+}
+
+.nav-btn {
+  margin-left: auto;
+}
+} /* desktop end */
+
+

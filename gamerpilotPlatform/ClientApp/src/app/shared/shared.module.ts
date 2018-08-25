@@ -17,7 +17,7 @@ import { CoursesComponent } from './courses/courses.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule, 
+    RouterModule,
   ],
   declarations: [
   LoadingSpinnerComponent,

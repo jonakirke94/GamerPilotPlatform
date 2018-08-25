@@ -23,11 +23,22 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
       this._auth.IsAuthed.subscribe(status => this.changeAuthStatus(status));
+      this.initNavbar();
     }
 
     private changeAuthStatus(status: boolean): void {
       this.isAuthed = status;
   }
+
+
+  initNavbar() {
+    document.querySelectorAll('.mobile-menu-toggle').forEach(function(btn) {
+      return btn.addEventListener('click', function() {
+        document.querySelector('.main-nav').classList.toggle('active');
+      });
+    });
+  }
+
 
   toggleOverlay(): void {
        this.showOverlay = !this.showOverlay;
