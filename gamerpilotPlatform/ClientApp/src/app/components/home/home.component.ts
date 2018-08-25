@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CourseCardComponent } from '../../shared/course-card/course-card.component';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -10,44 +10,115 @@ import { CourseCardComponent } from '../../shared/course-card/course-card.compon
 })
 
 export class HomeComponent {
+  public fixed = false;
 
-  courses: any = [];
 
-  constructor() {}
+  constructor() {
 
-  // tslint:disable-next-line:use-life-cycle-interface
+  }
+
   ngOnInit() {
-    this.courses.push({
-      topic: 'Communication',
-      fa: 'fas fa-headset',
-      soon: false,
-      id: 1,
+    $('#carouselExample').on('slide.bs.carousel', function (e) {
+      const $e = $(e.relatedTarget);
+      console.log($e);
+      const idx = $e.index();
+      const itemsPerSlide = 4;
+      const totalItems = $('.carousel-item').length;
+      if (idx >= totalItems - (itemsPerSlide - 1)) {
+        const it = itemsPerSlide - (totalItems - idx);
+          for (let i = 0; i < it; i++) {
+              // append slides to end
+              if (e.direction === 'left') {
+                  $('.carousel-item').eq(i).appendTo('.carousel-inner');
+              } else {
+                  $('.carousel-item').eq(0).appendTo('.carousel-inner');
+              }
+          }
+      }
     });
+        $('#carouselExample').carousel( {interval: 2000
+              });
 
-    this.courses.push({
-      topic: 'Strategy',
-      fa: 'fab fa-accessible-icon',
-      soon: true,
-      id: 2,
-    });
 
-    this.courses.push({
-      topic: 'Teamwork',
-      fa: 'fas fa-allergies',
-      soon: true,
-      id: 3,
-    });
+        /* show lightbox when clicking a thumbnail */
+          $('a.thumb').click(function(event) {
+            event.preventDefault();
+            const content = $('.modal-body');
+            content.empty();
+            const title = $(this).attr('title');
+              $('.modal-title').html(title);
+              content.html($(this).html());
+              $('.modal-profile').modal({show: true});
+          });
+  }
 
-    this.courses.push({
-      topic: 'Concentration',
-      fa: 'fas fa-address-book',
-      soon: true,
-      id: 4,
-    });
+   // tslint:disable-next-line:use-life-cycle-interface
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+      const nav: HTMLElement = document.querySelector('.features-nav');
+      const sticky = nav.offsetTop;
+      const navHeight = nav.offsetHeight;
+      if (window.pageYOffset > sticky) {
+        document.body.style.paddingTop = (navHeight + 16) + 'px';
+        this.fixed = true;
+        // header.classList.add("fixed-nav");
+      } else {
+        document.body.style.paddingTop = '0';
+        this.fixed = false;
+        // header.classList.remove("fixed-nav");
+      }
+
+      const sec1: HTMLElement = document.querySelector('#section-1');
+      const sec2: HTMLElement = document.querySelector('#section-2');
+      const sec3: HTMLElement = document.querySelector('#section-3');
+      const sec2Top = sec2.offsetTop;
+      const sec3Top = sec3.offsetTop;
+
+      // Lavalamp animation
+    if ((window.scrollY + navHeight + 50) >= sec2Top && (window.scrollY + navHeight) < sec3Top) {
+      this.removeActiveClass();
+      document.querySelector('.section-2-link').classList.add('active');
+      this.lavalampBar();
+    } else if ((window.scrollY + navHeight) >= sec3Top) {
+      this.removeActiveClass();
+      document.querySelector('.section-3-link').classList.add('active');
+      this.lavalampBar();
+    } else {
+      this.removeActiveClass();
+      document.querySelector('.section-1-link').classList.add('active');
+      this.lavalampBar();
+
+
+    }
+
 
   }
 
-  goCourse(id: string) {
-    console.log(id);
+  removeActiveClass() {
+    document.querySelectorAll('.features-nav-link').forEach(function (el) {
+      el.classList.remove('active');
+    });
   }
+
+  lavalampBar() {
+    const activeItem: HTMLElement = document.querySelector('.active.features-nav-link');
+    const lavalampElm: HTMLElement = document.querySelector('.lavalamp');
+    const positionLavalamp = function (activeElm) {
+      lavalampElm.style.width = activeElm.offsetWidth + 'px';
+      lavalampElm.style.left = activeElm.offsetLeft + 'px';
+    };
+    positionLavalamp(activeItem);
+    window.addEventListener('resize', function () {
+     positionLavalamp(activeItem);
+    });
+  }
+
+  scrollToElement($element): void {
+    $element.scrollIntoView({behavior: 'smooth', block: 'start'});
+    $element.scrollTop += 30;
+
+  }
+
+  /* carousel */
+
 }

@@ -60,7 +60,7 @@ namespace gamerpilotPlatform.Controllers
                 token = jwtToken,
                 refreshToken = refreshToken
             });
-
+ 
         }
 
         [HttpPost("[action]")]

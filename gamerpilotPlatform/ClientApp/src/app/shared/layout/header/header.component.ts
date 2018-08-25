@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
      }
 
     // changing navbar background on scroll
-    @HostListener('window:scroll', [])
+   /*  @HostListener('window:scroll', [])
     onWindowScroll() {
       if (this.showNav) {
         const myNav = document.getElementById('navbar');
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
           myNav.classList.remove('navbarScroll');
         }
       }
-    }
+    } */
 
     logout() {
       this._auth.logout();

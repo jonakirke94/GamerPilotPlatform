@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="19px" viewBox="0 0 25 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#C6F0E7" offset="0%"></stop>
+            <stop stop-color="#CDF3D6" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="VerifyPayments-Home--Desktop-1170px--ver-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-914.000000, -2105.000000)">
+        <g id="//Content" fill="#62B552" fill-rule="nonzero">
+            <g id="Low-cost" transform="translate(0.000000, 1810.000000)">
+                <g id="Check" transform="translate(914.000000, 220.000000)">
+                    <path d="M4,90.0462428 L0,86.0924855 L1.06666667,85.0601156 L2.11111111,84.0057803 L5.06666667,86.9271676 L8.02222222,89.8265896 L15.5111111,82.4242775 L22.9777778,75 L24,75.9884393 C24.5555556,76.5156069 25,77.0647399 25,77.1965318 C25,77.416185 8.33333333,94 8.11111111,94 C8.04444444,94 6.2,92.2208092 4,90.0462428 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
