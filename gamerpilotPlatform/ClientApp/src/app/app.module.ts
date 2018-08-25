@@ -22,7 +22,7 @@ import { LearningbasisComponent } from './components/learningbases/learningbasis
       FetchDataComponent,
       HomeComponent,
       BooksComponent,
-      LearningbasisComponent
+      LearningbasisComponent,
   ],
   imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

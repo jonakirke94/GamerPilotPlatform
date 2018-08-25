@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
-import * as $ from 'jquery';
+import { Component, OnInit, HostListener, Inject} from '@angular/core';
+import { CoursesComponent} from '../../shared/courses/courses.component';
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -9,63 +10,33 @@ import * as $ from 'jquery';
 
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   public fixed = false;
+  nav: HTMLElement;
+  navOffsetTop;
+  navHeight;
+  courseTop;
 
-
-  constructor() {
+  constructor(@Inject(DOCUMENT) document) {
 
   }
 
   ngOnInit() {
-    $('#carouselExample').on('slide.bs.carousel', function (e) {
-      const $e = $(e.relatedTarget);
-      console.log($e);
-      const idx = $e.index();
-      const itemsPerSlide = 4;
-      const totalItems = $('.carousel-item').length;
-      if (idx >= totalItems - (itemsPerSlide - 1)) {
-        const it = itemsPerSlide - (totalItems - idx);
-          for (let i = 0; i < it; i++) {
-              // append slides to end
-              if (e.direction === 'left') {
-                  $('.carousel-item').eq(i).appendTo('.carousel-inner');
-              } else {
-                  $('.carousel-item').eq(0).appendTo('.carousel-inner');
-              }
-          }
-      }
-    });
-        $('#carouselExample').carousel( {interval: 2000
-              });
-
-
-        /* show lightbox when clicking a thumbnail */
-          $('a.thumb').click(function(event) {
-            event.preventDefault();
-            const content = $('.modal-body');
-            content.empty();
-            const title = $(this).attr('title');
-              $('.modal-title').html(title);
-              content.html($(this).html());
-              $('.modal-profile').modal({show: true});
-          });
+    this.nav = document.querySelector('.features-nav');
+    this.navOffsetTop = this.nav.offsetTop;
+    this.navHeight = this.nav.offsetHeight;
+    this.courseTop = document.querySelector('#courses').offsetTop;
   }
 
    // tslint:disable-next-line:use-life-cycle-interface
     @HostListener('window:scroll', [])
     onWindowScroll() {
-      const nav: HTMLElement = document.querySelector('.features-nav');
-      const sticky = nav.offsetTop;
-      const navHeight = nav.offsetHeight;
-      if (window.pageYOffset > sticky) {
-        document.body.style.paddingTop = (navHeight + 16) + 'px';
-        this.fixed = true;
-        // header.classList.add("fixed-nav");
+      if (window.pageYOffset > this.navOffsetTop && (window.scrollY + this.navHeight) <= this.courseTop) {
+         document.body.style.paddingTop = (this.navHeight + 16) + 'px';
+         this.fixed = true;
       } else {
-        document.body.style.paddingTop = '0';
+         document.body.style.paddingTop = '0';
         this.fixed = false;
-        // header.classList.remove("fixed-nav");
       }
 
       const sec1: HTMLElement = document.querySelector('#section-1');
@@ -75,11 +46,11 @@ export class HomeComponent {
       const sec3Top = sec3.offsetTop;
 
       // Lavalamp animation
-    if ((window.scrollY + navHeight + 50) >= sec2Top && (window.scrollY + navHeight) < sec3Top) {
+    if ((window.scrollY + this.navHeight + 50) >= sec2Top && (window.scrollY + this.navHeight) < sec3Top) {
       this.removeActiveClass();
       document.querySelector('.section-2-link').classList.add('active');
       this.lavalampBar();
-    } else if ((window.scrollY + navHeight) >= sec3Top) {
+    } else if ((window.scrollY + this.navHeight) >= sec3Top) {
       this.removeActiveClass();
       document.querySelector('.section-3-link').classList.add('active');
       this.lavalampBar();
@@ -120,5 +91,10 @@ export class HomeComponent {
   }
 
   /* carousel */
+  
+
+  goCourse(id: string) {
+    console.log(id);
+  }
 
 }

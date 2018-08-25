@@ -5,9 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { RouterExtService } from './RouterExtService';
-import { CourseCardComponent } from './course-card/course-card.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { CoursesComponent } from './courses/courses.component';
 
 
 
@@ -17,12 +17,12 @@ import { HeaderComponent } from './layout/header/header.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule, 
   ],
   declarations: [
   LoadingSpinnerComponent,
-  CourseCardComponent,
   HeaderComponent,
+  CoursesComponent,
   FooterComponent],
   exports: [
     CommonModule,
@@ -31,9 +31,9 @@ import { HeaderComponent } from './layout/header/header.component';
     HttpClientModule,
     RouterModule,
     LoadingSpinnerComponent,
-    CourseCardComponent,
     HeaderComponent,
-  FooterComponent
+    CoursesComponent,
+    FooterComponent
 
   ],
   providers: [
