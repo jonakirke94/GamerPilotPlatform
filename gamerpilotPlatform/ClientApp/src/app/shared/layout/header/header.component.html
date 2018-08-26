@@ -3,24 +3,25 @@
 <header class="header home-header">
 <div class="row header-nav-bar home-nav-bar no-gutters">
         <div class="logo-block header-logo-block">
-          <a href="#">
+          <a routerLink='/'>
             <img class="logo header-logo" src="/assets/images/gp-brand.png" alt="logo">
-          </a>
+         
           <span class="logo-text">GamerPilot</span>
+        </a>
         </div>
         <nav class="main-nav">
           <img class="close-btn mobile-menu-toggle" hidden src="/assets/images/close-icon.svg" alt="Close button" role="button">
           <ul class="nav home-nav">
-            <li class="nav-link active-link">
+            <li class="nav-link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
               <a routerLink='/'>Home</a>
             </li>
-            <li class="nav-link">
+            <li class="nav-link" routerLinkActive="active-link">
               <a routerLink='/courses'>Kurser</a>
             </li>
-            <li class="nav-link">
+            <li class="nav-link" routerLinkActive="active-link">
               <a routerLink='/learningbasis'>Læringsgrundlag</a>
             </li>
-            <li class="nav-link">
+            <li class="nav-link" routerLinkActive="active-link">
               <a href="">Documentation</a>
             </li>
 
@@ -49,73 +50,3 @@
         <img class="mobile-menu-toggle" hidden src="/assets/images/mobile-menu-icon.svg" alt="Mobile menu button" role="button">
       </div>
     </header>
-
-<!-- <nav *ngIf="showNav" class="navbar navbar-expand-lg" id="navbar">
-
- <a class="navbar-brand" href="#">
-    <img src="assets/images/gp-logo-c.png" class="d-inline-block align-top" height="38" alt="GamerPilot Logo">
-  </a>
-
-  <div (click)="toggleOverlay()" class="navbar-toggler">
-    <i *ngIf="!showOverlay" class="fas fa-bars nav-icon"  aria-expanded="false" aria-label="Toggle navigation"></i>
-
-
-  </div>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
-
-
-  <ul *ngIf="isAuthed" class="nav navbar-nav ml-auto" >
-      <li class="nav-item">
-          <a class="nav-link" href="#">Personlighedstest</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/books">Books</a>
-    </li>  
-    <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/login']" (click)="logout()">Log out</a>
-        </li>  
-   </ul>
-
-  <ul *ngIf="!isAuthed" class="nav navbar-nav ml-auto">
-
-      <li class="nav-item" >
-          <a class="nav-link" [routerLink]="['/books']">Books</a>
-      </li>
-    <li class="nav-item">
-        <a class="nav-link" routerLink='/learningbasis'>Læringsgrundlag</a>
-    </li>
-    
-    <li class="nav-item nav-divide">
-            <a class="nav-link" routerLink='/login'>Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link highlight-link" routerLink='/signup'>Signup</a>
-      </li>
- 
-</ul>
-  </div>
-</nav>
-
-
-
-<div id="myNav" class="overlay" *ngIf="showOverlay">
-
-  <a href="javascript:void(0)" class="closebtn" (click)="toggleOverlay()">&times;</a>
-
-
-  <div *ngIf="isAuthed" class="overlay-content">
-    <a href="#">Personlighedstest</a>
-    <a href="#">Books</a>
-    <a href="#">Logud</a>
-    <a href="#">Contact</a>
-  </div>
-
-  <div *ngIf="!isAuthed" class="overlay-content">
-      <a href="#">Home</a>
-      <a href="#">Kursus</a>
-      <a href="#">Til forældre</a>
-    </div>
-
-</div>
- -->
