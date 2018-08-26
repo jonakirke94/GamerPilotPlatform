@@ -7,6 +7,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/authentication/signup/signup.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
+import { CoursesComponent } from './components/courses/courses.component';
+
 
 const routes: Routes = [
     { path: '', component: HomeComponent }, // index
@@ -14,6 +16,8 @@ const routes: Routes = [
     { path: 'books', canActivate: [AuthGuard], component: BooksComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'courses', component: CoursesComponent },
+
     { path: 'fetch-data', component: FetchDataComponent },
     { path: 'learningbasis', component: LearningbasisComponent },
     { path: '**', redirectTo: 'home' }

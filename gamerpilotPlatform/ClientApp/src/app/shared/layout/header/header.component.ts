@@ -13,9 +13,6 @@ export class HeaderComponent implements OnInit {
   isLoggedin$: Observable<boolean>;
   isAuthed: boolean;
 
-  showNav = true;
-  showOverlay = false;
-
     constructor(private _auth: AuthService,
       private router: Router) {
 
@@ -32,33 +29,13 @@ export class HeaderComponent implements OnInit {
 
 
   initNavbar() {
-    document.querySelectorAll('.mobile-menu-toggle').forEach(function(btn) {
+    const menus = Array.from(document.querySelectorAll('.mobile-menu-toggle'));
+    menus.forEach(function(btn) {
       return btn.addEventListener('click', function() {
         document.querySelector('.main-nav').classList.toggle('active');
       });
     });
   }
-
-
-  toggleOverlay(): void {
-       this.showOverlay = !this.showOverlay;
-       this.showNav = !this.showNav;
-     }
-
-    // changing navbar background on scroll
-   /*  @HostListener('window:scroll', [])
-    onWindowScroll() {
-      if (this.showNav) {
-        const myNav = document.getElementById('navbar');
-        if (document.documentElement.scrollTop || document.body.scrollTop > window.innerHeight) {
-          myNav.classList.add('navbarScroll');
-          myNav.classList.remove('navbarTransparent');
-        } else {
-          myNav.classList.add('navbarTransparent');
-          myNav.classList.remove('navbarScroll');
-        }
-      }
-    } */
 
     logout() {
       this._auth.logout();

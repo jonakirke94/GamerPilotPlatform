@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../core/services/book.service';
-import { CourseCardComponent } from '../../shared/course-card/course-card.component';
 
 
 @Component({

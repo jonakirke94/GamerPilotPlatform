@@ -1,7 +1,7 @@
 
 
 <header class="header home-header">
-<div class="row header-nav-bar home-nav-bar">
+<div class="row header-nav-bar home-nav-bar no-gutters">
         <div class="logo-block header-logo-block">
           <a href="#">
             <img class="logo header-logo" src="/assets/images/gp-brand.png" alt="logo">
@@ -12,27 +12,40 @@
           <img class="close-btn mobile-menu-toggle" hidden src="/assets/images/close-icon.svg" alt="Close button" role="button">
           <ul class="nav home-nav">
             <li class="nav-link active-link">
-              <a href="index.html">Home</a>
+              <a routerLink='/'>Home</a>
             </li>
             <li class="nav-link">
-              <a href="how.html">How it works</a>
+              <a href="">How it works</a>
             </li>
             <li class="nav-link">
-              <a href="pricing.html">Pricing</a>
+              <a href="">Pricing</a>
             </li>
             <li class="nav-link">
-              <a href="https://docs.verifypayments.com/">Documentation</a>
+              <a href="">Documentation</a>
             </li>
-            <li class="nav-link sign-link-mobile" hidden>
-                    <a href="#subscribe">Log in</a>
-            </li>
-            <li class="nav-link sign-link-mobile" hidden>
-              <a href="#subscribe">Sign up</a>
-            </li>
+
+            <!-- Only visible on mobile menu-->
+            <li class="nav-link sign-link-mobile"><a routerLink='/login' *ngIf="!isAuthed">Log in</a></li>
+            <li class="nav-link sign-link-mobile"><a routerLink='/signup' *ngIf="!isAuthed">Sign up</a></li>
+
+            <li class="nav-link sign-link-mobile"><a href="#" *ngIf="isAuthed">Profil</a></li>
+            <li class="nav-link sign-link-mobile"><a routerLink='/login' (click)="logout()" *ngIf="isAuthed">Log out</a></li>
+
           </ul>
         </nav>
-        <a href="#subscribe" class="btn nav-btn sign-link-desktop" role="button">Log in</a>
-        <a href="#subscribe" class="btn nav-btn sign-link-desktop" role="button">Sign up</a>
+
+        <!-- Show for non authenticated users-->
+        <span style="margin-left: auto" *ngIf="!isAuthed">
+          <a routerLink='/login' class="btn nav-btn sign-link-desktop" role="button" >Log in</a>
+          <a routerLink='/signup' class="btn nav-btn sign-link-desktop" role="button">Sign up</a>
+        </span>
+
+        <!-- Show for authenticated users-->
+        <span *ngIf="isAuthed">
+          <a routerLink='/login' class="btn nav-btn sign-link-desktop" role="button">Profil</a>
+          <a routerLink='/login' (click)="logout()" class="btn nav-btn sign-link-desktop" role="button">Log out</a>
+        </span>
+
         <img class="mobile-menu-toggle" hidden src="/assets/images/mobile-menu-icon.svg" alt="Mobile menu button" role="button">
       </div>
     </header>

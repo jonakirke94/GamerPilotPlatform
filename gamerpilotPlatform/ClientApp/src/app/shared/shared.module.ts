@@ -7,7 +7,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { RouterExtService } from './RouterExtService';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
-import { CoursesComponent } from './courses/courses.component';
+import { CourseCarouselComponent } from './coursecarousel/coursecarousel.component';
 
 
 
@@ -22,7 +22,7 @@ import { CoursesComponent } from './courses/courses.component';
   declarations: [
   LoadingSpinnerComponent,
   HeaderComponent,
-  CoursesComponent,
+  CourseCarouselComponent,
   FooterComponent],
   exports: [
     CommonModule,
@@ -32,7 +32,7 @@ import { CoursesComponent } from './courses/courses.component';
     RouterModule,
     LoadingSpinnerComponent,
     HeaderComponent,
-    CoursesComponent,
+    CourseCarouselComponent,
     FooterComponent
 
   ],

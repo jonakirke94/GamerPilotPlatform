@@ -41,6 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(this.applyCredentials(req)).pipe(
             catchError(err => {
                 console.log('Caught error in interceptor');
+                console.log(err);
 
                 if (err instanceof HttpErrorResponse) {
 

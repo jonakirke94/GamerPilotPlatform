@@ -1,12 +1,13 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
+declare var $: any;
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  selector: 'app-coursecarousel',
+  templateUrl: './coursecarousel.component.html',
+  styleUrls: ['./coursecarousel.component.scss']
 })
-export class CoursesComponent implements OnInit {
+export class CourseCarouselComponent implements OnInit {
   @Input()  course: any;
   @Output() viewcourse = new EventEmitter<string>();
   courses: any = [];

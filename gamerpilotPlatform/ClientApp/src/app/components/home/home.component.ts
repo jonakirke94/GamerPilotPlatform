@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, Inject} from '@angular/core';
-import { CoursesComponent} from '../../shared/courses/courses.component';
+import { CourseCarouselComponent} from '../../shared/coursecarousel/coursecarousel.component';
 import { DOCUMENT } from '@angular/common';
 
 
@@ -25,7 +25,8 @@ export class HomeComponent implements OnInit {
     this.nav = document.querySelector('.features-nav');
     this.navOffsetTop = this.nav.offsetTop;
     this.navHeight = this.nav.offsetHeight;
-    this.courseTop = document.querySelector('#courses').offsetTop;
+    const courseElement = <HTMLElement>document.querySelector('#courses');
+    this.courseTop = courseElement.offsetTop;
   }
 
    // tslint:disable-next-line:use-life-cycle-interface
@@ -66,7 +67,8 @@ export class HomeComponent implements OnInit {
   }
 
   removeActiveClass() {
-    document.querySelectorAll('.features-nav-link').forEach(function (el) {
+    const navs = Array.from(document.querySelectorAll('.features-nav-link'));
+    navs.forEach(function (el) {
       el.classList.remove('active');
     });
   }
@@ -86,13 +88,9 @@ export class HomeComponent implements OnInit {
 
   scrollToElement($element): void {
     $element.scrollIntoView({behavior: 'smooth', block: 'start'});
-    $element.scrollTop += 30;
-
   }
 
   /* carousel */
-  
-
   goCourse(id: string) {
     console.log(id);
   }
