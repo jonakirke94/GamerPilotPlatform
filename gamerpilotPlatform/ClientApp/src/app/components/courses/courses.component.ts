@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseService } from '../../core/services/course.service';
 
 @Component({
   selector: 'app-courses',
@@ -8,57 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class CoursesComponent implements OnInit {
   courses: any = [];
 
-  constructor() { }
+  constructor(private _courseService: CourseService) { }
 
   ngOnInit() {
-    this.courses.push({
-      topic: 'Communication',
-      imgUrl: 'https://picsum.photos/600/600?random',
-      fa: 'fas fa-headset',
-      soon: false,
-      id: 1,
-    });
-
-    this.courses.push({
-      topic: 'Strategy',
-      imgUrl: 'https://picsum.photos/600/600/?random',
-      fa: 'fab fa-accessible-icon',
-      soon: false,
-      id: 2,
-    });
-
-    this.courses.push({
-      topic: 'Teamwork',
-      imgUrl: 'https://picsum.photos/600/600?random',
-      fa: 'fas fa-allergies',
-      soon: false,
-      id: 3,
-    });
-
-    this.courses.push({
-      topic: 'Concentration',
-      imgUrl: 'https://picsum.photos/600/600?random',
-      fa: 'fas fa-address-book',
-      soon: false,
-      id: 4,
-    });
-
-    this.courses.push({
-      topic: 'Concentration111',
-      imgUrl: 'https://picsum.photos/600/600?random',
-      fa: 'fas fa-address-book',
-      soon: false,
-      id: 5,
-    });
-
-
-    this.courses.push({
-      topic: 'Concentration111',
-      imgUrl: 'https://picsum.photos/600/600?random',
-      fa: 'fas fa-address-book',
-      soon: true,
-      id: 6,
-    });
+    this.courses = this._courseService.getCourses();
   }
 
   showCourse(course) {
