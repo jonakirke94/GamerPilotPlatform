@@ -3,8 +3,8 @@
 @import '~sass/fonts';
 
 .auth-container {
-    border: 1px solid lighten($blue, 5%); 
-    margin-top: 150px;
+    border: 1px solid lighten($deepsea, 5%); 
+    margin-top: 50px;
     padding: 50px;
     box-shadow: 10px 10px 40px 0 rgba(0,0,0,.6);
 }
@@ -15,6 +15,7 @@ input {
     color: #414351;
     font-size: 15px;
     border-radius: 0;
+    border: 1px solid $deepsea;
     -webkit-appearance: none;
     font-family: sans-serif;
     font-size: 100%;
@@ -29,17 +30,17 @@ input {
     margin-top: 5px;
 }
 
-.btn-blue {
+.btn-deepsea {
     @include btn-gp;
     width: 100%;
-    background-color: $blue;
+    background-color: $deepsea;
     border-radius: 0;
-    border: .0625rem solid $blue;
+    border: .0625rem solid $deepsea;
     padding: 0.8rem 4rem 0.8rem 4rem; //top-right-bot-left
 }
 
 .auth-icon {
-    color: white;
+    color: $deepsea;
     font-size: 96px;
     padding: 40px;
 }
@@ -53,7 +54,7 @@ input {
     font-size: 16px;
     text-transform: uppercase;
     font-family: $font-stack;
-    background: $blue;
+    background: $deepsea;
     color: white;
     outline: 0;
 }
@@ -77,13 +78,13 @@ input {
 .link-box-top a {
     margin-top: 10px;
     padding-bottom: 30px;
-    color: $blue;
+    color: $deepsea;
 }
 
 .link-box-bottom a {
     margin-top: 10px;
     padding-top: 15px;
-    color: $blue;
+    color: $deepsea;
     display: block;
 }
 

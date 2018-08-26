@@ -85,8 +85,7 @@ export class CourseCarouselComponent implements OnInit {
       });
 
       $('#carouselExample').carousel( {
-                interval: 5000,
-                ride: true
+                interval: 3000,
             });
     }
 

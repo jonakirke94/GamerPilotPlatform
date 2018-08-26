@@ -9,7 +9,6 @@ import { HeaderComponent } from './shared/layout/header/header.component';
 import { CoreModule } from './core/core.module';
 import { BooksComponent } from './components/books/books.component';
 import { CommonModule } from '@angular/common';
-import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -20,7 +19,6 @@ import { CoursesComponent } from './components/courses/courses.component';
 @NgModule({
   declarations: [
       AppComponent,
-      FetchDataComponent,
       HomeComponent,
       BooksComponent,
       LearningbasisComponent,

@@ -3,21 +3,28 @@
 @import '~sass/fonts';
 
 .intro {
-    background-color: $main;
+    background-color: $eden;
     padding: 50px;
+    padding-bottom: 100px;
+}
+
+.intro:before {
+    width: 100%;
+    content: " ";
+    background: url("/assets/images/bg-dots.svg") repeat;
+    position: absolute;
+    height:100%;
 }
 
 
-.block-blue {
+.block-white {
     @include block;
     margin-top: 50px;
-    border-left-color: $blue;
+    border-left-color: $white;
 }
 
-.intro-bg {
-    background: url("/assets/images/bg-dots.svg") repeat;
-    height: 100%;
-    width: 100%;
+.block-white h3 {
+    color: white;
 }
 
 .intro h1 {
@@ -41,7 +48,7 @@
 }
 
 .card-header {
-    background-color: lighten($main, 5%);
+    background-color: lighten($deepsea, 5%);
     color: $white;
     font-size: 20px;
     padding: 15px;
@@ -60,7 +67,7 @@
 }
 
 .card-icon {
-    color: $blue;
+    color: $deepsea;
     font-size: 20px;
 }
 
@@ -82,7 +89,7 @@
 .block-main {
     @include block;
     margin-top: 50px;
-    border-left-color: $main;
+    border-left-color: $deepsea;
 }
 
 .block-main h3 {
@@ -96,14 +103,18 @@
 
 /* learning theories*/
 .block-left {
-    background-color: darken($main, 5%);
+    background-color: $deepsea;
     padding: 100px;
     margin-top: -50px;
     margin-bottom: 50px;
 }
 
+.block-left h3, .block-right h3 {
+    color: white;
+}
+
 .block-right {
-    background-color: lighten($main, 5%);
+    background-color: $eden;
     padding: 100px;  
 }
 
@@ -115,19 +126,27 @@ hr {
 
 /* learning concepts */
 
-.container-main {
-    background-color: $main;
+.container-white {
+    background-color: white;
     padding: 50px;
     padding-top: 100px;
 }
 
-.container-grey {
-    background-color: lighten($main, 5%);
+.container-white p {
+    color: $main;
+}
+
+.container-white h1,h2,h3 {
+    color: $deepsea;
+}
+
+.container-eden {
+    background-color: $eden;
     padding: 50px;
 }
 
-.container-white {
-    background-color: darken($white, 5%);
+.container-deep {
+    background-color:$deepsea;
     padding: 50px;
 }
 
@@ -140,10 +159,10 @@ hr {
 .fa-diagnoses {
     margin-top: 130px;
     font-size: 158px;
-    color: $highlight;
+    color: white;
 }
 
-#motivation::after {
+.container-deep::after {
     content: "";
     display: inline-block;
     width: 34px;
@@ -155,22 +174,22 @@ hr {
     background: url("/assets/images/connector.svg") 0 0 no-repeat;
 }
 
-.block-highlight {
+.block-white {
     @include block;
     margin-top: 50px;
-    border-left-color: $highlight;
+    border-left-color: white;
 }
 
 .fa-child {
     margin-top: 100px;
     font-size: 158px;
-    color: $blue;
+    color: $deepsea;
 }
 
 .fa-boxes {
     margin-top: 200px;
     font-size: 158px;
-    color: $main;
+    color: white;
 }
 
 .fa-eye {
