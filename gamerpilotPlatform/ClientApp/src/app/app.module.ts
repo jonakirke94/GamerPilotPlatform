@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { RouterExtService } from './shared/RouterExtService';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
 import { CoursesComponent } from './components/courses/courses.component';
+import { CourseModule } from './components/course/course.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CoursesComponent } from './components/courses/courses.component';
       AppRoutingModule,
       CoreModule,
       BrowserAnimationsModule,
-      SharedModule
+      SharedModule,
+      CourseModule
   ],
    providers: [
 

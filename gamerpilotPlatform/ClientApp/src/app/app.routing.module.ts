@@ -7,6 +7,8 @@ import { SignupComponent } from './components/authentication/signup/signup.compo
 import { LoginComponent } from './components/authentication/login/login.component';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
 import { CoursesComponent } from './components/courses/courses.component';
+import { CourseModule } from './components/course/course.module';
+import { CourseSidebarComponent } from './components/course/course-sidebar/course-sidebar.component';
 
 
 const routes: Routes = [
@@ -18,7 +20,15 @@ const routes: Routes = [
     { path: 'courses', component: CoursesComponent },
 
     { path: 'learningbasis', component: LearningbasisComponent },
-    { path: '**', redirectTo: 'home' }
+
+    {
+      path: 'test/:name', component: CourseSidebarComponent,
+      /* children: [
+        { path: '', component: CoursesComponent },
+      ] */
+    },
+    { path: '**', redirectTo: 'home' },
+
   ];
 
   @NgModule({
