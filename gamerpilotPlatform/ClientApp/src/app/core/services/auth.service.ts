@@ -17,8 +17,8 @@ export class AuthService {
   @Output() IsAuthed: EventEmitter<boolean> = new EventEmitter();
   baseUrl: string;
 
-  loggedIn = new BehaviorSubject<boolean>(false);
-
+/*   loggedIn = new BehaviorSubject<boolean>(false);
+ */
 
   constructor(private http: HttpClient, private _storage: StorageService, @Inject('BASE_URL') _baseUrl: string) {
     this.baseUrl = _baseUrl;
@@ -61,14 +61,18 @@ export class AuthService {
   }
 
   public isLoggedIn() {
+    let res = false;
+
     const token = this._storage.getToken();
     if (token) {
-      this.loggedIn.next(true);
+      res = true;
+      this.IsAuthed.emit(true);
     } else {
-      this.loggedIn.next(false);
+      this.IsAuthed.emit(false);
     }
 
-    return this.loggedIn.asObservable();
+    return res;
+
   }
 
   logout() {

@@ -20,7 +20,12 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
       this._auth.IsAuthed.subscribe(status => this.changeAuthStatus(status));
-      this.initNavbar();
+
+   /*    this.isAuthed =  this._auth.isLoggedIn(); */
+
+        // unsubscribe later
+
+       this.initNavbar();
     }
 
     private changeAuthStatus(status: boolean): void {

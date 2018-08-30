@@ -6,9 +6,6 @@ import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/authentication/signup/signup.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
-import { CoursesComponent } from './components/courses/courses.component';
-import { CourseModule } from './components/course/course.module';
-import { CourseSidebarComponent } from './components/course/course-sidebar/course-sidebar.component';
 
 
 const routes: Routes = [
@@ -17,15 +14,14 @@ const routes: Routes = [
     { path: 'books', canActivate: [AuthGuard], component: BooksComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'courses', component: CoursesComponent },
 
     { path: 'learningbasis', component: LearningbasisComponent },
 
-    { path: 'courses', component: CoursesComponent },
+/*     { path: 'courses', component: CoursesComponent }, */
 
     {
-      path: 'courses/:name',
-      loadChildren: './course-panel/course-panel.module#CoursePanelModule'
+      path: 'courses',
+      loadChildren: './course/course.module#CourseModule'
     },
       /* children: [
         { path: '', component: CoursesComponent },

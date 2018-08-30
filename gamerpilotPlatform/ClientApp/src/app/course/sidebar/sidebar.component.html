@@ -1,0 +1,241 @@
+
+
+<!-- <div class="wrapper">
+  <nav id="sidebar">
+      <div class="header">
+          <h3>Communication</h3>
+          <strong>GP</strong>
+      </div>
+
+      <ul class="components">
+        <li class="title">Course Info</li>
+        <li>
+            <a>
+                <span class="status-container">
+                    <span class="status-icon completed"></span>
+                </span>
+                <div class="title-container">
+                    <i class="fas fa-file-alt"></i>        
+                    <span class="lecture-name">CS:GO</span>
+                </div>       
+            </a>
+        </li>
+      </ul>
+
+   
+  </nav> -->
+
+<div class="flex-container">
+
+  <div class="row lecture-sidebar">
+    
+    <div class="col-sm-12 course-section">
+      <div class="section-title">
+        Velkommen
+      </div>
+      <ul class="section-list">
+        
+        <li class="section-item incomplete next-lecture">
+          <a class="item" routerLink='./' routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+            <span class="status-container">
+              <span class="status-icon">
+                &nbsp;
+              </span>
+            </span>
+            <div class="title-container">
+              <span class="lecture-icon">
+                <i class="fas fa-lightbulb"></i>
+              </span>
+              <span class="lecture-name">
+                Information                       
+              </span>
+            </div>
+          </a>
+        </li>
+        
+        <li class="section-item incomplete">
+          <a class="item" routerLink='./introduction' routerLinkActive="active-link">
+            <span class="status-container">
+              <span class="status-icon">
+                &nbsp;
+              </span>
+            </span>
+            <div class="title-container">
+              <span class="lecture-icon">
+                <i class="fas fa-file-alt"></i>
+              </span>
+              <span class="lecture-name">
+                Introduktion til kurset        
+              </span>
+            </div>
+          </a>
+        </li>        
+      </ul>
+    </div>
+    
+    <div class="col-sm-12 course-section">
+      <div class="section-title" >
+        Real life perspective
+      </div>
+      <ul class="section-list">
+        
+        <li class="section-item incomplete">
+          <a class="item" routerLink='./professional-view' routerLinkActive="active-link">
+            <span class="status-container">
+              <span class="status-icon">
+                &nbsp;
+              </span>
+            </span>
+            <div class="title-container">
+              <span class="lecture-icon">
+                <i class="fas fa-video"></i>
+              </span>
+              <span class="lecture-name">
+                A professional angle
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="section-item incomplete">
+            <a class="item" routerLink='./case' routerLinkActive="active-link">
+              <span class="status-container">
+                <span class="status-icon">
+                  &nbsp;
+                </span>
+              </span>
+              <div class="title-container">
+                <span class="lecture-icon">
+                  <i class="fas fa-file-alt"></i>
+                </span>
+                <span class="lecture-name">
+                  A real life case
+                </span>
+              </div>
+            </a>
+          </li>
+
+        
+      </ul>
+    </div>
+
+    <div class="col-sm-12 course-section">
+        <div class="section-title" >
+          Test your knowledge
+        </div>
+        <ul class="section-list">
+          
+          <li class="section-item incomplete">
+            <a class="item" routerLink='./quiz' routerLinkActive="active-link">
+              <span class="status-container">
+                <span class="status-icon">
+                  &nbsp;
+                </span>
+              </span>
+              <div class="title-container">
+                <span class="lecture-icon">
+                  <i class="fas fa-brain"></i>
+                </span>
+                <span class="lecture-name">
+                  Quiz
+                </span>
+              </div>
+            </a>
+          </li>
+  
+          
+        </ul>
+    </div>
+    
+    <div class="col-sm-12 course-section">
+          <div class="section-title" >
+            Diving into CS:GO
+          </div>
+          <ul class="section-list">
+            
+            <li class="section-item incomplete">
+              <a class="item" routerLink='./professional-content' routerLinkActive="active-link">
+                <span class="status-container">
+                  <span class="status-icon">
+                    &nbsp;
+                  </span>
+                </span>
+                <div class="title-container">
+                  <span class="lecture-icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span class="lecture-name">
+                    CS:GO tips 
+                  </span>
+                </div>
+              </a>
+            </li>
+    
+            
+          </ul>
+    </div>
+   
+    <div class="col-sm-12 course-section">
+        <div class="section-title" >
+          Put it into practice
+        </div>
+        <ul class="section-list">
+          
+          <li class="section-item incomplete">
+            <a class="item" routerLink='./exercises' routerLinkActive="active-link">
+              <span class="status-container">
+                <span class="status-icon">
+                  &nbsp;
+                </span>
+              </span>
+              <div class="title-container">
+                <span class="lecture-icon">
+                  <i class="fas fa-file-contract"></i>
+                </span>
+                <span class="lecture-name">
+                  Exercises
+                </span>
+              </div>
+            </a>
+          </li>   
+        </ul>
+    </div>
+
+    <div class="col-sm-12 course-section">
+        <div class="section-title" >
+          Wrapping up
+        </div>
+        <ul class="section-list">
+          
+          <li class="section-item incomplete">
+            <a class="item" routerLink='./summary' routerLinkActive="active-link">
+              <span class="status-container">
+                <span class="status-icon">
+                  &nbsp;
+                </span>
+              </span>
+              <div class="title-container">
+                <span class="lecture-icon">
+                  <i class="fas fa-file-alt"></i>
+                </span>
+                <span class="lecture-name">
+                  Summary
+                </span>
+              </div>
+            </a>
+          </li>   
+        </ul>
+    </div>
+
+  </div>
+
+<!-- Page Content  -->
+<div id="content">
+
+  <nav class="navbar">
+        <a>Next</a>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>
+</div>

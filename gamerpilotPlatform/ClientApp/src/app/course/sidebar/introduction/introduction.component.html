@@ -1,0 +1,17 @@
+
+
+<pre>{{isLoggedIn}}</pre>
+
+<div *ngIf="isLoggedIn">
+
+  <p>
+  introduction works!
+  </p>
+
+</div>
+
+<div *ngIf="!isLoggedIn">
+
+    <app-locked-content></app-locked-content>
+  
+  </div>

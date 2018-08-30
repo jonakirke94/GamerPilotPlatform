@@ -14,8 +14,6 @@ import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterExtService } from './shared/RouterExtService';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
-import { CoursesComponent } from './components/courses/courses.component';
-import { CourseModule } from './components/course/course.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +21,6 @@ import { CourseModule } from './components/course/course.module';
       HomeComponent,
       BooksComponent,
       LearningbasisComponent,
-      CoursesComponent,
   ],
   imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,7 +31,6 @@ import { CourseModule } from './components/course/course.module';
       CoreModule,
       BrowserAnimationsModule,
       SharedModule,
-      CourseModule
   ],
    providers: [
 
