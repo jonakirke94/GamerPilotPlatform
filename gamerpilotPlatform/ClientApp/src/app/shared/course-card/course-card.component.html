@@ -1,0 +1,15 @@
+
+
+
+<!--Component interaction https://angular.io/guide/component-interaction-->
+  <div class="card-container" (click)="showCourse(course.soon, course.id)">
+    <div class="card">
+        <img class="card-img-top" src="assets/images/csgo.jpg" alt="Card image cap">
+        <img class="card-img-top coming-soon" src="assets/images/coming-soon.png" alt="Card image cap" *ngIf="course.soon">
+        <div class="card-body">
+            <i class="{{course.fa}} card-icon"></i>
+          <p class="card-text">{{course.topic}}</p>
+        </div>
+      </div>
+      </div>
+

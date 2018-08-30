@@ -21,12 +21,15 @@ const routes: Routes = [
 
     { path: 'learningbasis', component: LearningbasisComponent },
 
+    { path: 'courses', component: CoursesComponent },
+
     {
-      path: 'test/:name', component: CourseSidebarComponent,
+      path: 'courses/:name',
+      loadChildren: './course-panel/course-panel.module#CoursePanelModule'
+    },
       /* children: [
         { path: '', component: CoursesComponent },
       ] */
-    },
     { path: '**', redirectTo: 'home' },
 
   ];
