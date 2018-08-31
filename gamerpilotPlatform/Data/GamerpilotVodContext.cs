@@ -20,6 +20,12 @@ namespace gamerpilotPlatform.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
+        public DbSet<LearningGoal> LearningGoals { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CourseIntroduction>().HasBaseType<Lecture>();
+        }
 
     }
 }

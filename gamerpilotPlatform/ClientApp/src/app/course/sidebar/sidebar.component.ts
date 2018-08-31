@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import { CourseService } from '../../core/services/course.service';
+import { Course } from '../../../models/course';
 
 
 @Component({
@@ -11,29 +12,26 @@ import { CourseService } from '../../core/services/course.service';
 })
 export class SidebarComponent implements OnInit {
   showOutlet = false;
-  course;
+  course: Course;
 
   constructor(private _router: Router, private _activedRoute: ActivatedRoute, private _courseService: CourseService) { }
 
   ngOnInit() {
     const nameParam: string = this._activedRoute.snapshot.paramMap.get('name');
-
-    console.log(nameParam, 'param');
-
     this.loadCourse(nameParam);
     // retrieve route and check if the course exists
   }
 
   loadCourse(name: string) {
       this._courseService.getCourse(name).subscribe(res => {
-        console.log(res, 'res');
+        console.log(res['data'], 'res');
         this.course = res['data'];
-      });
 
-      if (!this.course) {
-        // if no course matched name param in url
-        this._router.navigateByUrl('/courses');
-      }
+        if (!this.course) {
+          // if no course matched name param in url
+          this._router.navigateByUrl('/courses');
+        }
+      });
   }
 }
 

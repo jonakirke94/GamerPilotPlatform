@@ -6,6 +6,8 @@ using gamerpilotPlatform.Data;
 using gamerpilotPlatform.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace gamerpilotPlatform.Controllers
 {
@@ -47,7 +49,9 @@ namespace gamerpilotPlatform.Controllers
 
             try
             {
-                course = _context.Courses.SingleOrDefault(x => x.Name == urlName);
+                course = _context.Courses
+                    .Include(x =>  x.Instructors)
+                    .SingleOrDefault(x => x.UrlName == urlName);
             }
             catch (Exception)
             {
@@ -60,5 +64,34 @@ namespace gamerpilotPlatform.Controllers
                 data = course
             });
         }
-}
+
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetLecture(int id)
+        {
+            object lecture = null;
+
+            try
+            {
+                var type = _context.Lectures.SingleOrDefault(x => x.Id == id).LectureType;
+
+                if (type.ToString().Equals("CourseIntroduction"))
+                {
+                    lecture = _context.Lectures.OfType<CourseIntroduction>().Include(x => x.LearningGoals)
+                    .SingleOrDefault(x => x.Id == id);
+                }
+
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+
+            return new ObjectResult(new
+            {
+                data = lecture
+            });
+        }
+    }
 }

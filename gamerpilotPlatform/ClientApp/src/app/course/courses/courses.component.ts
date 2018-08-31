@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CourseService } from '../../core/services/course.service';
 import { Subscription } from 'rxjs';
+import { Course } from '../../../models/course';
 
 @Component({
   selector: 'app-courses',
@@ -8,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit, OnDestroy {
-  courses: any = [];
+  courses: Course[];
   $courses: Subscription;
 
   constructor(private _courseService: CourseService) { }
@@ -25,10 +26,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.$courses = this._courseService.getCourses().subscribe(res => {
       this.courses = res['data'];
     });
-  }
-
-  showCourse(course) {
-    console.log(course.id);
   }
 
 }

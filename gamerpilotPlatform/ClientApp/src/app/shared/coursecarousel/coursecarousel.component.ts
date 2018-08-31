@@ -10,8 +10,6 @@ declare var $: any;
   styleUrls: ['./coursecarousel.component.scss']
 })
 export class CourseCarouselComponent implements OnInit, OnDestroy {
-  @Input()  course: any;
-  @Output() viewcourse = new EventEmitter<string>();
   courses: any = [];
   $courses: Subscription;
   carouselItems: any = [];

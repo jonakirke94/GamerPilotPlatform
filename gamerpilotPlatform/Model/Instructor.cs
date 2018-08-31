@@ -12,5 +12,10 @@ namespace gamerpilotPlatform.Model
         public string Name { get; set; }
 
         public List<Lecture> Lectures { get; set; }
+
+        public Instructor()
+        {
+            Lectures = new List<Lecture>();
+        }
     }
 }

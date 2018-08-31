@@ -13,6 +13,7 @@ import { SummaryComponent } from './sidebar/summary/summary.component';
 import { ExercisesComponent } from './sidebar/exercises/exercises.component';
 import { ProfessionalContentComponent } from './sidebar/professional-content/professional-content.component';
 import { LockedContentComponent } from './sidebar/locked-content/locked-content.component';
+import { LectureComponentComponent } from './lecture-component/lecture-component.component';
 
 
 
@@ -21,6 +22,11 @@ import { LockedContentComponent } from './sidebar/locked-content/locked-content.
     CommonModule,
     CourseRoutingModule
   ],
-  declarations: [SidebarComponent, IntroductionComponent, CoursesComponent, InfoComponent, CaseComponent, ProfessionalViewComponent, QuizComponent, SummaryComponent, ExercisesComponent, ProfessionalContentComponent, LockedContentComponent]
+  declarations: [SidebarComponent,
+     IntroductionComponent,
+      CoursesComponent, InfoComponent,
+       CaseComponent, ProfessionalViewComponent,
+        QuizComponent, SummaryComponent, ExercisesComponent,
+         ProfessionalContentComponent, LockedContentComponent, LectureComponentComponent]
 })
 export class CourseModule { }

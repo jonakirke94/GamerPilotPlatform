@@ -10,6 +10,7 @@ import { QuizComponent } from './sidebar/quiz/quiz.component';
 import { ProfessionalContentComponent } from './sidebar/professional-content/professional-content.component';
 import { ExercisesComponent } from './sidebar/exercises/exercises.component';
 import { SummaryComponent } from './sidebar/summary/summary.component';
+import { LectureComponentComponent } from './lecture-component/lecture-component.component';
 
 
 const routes: Routes = [
@@ -19,14 +20,15 @@ const routes: Routes = [
     path: ':name',
     component: SidebarComponent,
     children: [
-      {path: '', component: InfoComponent},
+      {path: 'lectures/:id', component: LectureComponentComponent}
+/*       {path: '', component: InfoComponent},
       {path: 'introduction', component: IntroductionComponent},
       {path: 'case', component: CaseComponent},
       {path: 'professional-view', component: ProfessionalViewComponent},
       {path: 'professional-content', component: ProfessionalContentComponent},
       {path: 'quiz', component: QuizComponent},
       {path: 'exercises', component: ExercisesComponent},
-      {path: 'summary', component: SummaryComponent}
+      {path: 'summary', component: SummaryComponent} */
     ]
   }
 ];

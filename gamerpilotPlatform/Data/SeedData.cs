@@ -10,6 +10,8 @@ namespace gamerpilotPlatform.Data
     {
         public static void Initialize(GamerpilotVodContext context)
         {
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
             // Look for any users.
             if (!context.Users.Any())
@@ -33,6 +35,43 @@ namespace gamerpilotPlatform.Data
 
             }
 
+            var instructor1 = new Instructor()
+            {
+                Name = "Anne Fiskali",
+            };
+
+            var instructo2 = new Instructor()
+            {
+                Name = "Frederik Røj",
+            };
+
+            context.Instructors.AddRange();
+
+
+            var learningGoal1 = new LearningGoal() { Goal = "JUST A LEARNING GOAL" };
+            var learningGoal2 = new LearningGoal() { Goal = "JUST A LEARNING GOAL2" };
+            context.LearningGoals.AddRange(learningGoal1, learningGoal2);      
+        
+            context.SaveChanges();
+            
+
+
+            var lecture1 = new CourseIntroduction()
+            {
+                Order = 1,
+                Section = Section.Welcome,
+                LectureType = LectureType.CourseIntroduction,
+                Description = "blbalbalb",
+                
+            };
+            lecture1.LearningGoals.Add(learningGoal1);
+            lecture1.LearningGoals.Add(learningGoal2);
+
+            context.Lectures.Add(lecture1);
+
+            context.SaveChanges();
+
+
             if (!context.Courses.Any())
             {
                 context.Courses.AddRange(
@@ -42,6 +81,11 @@ namespace gamerpilotPlatform.Data
                         UrlName = "communication-in-csgo",
                         Description = "This course is about communication in CS:GO..",
                         ImageUrl = "https://picsum.photos/600/600?random",
+                        Language = "English",
+                        CourseLength = "35",
+                        Level = "Beginner/Intermediate",
+                        LifeSkill = "Communication"
+                       
                     },
                     new Course
                     {
@@ -49,14 +93,21 @@ namespace gamerpilotPlatform.Data
                         UrlName = "strategy-in-csgo",
                         Description = "This course is about strategy in CS:GO..",
                         ImageUrl = "https://picsum.photos/600/600?random",
-                    }
-                    ,
+                        Language = "English",
+                        CourseLength = "35",
+                        Level = "Beginner/Intermediate",
+                        LifeSkill = "Communication"
+                    },
                     new Course
                     {
                         Name = "Strategy1 in CS:GO",
                         UrlName = "strategy-in-csgo1",
                         Description = "This course is about strategy in CS:GO..",
                         ImageUrl = "https://picsum.photos/600/600?random",
+                        Language = "English",
+                        CourseLength = "35",
+                        Level = "Beginner/Intermediate",
+                        LifeSkill = "Communication"
                     },
                     new Course
                     {
@@ -64,11 +115,17 @@ namespace gamerpilotPlatform.Data
                         UrlName = "strategy-in-csgo2",
                         Description = "This course is about strategy in CS:GO..",
                         ImageUrl = "https://picsum.photos/600/600?random",
+                        Language = "English",
+                        CourseLength = "35",
+                        Level = "Beginner/Intermediate",
+                        LifeSkill = "Communication"
                     }
                 );
                 context.SaveChanges();
             }
-         
+
+            
+
 
 
 

@@ -17,6 +17,11 @@ export class CourseService {
     .get(this.baseUrl + `api/course/getcourse/${name}`);
   }
 
+  getLecture(id: string) {
+    return this.http
+    .get(this.baseUrl + `api/course/getlecture/${id}`);
+  }
+
 
 
   getCourses() {

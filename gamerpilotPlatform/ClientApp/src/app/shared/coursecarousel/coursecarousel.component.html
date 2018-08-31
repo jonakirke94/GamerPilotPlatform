@@ -8,10 +8,10 @@
                 <div class="carousel-item col-md-3 active">
                     <div class="panel panel-default">
                     <div class="panel-thumbnail">
-                        <img class="img-fluid mx-auto d-block" src="https://picsum.photos/600/600?random" alt="slide 1">
+                        <img class="img-fluid mx-auto d-block" src="{{courses[0].imageUrl}}" alt="slide 1">
                 
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Test</h5>
+                            <h5>{{courses[0].name}}</h5>
                         </div>
                     </div>
                     
@@ -21,7 +21,7 @@
                
 
                   
-                <div class="carousel-item col-md-3 active" *ngFor="let course of courses; let i = index">
+                <div class="carousel-item col-md-3" *ngFor="let course of courses; let i = index" routerLink="/courses/{{course.urlName}}">
                     <div class="panel panel-default">
                     <div class="panel-thumbnail">
                         <img class="img-fluid mx-auto d-block" src="{{course.imageUrl}}" alt="slide {{i +1}}">
@@ -34,7 +34,7 @@
                     </div>
               
     
-
+                </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
