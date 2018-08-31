@@ -14,13 +14,13 @@ export class CourseCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  showCourse(soon: boolean, id: string) {
+  /* showCourse(soon: boolean, id: string) {
     if (!soon) {
       console.log('Clicked on available course');
       this.viewcourse.emit(id);
     } else {
       console.log('Clicked on NOT available');
     }
-  }
+  } */
 
 }

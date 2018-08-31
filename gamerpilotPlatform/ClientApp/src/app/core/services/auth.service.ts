@@ -22,6 +22,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private _storage: StorageService, @Inject('BASE_URL') _baseUrl: string) {
     this.baseUrl = _baseUrl;
+    console.log(this.baseUrl, 'base');
   }
 
   signup(username: string, email: string, password: string) {

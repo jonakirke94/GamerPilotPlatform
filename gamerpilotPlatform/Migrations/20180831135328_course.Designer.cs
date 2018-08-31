@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gamerpilotPlatform.Data;
 
 namespace gamerpilotPlatform.Migrations
 {
     [DbContext(typeof(GamerpilotVodContext))]
-    partial class GamerpilotVodContextModelSnapshot : ModelSnapshot
+    [Migration("20180831135328_course")]
+    partial class course
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,8 +30,6 @@ namespace gamerpilotPlatform.Migrations
                     b.Property<string>("ImageUrl");
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("UrlName");
 
                     b.HasKey("Id");
 

@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
 import { CourseService } from '../../core/services/course.service';
+import { Subscription } from 'rxjs';
 
 declare var $: any;
 
@@ -8,18 +9,18 @@ declare var $: any;
   templateUrl: './coursecarousel.component.html',
   styleUrls: ['./coursecarousel.component.scss']
 })
-export class CourseCarouselComponent implements OnInit {
+export class CourseCarouselComponent implements OnInit, OnDestroy {
   @Input()  course: any;
   @Output() viewcourse = new EventEmitter<string>();
   courses: any = [];
+  $courses: Subscription;
   carouselItems: any = [];
+  isDataLoaded = false;
   constructor(private _courseService: CourseService) { }
 
      ngOnInit() {
-      this.courses = this._courseService.getCourses();
+      this.fetchCourses();
 
-      this.carouselItems = this.courses;
-      this.carouselItems.shift();
 
       $('#carouselExample').on('slide.bs.carousel', function (e) {
         const $e = $(e.relatedTarget);
@@ -37,19 +38,29 @@ export class CourseCarouselComponent implements OnInit {
             }
         }
       });
-
       $('#carouselExample').carousel( {
-                interval: 3000,
+                interval: 2000,
             });
     }
 
-    showCourse(soon: boolean, id: string) {
-      if (!soon) {
-        console.log('Clicked on available course');
-        this.viewcourse.emit(id);
-      } else {
-        console.log('Clicked on NOT available');
-      }
+    ngOnDestroy() {
+        this.$courses.unsubscribe();
+    }
+
+    fetchCourses() {
+      this.$courses = this._courseService.getCourses().subscribe(res => {
+        this.courses = res['data'];
+        this.courses.push(res['data'][0]);
+        this.courses.push(res['data'][0]);
+        this.courses.push(res['data'][0]);
+
+        this.isDataLoaded = true;
+        console.log(this.courses);
+        console.log(this.courses[0]);
+      });
+
+
+
     }
 
   }

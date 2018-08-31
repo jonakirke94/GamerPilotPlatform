@@ -5,13 +5,13 @@
   </div>
 
     <div class="row no-gutters wrapper justify-content-center">
-        <div class="col-md-3 course parent" *ngFor="let course of courses; let i = index" (click)="showCourse(course)">
+        <div class="col-md-3 course parent" *ngFor="let course of courses; let i = index" routerLink="/{{course.UrlName}}">
           <div class="panel panel-default child">
             <div class="panel-thumbnail">
-              <img class="img-fluid mx-auto d-block" src="{{course.imgUrl}}" alt="slide {{i +1}}">
+              <img class="img-fluid mx-auto d-block" src="{{course.ImageUrl}}" alt="slide {{i +1}}">
        
               <div class="carousel-caption d-none d-md-block">
-                  <h5>{{course.topic}}</h5>
+                  <h5>{{course.Name}}</h5>
                   </div>
             </div>   
           </div>
