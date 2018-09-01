@@ -18,8 +18,6 @@ export class LectureComponentComponent implements OnInit {
 
   ngOnInit() {
     const idParam: string = this._activeRoute.snapshot.paramMap.get('id');
-    const nameParam: string = this._activeRoute.snapshot.paramMap.get('name');
-
 
     this.loadLecture(idParam);
     // retrieve route and check if the course exists
@@ -27,7 +25,7 @@ export class LectureComponentComponent implements OnInit {
 
   loadLecture(id: string) {
       this._courseService.getLecture(id).subscribe(res => {
-        console.log(res, 'res');
+        console.log(res, 'lecture in lecturecomp');
         this.lecture = res['data'];
 
         this.dataLoaded = true;

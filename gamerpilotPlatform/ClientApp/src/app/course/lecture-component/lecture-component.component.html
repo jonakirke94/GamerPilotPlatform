@@ -4,7 +4,9 @@
 
 <div *ngIf="dataLoaded">
 
-<div *ngIf="lecture.lectureType == 0">
+  <pre>Lecture type {{lecture.lectureType}}</pre>
+
+<div *ngIf="lecture.lectureType == 2">
     <app-info [lecture]="lecture"></app-info>
 </div>
 </div>

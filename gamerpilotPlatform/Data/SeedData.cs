@@ -39,7 +39,6 @@ namespace gamerpilotPlatform.Data
             {
                 Name = "Anne Fiskali",
             };
-
             var instructo2 = new Instructor()
             {
                 Name = "Frederik Røj",
@@ -74,19 +73,23 @@ namespace gamerpilotPlatform.Data
 
             if (!context.Courses.Any())
             {
+                var course1 = new Course
+                {
+                    Name = "Communication in CS:GO",
+                    UrlName = "communication-in-csgo",
+                    Description = "This course is about communication in CS:GO..",
+                    ImageUrl = "https://picsum.photos/600/600?random",
+                    Language = "English",
+                    CourseLength = "35",
+                    Level = "Beginner/Intermediate",
+                    LifeSkill = "Communication"
+
+                };
+                course1.Lectures.Add(lecture1);
+                context.Courses.Add(course1);
+
                 context.Courses.AddRange(
-                    new Course
-                    {
-                        Name = "Communication in CS:GO",
-                        UrlName = "communication-in-csgo",
-                        Description = "This course is about communication in CS:GO..",
-                        ImageUrl = "https://picsum.photos/600/600?random",
-                        Language = "English",
-                        CourseLength = "35",
-                        Level = "Beginner/Intermediate",
-                        LifeSkill = "Communication"
-                       
-                    },
+                 
                     new Course
                     {
                         Name = "Strategy in CS:GO",

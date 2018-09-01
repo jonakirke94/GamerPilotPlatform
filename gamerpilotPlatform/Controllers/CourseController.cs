@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using gamerpilotPlatform.Data;
 using gamerpilotPlatform.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +51,8 @@ namespace gamerpilotPlatform.Controllers
             try
             {
                 course = _context.Courses
-                    .Include(x =>  x.Instructors)
+                    .Include(x => x.Instructors)
+                    .Include(x => x.Lectures)
                     .SingleOrDefault(x => x.UrlName == urlName);
             }
             catch (Exception)
@@ -72,9 +74,9 @@ namespace gamerpilotPlatform.Controllers
 
             try
             {
-                var type = _context.Lectures.SingleOrDefault(x => x.Id == id).LectureType;
+                var type = _context.Lectures.SingleOrDefault(x => x.Id == id).GetType().Name;
 
-                if (type.ToString().Equals("CourseIntroduction"))
+                if (type.Equals("CourseIntroduction"))
                 {
                     lecture = _context.Lectures.OfType<CourseIntroduction>().Include(x => x.LearningGoals)
                     .SingleOrDefault(x => x.Id == id);

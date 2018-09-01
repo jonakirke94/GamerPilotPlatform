@@ -11,8 +11,7 @@ import { Course } from '../../../models/course';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  showOutlet = false;
-  course: Course;
+  course;
 
   constructor(private _router: Router, private _activedRoute: ActivatedRoute, private _courseService: CourseService) { }
 

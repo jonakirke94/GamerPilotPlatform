@@ -15,9 +15,6 @@ namespace gamerpilotPlatform.Model
 
         public LectureType LectureType { get; set; }
 
-        public Course Course { get; set; }
-        public string CourseId { get; set; }
-
         public Instructor Instructor { get; set; }
         public string InstructorId { get; set; }
 
