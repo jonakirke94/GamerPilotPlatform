@@ -9,6 +9,8 @@ namespace gamerpilotPlatform.Model
     {
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
         public int Order { get; set; }
 
         public Section Section { get; set; }
@@ -22,8 +24,8 @@ namespace gamerpilotPlatform.Model
         //public string CourseIntroductionId { get; set; }
     };
 
-    public enum Section { Welcome = 1, RealLife, Test, Game, Practice, Summary};
+    public enum Section { Welcome = 1, RealLife, Quiz, Game, Practice, Summary};
 
-    public enum LectureType { Info, Text = 1, CourseIntroduction, Video, Quiz, Exercise}
+    public enum LectureType { Info, CourseIntroduction, Case, Video, Quiz, Practice, Summary}
 
 }

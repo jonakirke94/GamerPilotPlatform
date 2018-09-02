@@ -17,14 +17,6 @@ namespace gamerpilotPlatform.Model
 
         public string ImageUrl { get; set; }
 
-        public string CourseLength { get; set; }
-
-        public string Language { get; set; }
-
-        public string Level { get; set; }
-
-        public string LifeSkill { get; set; }
-
         public List<Lecture> Lectures { get; set; }
 
         public List<Instructor> Instructors { get; set; }

@@ -34,43 +34,27 @@
         Velkommen
       </div>
       <ul class="section-list">
-        
-        <li class="section-item incomplete next-lecture">
-          <a class="item" routerLink='./' routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
-            <span class="status-container">
-              <span class="status-icon">
-                &nbsp;
-              </span>
-            </span>
-            <div class="title-container">
-              <span class="lecture-icon">
-                <i class="fas fa-lightbulb"></i>
-              </span>
-              <span class="lecture-name">
-                Information                       
-              </span>
-            </div>
-          </a>
-        </li>
-        
-        <li class="section-item incomplete">
-          <a class="item" routerLink='./introduction' routerLinkActive="active-link">
-            <span class="status-container">
-              <span class="status-icon">
-                &nbsp;
-              </span>
-            </span>
-            <div class="title-container">
-              <span class="lecture-icon">
-                <i class="fas fa-file-alt"></i>
-              </span>
-              <span class="lecture-name">
-                Introduktion til kurset        
-              </span>
-            </div>
-          </a>
-        </li>        
-      </ul>
+
+        <div *ngFor="let lecture of lectures">
+            <li class="section-item incomplete"  *ngIf="lecture.section == 1">
+                <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+                  <span class="status-container">
+                    <span class="status-icon">
+                      &nbsp;
+                    </span>
+                  </span>
+                  <div class="title-container">
+                    <span class="lecture-icon">
+                      <i class="fas fa-file-alt"></i>
+                    </span>
+                    <span class="lecture-name">
+                      {{lecture.name}} 
+                    </span>
+                  </div>
+                </a>
+              </li>    
+        </div>
+       </ul>
     </div>
     
     <div class="col-sm-12 course-section">
@@ -79,41 +63,25 @@
       </div>
       <ul class="section-list">
         
-        <li class="section-item incomplete">
-          <a class="item" routerLink='./professional-view' routerLinkActive="active-link">
-            <span class="status-container">
-              <span class="status-icon">
-                &nbsp;
-              </span>
-            </span>
-            <div class="title-container">
-              <span class="lecture-icon">
-                <i class="fas fa-video"></i>
-              </span>
-              <span class="lecture-name">
-                A professional angle
-              </span>
-            </div>
-          </a>
-        </li>
-
-        <li class="section-item incomplete">
-            <a class="item" routerLink='./case' routerLinkActive="active-link">
-              <span class="status-container">
-                <span class="status-icon">
-                  &nbsp;
+        <div *ngFor="let lecture of lectures">
+          <li class="section-item incomplete"  *ngIf="lecture.section == 2">
+              <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+                <span class="status-container">
+                  <span class="status-icon">
+                    &nbsp;
+                  </span>
                 </span>
-              </span>
-              <div class="title-container">
-                <span class="lecture-icon">
-                  <i class="fas fa-file-alt"></i>
-                </span>
-                <span class="lecture-name">
-                  A real life case
-                </span>
-              </div>
-            </a>
-          </li>
+                <div class="title-container">
+                  <span class="lecture-icon">
+                    <i class="fas fa-file-alt"></i>
+                  </span>
+                  <span class="lecture-name">
+                    {{lecture.name}} 
+                  </span>
+                </div>
+              </a>
+            </li>    
+      </div>
 
         
       </ul>
@@ -125,23 +93,25 @@
         </div>
         <ul class="section-list">
           
-          <li class="section-item incomplete">
-            <a class="item" routerLink='./quiz' routerLinkActive="active-link">
-              <span class="status-container">
-                <span class="status-icon">
-                  &nbsp;
-                </span>
-              </span>
-              <div class="title-container">
-                <span class="lecture-icon">
-                  <i class="fas fa-brain"></i>
-                </span>
-                <span class="lecture-name">
-                  Quiz
-                </span>
-              </div>
-            </a>
-          </li>
+          <div *ngFor="let lecture of lectures">
+            <li class="section-item incomplete"  *ngIf="lecture.section == 3">
+                <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+                  <span class="status-container">
+                    <span class="status-icon">
+                      &nbsp;
+                    </span>
+                  </span>
+                  <div class="title-container">
+                    <span class="lecture-icon">
+                      <i class="fas fa-file-alt"></i>
+                    </span>
+                    <span class="lecture-name">
+                      {{lecture.name}} 
+                    </span>
+                  </div>
+                </a>
+              </li>    
+        </div>
   
           
         </ul>
@@ -153,23 +123,26 @@
           </div>
           <ul class="section-list">
             
-            <li class="section-item incomplete">
-              <a class="item" routerLink='./professional-content' routerLinkActive="active-link">
-                <span class="status-container">
-                  <span class="status-icon">
-                    &nbsp;
-                  </span>
-                </span>
-                <div class="title-container">
-                  <span class="lecture-icon">
-                    <i class="fas fa-video"></i>
-                  </span>
-                  <span class="lecture-name">
-                    CS:GO tips 
-                  </span>
-                </div>
-              </a>
-            </li>
+            <div *ngFor="let lecture of lectures">
+              <li class="section-item incomplete"  *ngIf="lecture.section == 4">
+                  <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+                    <span class="status-container">
+                      <span class="status-icon">
+                        &nbsp;
+                      </span>
+                    </span>
+                    <div class="title-container">
+                      <span class="lecture-icon">
+                        <i class="fas fa-file-alt"></i>
+                      </span>
+                      <span class="lecture-name">
+                        {{lecture.name}} 
+                      </span>
+                    </div>
+                  </a>
+                </li>    
+          </div>
+    
     
             
           </ul>
@@ -181,52 +154,57 @@
         </div>
         <ul class="section-list">
           
-          <li class="section-item incomplete">
-            <a class="item" routerLink='./exercises' routerLinkActive="active-link">
-              <span class="status-container">
-                <span class="status-icon">
-                  &nbsp;
-                </span>
-              </span>
-              <div class="title-container">
-                <span class="lecture-icon">
-                  <i class="fas fa-file-contract"></i>
-                </span>
-                <span class="lecture-name">
-                  Exercises
-                </span>
-              </div>
-            </a>
-          </li>   
+          <div *ngFor="let lecture of lectures">
+            <li class="section-item incomplete"  *ngIf="lecture.section == 5">
+                <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+                  <span class="status-container">
+                    <span class="status-icon">
+                      &nbsp;
+                    </span>
+                  </span>
+                  <div class="title-container">
+                    <span class="lecture-icon">
+                      <i class="fas fa-file-alt"></i>
+                    </span>
+                    <span class="lecture-name">
+                      {{lecture.name}} 
+                    </span>
+                  </div>
+                </a>
+              </li>    
+        </div>
+   
         </ul>
     </div>
 
     <div class="col-sm-12 course-section">
         <div class="section-title" >
-          Wrapping up
+          Summary
         </div>
         <ul class="section-list">
           
-          <li class="section-item incomplete">
-            <a class="item" routerLink='./summary' routerLinkActive="active-link">
-              <span class="status-container">
-                <span class="status-icon">
-                  &nbsp;
-                </span>
-              </span>
-              <div class="title-container">
-                <span class="lecture-icon">
-                  <i class="fas fa-file-alt"></i>
-                </span>
-                <span class="lecture-name">
-                  Summary
-                </span>
-              </div>
-            </a>
-          </li>   
+          <div *ngFor="let lecture of lectures">
+            <li class="section-item incomplete"  *ngIf="lecture.section == 6">
+                <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+                  <span class="status-container">
+                    <span class="status-icon">
+                      &nbsp;
+                    </span>
+                  </span>
+                  <div class="title-container">
+                    <span class="lecture-icon">
+                      <i class="fas fa-file-alt"></i>
+                    </span>
+                    <span class="lecture-name">
+                      {{lecture.name}} 
+                    </span>
+                  </div>
+                </a>
+              </li>    
+        </div>
+  
         </ul>
     </div>
-
   </div>
 
 <!-- Page Content  -->

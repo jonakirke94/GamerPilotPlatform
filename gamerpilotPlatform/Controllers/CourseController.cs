@@ -76,13 +76,41 @@ namespace gamerpilotPlatform.Controllers
             {
                 var type = _context.Lectures.SingleOrDefault(x => x.Id == id).GetType().Name;
 
-                if (type.Equals("CourseIntroduction"))
+                switch (type)
                 {
-                    lecture = _context.Lectures.OfType<CourseIntroduction>().Include(x => x.LearningGoals)
-                    .SingleOrDefault(x => x.Id == id);
+                    case "CourseIntroduction":
+                        lecture = _context.Lectures.OfType<CourseIntroduction>().Include(x => x.LearningGoals)
+                        .SingleOrDefault(x => x.Id == id);
+                        break;
+                    case "CourseInfo":
+                        lecture = _context.Lectures.OfType<CourseInfo>()
+                        .SingleOrDefault(x => x.Id == id);
+                        break;
+                    case "CourseCase":
+                        lecture = _context.Lectures.OfType<CourseCase>()
+                        .SingleOrDefault(x => x.Id == id);
+                        break;
+                    case "CourseExercise":
+                        lecture = _context.Lectures.OfType<CourseExercise>()
+                        .SingleOrDefault(x => x.Id == id);
+                        break;
+                    case "CourseQuiz":
+                        lecture = _context.Lectures.OfType<CourseQuiz>()
+                        .SingleOrDefault(x => x.Id == id);
+                        break;
+                    case "CourseSummary":
+                        lecture = _context.Lectures.OfType<CourseSummary>()
+                        .SingleOrDefault(x => x.Id == id);
+                        break;
+                    case "CourseVideo":
+                        lecture = _context.Lectures.OfType<CourseVideo>()
+                        .SingleOrDefault(x => x.Id == id);
+                        break;
+                    default:
+                        lecture = _context.Lectures.OfType<CourseInfo>()
+                        .SingleOrDefault(x => x.Id == id);
+                        break;
                 }
-
-
             }
             catch (Exception)
             {

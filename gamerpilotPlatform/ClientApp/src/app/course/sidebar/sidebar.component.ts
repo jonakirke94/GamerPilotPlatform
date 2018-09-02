@@ -12,6 +12,7 @@ import { Course } from '../../../models/course';
 })
 export class SidebarComponent implements OnInit {
   course;
+  lectures;
 
   constructor(private _router: Router, private _activedRoute: ActivatedRoute, private _courseService: CourseService) { }
 
@@ -23,9 +24,9 @@ export class SidebarComponent implements OnInit {
 
   loadCourse(name: string) {
       this._courseService.getCourse(name).subscribe(res => {
-        console.log(res['data'], 'res');
         this.course = res['data'];
-
+        this.lectures = this.course.lectures;
+        console.log('lectures', this.lectures);
         if (!this.course) {
           // if no course matched name param in url
           this._router.navigateByUrl('/courses');
