@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-case',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./case.component.scss']
 })
 export class CaseComponent implements OnInit {
+  @Input() lecture;
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.lecture);
   }
 
 }

@@ -1,3 +1,11 @@
 <p>
-  quiz works!
+  {{lecture.name}}
 </p>
+
+
+<div *ngFor="let question of lecture.questions">
+  <p>{{question.difficulty}}</p>
+  <p>{{question.answer}}</p>
+  <p>{{question.text}}</p>
+
+</div>

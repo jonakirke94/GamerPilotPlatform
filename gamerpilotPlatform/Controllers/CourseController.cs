@@ -92,10 +92,12 @@ namespace gamerpilotPlatform.Controllers
                         break;
                     case "CourseExercise":
                         lecture = _context.Lectures.OfType<CourseExercise>()
+                        .Include(x => x.Exercises)
                         .SingleOrDefault(x => x.Id == id);
                         break;
                     case "CourseQuiz":
                         lecture = _context.Lectures.OfType<CourseQuiz>()
+                        .Include(x => x.Questions)
                         .SingleOrDefault(x => x.Id == id);
                         break;
                     case "CourseSummary":
@@ -104,6 +106,7 @@ namespace gamerpilotPlatform.Controllers
                         break;
                     case "CourseVideo":
                         lecture = _context.Lectures.OfType<CourseVideo>()
+                        .Include(x => x.Videos)
                         .SingleOrDefault(x => x.Id == id);
                         break;
                     default:

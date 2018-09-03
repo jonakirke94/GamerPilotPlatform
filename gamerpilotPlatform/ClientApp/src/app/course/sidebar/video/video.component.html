@@ -1,0 +1,8 @@
+<p>
+  {{lecture.name}}
+</p>
+
+<div *ngFor="let video of lecture.videos">
+    <p>{{video.title}}</p>
+    <p>{{video.videoUrl}}</p>
+</div>

@@ -1,3 +1,9 @@
 <p>
-  exercises works!
-</p>
+    {{lecture.description}}
+  </p>
+  
+  
+  <div *ngFor="let exercise of lecture.exercises">
+    <p>{{exercise.description}}</p>
+  
+  </div>

@@ -1,17 +1,12 @@
 
 
-<pre>{{isLoggedIn}}</pre>
+<p>{{lecture.name}}</p>
 
-<div *ngIf="isLoggedIn">
+<p>{{lecture.description}}</p>
 
-  <p>
-  introduction works!
-  </p>
 
-</div>
-
-<div *ngIf="!isLoggedIn">
-
-    <app-locked-content></app-locked-content>
-  
-  </div>
+<ul>
+    <li *ngFor="let lg of lecture.learningGoals">
+        {{lg.goal}}
+    </li>
+</ul>

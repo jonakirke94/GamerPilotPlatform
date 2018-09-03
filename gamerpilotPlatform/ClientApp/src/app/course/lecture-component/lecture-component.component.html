@@ -2,11 +2,39 @@
   lecture-component works!
 </p>
 
+<pre>{{dataLoaded}}</pre>
 <div *ngIf="dataLoaded">
 
   <pre>Lecture type {{lecture.lectureType}}</pre>
 
-<div *ngIf="lecture.lectureType == 2">
-    <app-info [lecture]="lecture"></app-info>
+<div *ngIf="lecture.lectureType == 0">
+  <app-info [lecture]="lecture"></app-info>
 </div>
+
+<div *ngIf="lecture.lectureType == 1">
+    <app-introduction [lecture]="lecture"></app-introduction>
+</div>
+  
+<div *ngIf="lecture.lectureType == 2">
+    <app-case [lecture]="lecture"></app-case>
+</div>
+
+<div *ngIf="lecture.lectureType == 3">
+    <app-video [lecture]="lecture"></app-video>
+</div>
+
+<div *ngIf="lecture.lectureType == 4">
+    <app-quiz [lecture]="lecture"></app-quiz>
+</div>
+
+<div *ngIf="lecture.lectureType == 5">
+    <app-exercises [lecture]="lecture"></app-exercises>
+</div>
+
+<div *ngIf="lecture.lectureType == 6">
+    <app-summary [lecture]="lecture"></app-summary>
+</div>
+
+
+
 </div>

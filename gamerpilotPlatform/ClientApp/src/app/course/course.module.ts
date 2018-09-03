@@ -7,13 +7,12 @@ import { CoursesComponent } from './courses/courses.component';
 import { CourseRoutingModule } from './course-routing.module';
 import { InfoComponent } from './sidebar/info/info.component';
 import { CaseComponent } from './sidebar/case/case.component';
-import { ProfessionalViewComponent } from './sidebar/professional-view/professional-view.component';
 import { QuizComponent } from './sidebar/quiz/quiz.component';
 import { SummaryComponent } from './sidebar/summary/summary.component';
 import { ExercisesComponent } from './sidebar/exercises/exercises.component';
-import { ProfessionalContentComponent } from './sidebar/professional-content/professional-content.component';
 import { LockedContentComponent } from './sidebar/locked-content/locked-content.component';
 import { LectureComponentComponent } from './lecture-component/lecture-component.component';
+import { VideoComponent } from './sidebar/video/video.component';
 
 
 
@@ -25,8 +24,8 @@ import { LectureComponentComponent } from './lecture-component/lecture-component
   declarations: [SidebarComponent,
      IntroductionComponent,
       CoursesComponent, InfoComponent,
-       CaseComponent, ProfessionalViewComponent,
+       CaseComponent,
         QuizComponent, SummaryComponent, ExercisesComponent,
-         ProfessionalContentComponent, LockedContentComponent, LectureComponentComponent]
+         LockedContentComponent, LectureComponentComponent, VideoComponent]
 })
 export class CourseModule { }

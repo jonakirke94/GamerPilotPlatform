@@ -1,25 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { AuthService } from '../../../core/services/auth.service';
-import { LockedContentComponent} from '../locked-content/locked-content.component';
+import { Component, OnInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-introduction',
   templateUrl: './introduction.component.html',
   styleUrls: ['./introduction.component.scss']
 })
-export class IntroductionComponent implements OnInit, OnDestroy {
-  isLoggedIn: boolean;
-  private $isLoggedObs: Subscription;
+export class IntroductionComponent implements OnInit {
+  @Input() lecture;
 
-  constructor(private _auth: AuthService) { }
+  constructor() { }
 
   ngOnInit() {
-          this.isLoggedIn =  this._auth.isLoggedIn();
-
+    console.log(this.lecture);
   }
 
-  ngOnDestroy() {
-/*     this.$isLoggedObs.unsubscribe();
- */  }
 }

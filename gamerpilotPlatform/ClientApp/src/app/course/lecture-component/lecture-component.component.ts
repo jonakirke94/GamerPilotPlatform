@@ -1,40 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Course } from '../../../models/course';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CourseService } from '../../core/services/course.service';
 import { Lecture } from '../../../models/lecture';
-import { InfoComponent} from '../sidebar/info/info.component';
+import { AuthService } from '../../core/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-lecture-component',
   templateUrl: './lecture-component.component.html',
   styleUrls: ['./lecture-component.component.scss']
 })
-export class LectureComponentComponent implements OnInit {
+export class LectureComponentComponent implements OnInit, OnDestroy {
   dataLoaded = false;
+  $params: Subscription;
   lecture;
+  isLoggedIn = false;
+  paramId: string;
 
-  constructor(private _activeRoute: ActivatedRoute, private _courseService: CourseService ) { }
+  constructor(private _activeRoute: ActivatedRoute, private _courseService: CourseService, private _authService: AuthService ) { }
+
 
   ngOnInit() {
-    const idParam: string = this._activeRoute.snapshot.paramMap.get('id');
-
-    this._activeRoute.params.subscribe((params: Params) => {
-      const id = params['id'];
-      console.log(id, 'ID SUBSCRIBE');
-      this.loadLecture(id);
+    this.$params = this._activeRoute.params.subscribe((params: Params) => {
+      this.paramId = params['id'];
     });
 
-    // console.log(idParam, 'idParam');
-    // retrieve route and check if the course exists
+    if (!!this.paramId) {
+      this.loadLecture(this.paramId);
+    }
+ /*    this._authService. */
   }
 
   loadLecture(id: string) {
       this._courseService.getLecture(id).subscribe(res => {
-        console.log(res, 'lecture in lecturecomp');
         this.lecture = res['data'];
-
         this.dataLoaded = true;
       });
+  }
+
+  ngOnDestroy() {
+    this.$params.unsubscribe();
   }
 }

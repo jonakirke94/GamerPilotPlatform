@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfessionalViewComponent } from './professional-view.component';
+import { VideoComponent } from './video.component';
 
-describe('ProfessionalViewComponent', () => {
-  let component: ProfessionalViewComponent;
-  let fixture: ComponentFixture<ProfessionalViewComponent>;
+describe('VideoComponent', () => {
+  let component: VideoComponent;
+  let fixture: ComponentFixture<VideoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfessionalViewComponent ]
+      declarations: [ VideoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfessionalViewComponent);
+    fixture = TestBed.createComponent(VideoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
