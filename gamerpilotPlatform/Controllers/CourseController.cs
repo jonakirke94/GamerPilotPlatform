@@ -16,10 +16,12 @@ namespace gamerpilotPlatform.Controllers
     public class CourseController : Controller
     {
         private readonly GamerpilotVodContext _context;
+        private readonly VideoController _video;
 
-        public CourseController(GamerpilotVodContext context)
+        public CourseController(GamerpilotVodContext context, VideoController video)
         {
             _context = context;
+            _video = video;
         }
 
         [HttpGet("[action]")]

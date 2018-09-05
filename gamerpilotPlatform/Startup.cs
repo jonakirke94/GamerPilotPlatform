@@ -30,6 +30,7 @@ namespace gamerpilotPlatform
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets<Startup>();
+
             }
         }
 
@@ -39,6 +40,8 @@ namespace gamerpilotPlatform
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+
+            /* aws */
 
 
             services.AddSingleton(provider => Configuration);
