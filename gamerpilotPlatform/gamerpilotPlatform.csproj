@@ -30,6 +30,12 @@
     <Folder Include="ClientApp\src\app\core\services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="GamerPilot.Video">
+      <HintPath>..\..\..\..\..\..\Desktop\GamerPilot.Video\GamerPilot.Video\vs1.0\Bin\GamerPilot.Video.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
