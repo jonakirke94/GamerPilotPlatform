@@ -13,33 +13,35 @@ import { Subscription } from 'rxjs';
 })
 export class LectureComponentComponent implements OnInit, OnDestroy {
   dataLoaded = false;
-  $params: Subscription;
+  $idParams: Subscription;
+  $nameParams: Subscription;
   lecture;
   isLoggedIn = false;
-  paramId: string;
 
   constructor(private _activeRoute: ActivatedRoute, private _courseService: CourseService, private _authService: AuthService ) { }
 
 
   ngOnInit() {
-    this.$params = this._activeRoute.params.subscribe((params: Params) => {
-      this.paramId = params['id'];
+    this.$idParams = this._activeRoute.params.subscribe((params: Params) => {
+
+      this.$nameParams = this._activeRoute.parent.params.subscribe((parentParams: Params) => {
+          this.loadLecture(parentParams['name'], params['id']);
+      });
     });
 
-    if (!!this.paramId) {
-      this.loadLecture(this.paramId);
-    }
- /*    this._authService. */
+    console.log(this._activeRoute.url, 'url');
+
   }
 
-  loadLecture(id: string) {
-      this._courseService.getLecture(id).subscribe(res => {
+  loadLecture(name: string, id: string) {
+      this._courseService.getLecture(name, id).subscribe(res => {
         this.lecture = res['data'];
         this.dataLoaded = true;
       });
   }
 
   ngOnDestroy() {
-    this.$params.unsubscribe();
+    this.$idParams.unsubscribe();
+    this.$nameParams.unsubscribe();
   }
 }

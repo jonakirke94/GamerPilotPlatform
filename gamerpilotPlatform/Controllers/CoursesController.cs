@@ -72,19 +72,29 @@ namespace gamerpilotPlatform.Controllers
             });
         }
 
-        [HttpGet("[action]/{id}")]
-        public IActionResult Lecture(int id)
+        //GET course/communication-in-csgo/lecture/1
+        [HttpGet("{name}/[action]/{id}")]
+        public IActionResult Lecture(string name, int id)
         {
             object lecture = null;
 
             try
             {
+                var courseExists = _context.Courses.Any(x => x.UrlName == name && x.Lectures.Any(y => y.Id == id));
+
+                if (!courseExists)
+                {
+                    return BadRequest();
+                }
+
+
                 var type = _context.Lectures.SingleOrDefault(x => x.Id == id).GetType().Name;
 
                 switch (type)
                 {
                     case "CourseIntroduction":
-                        lecture = _context.Lectures.OfType<CourseIntroduction>().Include(x => x.LearningGoals)
+                        lecture = _context.Lectures.OfType<CourseIntroduction>()
+                        .Include(x => x.LearningGoals)
                         .SingleOrDefault(x => x.Id == id);
                         break;
                     case "CourseInfo":

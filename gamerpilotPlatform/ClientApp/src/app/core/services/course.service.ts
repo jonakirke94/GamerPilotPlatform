@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CourseService implements OnDestroy {
   baseUrl: string;
-  activeCourse;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') _baseUrl: string) {
     this.baseUrl = _baseUrl;
@@ -14,19 +13,13 @@ export class CourseService implements OnDestroy {
 
 
   getCourse(name: string) {
-    const req = this.http
+    return this.http
     .get(this.baseUrl + `api/courses/${name}`);
-
-    req.subscribe( res => {
-      this.activeCourse = res['data'];
-    });
-
-    return req;
   }
 
-  getLecture(id: string) {
+  getLecture(name: string, id: string)  {
     return this.http
-    .get(this.baseUrl + `api/courses/lecture/${id}`);
+    .get(this.baseUrl + `api/courses/${name}/lecture/${id}`);
   }
 
   getCourses() {
@@ -35,6 +28,6 @@ export class CourseService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    
+
   }
 }
