@@ -18,20 +18,10 @@ namespace gamerpilotPlatform
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-               .SetBasePath(env.ContentRootPath)
-               .AddJsonFile("appsettings.json",
-                            optional: false,
-                            reloadOnChange: true)
-               .AddEnvironmentVariables();
+            Configuration = configuration;
 
-            if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-
-            }
         }
 
         public IConfiguration Configuration { get; }
@@ -42,16 +32,25 @@ namespace gamerpilotPlatform
             services.AddCors();
 
             /* aws */
+            services.Configure<AWSSettings>(mySettings =>
+            {
+                mySettings.AWSAccessKey = Configuration["AWSAccessKey"];
+                mySettings.AWSSecretKey = Configuration["AWSSecretKey"];
+                mySettings.AWSBucketName = Configuration["AWSBucketName"];
+                mySettings.AWSRegion = Amazon.RegionEndpoint.EUWest1;
+            });
 
 
             services.AddSingleton(provider => Configuration);
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IPasswordHasher, PasswordHasher>();
+            services.AddTransient<IVideoService, VideoService>();
 
             services.AddDbContext<GamerpilotVodContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("VodContext")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -102,7 +101,7 @@ namespace gamerpilotPlatform
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseSpaStaticFiles();

@@ -27,7 +27,7 @@ export class AuthService {
 
   signup(username: string, email: string, password: string) {
     return this.http
-      .post(this.baseUrl + 'api/account/signup', {
+      .post(this.baseUrl + 'api/accounts/signup', {
         email,
         username,
         password
@@ -43,7 +43,7 @@ export class AuthService {
     this.logout();
 
     return this.http
-      .post(this.baseUrl + 'api/account/login', {
+      .post(this.baseUrl + 'api/accounts/login', {
         email,
         password
       }).pipe(

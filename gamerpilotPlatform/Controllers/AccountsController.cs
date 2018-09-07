@@ -12,12 +12,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace gamerpilotPlatform.Controllers
 {
     [Route("api/[controller]")]
-    public class AccountController : Controller
+    public class AccountsController : Controller
     {
         private readonly GamerpilotVodContext _context;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenService _tokenService;
-        public AccountController(GamerpilotVodContext context, IPasswordHasher passwordHasher, ITokenService tokenService)
+        public AccountsController(GamerpilotVodContext context, IPasswordHasher passwordHasher, ITokenService tokenService)
         {
             _context = context;
             _passwordHasher = passwordHasher;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using gamerpilotPlatform.Data;
 using gamerpilotPlatform.Model;
+using gamerpilotPlatform.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,21 +14,23 @@ using Microsoft.EntityFrameworkCore;
 namespace gamerpilotPlatform.Controllers
 {
     [Route("api/[controller]")]
-    public class CourseController : Controller
+    public class CoursesController : Controller
     {
         private readonly GamerpilotVodContext _context;
-        private readonly VideoController _video;
+        private readonly IVideoService _videoService;
 
-        public CourseController(GamerpilotVodContext context, VideoController video)
+        public CoursesController(GamerpilotVodContext context, IVideoService videoService)
         {
             _context = context;
-            _video = video;
+            _videoService = videoService;
         }
 
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetAll(string name)
+
+        [HttpGet]
+        public IActionResult Get()
         {
             List<Course> courses = new List<Course>();
+            //var vid = _videoService.GetVideos();
 
             try
             {
@@ -45,8 +48,8 @@ namespace gamerpilotPlatform.Controllers
             });
         }
 
-        [HttpGet("[action]/{urlName}")]
-        public async Task<IActionResult> GetCourse(string urlName)
+        [HttpGet("{urlName}")]
+        public IActionResult Get(string urlName)
         {
             Course course = null;
 
@@ -70,7 +73,7 @@ namespace gamerpilotPlatform.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> GetLecture(int id)
+        public IActionResult Lecture(int id)
         {
             object lecture = null;
 

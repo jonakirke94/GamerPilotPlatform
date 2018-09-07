@@ -11,16 +11,17 @@ using Newtonsoft.Json.Linq;
 namespace gamerpilotPlatform.Controllers
 {
     [Route("api/[controller]")]
-    public class TokenController : Controller
+    public class TokensController : Controller
     {
         private readonly ITokenService _tokenService;
         private readonly GamerpilotVodContext _context;
 
-        public TokenController(ITokenService tokenService, GamerpilotVodContext context)
+        public TokensController(ITokenService tokenService, GamerpilotVodContext context)
         {
             _tokenService = tokenService;
             _context = context;
         }
+
 
         [HttpPost("[action]")]
         public async Task<IActionResult> Refresh([FromBody]JObject data)
