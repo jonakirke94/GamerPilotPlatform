@@ -19,18 +19,10 @@ namespace gamerpilotPlatform.Data
                 context.Users.AddRange(
                 new User
                 {
-                    Email = "Test@Test.dk",
+                    Email = "test@test.dk",
                     Username = "TestUser",
-                    Password = "AQAAAAEAACcQAAAAEBEbjTr4E7rEPlOgmMZArDU1IHpxlvwk7faTxwJ2TXHfR1C8FpB/6JkzRTVnzzRdKg=="
-                },
-                   new User
-                   {
-                       Email = "Dum@Dum.dk",
-                       Username = "DumUser",
-                       Password = "AQAAAAEAACcQAAAAEBEbjTr4E7rEPlOgmMZArDU1IHpxlvwk7faTxwJ2TXHfR1C8FpB/6JkzRTVnzzRdKg=="
-                   }
-
-                );
+                    Password = "AQAAAAEAACcQAAAAENoRYO3DXwVRVZ2JE9/kX+WCIQGGGZDmT9ERFDYTgbMpel4xEPWd6AxuCE/7nDOS/w=="
+                });
                 context.SaveChanges();
 
             }

@@ -37,7 +37,9 @@ namespace gamerpilotPlatform.Controllers
 
             var jwtToken = _tokenService.GenerateAccessToken(usersClaims);
             var refreshToken = _tokenService.GenerateRefreshToken();
-         
+            var pass = _passwordHasher.GenerateIdentityV3Hash(sentUser.Password);
+
+
             try
             {
                 _context.Users.Add(new User
@@ -45,7 +47,7 @@ namespace gamerpilotPlatform.Controllers
                     RefreshToken = refreshToken,
                     Username = sentUser.Username,
                     Email = sentUser.Email,
-                    Password = _passwordHasher.GenerateIdentityV3Hash(sentUser.Password)
+                    Password = pass
                 });
 
                 await _context.SaveChangesAsync();

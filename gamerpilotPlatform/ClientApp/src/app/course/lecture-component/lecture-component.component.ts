@@ -28,9 +28,6 @@ export class LectureComponentComponent implements OnInit, OnDestroy {
           this.loadLecture(parentParams['name'], params['id']);
       });
     });
-
-    console.log(this._activeRoute.url, 'url');
-
   }
 
   loadLecture(name: string, id: string) {
