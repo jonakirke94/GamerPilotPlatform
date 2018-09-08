@@ -2,7 +2,7 @@
 
 <div class="flex-container">
 
-  <div class="row lecture-sidebar">
+  <div class="row lecture-sidebar" *ngIf="dataLoaded">
     
     <div class="col-sm-12 course-section">
       <div class="section-title">
@@ -13,7 +13,7 @@
         <div *ngFor="let lecture of lectures">
             <li class="section-item incomplete"  *ngIf="lecture.section == 1">
                 <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                  <span class="status-container">
+                  <span class="status-container" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)">
                     <span class="status-icon">
                       &nbsp;
                     </span>
@@ -41,7 +41,7 @@
         <div *ngFor="let lecture of lectures">
           <li class="section-item"  *ngIf="lecture.section == 2">
               <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                <span class="status-container">
+                <span class="status-container" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)">
                   <span class="status-icon completed">
                     &nbsp;
                   </span>
@@ -187,13 +187,22 @@
 
   <nav class="navbar">
     <!-- If first show next-->
-    <button (click)="previous()">Prev</button>
-    <button (click)="next()">Next</button>
+    <div *ngIf="isFirst()">
+        <button (click)="next()">Next and complete</button>
+    </div>
 
+    
     <!-- If in between show prev/next-->
+    <div *ngIf="isInBetween()">
+        <button (click)="previous()">Prev</button>
+        <button (click)="next()">Next and complete</button>
+    </div>
 
     <!-- If last show prev/complete-->
-        <a>Next</a>
+    <div *ngIf="isLast()">
+        <button (click)="complete()">Complete</button>
+    </div>
+
   </nav>
 
   <pre>{{isEnrolled}}</pre>

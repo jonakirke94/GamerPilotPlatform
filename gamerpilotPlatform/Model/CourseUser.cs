@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,9 +11,11 @@ namespace gamerpilotPlatform.Model
     public class CourseUser
     {
         public string UserId { get; set; }
+        [JsonIgnore]
         public virtual User User { get; set; }
 
         public string CourseId { get; set; }
+        [JsonIgnore]
         public virtual Course Course { get; set; }
 
         public bool IsCompleted { get; set; }

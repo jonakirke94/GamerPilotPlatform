@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { CourseService } from '../../core/services/course.service';
 import { AuthService } from '../../core/services/auth.service';
@@ -15,14 +15,17 @@ import { takeUntil } from 'rxjs/operators';
 export class SidebarComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();
 
-  course;
-  lectures;
-  completedLectures;
-  currentLectureId;
+  private courseName: string;
+  private course;
+  private lectures;
+  private dataLoaded: boolean;
+
+  completedLectures = [];
+  currentLectureId: number;
 
   isLoggedIn;
   isEnrolled;
-  courseName: string;
+
 
   constructor(
     private _router: Router,
@@ -75,18 +78,34 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     if (index + 1 < lectureArr.length) {
       // complete lecture on server
+      this._courseService.completeLecture(Number(this.currentLectureId), this.courseName).pipe(
+        takeUntil(this.onDestroy$))
+        .subscribe(res => {
+          const newCompletedLectures = res['data'];
+          console.log('newCompleted', res['data']);
+          this.completedLectures = newCompletedLectures.map(x => x.lectureId);
+        });
+
       this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[index + 1]}`);
     }
 
-    if (index === lectureArr.length) {
-      // complete course;
-    }
   }
 
+  complete() {
+    const lectureArr = this.lectures.map(x => x.id);
+    const index = lectureArr.indexOf(Number(this.currentLectureId));
 
+    if (index + 1 < lectureArr.length) {
+      // complete lecture on server
+      this._courseService.completeLecture(Number(this.currentLectureId), this.courseName).pipe(
+        takeUntil(this.onDestroy$))
+        .subscribe(res => {
+          const newCompletedLectures = res['data'];
+          this.completedLectures = newCompletedLectures.map(x => x.lectureId);
+        });
 
-  isCompleted(id) {
-    return this.completedLectures.indexOf(id) > -1;
+     // add popup modal
+    }
   }
 
 
@@ -95,7 +114,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(res => {
         const enrolledResult = res['enrolled'] as boolean;
-        console.log('COURSE', res);
+        console.log('isEnrolled', res['enrolled']);
 
         if (!enrolledResult) {
           this.course = res['course'];
@@ -103,12 +122,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
         } else {
           this.course = res['course'];
           this.lectures = this.course.lectures;
-          this.completedLectures = res['completedLectures'];
+          const completedLectureArr = res['completedLectures'];
+          this.completedLectures = completedLectureArr.map(x => x.lectureId);
+          console.log('loadCourse', this.completedLectures);
         }
         if (!this.course) {
           // if no course matched name param in url
           this._router.navigateByUrl('/courses');
         }
+
+        this.dataLoaded = true;
       });
   }
 
@@ -122,7 +145,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     this._router.events.pipe(takeUntil(this.onDestroy$)).
     subscribe(e => {
-      if (e instanceof NavigationEnd) {
+      if (e instanceof NavigationEnd && this._activeRoute.children.length > 0) {
         this._activeRoute.firstChild.params
         .pipe(takeUntil(this.onDestroy$))
         .subscribe((params: Params) => {
@@ -141,6 +164,41 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.loadCourse(this.courseName);
     });
   }
+
+  isCompleted(id) {
+    return this.completedLectures.indexOf(Number(id)) > -1;
+  }
+
+  isCurrent(id) {
+    return Number(this.currentLectureId) === Number(id);
+  }
+
+  isLast() {
+    if (typeof this.currentLectureId === 'undefined' || typeof this.lectures === 'undefined') {
+      return false;
+    }  else {
+      return this.lectures.map(x => x.id).indexOf(Number(this.currentLectureId)) === this.lectures.length - 1;
+    }
+  }
+
+  isFirst() {
+    if (typeof this.currentLectureId === 'undefined' || typeof this.lectures === 'undefined') {
+      return false;
+    }  else {
+      return this.lectures.map(x => x.id).indexOf(Number(this.currentLectureId)) === 0;
+    }
+  }
+
+  isInBetween() {
+    if (typeof this.currentLectureId === 'undefined' || typeof this.lectures === 'undefined') {
+      return false;
+    }  else {
+      const index = this.lectures.map(x => x.id).indexOf(Number(this.currentLectureId));
+      return index !== 0 && index !== this.lectures.length - 1;
+    }
+  }
+
+
 
   ngOnDestroy() {
     this.onDestroy$.next();

@@ -24,10 +24,10 @@ export class LectureComponentComponent implements OnInit, OnDestroy {
   $idParams: Subscription;
   $nameParams: Subscription;
 
-
-
-
-  constructor(private _activeRoute: ActivatedRoute, private _courseService: CourseService, private _router: Router) { }
+  constructor(
+    private _activeRoute: ActivatedRoute,
+    private _courseService: CourseService,
+    private _router: Router) { }
 
 
   ngOnInit() {

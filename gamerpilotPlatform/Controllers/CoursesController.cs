@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using Newtonsoft.Json.Linq;
 
 namespace gamerpilotPlatform.Controllers
 {
@@ -59,20 +59,18 @@ namespace gamerpilotPlatform.Controllers
             try
             {
                 CourseUser isEnrolledEntity = null;
-
-                if (String.IsNullOrEmpty(authorization))
-                {
-                    var userId = _tokenService.getClaimsId(authorization);
-                    isEnrolledEntity = _context.CourseUsers.
-                        Include(x => x.CompletedLectures)
-                        .FirstOrDefault(x => x.Course.UrlName == urlName && x.UserId == userId);
-                }
+                var userId = _tokenService.getClaimsId(authorization);
 
                 course = _context.Courses
-                       .Include(x => x.Instructors)
-                       .Include(x => x.Lectures)
-                       .SingleOrDefault(x => x.UrlName == urlName);
-
+                    .Include(x => x.Instructors)
+                    .Include(x => x.Lectures)
+                    .SingleOrDefault(x => x.UrlName == urlName);
+            
+              
+                isEnrolledEntity = _context.CourseUsers
+                    .Include(x => x.CompletedLectures)
+                    .SingleOrDefault(x => x.Course.UrlName == urlName && x.UserId == userId);
+                
                 if (isEnrolledEntity == null)
                 {
                     // if not enrolled just return the course
@@ -81,7 +79,6 @@ namespace gamerpilotPlatform.Controllers
                         enrolled = isEnrolledEntity == null ? false : true,
                         course,
                     });
-
                 }
                 else
                 {
@@ -223,29 +220,58 @@ namespace gamerpilotPlatform.Controllers
                 {
                     data = isEnrolled,
                 });
-    
+   
+        }
 
+        [HttpPost("[action]")]
+        public IActionResult Complete([FromHeader]string authorization, [FromBody]JObject body)
+        {
+           
 
+            try
+            {
+                var lectureId = body.Value<Int32>("id");
+                var urlName = body.Value<String>("urlName");
 
-            //Course course = null;
+                var userId = _tokenService.getClaimsId(authorization);
 
-            //try
-            //{
-            //    course = _context.Courses
-            //        .Include(x => x.Instructors)
-            //        .Include(x => x.Lectures)
-            //        .SingleOrDefault(x => x.UrlName == urlName);
-            //}
-            //catch (Exception)
-            //{
-            //    return StatusCode(StatusCodes.Status500InternalServerError);
-            //}
+                if (!String.IsNullOrEmpty(urlName) && lectureId > 0) 
+                {
+                    var courseUser = _context.CourseUsers
+                        .Include(x => x.CompletedLectures)
+                        .Include(x => x.User)
+                        .Include(x => x.Course)
+                        .SingleOrDefault(x => x.Course.UrlName == urlName && x.User.Id == userId);
 
+                    // save lectureId to completeLecture table
+                    var completedLecture = new CompletedLectures { LectureId = lectureId };
+                    _context.CompletedLectures.Add(completedLecture);
+                    _context.SaveChanges();
 
-            //return new ObjectResult(new
-            //{
-            //    data = course
-            //});
+                    // add table to users list of completed courses;
+                    courseUser.CompletedLectures.Add(completedLecture);
+                    _context.SaveChanges();
+
+                    var newCompletedLectures = _context.CourseUsers
+                        .Include(x => x.CompletedLectures)
+                        .Include(x => x.User)
+                        .Include(x => x.Course)
+                        .SingleOrDefault(x => x.Course.UrlName == urlName && x.User.Id == userId);
+
+                    return new ObjectResult(new
+                    {
+                        data = newCompletedLectures.CompletedLectures,
+                    });
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

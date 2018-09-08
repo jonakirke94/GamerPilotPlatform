@@ -13,6 +13,7 @@ import { ExercisesComponent } from './sidebar/exercises/exercises.component';
 import { LockedContentComponent } from './sidebar/locked-content/locked-content.component';
 import { LectureComponentComponent } from './lecture-component/lecture-component.component';
 import { VideoComponent } from './sidebar/video/video.component';
+import { StatusDirective } from './directives/status.directive';
 
 
 
@@ -26,6 +27,6 @@ import { VideoComponent } from './sidebar/video/video.component';
       CoursesComponent, InfoComponent,
        CaseComponent,
         QuizComponent, SummaryComponent, ExercisesComponent,
-         LockedContentComponent, LectureComponentComponent, VideoComponent, LockedContentComponent]
+         LockedContentComponent, LectureComponentComponent, VideoComponent, LockedContentComponent, StatusDirective]
 })
 export class CourseModule { }
