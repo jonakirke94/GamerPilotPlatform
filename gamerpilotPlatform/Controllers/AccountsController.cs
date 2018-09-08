@@ -30,27 +30,33 @@ namespace gamerpilotPlatform.Controllers
             var user = _context.Users.SingleOrDefault(u => u.Email == sentUser.Email);
             if (user != null) return StatusCode(409, Json(sentUser.Email + " already exists."));
 
-            var usersClaims = new[]
-            {
-                new Claim(ClaimTypes.Name, sentUser.Username),
-            };
-
-            var jwtToken = _tokenService.GenerateAccessToken(usersClaims);
-            var refreshToken = _tokenService.GenerateRefreshToken();
+                    var refreshToken = _tokenService.GenerateRefreshToken();
             var pass = _passwordHasher.GenerateIdentityV3Hash(sentUser.Password);
-
+            var jwtToken = string.Empty;
 
             try
             {
-                _context.Users.Add(new User
+                var newUser = new User
                 {
                     RefreshToken = refreshToken,
                     Username = sentUser.Username,
                     Email = sentUser.Email,
                     Password = pass
-                });
+                };
 
+                // add to DB
+                _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
+
+                //access Id of newly inserted entity
+                var usersClaims = new[]
+                {
+                    new Claim(ClaimTypes.Name, newUser.Username),
+                    new Claim("UserId", newUser.Id)
+                };
+
+
+                jwtToken = _tokenService.GenerateAccessToken(usersClaims);
             }
             catch (Exception)
             {
@@ -74,7 +80,7 @@ namespace gamerpilotPlatform.Controllers
             var usersClaims = new[]
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim("UserId", user.Id)
             };
 
             var jwtToken = _tokenService.GenerateAccessToken(usersClaims);

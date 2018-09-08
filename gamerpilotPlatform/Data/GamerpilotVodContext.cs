@@ -15,16 +15,21 @@ namespace gamerpilotPlatform.Data
        : base(options)
         {
         }
-
+        
         public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseUser> CourseUsers { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<LearningGoal> LearningGoals { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<CompletedLectures> CompletedLectures { get; set; }
 
+
+        // many to many with customized join table
+        /* https://stackoverflow.com/questions/7050404/create-code-first-many-to-many-with-additional-fields-in-association-table */
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +42,11 @@ namespace gamerpilotPlatform.Data
             modelBuilder.Entity<CourseVideo>().HasBaseType<Lecture>();
             modelBuilder.Entity<CourseExercise>().HasBaseType<Lecture>();
 
+            // define composite primary key for joint table
+            modelBuilder.Entity<CourseUser>().HasKey(t => new {
+                t.UserId,
+                t.CourseId
+            });
         }
 
     }

@@ -17,14 +17,20 @@ namespace gamerpilotPlatform.Model
 
         public string ImageUrl { get; set; }
 
-        public List<Lecture> Lectures { get; set; }
+        public virtual ICollection<Lecture> Lectures { get; set; }
 
-        public List<Instructor> Instructors { get; set; }
+        public virtual ICollection<Instructor> Instructors { get; set; }
+
+        public virtual ICollection<CourseUser> EnrolledCourses { get; set; }
+
 
         public Course()
         {
             Lectures = new List<Lecture>();
             Instructors = new List<Instructor>();
+            EnrolledCourses = new List<CourseUser>();
         }
     }
 }
+
+

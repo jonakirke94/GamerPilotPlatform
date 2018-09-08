@@ -8,7 +8,7 @@ namespace gamerpilotPlatform.Model
 {
     public class User
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         [DataType(DataType.EmailAddress), Required]
         public string Email { get; set; }
         [Required]
@@ -16,5 +16,13 @@ namespace gamerpilotPlatform.Model
         [Required]
         public string Password { get; set; }
         public string RefreshToken { get; set; }
+
+        public virtual ICollection<CourseUser> EnrolledUsers { get; set; }
+
+        public User()
+        {
+            EnrolledUsers = new List<CourseUser>();
+        }
+
     }
 }

@@ -26,6 +26,6 @@ import { VideoComponent } from './sidebar/video/video.component';
       CoursesComponent, InfoComponent,
        CaseComponent,
         QuizComponent, SummaryComponent, ExercisesComponent,
-         LockedContentComponent, LectureComponentComponent, VideoComponent]
+         LockedContentComponent, LectureComponentComponent, VideoComponent, LockedContentComponent]
 })
 export class CourseModule { }

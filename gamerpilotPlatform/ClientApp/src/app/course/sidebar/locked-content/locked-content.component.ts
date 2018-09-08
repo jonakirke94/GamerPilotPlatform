@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-locked-content',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./locked-content.component.scss']
 })
 export class LockedContentComponent implements OnInit {
+  @Output() enrolled = new EventEmitter<boolean>();
+  clicked = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  enroll() {
+    this.enrolled.emit(true);
+    this.clicked = true;
   }
 
 }

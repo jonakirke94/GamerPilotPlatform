@@ -2,8 +2,12 @@
   lecture-component works!
 </p>
 
+<!-- <div *ngIf="!isEnrolled || !isLoggedIn">
+    <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
+</div> -->
+
 <pre>{{dataLoaded}}</pre>
-<div *ngIf="dataLoaded">
+<div *ngIf="dataLoaded && isEnrolled && isLoggedIn">
 
   <pre>Lecture type {{lecture.lectureType}}</pre>
 

@@ -1,30 +1,5 @@
 
 
-<!-- <div class="wrapper">
-  <nav id="sidebar">
-      <div class="header">
-          <h3>Communication</h3>
-          <strong>GP</strong>
-      </div>
-
-      <ul class="components">
-        <li class="title">Course Info</li>
-        <li>
-            <a>
-                <span class="status-container">
-                    <span class="status-icon completed"></span>
-                </span>
-                <div class="title-container">
-                    <i class="fas fa-file-alt"></i>        
-                    <span class="lecture-name">CS:GO</span>
-                </div>       
-            </a>
-        </li>
-      </ul>
-
-   
-  </nav> -->
-
 <div class="flex-container">
 
   <div class="row lecture-sidebar">
@@ -64,10 +39,10 @@
       <ul class="section-list">
         
         <div *ngFor="let lecture of lectures">
-          <li class="section-item incomplete"  *ngIf="lecture.section == 2">
+          <li class="section-item"  *ngIf="lecture.section == 2">
               <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
                 <span class="status-container">
-                  <span class="status-icon">
+                  <span class="status-icon completed">
                     &nbsp;
                   </span>
                 </span>
@@ -211,9 +186,25 @@
 <div id="content">
 
   <nav class="navbar">
+    <!-- If first show next-->
+    <button (click)="previous()">Prev</button>
+    <button (click)="next()">Next</button>
+
+    <!-- If in between show prev/next-->
+
+    <!-- If last show prev/complete-->
         <a>Next</a>
   </nav>
 
-  <router-outlet></router-outlet>
+  <pre>{{isEnrolled}}</pre>
+  <pre>{{isLoggedIn}}</pre>
+
+  <div *ngIf="!isEnrolled || !isLoggedIn">
+    <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
+  </div>
+
+    <router-outlet></router-outlet>
+
+
 </div>
 </div>

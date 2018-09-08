@@ -27,6 +27,17 @@ export class CourseService implements OnDestroy {
     .get(this.baseUrl + `api/courses/`);
   }
 
+  getUserCourse(name: string) {
+    return this.http
+    .get(this.baseUrl + `api/courses/user/${name}`);
+  }
+
+  enroll(name: string) {
+    console.log('enrollName', name);
+    return this.http
+    .post(this.baseUrl + `api/courses/enroll`, {urlName: name});
+  }
+
   ngOnDestroy() {
 
   }
