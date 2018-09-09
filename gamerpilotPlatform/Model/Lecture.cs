@@ -11,8 +11,6 @@ namespace gamerpilotPlatform.Model
 
         public string Name { get; set; }
 
-        public int Order { get; set; }
-
         public Section Section { get; set; }
 
         public LectureType LectureType { get; set; }
@@ -26,6 +24,6 @@ namespace gamerpilotPlatform.Model
 
     public enum Section { Welcome = 1, RealLife, Quiz, Game, Practice, Summary};
 
-    public enum LectureType { Info, CourseIntroduction, Case, Video, Quiz, Practice, Summary}
+    public enum LectureType { Info = 1, CourseIntroduction, Case, Video, Quiz, Practice, Summary}
 
 }

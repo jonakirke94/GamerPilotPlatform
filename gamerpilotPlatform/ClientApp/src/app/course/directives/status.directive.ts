@@ -11,8 +11,6 @@ export class StatusDirective implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.completed, 'completedDir');
-
     if (this.completed && !this.current) {
       this.el.nativeElement.style.backgroundColor = 'green';
     } else if (this.current) {

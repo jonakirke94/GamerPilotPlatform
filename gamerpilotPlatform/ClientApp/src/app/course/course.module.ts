@@ -14,6 +14,7 @@ import { LockedContentComponent } from './sidebar/locked-content/locked-content.
 import { LectureComponentComponent } from './lecture-component/lecture-component.component';
 import { VideoComponent } from './sidebar/video/video.component';
 import { StatusDirective } from './directives/status.directive';
+import { IconDirective } from './directives/icon.directive';
 
 
 
@@ -23,10 +24,12 @@ import { StatusDirective } from './directives/status.directive';
     CourseRoutingModule
   ],
   declarations: [SidebarComponent,
-     IntroductionComponent,
-      CoursesComponent, InfoComponent,
-       CaseComponent,
-        QuizComponent, SummaryComponent, ExercisesComponent,
-         LockedContentComponent, LectureComponentComponent, VideoComponent, LockedContentComponent, StatusDirective]
+    IntroductionComponent,
+    CoursesComponent, InfoComponent,
+    CaseComponent,
+    QuizComponent, SummaryComponent, ExercisesComponent,
+    LockedContentComponent, LectureComponentComponent,
+    VideoComponent, LockedContentComponent,
+    StatusDirective, IconDirective]
 })
 export class CourseModule { }

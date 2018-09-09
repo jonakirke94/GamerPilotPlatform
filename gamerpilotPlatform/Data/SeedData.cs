@@ -45,7 +45,6 @@ namespace gamerpilotPlatform.Data
                     LifeSkill = "Communication",
                     Name = "Course Info",
                     Level = "Beginner/Intermediate",
-                    Order = 1,
                     LectureType = LectureType.Info,
                     Section = Section.Welcome,
                 };
@@ -53,7 +52,6 @@ namespace gamerpilotPlatform.Data
                 // COURSE INTRODUCTION
                 var CourseIntroduction = new CourseIntroduction()
                 {
-                    Order = 2,
                     Name = "Course Introduction",
                     Section = Section.Welcome,
                     LectureType = LectureType.CourseIntroduction,
@@ -82,7 +80,6 @@ namespace gamerpilotPlatform.Data
                 var RealLifePersp = new CourseVideo()
                 {
                     Name = "A look into communication from a psychologist",
-                    Order = 3,
                     Section = Section.RealLife,
                     LectureType = LectureType.Video
                 };
@@ -92,7 +89,6 @@ namespace gamerpilotPlatform.Data
                 var courseCase = new CourseCase()
                 {
                     Name = "Communication ingame & in real life situations",
-                    Order = 4,
                     Section = Section.RealLife,
                     LectureType = LectureType.Case,
                     Description = "BLBALBAL CASE!"
@@ -118,7 +114,6 @@ namespace gamerpilotPlatform.Data
                 var courseQuiz = new CourseQuiz()
                 {
                     Name = "Quiz",
-                    Order = 5,
                     Section = Section.Quiz,
                     LectureType = LectureType.Quiz
                 };
@@ -144,7 +139,6 @@ namespace gamerpilotPlatform.Data
                 var proContent = new CourseVideo()
                 {
                     Name = "Pro CS:GO content",
-                    Order = 6,
                     Section = Section.Game,
                     LectureType = LectureType.Video
                 };
@@ -167,7 +161,6 @@ namespace gamerpilotPlatform.Data
                 var exercises = new CourseExercise()
                 {
                     Name = "Exercises",
-                    Order = 7,
                     Section = Section.Practice,
                     LectureType = LectureType.Practice,
                     Description = "These are exercises in communication",
@@ -180,7 +173,6 @@ namespace gamerpilotPlatform.Data
                 {
                     Name = "This is summary",
                     Section = Section.Summary,
-                    Order = 8,
                     LectureType = LectureType.Summary,
                     Summary = "This will wraup up the..........",
                 };
