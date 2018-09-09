@@ -4,7 +4,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CourseService } from '../../core/services/course.service';
 import { Lecture } from '../../../models/lecture';
 import { AuthService } from '../../core/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lecture-component',
@@ -12,6 +13,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./lecture-component.component.scss']
 })
 export class LectureComponentComponent implements OnInit, OnDestroy {
+  private onDestroy$ = new Subject<void>();
+
   dataLoaded = false;
 
   isLoggedIn;
@@ -21,9 +24,6 @@ export class LectureComponentComponent implements OnInit, OnDestroy {
   courseName: string;
   lectureId: string;
 
-  $idParams: Subscription;
-  $nameParams: Subscription;
-
   constructor(
     private _activeRoute: ActivatedRoute,
     private _courseService: CourseService,
@@ -31,18 +31,34 @@ export class LectureComponentComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.$idParams = this._activeRoute.params.subscribe((params: Params) => {
-      this.$nameParams = this._activeRoute.parent.params.subscribe((parentParams: Params) => {
+    this.fetchParamData();
+  }
+
+  fetchParamData() {
+    this._activeRoute.params
+    .pipe(
+      takeUntil(this.onDestroy$
+    ))
+    .subscribe((params: Params) => {
+    this._activeRoute.parent.params
+    .pipe(
+      takeUntil(this.onDestroy$
+    ))
+    .subscribe((parentParams: Params) => {
         this.courseName = parentParams['name'];
         this.lectureId = params['id'];
 
-          this.loadLecture(this.courseName, this.lectureId);
+          this.fetchLecture(this.courseName, this.lectureId);
       });
     });
   }
 
-  loadLecture(name: string, id: string) {
-      this._courseService.getLecture(name, id).subscribe(res => {
+  fetchLecture(name: string, id: string) {
+      this._courseService.getLecture(name, id)
+      .pipe(
+        takeUntil(this.onDestroy$
+      ))
+      .subscribe(res => {
         this.lecture = res['data'];
         this.dataLoaded = true;
       },
@@ -55,7 +71,7 @@ export class LectureComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.$idParams.unsubscribe();
-    this.$nameParams.unsubscribe();
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

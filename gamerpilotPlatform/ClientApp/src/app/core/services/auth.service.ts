@@ -46,7 +46,8 @@ export class AuthService {
       .post(this.baseUrl + 'api/accounts/login', {
         email,
         password
-      }).pipe(
+      })
+      .pipe(
       tap(res => {
         this.setSession(res);
 

@@ -22,6 +22,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setNavFields();
+  }
+
+  setNavFields() {
     this.nav = document.querySelector('.features-nav');
     this.navOffsetTop = this.nav.offsetTop;
     this.navHeight = this.nav.offsetHeight;

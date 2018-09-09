@@ -7,6 +7,8 @@ import { flyInOut } from '../../../shared/animation';
 import { AuthService } from '../../../core/services/auth.service';
 import { RouterExtService } from '../../../shared/RouterExtService';
 import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-spinner.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -16,13 +18,15 @@ import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-s
   animations: [flyInOut]
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private onDestroy$ = new Subject<void>();
+
   loginForm: FormGroup;
   email: FormControl;
   password: FormControl;
   showSpinner = false;
   error = '';
 
-  login$;
+
 
   constructor(
     private http: HttpClient,
@@ -38,13 +42,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // unsubscribe to prevent memory leaks
-    if (this.login$ && this.login$ !== 'undefined') {
-      this.login$.unsubscribe();
-    }
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 
-  createFormControls() {
+  private createFormControls() {
     (this.email = new FormControl('', [
       Validators.required,
       Validators.pattern('[^ @]*@[^ *]*')
@@ -54,14 +56,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       ]));
   }
 
-  createForm() {
+  private createForm() {
     this.loginForm = new FormGroup({
       email: this.email,
       password: this.password
     });
   }
 
-  loginUser() {
+  private loginUser() {
     // clear any existing data
      this._auth.logout();
 
@@ -71,7 +73,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       // set loading to true and then false if error
       this.showSpinner = true;
-      this.login$ = this._auth.login(email, password).subscribe(() => {
+      this._auth.login(email, password)
+      .pipe(
+        takeUntil(this.onDestroy$
+      ))
+      .subscribe(() => {
 
       // on successful auth redirect to previous url
       const previous = this.routerExtService.getPreviousUrl();

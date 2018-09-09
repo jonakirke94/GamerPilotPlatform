@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CourseService } from '../../core/services/course.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { Course } from '../../../models/course';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-courses',
@@ -9,8 +10,8 @@ import { Course } from '../../../models/course';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit, OnDestroy {
+  private onDestroy$ = new Subject<void>();
   courses: Course[];
-  $courses: Subscription;
 
   constructor(private _courseService: CourseService) { }
 
@@ -19,11 +20,16 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.$courses.unsubscribe();
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 
   fetchCourses() {
-    this.$courses = this._courseService.getCourses().subscribe(res => {
+    this._courseService.getCourses()
+    .pipe(
+      takeUntil(this.onDestroy$
+    ))
+    .subscribe(res => {
       this.courses = res['data'];
     });
   }

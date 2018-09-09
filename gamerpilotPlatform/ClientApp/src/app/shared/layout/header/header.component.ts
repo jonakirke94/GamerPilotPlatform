@@ -1,39 +1,43 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  private onDestroy$ = new Subject<void>();
 
   isLoggedin$: Observable<boolean>;
   isAuthed: boolean;
 
-    constructor(private _auth: AuthService,
-      private router: Router) {
+  constructor(private _auth: AuthService,
+    private router: Router) {
 
-       }
+      }
 
-    ngOnInit() {
-      this._auth.IsAuthed.subscribe(status => this.changeAuthStatus(status));
+  ngOnInit() {
+    this.listenToAuthChanges();
+    this.initNavbar();
+  }
 
-   /*    this.isAuthed =  this._auth.isLoggedIn(); */
+  private listenToAuthChanges() {
+    this._auth.IsAuthed
+    .pipe(
+      takeUntil(this.onDestroy$
+    ))
+    .subscribe(status => this.changeAuthStatus(status));
+  }
 
-        // unsubscribe later
-
-       this.initNavbar();
-    }
-
-    private changeAuthStatus(status: boolean): void {
+  private changeAuthStatus(status: boolean): void {
       this.isAuthed = status;
   }
 
-
-  initNavbar() {
+  private initNavbar() {
     const menus = Array.from(document.querySelectorAll('.mobile-menu-toggle'));
     menus.forEach(function(btn) {
       return btn.addEventListener('click', function() {
@@ -42,9 +46,14 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-    logout() {
-      this._auth.logout();
-      // this.router.navigateByUrl('/home');
-    }
+  private logout() {
+    this._auth.logout();
+    // this.router.navigateByUrl('/home');
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
 
 }

@@ -6,6 +6,8 @@ import { AuthService } from '../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { flyInOut } from '../../../shared/animation';
 import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-spinner.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +17,8 @@ import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-s
 
 })
 export class SignupComponent implements OnInit, OnDestroy {
+  private onDestroy$ = new Subject<void>();
+
   signupForm: FormGroup;
   passwords: FormGroup;
   email: FormControl;
@@ -23,10 +27,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   username: FormControl;
   showSpinner = false;
   error = '';
-
-
-  login$;
-  signup$;
 
   constructor(
     private http: HttpClient,
@@ -41,11 +41,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-  // unsubscribe to prevent memory leaks
-    if (this.login$ && this.login$ !== 'undefined' && this.signup$ && this.signup$ !== 'undefined') {
-      this.login$.unsubscribe();
-      this.signup$.unsubscribe();
-    }
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 
   createFormControls() {
@@ -98,7 +95,11 @@ export class SignupComponent implements OnInit, OnDestroy {
 
       // set loading to true and then false if error
       this.showSpinner = true;
-      this.signup$ = this._auth.signup(username, email, password).subscribe(
+      this._auth.signup(username, email, password)
+      .pipe(
+        takeUntil(this.onDestroy$
+      ))
+      .subscribe(
         () => {
             // on successful auth redirect to previous url
               const previous = this.routerExtService.getPreviousUrl();
