@@ -7,7 +7,7 @@ namespace gamerpilotPlatform.Model
 {
     public class CourseQuiz : Lecture
     {
-        public List<Question> Questions { get; set; }
+        public ICollection<Question> Questions { get; set; }
 
         public CourseQuiz()
         {

@@ -11,7 +11,7 @@ namespace gamerpilotPlatform.Model
 
         public string Name { get; set; }
 
-        public List<Lecture> Lectures { get; set; }
+        public ICollection<Lecture> Lectures { get; set; }
 
         public Instructor()
         {

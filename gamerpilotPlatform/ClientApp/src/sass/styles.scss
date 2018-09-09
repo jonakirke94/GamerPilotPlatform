@@ -2,6 +2,17 @@
 @import './mixins';
 @import './fonts';
 
+@import "~ng-snotify/styles/material";
+
+
+
+.snotify-icon {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+}
+
 body {
   font-family: $font-stack;
 }

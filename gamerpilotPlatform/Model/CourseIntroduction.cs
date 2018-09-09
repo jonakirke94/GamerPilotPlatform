@@ -8,7 +8,7 @@ namespace gamerpilotPlatform.Model
     public class CourseIntroduction : Lecture
     {
         public string Description { get; set; }
-        public List<LearningGoal> LearningGoals { get; set; }
+        public ICollection<LearningGoal> LearningGoals { get; set; }
 
         public CourseIntroduction()
         {

@@ -14,6 +14,8 @@ import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterExtService } from './shared/RouterExtService';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+
 
 @NgModule({
   declarations: [
@@ -31,9 +33,11 @@ import { LearningbasisComponent } from './components/learningbases/learningbasis
       CoreModule,
       BrowserAnimationsModule,
       SharedModule,
+      SnotifyModule
   ],
    providers: [
-
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
    ],
    exports: [
    ],

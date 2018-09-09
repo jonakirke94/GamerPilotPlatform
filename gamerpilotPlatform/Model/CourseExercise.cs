@@ -9,7 +9,7 @@ namespace gamerpilotPlatform.Model
     {
         public string Description { get; set; }
 
-        public List<Exercise> Exercises { get; set; }
+        public ICollection<Exercise> Exercises { get; set; }
 
         public CourseExercise()
         {

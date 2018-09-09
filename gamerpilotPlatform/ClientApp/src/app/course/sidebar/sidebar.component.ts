@@ -5,6 +5,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { Subscription, Subject } from 'rxjs';
 import { LockedContentComponent} from './locked-content/locked-content.component';
 import { takeUntil } from 'rxjs/operators';
+import { SnotifyService } from 'ng-snotify';
 
 
 @Component({
@@ -23,15 +24,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
   completedLectures = [];
   currentLectureId: number;
 
-  isLoggedIn;
-  isEnrolled;
-
+  private isLoggedIn;
+  private isEnrolled;
 
   constructor(
     private _router: Router,
     private _activeRoute: ActivatedRoute,
     private _courseService: CourseService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _toast: SnotifyService
     ) { }
 
   ngOnInit() {
@@ -84,6 +85,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
           const newCompletedLectures = res['data'];
           console.log('newCompleted', res['data']);
           this.completedLectures = newCompletedLectures.map(x => x.lectureId);
+
+          this._toast.success('Keep it up!', {
+            timeout: 2000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true
+          });
+
         });
 
       this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[index + 1]}`);
@@ -137,7 +146,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   listenToChildRoutes() {
     if (this._activeRoute.children.length > 0) {
-     this._activeRoute.firstChild.params.pipe(takeUntil(this.onDestroy$))
+     this._activeRoute.firstChild.params
+     .pipe(takeUntil(this.onDestroy$))
      .subscribe((params: Params) => {
           this.currentLectureId = params['id'];
       });

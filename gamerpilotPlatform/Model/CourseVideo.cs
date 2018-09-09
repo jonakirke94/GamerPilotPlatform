@@ -7,7 +7,7 @@ namespace gamerpilotPlatform.Model
 {
     public class CourseVideo : Lecture
     {       
-        public List<Video> Videos { get; set; }
+        public ICollection<Video> Videos { get; set; }
 
         public CourseVideo()
         {
