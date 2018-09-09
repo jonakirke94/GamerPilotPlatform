@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private _activeRoute: ActivatedRoute,
     private _courseService: CourseService,
     private _authService: AuthService,
-    private _toast: SnotifyService
+    private _toastService: SnotifyService
     ) { }
 
   ngOnInit() {
@@ -51,16 +51,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroy$))
       .subscribe(res => {
           this.isEnrolled = res['data'];
-
-          // temp if else not needed -only calling one method and doing the resolve on server
-          if (!this.isLoggedIn || !this.isEnrolled) {
-            console.log('NOT ENROLLED!!');
-            this.loadCourse(this.courseName);
-          } else {
-            // load cousre with user's progress
-            console.log('userIsEnrolled!!');
-            this.loadCourse(this.courseName);
-          }
+          this.loadCourse(this.courseName);
     });
   }
 
@@ -76,17 +67,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
   next() {
     const lectureArr = this.lectures.map(x => x.id);
     const index = lectureArr.indexOf(Number(this.currentLectureId));
+    const isNotCompleted = this.completedLectures.indexOf(Number(this.currentLectureId)) === -1;
 
-    if (index + 1 < lectureArr.length) {
+    if (index + 1 < lectureArr.length && isNotCompleted) {
       // complete lecture on server
       this._courseService.completeLecture(Number(this.currentLectureId), this.courseName).pipe(
         takeUntil(this.onDestroy$))
         .subscribe(res => {
           const newCompletedLectures = res['data'];
-          console.log('newCompleted', res['data']);
           this.completedLectures = newCompletedLectures.map(x => x.lectureId);
 
-          this._toast.success('Keep it up!', {
+          this._toastService.success('Keep it up!', {
             timeout: 2000,
             showProgressBar: true,
             closeOnClick: false,
@@ -94,26 +85,42 @@ export class SidebarComponent implements OnInit, OnDestroy {
           });
 
         });
-
-      this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[index + 1]}`);
     }
+
+    this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[index + 1]}`);
 
   }
 
   complete() {
     const lectureArr = this.lectures.map(x => x.id);
-    const index = lectureArr.indexOf(Number(this.currentLectureId));
+    const isNotCompleted = this.completedLectures.indexOf(Number(this.currentLectureId)) === -1;
 
-    if (index + 1 < lectureArr.length) {
+    if (isNotCompleted) {
       // complete lecture on server
-      this._courseService.completeLecture(Number(this.currentLectureId), this.courseName).pipe(
-        takeUntil(this.onDestroy$))
-        .subscribe(res => {
+      this._courseService.completeLecture(Number(this.currentLectureId), this.courseName)
+      .pipe(
+      takeUntil(this.onDestroy$))
+      .subscribe(res => {
           const newCompletedLectures = res['data'];
           this.completedLectures = newCompletedLectures.map(x => x.lectureId);
-        });
 
-     // add popup modal
+          this._toastService.confirm('Example body content', 'Example title', {
+            timeout: 10000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            buttons: [
+              {text: 'Yes', action: (toast) => {
+                console.log('Clicked yes');
+                this._toastService.remove(toast.id);
+              }},
+              {text: 'No', action: (toast) => {
+                console.log('Clicked no');
+                this._toastService.remove(toast.id);
+              }},
+            ]
+          });
+        });
     }
   }
 
@@ -123,7 +130,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(res => {
         const enrolledResult = res['enrolled'] as boolean;
-        console.log('isEnrolled', res['enrolled']);
 
         if (!enrolledResult) {
           this.course = res['course'];
@@ -133,7 +139,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
           this.lectures = this.course.lectures;
           const completedLectureArr = res['completedLectures'];
           this.completedLectures = completedLectureArr.map(x => x.lectureId);
-          console.log('loadCourse', this.completedLectures);
         }
         if (!this.course) {
           // if no course matched name param in url
@@ -166,12 +171,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   enrollUser(enroll: boolean) {
-    console.log('in enrollUser');
     this._courseService.enroll(this.courseName)
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(res => {
         this.isEnrolled = true;
         this.loadCourse(this.courseName);
+
+        const lectureIds = this.lectures.map(x => x.id);
+        this._router.navigateByUrl(`/courses/${this.courseName}/lectures/${lectureIds[0]}`);
+
+        this._toastService.success('Keep it up!', {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true
+        });
     });
   }
 

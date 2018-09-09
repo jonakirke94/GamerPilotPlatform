@@ -1,0 +1,26 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
+
+
+h3 {
+    color: $primary;
+    margin-bottom: 50px;
+}
+
+.fa-dot-circle {
+    padding-right: 15px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding-bottom: 10px;
+}
+
+.line-breaker {
+    white-space: pre-line;
+  }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using gamerpilotPlatform.Data;
 using gamerpilotPlatform.Model;
+using gamerpilotPlatform.Model.Lectures;
 using gamerpilotPlatform.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -168,7 +169,8 @@ namespace gamerpilotPlatform.Controllers
                         break;
                     case "CourseCase":
                         lecture = _context.Lectures.OfType<CourseCase>()
-                        .SingleOrDefault(x => x.Id == id);
+                         .Include(x => x.Sections)
+                         .SingleOrDefault(x => x.Id == id);
                         break;
                     case "CourseExercise":
                         lecture = _context.Lectures.OfType<CourseExercise>()

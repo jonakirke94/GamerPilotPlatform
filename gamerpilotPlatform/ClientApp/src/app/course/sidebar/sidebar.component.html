@@ -1,4 +1,32 @@
 
+    <nav class="navbar" >
+    
+      <a routerLink="/courses">
+        <button class="btn-nav">Back</button>
+      </a>
+
+      <ng-template *ngIf="isLoggedIn && isEnrolled">
+        <!-- If first show next-->
+        <div *ngIf="isFirst()" class="nav-buttons">
+            <button (click)="next()" class="btn-nav btn-next btn-single">Next and complete</button>
+        </div>
+
+        
+        <!-- If in between show prev/next-->
+        <div *ngIf="isInBetween()" class="nav-buttons">
+            <button (click)="previous()" class="btn-nav btn-prev">Prev</button>
+            <button (click)="next()" class="btn-nav btn-next">Next and complete</button>
+        </div>
+
+        <!-- If last show prev/complete-->
+        <div *ngIf="isLast()" class="nav-buttons">
+            <button (click)="complete()" class="btn-nav btn-complete btn-single">Complete</button>
+        </div>
+      </ng-template>
+      
+    
+      </nav>
+
 
 <div class="flex-container">
 
@@ -186,28 +214,6 @@
 <div id="content">
 
 
-    <nav class="navbar" *ngIf="isLoggedIn && isEnrolled">
-    
-
-
-        <!-- If first show next-->
-        <div *ngIf="isFirst()" class="nav-buttons">
-            <button (click)="next()" class="btn-nav btn-next btn-single">Next and complete</button>
-        </div>
-    
-        
-        <!-- If in between show prev/next-->
-        <div *ngIf="isInBetween()" class="nav-buttons">
-            <button (click)="previous()" class="btn-nav btn-prev">Prev</button>
-            <button (click)="next()" class="btn-nav btn-next">Next and complete</button>
-        </div>
-    
-        <!-- If last show prev/complete-->
-        <div *ngIf="isLast()" class="nav-buttons">
-            <button (click)="complete()" class="btn-nav btn-complete btn-single">Complete</button>
-        </div>
-    
-      </nav>
 
   <pre>{{isEnrolled}}</pre>
   <pre>{{isLoggedIn}}</pre>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using gamerpilotPlatform.Model;
+using gamerpilotPlatform.Model.Lectures;
+
 using Microsoft.EntityFrameworkCore;
 
 
@@ -26,6 +28,7 @@ namespace gamerpilotPlatform.Data
         public DbSet<Video> Videos { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<CompletedLectures> CompletedLectures { get; set; }
+        public DbSet<CaseSection> CaseSections { get; set; }
 
 
         // many to many with customized join table

@@ -1,0 +1,26 @@
+
+@import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
+
+h3 {
+    color: $primary;
+    margin-bottom: 50px;
+}
+
+h4 {
+   padding: 40px 0;
+}
+
+.section-body {
+    margin-bottom: 50px;
+}
+
+.fa-rocket {
+    padding-right: 15px;
+}
+
+
+.line-breaker {
+  white-space: pre-line;
+}

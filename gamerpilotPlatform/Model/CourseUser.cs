@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using gamerpilotPlatform.Model.Lectures;
 using System.Threading.Tasks;
 
 namespace gamerpilotPlatform.Model

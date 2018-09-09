@@ -1,0 +1,17 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
+
+
+.table-bordered>tbody>tr:nth-child(odd) {
+    background-color: lighten(lightgray, 5%);
+}
+
+h3 {
+    color: $primary;
+    margin-bottom: 50px;
+}
+
+.table-bordered td {
+    border: none;
+}

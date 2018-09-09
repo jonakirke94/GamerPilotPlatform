@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace gamerpilotPlatform.Model
+namespace gamerpilotPlatform.Model.Lectures
 {
     public class CompletedLectures
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public int LectureId { get; set; }
     }

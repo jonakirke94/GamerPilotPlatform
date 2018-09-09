@@ -1,12 +1,20 @@
 
 
-<p>{{lecture.name}}</p>
 
-<p>{{lecture.description}}</p>
 
+
+<h3>{{lecture.name}}</h3>
+
+<hr>
+
+<div class="text-left">
+
+        <p class="line-breaker">{{lecture.description}}</p>
 
 <ul>
     <li *ngFor="let lg of lecture.learningGoals">
-        {{lg.goal}}
+        <i class="fas fa-dot-circle"></i>{{lg.goal}}
     </li>
 </ul>
+
+</div>
