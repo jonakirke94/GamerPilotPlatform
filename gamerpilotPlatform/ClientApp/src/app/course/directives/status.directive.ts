@@ -12,11 +12,11 @@ export class StatusDirective implements OnChanges {
 
   ngOnChanges() {
     if (this.completed && !this.current) {
-      this.el.nativeElement.style.backgroundColor = 'green';
+      this.el.nativeElement.classList.add('fas', 'fa-circle');
     } else if (this.current) {
-      this.el.nativeElement.style.backgroundColor = 'yellow';
+      this.el.nativeElement.classList.add('fas', 'fa-adjust');
     } else {
-      this.el.nativeElement.style.backgroundColor = 'red';
+      this.el.nativeElement.classList.add('far', 'fa-circle');
     }
 
   }

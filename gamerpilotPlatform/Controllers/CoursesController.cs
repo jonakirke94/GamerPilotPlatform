@@ -34,13 +34,17 @@ namespace gamerpilotPlatform.Controllers
         public IActionResult Get()
         {
             List<Course> courses = new List<Course>();
+
+            //var x = _videoService.AddVideo().GetAwaiter().GetResult();
             //var vid = _videoService.GetVideos();
+
 
             try
             {
+      
                 courses = _context.Courses.ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
@@ -188,7 +192,6 @@ namespace gamerpilotPlatform.Controllers
                         break;
                     case "CourseVideo":
                         lecture = _context.Lectures.OfType<CourseVideo>()
-                        .Include(x => x.Videos)
                         .SingleOrDefault(x => x.Id == id);
                         break;
                     default:

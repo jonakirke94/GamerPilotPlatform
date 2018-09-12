@@ -16,6 +16,7 @@ namespace gamerpilotPlatform.Data
         public GamerpilotVodContext(DbContextOptions<GamerpilotVodContext> options)
        : base(options)
         {
+            var x = Model.GetEntityTypes();
         }
         
         public DbSet<User> Users { get; set; }
@@ -25,11 +26,11 @@ namespace gamerpilotPlatform.Data
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<LearningGoal> LearningGoals { get; set; }
         public DbSet<Question> Questions { get; set; }
-        public DbSet<Video> Videos { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<CompletedLectures> CompletedLectures { get; set; }
         public DbSet<CaseSection> CaseSections { get; set; }
 
+        
 
         // many to many with customized join table
         /* https://stackoverflow.com/questions/7050404/create-code-first-many-to-many-with-additional-fields-in-association-table */

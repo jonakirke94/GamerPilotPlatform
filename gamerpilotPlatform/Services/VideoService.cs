@@ -21,13 +21,37 @@ namespace gamerpilotPlatform.Services
             Options = optionsAccessor.Value;
             _configuration = configuration;
             ConnString = _configuration.GetConnectionString("VodContext");
-            _videoHelper = Helper.Create(ConnString, Options.AWSAccessKey, Options.AWSSecretKey, Options.AWSBucketName, Options.AWSRegion);
+
+            try
+            {
+                _videoHelper = Helper.Create(ConnString, Options.AWSAccessKey, Options.AWSSecretKey, Options.AWSBucketName, Options.AWSRegion);
+                var x = 1;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<GamerPilot.Video.IVideo> AddVideo()
+        {
+            try
+            {
+                return await _videoHelper.AddVideoAsync("test", "test", "testVideoName", "C:\\Users\\inter\\Desktop\\GamerPilotOutro.mp4");
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public IEnumerable<GamerPilot.Video.IVideo> GetVideos()
         {
             var x = _videoHelper.GetVideos();
-            return _videoHelper.GetVideos();
+            return x;
         }
 
 

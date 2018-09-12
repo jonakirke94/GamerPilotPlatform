@@ -1,229 +1,150 @@
 
-    <nav class="navbar" >
-    
-      <a routerLink="/courses">
-        <button class="btn-nav">Back</button>
-      </a>
+<nav class="controls">
+  <div>
+      <div  class="page-controls" [class.minimized]="minimized">
+          <i routerLink="/courses">Back</i>
+  </div>
+  </div>
+  <div>
+      <div class="lecture-controls">
+          <button (click)="previous()" class="btn-next">Prev</button>
+          <button (click)="next()" class="btn-next">Next and complete</button>
+      </div>
+  </div>
 
-      <ng-template *ngIf="isLoggedIn && isEnrolled">
-        <!-- If first show next-->
-        <div *ngIf="isFirst()" class="nav-buttons">
-            <button (click)="next()" class="btn-nav btn-next btn-single">Next and complete</button>
-        </div>
-
-        
-        <!-- If in between show prev/next-->
-        <div *ngIf="isInBetween()" class="nav-buttons">
-            <button (click)="previous()" class="btn-nav btn-prev">Prev</button>
-            <button (click)="next()" class="btn-nav btn-next">Next and complete</button>
-        </div>
-
-        <!-- If last show prev/complete-->
-        <div *ngIf="isLast()" class="nav-buttons">
-            <button (click)="complete()" class="btn-nav btn-complete btn-single">Complete</button>
-        </div>
-      </ng-template>
       
-    
-      </nav>
+</nav>
 
 
-<div class="flex-container">
+<div class="sidebar" [class.minimized]="minimized">
+  <nav class="main-navigation item no-border">
+    <ul>
+        <li class="item link title">
+            <img src="/assets/images/gp-brand.png" alt="GamerPilot Logo">        
+            <span class="topic">CS:GO Content</span>
+        </li>
 
-  <div class="row lecture-sidebar" *ngIf="dataLoaded">
-    
-    <div class="col-sm-12 course-section">
-      <div class="section-title">
-        Velkommen
-      </div>
-      <ul class="section-list">
-
+        <!-- Welcome -->
+        <li class="item sidebar-link section">
+            <span class="order">1</span>
+            <span class="topic">Velkommen</span>
+        </li>
         <div *ngFor="let lecture of lectures">
-            <li class="section-item incomplete"  *ngIf="lecture.section == 1">
-                <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                  <span class="status-container" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)">
-                    <span class="status-icon">
-                      &nbsp;
-                    </span>
-                  </span>
-                  <div class="title-container">
-                    <span class="lecture-icon">
-                      <i appIcon [type]="lecture.lectureType"></i>
-                    </span>
-                    <span class="lecture-name">
-                      {{lecture.name}} 
-                    </span>
-                  </div>
-                </a>
-              </li>    
-        </div>
-       </ul>
-    </div>
-    
-    <div class="col-sm-12 course-section">
-      <div class="section-title" >
-        Real life perspective
-      </div>
-      <ul class="section-list">
-        
-        <div *ngFor="let lecture of lectures">
-          <li class="section-item"  *ngIf="lecture.section == 2">
-              <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                <span class="status-container" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)">
-                  <span class="status-icon">
-                    &nbsp;
-                  </span>
-                </span>
-                <div class="title-container">
-                  <span class="lecture-icon">
-                    <i appIcon [type]="lecture.lectureType"></i>
-                  </span>
-                  <span class="lecture-name">
-                    {{lecture.name}} 
-                  </span>
-                </div>
-              </a>
+            <li class="item link"  *ngIf="lecture.section == 1" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+              <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+              <i class="icon" appIcon [type]="lecture.lectureType"></i>
+              <span class="label">{{lecture.name}} </span>        
             </li>    
-      </div>
-
-        
-      </ul>
-    </div>
-
-    <div class="col-sm-12 course-section">
-        <div class="section-title" >
-          Test your knowledge
         </div>
-        <ul class="section-list">
-          
-          <div *ngFor="let lecture of lectures">
-            <li class="section-item incomplete"  *ngIf="lecture.section == 3">
-                <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                  <span class="status-container" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)">
-                    <span class="status-icon">
-                      &nbsp;
-                    </span>
-                  </span>
-                  <div class="title-container">
-                    <span class="lecture-icon">
-                      <i appIcon [type]="lecture.lectureType"></i>
-                    </span>
-                    <span class="lecture-name">
-                      {{lecture.name}} 
-                    </span>
-                  </div>
-                </a>
-              </li>    
+
+        <!-- Real life perspective -->
+        <li class="item sidebar-link section">
+            <span class="order">2</span>
+            <span class="topic">Real life perspective</span>
+        </li>
+        <div *ngFor="let lecture of lectures">
+            <li class="item link"  *ngIf="lecture.section == 2" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+              <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+              <i class="icon" appIcon [type]="lecture.lectureType"></i>
+              <span class="label">{{lecture.name}} </span>        
+            </li>    
         </div>
-  
-          
-        </ul>
-    </div>
-    
-    <div class="col-sm-12 course-section">
-          <div class="section-title" >
-            Diving into CS:GO
-          </div>
-          <ul class="section-list">
-            
-            <div *ngFor="let lecture of lectures">
-              <li class="section-item incomplete"  *ngIf="lecture.section == 4">
-                  <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                    <span class="status-container" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)">
-                      <span class="status-icon">
-                        &nbsp;
-                      </span>
-                    </span>
-                    <div class="title-container">
-                      <span class="lecture-icon">
-                        <i appIcon [type]="lecture.lectureType"></i>
-                      </span>
-                      <span class="lecture-name">
-                        {{lecture.name}} 
-                      </span>
-                    </div>
-                  </a>
-                </li>    
-          </div>
-    
-    
-            
-          </ul>
-    </div>
-   
-    <div class="col-sm-12 course-section">
-        <div class="section-title" >
-          Put it into practice
+
+        <!-- Test your knowledge -->
+        <li class="item sidebar-link section">
+            <span class="order">3</span>
+            <span class="topic">Test your knowledge</span>
+        </li>
+        <div *ngFor="let lecture of lectures">
+            <li class="item link"  *ngIf="lecture.section == 3" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+              <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+              <i class="icon" appIcon [type]="lecture.lectureType"></i>
+              <span class="label">{{lecture.name}} </span>        
+            </li>    
         </div>
-        <ul class="section-list">
-          
-          <div *ngFor="let lecture of lectures">
-            <li class="section-item incomplete"  *ngIf="lecture.section == 5">
-                <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                  <span class="status-container" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)">
-                    <span class="status-icon">
-                      &nbsp;
-                    </span>
-                  </span>
-                  <div class="title-container">
-                    <span class="lecture-icon">
-                      <i appIcon [type]="lecture.lectureType"></i>
-                    </span>
-                    <span class="lecture-name">
-                      {{lecture.name}} 
-                    </span>
-                  </div>
-                </a>
-              </li>    
+
+        <!--  Diving into CS:GO -->
+        <li class="item sidebar-link section">
+            <span class="order">4</span>
+            <span class="topic">Diving into CS:GO</span>
+        </li>
+        <div *ngFor="let lecture of lectures">
+            <li class="item link"  *ngIf="lecture.section == 4" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+              <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+              <i class="icon" appIcon [type]="lecture.lectureType"></i>
+              <span class="label">{{lecture.name}} </span>        
+            </li>    
         </div>
-   
-        </ul>
-    </div>
 
-    <div class="col-sm-12 course-section">
-        <div class="section-title" >
-          Summary
+         <!--  Put it into practice -->
+        <li class="item sidebar-link section">
+            <span class="order">5</span>
+            <span class="topic">Put it into practice</span>
+        </li>
+        <div *ngFor="let lecture of lectures">
+            <li class="item link"  *ngIf="lecture.section == 5" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+              <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+              <i class="icon" appIcon [type]="lecture.lectureType"></i>
+              <span class="label">{{lecture.name}} </span>        
+            </li>    
         </div>
-        <ul class="section-list">
-          
-          <div *ngFor="let lecture of lectures">
-            <li class="section-item incomplete"  *ngIf="lecture.section == 6">
-                <a class="item" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                  <span class="status-container"appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)">
-                    <span class="status-icon">
-                      &nbsp;
-                    </span>
-                  </span>
-                  <div class="title-container">
-                    <span class="lecture-icon">
-                      <i appIcon [type]="lecture.lectureType"></i>
-                    </span>
-                    <span class="lecture-name">
-                      {{lecture.name}} 
-                    </span>
-                  </div>
-                </a>
-              </li>    
+
+         <!--  Summary -->
+        <li class="item sidebar-link section">
+            <span class="order">6</span>
+            <span class="topic">Summary</span>
+        </li>
+        <div *ngFor="let lecture of lectures">
+            <li class="item link"  *ngIf="lecture.section == 6" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link"  style="border-bottom: 1px solid #D7DADB;">
+              <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+              <i class="icon" appIcon [type]="lecture.lectureType"></i>
+              <span class="label">{{lecture.name}} </span>        
+            </li>    
         </div>
-  
-        </ul>
-    </div>
-  </div>
 
-<!-- Page Content  -->
-<div id="content">
-
-
-
-  <pre>{{isEnrolled}}</pre>
-  <pre>{{isLoggedIn}}</pre>
-
-  <div *ngIf="!isEnrolled || !isLoggedIn">
-    <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
-  </div>
-
-    <router-outlet></router-outlet>
-
-
+    </ul>
+  </nav>
+  <a class="item sidebar-toggle link" (click)="toggle()">
+      <i class="icon fas" [ngClass]="minimized ? 'fa-angle-right' : 'fa-angle-left'"></i>
+      <span class="label">Minimér</span>
+  </a>
 </div>
+
+<div class="header">
+  <nav class="main-navigation item no-border">
+    <ul>
+      <li class="item link">
+        <i class="icon fas fa-angle-left"></i>
+    </li>
+    <li class="item link" (click)="toggleNav()">
+        <i class="icon fas fa-list"></i>
+      </li>
+    <li class="item link">
+        <i class="icon fas fa-cog"></i>
+    </li>
+    </ul>
+  </nav>
 </div>
+
+<header>
+  <div class="header-dropdown" *ngIf="showNav">
+          <nav class="main-nav">
+            <ul class="nav">
+              <li class="nav-link">
+                <a>Leaderboard</a>
+              </li>
+              <li class="nav-link">
+                <a>Kampe</a>
+              </li>
+              <li class="nav-link">
+                <a>kamp</a>
+              </li>
+              <li class="nav-link">
+                <a>Nyspiller</a>
+              </li>
+  
+            </ul>
+          </nav>
+        </div>
+  </header>
+  

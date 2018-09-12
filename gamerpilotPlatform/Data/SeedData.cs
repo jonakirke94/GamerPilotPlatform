@@ -88,13 +88,13 @@ namespace gamerpilotPlatform.Data
 
 
             // REAL LIFE PERSPECTIVE
-            var video1 = new Video()
-            {
-                Title = "Video 1",
-                VideoUrl = "https://www.youtube.com/watch?v=nZXOiv1IHNM"
-            };
+            //var video1 = new Video()
+            //{
+            //    Title = "Video 1",
+            //    VideoUrl = "https://www.youtube.com/watch?v=nZXOiv1IHNM"
+            //};
 
-            context.Videos.Add(video1);
+            //context.Videos.Add(video1);
             context.SaveChanges();
 
             var RealLifePersp = new CourseVideo()
@@ -103,7 +103,7 @@ namespace gamerpilotPlatform.Data
                 Section = Section.RealLife,
                 LectureType = LectureType.Video
             };
-            RealLifePersp.Videos.Add(video1);
+            //RealLifePersp.Videos.Add(video1);
 
             // CASE
             var caseEntity = new CourseCase()
@@ -186,18 +186,18 @@ namespace gamerpilotPlatform.Data
 
             // PRO CONTENT
 
-            var video2 = new Video()
-            {
-                Title = "Video 2",
-                VideoUrl = "https://www.youtube.com/watch?v=qvvLzd8SA5w",
-            };
-            var video3 = new Video()
-            {
-                Title = "Video 3",
-                VideoUrl = "https://www.youtube.com/watch?v=O7r5lmYzwrk",
-            };
-            context.Videos.Add(video2);
-            context.Videos.Add(video3);
+            //var video2 = new Video()
+            //{
+            //    Title = "Video 2",
+            //    VideoUrl = "https://www.youtube.com/watch?v=qvvLzd8SA5w",
+            //};
+            //var video3 = new Video()
+            //{
+            //    Title = "Video 3",
+            //    VideoUrl = "https://www.youtube.com/watch?v=O7r5lmYzwrk",
+            //};
+            //context.Videos.Add(video2);
+            //context.Videos.Add(video3);
             context.SaveChanges();
 
             var proContent = new CourseVideo()
@@ -206,8 +206,8 @@ namespace gamerpilotPlatform.Data
                 Section = Section.Game,
                 LectureType = LectureType.Video
             };
-            proContent.Videos.Add(video2);
-            proContent.Videos.Add(video3);
+            //proContent.Videos.Add(video2);
+            //proContent.Videos.Add(video3);
 
             // EXERCISES
             var exercise1 = new Exercise()

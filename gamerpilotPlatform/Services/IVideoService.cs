@@ -8,7 +8,8 @@ namespace gamerpilotPlatform.Services
 {
     public interface IVideoService
     {
-        IEnumerable<GamerPilot.Video.IVideo> GetVideos();     
+        IEnumerable<GamerPilot.Video.IVideo> GetVideos();
+        Task<GamerPilot.Video.IVideo> AddVideo();
     }
 }
 

@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.6" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.23.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0-rc1-final" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-rc1-final" />
@@ -39,7 +39,7 @@
 
   <ItemGroup>
     <Reference Include="GamerPilot.Video">
-      <HintPath>..\..\..\..\..\..\Desktop\GamerPilot.Video\GamerPilot.Video\vs1.0\Bin\GamerPilot.Video.dll</HintPath>
+      <HintPath>GamerPilot.Video.dll</HintPath>
     </Reference>
   </ItemGroup>
 

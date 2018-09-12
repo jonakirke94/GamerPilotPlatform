@@ -27,6 +27,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private isLoggedIn;
   private isEnrolled;
 
+  private minimized = false;
+  private showNav = false;
+
   constructor(
     private _router: Router,
     private _activeRoute: ActivatedRoute,
@@ -43,6 +46,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isLoggedIn = this._authService.isLoggedIn();
 
     this.loadSidebar();
+  }
+
+  toggle() {
+    this.minimized = !this.minimized;
+  }
+
+  toggleNav() {
+    this.showNav = !this.showNav;
   }
 
   loadSidebar() {
