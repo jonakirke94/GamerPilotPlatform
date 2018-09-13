@@ -4,28 +4,128 @@ $gutter: 40px;
 @import '~sass/fonts';
 
 
-.controls {
+
+.wrapper {
+    display: flex;
+    flex-direction:  column;
+
+    @media only screen and (min-width : 1200px) {
+        flex-direction: row;
+    }
+
+    
+    .sidebar-toggle {
+        background-color: #e8e8e8;
+        cursor: pointer;
+        display: flex;
+        margin-top: auto;
+        border-bottom: 0;
+        border-top: 1px solid getColor('border', 'primary');
+    
+        .label {
+            text-transform: uppercase;
+            font-size: typeScale(1);
+        }
+    }
+}
+
+
+.content {
+    flex: 1;
+}
+
+.controls-large, .controls-small {
     display: flex;
     flex-direction: row;
+    
+    .control {
+        flex-grow: 1;
+        padding: 16px;
+        color: #fff;
+        text-align: center;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.95;
+        }
+        
+
+        i {
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+        &.prev {
+            background-color: $main;
+        }
+
+        &.next, &.complete {
+            background-color: $eden;
+        }
+    }
+    
+    .page-controls {
+        width: $gutter * 9;
+        padding: 10px 16px;
+        background-color: $main;    
+        border-right: 1px solid #D7DADB;
+        transition: width, filter;
+        transition-duration: 0.5s;
+
+        i {
+            color: white;
+            font-size: 26px;
+            padding-top: 4px;
+
+            &:hover {
+                opacity: 0.7;
+                cursor: pointer;
+            }
+        }
+
+        &.minimized {
+            width: $gutter * 2.5;
+        }
+    }
+    
 }
 
-.lecture-controls {
-    width: 100%;
-    display: flex;
+.controls-small {
+
+    .page-controls {
+        width: $gutter * 3;
+        text-align: center;
+
+        i:first-of-type {
+            padding-right: 10px;        
+        }
+        i {
+            transition: all .3s linear;
+        }
+
+        .fa-rotate-90 {
+            padding-left: 0px;
+            color: $eden !important;
+        }
+
+
+    }
 }
 
-.btn-next {
-    flex: 1;
-    border: 1px solid red;
+@media only screen and (max-width : 1200px) {
+    .controls-large {
+        display: none;
+
+    }
 }
 
-.page-controls {
-    width: $gutter * 9;
-    padding: 10px 16px;
-    background-color: lightblue;    
-    transition: width, filter;
-    transition-duration: 0.5s;
-}
+@media only screen and (min-width : 1200px) {
+    .controls-small {
+        display: none;
+    }
+}   
+
+
 
 /* Large screen */ 
 .main-navigation {
@@ -67,6 +167,10 @@ $gutter: 40px;
     }
 }
 
+.link-active {
+    background-color: red;
+}
+
 .item {
     display: flex;
     align-items: center;
@@ -79,13 +183,10 @@ $gutter: 40px;
         cursor: pointer;
 
         &:hover {
-            background-color: $highlight;
+            background-color: #d4ebe9;
         }
 
-        &.link-active,
-        &.router-link-active {
-            background-color: $highlight;
-        }
+      
     }
 
     .icon,
@@ -97,7 +198,7 @@ $gutter: 40px;
     .status {
         padding: 13px;
         font-size: 20px;
-        color: green;
+        color: $eden;
 
     }
 
@@ -118,6 +219,10 @@ $gutter: 40px;
     .section {
         background-color: #e8e8e8;
         padding: 10px 16px;
+
+        .order {   
+            opacity: 0;
+        }
     }
 
     .icon {
@@ -169,22 +274,9 @@ $gutter: 40px;
     }
 }
 
-.order {
-    
-    opacity: 0;
-}
 
-.sidebar-toggle {
-    display: flex;
-    margin-top: auto;
-    border-bottom: 0;
-    border-top: 1px solid getColor('border', 'primary');
 
-    .label {
-        text-transform: uppercase;
-        font-size: typeScale(1);
-    }
-}
+
 
 .item {
     .icon,
@@ -198,33 +290,14 @@ $gutter: 40px;
         transition-duration: 0.5s;
         padding-left: 0;
     }
-}
 
-
-
-
-
-
-
-/* small screens*/
-.header {
-    display: flex;
-    background-color: $grey;
-    color: #fff;
-
-    .sidebar-item {
-        .sidebar-label {
-            display: none;
-        }
-    }
-
-    @media only screen and (min-width : 1200px) {
-        display: none;
-    }
 }
 
 .header-dropdown {
-    position: relative;
+    flex: 1;
+    position: absolute;
+    top: 80px;
+    width: 100%;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
@@ -241,6 +314,10 @@ $gutter: 40px;
     .main-nav {
         width:100%;
         background-color: white;
+
+        ul li {
+            border-bottom: 1px solid #D7DADB;        
+        }
     }
     
     .nav {
@@ -271,5 +348,7 @@ $gutter: 40px;
           }
       }   
   }
+
+
 
   

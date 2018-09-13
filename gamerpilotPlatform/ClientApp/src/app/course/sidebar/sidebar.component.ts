@@ -24,6 +24,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   completedLectures = [];
   currentLectureId: number;
 
+  private activeChild = false;
+
   private isLoggedIn;
   private isEnrolled;
 
@@ -161,14 +163,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   listenToChildRoutes() {
+    // check on initial page load
     if (this._activeRoute.children.length > 0) {
-     this._activeRoute.firstChild.params
-     .pipe(takeUntil(this.onDestroy$))
-     .subscribe((params: Params) => {
-          this.currentLectureId = params['id'];
-      });
-    }
+      this._activeRoute.firstChild.params
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((params: Params) => {
+           this.currentLectureId = params['id'];
+           this.activeChild = true;
+       });
+     } else {
+        this.activeChild = false;
+     }
 
+    // listen to router events
     this._router.events.pipe(takeUntil(this.onDestroy$)).
     subscribe(e => {
       if (e instanceof NavigationEnd && this._activeRoute.children.length > 0) {
@@ -176,7 +183,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.onDestroy$))
         .subscribe((params: Params) => {
           this.currentLectureId = params['id'];
+          this.activeChild = true;
       });
+      } else {
+        this.activeChild = false;
+
       }
     });
   }
