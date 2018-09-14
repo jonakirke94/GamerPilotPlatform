@@ -261,6 +261,7 @@ namespace gamerpilotPlatform.Data
                     Name = "Communication in CS:GO",
                     UrlName = "communication-in-csgo",
                     Description = "This course is about communication in CS:GO..",
+                    IsReleased = true,
                     ImageUrl = "https://picsum.photos/600/600?random",
                 };
                 course1.Lectures.Add(infoEntity);

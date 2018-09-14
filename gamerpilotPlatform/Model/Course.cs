@@ -19,6 +19,8 @@ namespace gamerpilotPlatform.Model
 
         public string ImageUrl { get; set; }
 
+        public Boolean IsReleased { get; set; }
+
         public virtual ICollection<Lecture> Lectures { get; set; }
 
         public virtual ICollection<Instructor> Instructors { get; set; }

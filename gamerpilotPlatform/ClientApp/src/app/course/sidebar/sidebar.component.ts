@@ -131,7 +131,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
           const newCompletedLectures = res['data'];
           this.completedLectures = newCompletedLectures.map(x => x.lectureId);
 
-          this._toastService.confirm('Example body content', 'Example title', {
+          this._toastService.confirm('If another course was released, would you be willing to pay for it?', 'Congratulations!', {
             timeout: 10000,
             showProgressBar: true,
             closeOnClick: false,
@@ -162,6 +162,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this._courseService.getCourse(name)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(res => {
+
+        if (!res['course']['IsReleased'] as Boolean) {
+          this._router.navigateByUrl('/courses');
+        }
+
         const enrolledResult = res['enrolled'] as boolean;
 
         if (!enrolledResult) {

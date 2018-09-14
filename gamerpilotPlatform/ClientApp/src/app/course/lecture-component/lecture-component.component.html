@@ -1,43 +1,33 @@
-<p>
-  lecture-component works!
-</p>
 
-<!-- <div *ngIf="!isEnrolled || !isLoggedIn">
-    <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
-</div> -->
-
-<pre>{{dataLoaded}}</pre>
 <div *ngIf="dataLoaded" class="container">
 
-  <pre>Lecture type {{lecture.lectureType}}</pre>
+    <div *ngIf="lecture.lectureType == 1">
+    <app-info [lecture]="lecture"></app-info>
+    </div>
 
-<div *ngIf="lecture.lectureType == 1">
-  <app-info [lecture]="lecture"></app-info>
-</div>
-
-<div *ngIf="lecture.lectureType == 2">
+    <div *ngIf="lecture.lectureType == 2">
     <app-introduction [lecture]="lecture"></app-introduction>
-</div>
-  
-<div *ngIf="lecture.lectureType == 3">
+    </div>
+
+    <div *ngIf="lecture.lectureType == 3">
     <app-case [lecture]="lecture"></app-case>
-</div>
+    </div>
 
-<div *ngIf="lecture.lectureType == 4">
+    <div *ngIf="lecture.lectureType == 4">
     <app-video [lecture]="lecture"></app-video>
-</div>
+    </div>
 
-<div *ngIf="lecture.lectureType == 5">
+    <div *ngIf="lecture.lectureType == 5">
     <app-quiz [lecture]="lecture"></app-quiz>
-</div>
+    </div>
 
-<div *ngIf="lecture.lectureType == 6">
+    <div *ngIf="lecture.lectureType == 6">
     <app-exercises [lecture]="lecture"></app-exercises>
-</div>
+    </div>
 
-<div *ngIf="lecture.lectureType == 7">
+    <div *ngIf="lecture.lectureType == 7">
     <app-summary [lecture]="lecture"></app-summary>
-</div>
+    </div>
 
 
 
