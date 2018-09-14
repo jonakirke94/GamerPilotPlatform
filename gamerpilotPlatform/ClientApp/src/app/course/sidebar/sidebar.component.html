@@ -1,10 +1,17 @@
  <div class="controls-large">
   <div  class="page-controls" [class.minimized]="minimized">
     <i class="fas fa-chevron-circle-left" routerLink="/courses"></i>
+    <i class="small-only fas fa-list" (click)="toggleNav()" [ngClass]="showNav ? 'fa-rotate-90' : ''"></i>
   </div>
-  <div class="control prev" (click)="previous()" *ngIf="!isFirst()" ><i class="fas fa-arrow-left"></i> Prev</div>
-  <div class="control next" (click)="next()" *ngIf="!isLast()">Next and complete <i class="fas fa-arrow-right"></i></div>
-  <div class="control complete" (click)="complete()" *ngIf="isLast()">Complete<i class="fas fa-flag-checkered"></i></div>
+  <ng-template *ngIf="isLoggedIn && isEnrolled; else hide">
+    <div class="control prev" (click)="previous()" *ngIf="!isFirst()" ><i class="fas fa-arrow-left"></i> Prev</div>
+    <div class="control next" (click)="next()" *ngIf="!isLast()">Next and complete <i class="fas fa-arrow-right"></i></div>
+    <div class="control complete" (click)="complete()" *ngIf="isLast()">Complete<i class="fas fa-flag-checkered"></i></div>
+  </ng-template>
+  <ng-template #hide>
+    <div class="control next"></div>
+  </ng-template>
+
 </div>
 
 
@@ -102,16 +109,6 @@
           <span class="label">Minimér</span>
       </a>
   </div>
-
-      <div class="controls-small">
-          <div  class="page-controls">
-            <i class="fas fa-chevron-circle-left" routerLink="/courses"></i>
-            <i class="header-icon fas fa-list" (click)="toggleNav()" [ngClass]="showNav ? 'fa-rotate-90' : ''"></i>
-          </div>
-          <div class="control prev" (click)="previous()" *ngIf="!isFirst()" ><i class="fas fa-arrow-left"></i> Prev</div>
-          <div class="control next" (click)="next()" *ngIf="!isLast()">Next and complete <i class="fas fa-arrow-right"></i></div>
-          <div class="control complete" (click)="complete()" *ngIf="isLast()">Complete<i class="fas fa-flag-checkered"></i></div>
-        </div>
 
   <div class="header-dropdown" *ngIf="showNav">
       <nav class="main-nav">

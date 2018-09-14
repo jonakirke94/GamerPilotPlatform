@@ -24,14 +24,13 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
-      debounceTime(1000),
       takeUntil(this.onDestroy$)
     ).subscribe(
-      x => setTimeout(() => {
+      x =>  {
       const regex = /\/courses\/(.\/*)/g;
       const matches = regex.test(x['url']);
       this.inCourseSection = matches;
-  }, 0));
+    });
 
   }
 

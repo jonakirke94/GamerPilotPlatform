@@ -10,9 +10,6 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private onDestroy$ = new Subject<void>();
-
-  isLoggedin$: Observable<boolean>;
   isAuthed: boolean;
 
   constructor(private _auth: AuthService,
@@ -21,39 +18,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
 
   ngOnInit() {
-    this.listenToAuthChanges();
-    this.initNavbar();
-  }
-
-  private listenToAuthChanges() {
-    this._auth.IsAuthed
-    .pipe(
-      takeUntil(this.onDestroy$
-    ))
-    .subscribe(status => this.changeAuthStatus(status));
-  }
-
-  private changeAuthStatus(status: boolean): void {
-      this.isAuthed = status;
-  }
-
-  private initNavbar() {
-    const menus = Array.from(document.querySelectorAll('.mobile-menu-toggle'));
-    menus.forEach(function(btn) {
-      return btn.addEventListener('click', function() {
-        document.querySelector('.main-nav').classList.toggle('active');
+    this._auth.IsAuthed$.subscribe(status => {
+        console.log('emitted new event!');
+        this.isAuthed = status;
       });
-    });
   }
 
-  private logout() {
+
+  toggle() {
+    document.querySelector('.main-nav').classList.toggle('active');
+  }
+
+  logout() {
     this._auth.logout();
-    // this.router.navigateByUrl('/home');
-  }
-
-  ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
   }
 
 }

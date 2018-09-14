@@ -45,7 +45,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     this.listenToChildRoutes();
 
-    this.isLoggedIn = this._authService.isLoggedIn();
+    this.isLoggedIn = this._authService.IsAuthed$;
 
     this.loadSidebar();
   }
@@ -69,6 +69,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   previous() {
+    if (!this.activeChild) {
+      return;
+    }
+
     const lectureArr = this.lectures.map(x => x.id);
     const index = lectureArr.indexOf(Number(this.currentLectureId));
 
@@ -78,6 +82,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   next() {
+    if (!this.activeChild) {
+      return;
+    }
+
     const lectureArr = this.lectures.map(x => x.id);
     const index = lectureArr.indexOf(Number(this.currentLectureId));
     const isNotCompleted = this.completedLectures.indexOf(Number(this.currentLectureId)) === -1;
@@ -105,6 +113,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   complete() {
+    if (!this.activeChild) {
+      return;
+    }
+
     const lectureArr = this.lectures.map(x => x.id);
     const isNotCompleted = this.completedLectures.indexOf(Number(this.currentLectureId)) === -1;
 

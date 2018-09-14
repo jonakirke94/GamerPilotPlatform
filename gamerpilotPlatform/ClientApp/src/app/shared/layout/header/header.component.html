@@ -10,7 +10,7 @@
         </a>
         </div>
         <nav class="main-nav">
-          <img class="close-btn mobile-menu-toggle" hidden src="/assets/images/close-icon.svg" alt="Close button" role="button">
+          <img class="close-btn mobile-menu-toggle" hidden src="/assets/images/close-icon.svg" alt="Close button" role="button" (click)="toggle()">
           <ul class="nav home-nav">
             <li class="nav-link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
               <a routerLink='/'>Home</a>
@@ -26,28 +26,36 @@
             </li>
 
             <!-- Only visible on mobile menu-->
-            <li class="nav-link sign-link-mobile"><a routerLink='/login' *ngIf="!isAuthed">Log in</a></li>
-            <li class="nav-link sign-link-mobile"><a routerLink='/signup' *ngIf="!isAuthed">Sign up</a></li>
+            
+            <ng-template *ngIf="!isAuthed; else authedMobile">
+              <li class="nav-link sign-link-mobile"><a routerLink='/login'>Log in</a></li>
+              <li class="nav-link sign-link-mobile"><a routerLink='/signup'>Sign up</a></li>
+            </ng-template>
+      
 
-            <li class="nav-link sign-link-mobile"><a href="#" *ngIf="isAuthed">Profil</a></li>
-            <li class="nav-link sign-link-mobile"><a routerLink='/login' (click)="logout()" *ngIf="isAuthed">Log out</a></li>
+            <ng-template #authedMobile>
+              <li class="nav-link sign-link-mobile"><a routerLink>Profil</a></li>
+              <li class="nav-link sign-link-mobile"><a routerLink='/login' (click)="logout()">Log out</a></li>
+            </ng-template>
 
           </ul>
         </nav>
 
         <!-- Show for non authenticated users-->
-        <span style="margin-left: auto" *ngIf="!isAuthed">
+        <span style="margin-left: auto" *ngIf="!isAuthed; else Authed">
           <a routerLink='/login' class="btn nav-btn sign-link-desktop" role="button" >Log in</a>
           <a routerLink='/signup' class="btn nav-btn sign-link-desktop" role="button">Sign up</a>
         </span>
 
         <!-- Show for authenticated users-->
-        <span *ngIf="isAuthed">
+        <ng-template #Authed>
           <a routerLink='/login' class="btn nav-btn sign-link-desktop" role="button">Profil</a>
           <a routerLink='/login' (click)="logout()" class="btn nav-btn sign-link-desktop" role="button">Log out</a>
-        </span>
+        </ng-template>
+       
+        
 
-        <img class="mobile-menu-toggle" hidden src="/assets/images/mobile-menu-icon.svg" alt="Mobile menu button" role="button">
+        <img class="mobile-menu-toggle" hidden src="/assets/images/mobile-menu-icon.svg" alt="Mobile menu button" role="button" (click)="toggle()">
       </div>
     </header>
 

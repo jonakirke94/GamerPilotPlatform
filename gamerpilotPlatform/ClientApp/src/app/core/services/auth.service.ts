@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
+import { Injectable, EventEmitter, Output, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { Inject } from '@angular/core';
@@ -13,16 +13,21 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  @Output() IsAuthed: EventEmitter<boolean> = new EventEmitter();
+export class AuthService implements OnInit {
+  @Output() IsAuthed$: BehaviorSubject <boolean> = new BehaviorSubject (this.hasToken());
   baseUrl: string;
 
 /*   loggedIn = new BehaviorSubject<boolean>(false);
  */
+ 
 
   constructor(private http: HttpClient, private _storage: StorageService, @Inject('BASE_URL') _baseUrl: string) {
     this.baseUrl = _baseUrl;
     console.log(this.baseUrl, 'base');
+  }
+
+  ngOnInit() {
+   /*  this.isLoggedIn(); */ // emits value to IsAuthed
   }
 
   signup(username: string, email: string, password: string) {
@@ -59,26 +64,15 @@ export class AuthService {
 
   setSession(info: any) {
     this._storage.saveTokens(info);
-    this.IsAuthed.emit(true);
+    this.IsAuthed$.next(true);
   }
 
-  public isLoggedIn() {
-    let res = false;
-
-    const token = this._storage.getToken();
-    if (token) {
-      res = true;
-      this.IsAuthed.emit(true);
-    } else {
-      this.IsAuthed.emit(false);
-    }
-
-    return res;
-
+  hasToken() {
+     return !!this._storage.getToken() ? true : false;
   }
 
   logout() {
-    this.IsAuthed.emit(false);
+    this.IsAuthed$.next(false);
     this._storage.destroyTokens();
   }
 }
