@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate, OnDestroy {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-      this._auth.IsAuthed
+      this._auth.IsAuthed$
       .pipe(
         takeUntil(this.onDestroy$
       ))
@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate, OnDestroy {
           this.router.navigateByUrl('/login');
         }
           this.isLoggedIn = true;
-        })
+        });
 
       return this.isLoggedIn;
   }

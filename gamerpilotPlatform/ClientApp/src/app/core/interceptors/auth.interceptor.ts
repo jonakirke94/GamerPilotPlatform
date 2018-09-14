@@ -60,6 +60,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         }).pipe(
                         switchMap(res => {
                           if (!res) {
+                              console.log('got no token so user has to reload')
                               this.logout();
                           }
                           this._auth.setSession(res);
@@ -69,6 +70,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     }
                     // if 401 redirect to login
                     if (err.status === 401) {
+                        console.log('logged out');
                         this.logout();
                     }
 

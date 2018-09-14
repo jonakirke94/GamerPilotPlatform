@@ -2,10 +2,22 @@
   {{lecture.name}}
 </p>
 
+<ul>
+    <li class="question-wrapper" *ngFor="let question of lecture.questions">
+        <div class="question__badge">{{question.difficulty}}</div>
+        <div class="question">
+            <div class="question__tag" appTag [difficulty]="question.difficulty"></div>
+            <div class="question__heading">
+                <h6>{{question.text}}</h6>
+            </div>
+            <button class="question__button" (click)="toggle($event)">
+                <span> Show answer</span>
+                <i class="fas fa-chevron-down"></i>
 
-<div *ngFor="let question of lecture.questions">
-  <p>{{question.difficulty}}</p>
-  <p>{{question.answer}}</p>
-  <p>{{question.text}}</p>
+            </button>
+            <div class="answer hidden">
+                {{question.answer}}
+            </div>
+        </div>
+</li>
 
-</div>

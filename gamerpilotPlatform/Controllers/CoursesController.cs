@@ -104,6 +104,7 @@ namespace gamerpilotPlatform.Controllers
         }
 
         [HttpPost("[action]")]
+        [Authorize]
         public IActionResult Enroll([FromHeader]string authorization, [FromBody] Course course)
         {
             try

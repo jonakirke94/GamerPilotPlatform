@@ -14,4 +14,10 @@ export class QuizComponent implements OnInit {
     console.log(this.lecture);
   }
 
+  toggle(event) {
+    const container = event.currentTarget.parentElement;
+    container.querySelector('.answer').classList.toggle('hidden');
+    container.querySelector('button i').classList.toggle('fa-rotate-180');
+  }
+
 }

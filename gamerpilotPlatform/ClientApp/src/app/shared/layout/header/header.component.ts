@@ -1,15 +1,13 @@
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
-import { Router, RouterLink } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { Router, } from '@angular/router';
 
 @Component({
   selector: 'app-layout-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   isAuthed: boolean;
 
   constructor(private _auth: AuthService,
@@ -19,9 +17,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._auth.IsAuthed$.subscribe(status => {
-        console.log('emitted new event!');
         this.isAuthed = status;
-      });
+    });
   }
 
 

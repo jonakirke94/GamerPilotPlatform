@@ -45,7 +45,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     this.listenToChildRoutes();
 
-    this.isLoggedIn = this._authService.IsAuthed$;
+    this._authService.IsAuthed$.subscribe(status => {
+      this.isLoggedIn = status;
+  });
 
     this.loadSidebar();
   }
@@ -69,7 +71,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   previous() {
-    if (!this.activeChild) {
+    if (!this.activeChild || !this.isEnrolled || !this.isLoggedIn ) {
       return;
     }
 
@@ -82,7 +84,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    if (!this.activeChild) {
+    if (!this.activeChild || !this.isEnrolled || !this.isLoggedIn ) {
       return;
     }
 
@@ -113,7 +115,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   complete() {
-    if (!this.activeChild) {
+    if (!this.activeChild || !this.isEnrolled || !this.isLoggedIn ) {
       return;
     }
 
@@ -147,6 +149,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
           });
         });
     }
+  }
+
+  goFirstLesson() {
+    const lectureArr = this.lectures.map(x => x.id);
+    this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[0]}`);
+
   }
 
 
@@ -205,6 +213,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   enrollUser(enroll: boolean) {
+    if (!this.isLoggedIn) {
+      this._router.navigateByUrl('/login');
+      return;
+    }
+
     this._courseService.enroll(this.courseName)
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(res => {
@@ -214,12 +227,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
         const lectureIds = this.lectures.map(x => x.id);
         this._router.navigateByUrl(`/courses/${this.courseName}/lectures/${lectureIds[0]}`);
 
-        this._toastService.success('Keep it up!', {
+        this._toastService.success('Let\'s get started!', {
           timeout: 2000,
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true
         });
+    }, err => {
+        console.log(err);
     });
   }
 

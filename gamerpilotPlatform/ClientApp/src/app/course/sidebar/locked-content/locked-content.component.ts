@@ -7,7 +7,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class LockedContentComponent implements OnInit {
   @Output() enrolled = new EventEmitter<boolean>();
-  clicked = false;
 
   constructor() { }
 
@@ -16,7 +15,6 @@ export class LockedContentComponent implements OnInit {
 
   enroll() {
     this.enrolled.emit(true);
-    this.clicked = true;
   }
 
 }

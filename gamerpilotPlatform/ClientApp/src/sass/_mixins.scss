@@ -17,7 +17,6 @@
     vertical-align: middle;
     white-space: nowrap;
     border-radius: 2.1875rem;
-    cursor: pointer;
     -webkit-transition: all .25s ease-in-out;
     -o-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
@@ -25,6 +24,14 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    border: none;
+    display: block;
+    background-color: $eden;
+    font-size: 18px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 

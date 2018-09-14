@@ -15,6 +15,7 @@ import { LectureComponentComponent } from './lecture-component/lecture-component
 import { VideoComponent } from './sidebar/video/video.component';
 import { StatusDirective } from './directives/status.directive';
 import { IconDirective } from './directives/icon.directive';
+import { TagDirective } from './directives/tag.directive';
 
 
 
@@ -30,6 +31,6 @@ import { IconDirective } from './directives/icon.directive';
     QuizComponent, SummaryComponent, ExercisesComponent,
     LockedContentComponent, LectureComponentComponent,
     VideoComponent, LockedContentComponent,
-    StatusDirective, IconDirective]
+    StatusDirective, IconDirective, TagDirective]
 })
 export class CourseModule { }

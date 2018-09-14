@@ -13,21 +13,13 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
+export class AuthService {
   @Output() IsAuthed$: BehaviorSubject <boolean> = new BehaviorSubject (this.hasToken());
   baseUrl: string;
-
-/*   loggedIn = new BehaviorSubject<boolean>(false);
- */
- 
 
   constructor(private http: HttpClient, private _storage: StorageService, @Inject('BASE_URL') _baseUrl: string) {
     this.baseUrl = _baseUrl;
     console.log(this.baseUrl, 'base');
-  }
-
-  ngOnInit() {
-   /*  this.isLoggedIn(); */ // emits value to IsAuthed
   }
 
   signup(username: string, email: string, password: string) {
