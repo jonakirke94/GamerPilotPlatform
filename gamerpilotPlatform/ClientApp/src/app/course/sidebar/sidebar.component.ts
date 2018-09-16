@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private dataLoaded: boolean;
 
   completedLectures = [];
-  currentLectureId: number;
+  currentLectureId: string;
 
   private activeChild = false;
 
@@ -94,7 +94,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     if (index + 1 < lectureArr.length && isNotCompleted) {
       // complete lecture on server
-      this._courseService.completeLecture(Number(this.currentLectureId), this.courseName).pipe(
+      this._courseService.completeLecture(this.currentLectureId, this.courseName).pipe(
         takeUntil(this.onDestroy$))
         .subscribe(res => {
           const newCompletedLectures = res['data'];
@@ -124,7 +124,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     if (isNotCompleted) {
       // complete lecture on server
-      this._courseService.completeLecture(Number(this.currentLectureId), this.courseName)
+      this._courseService.completeLecture(this.currentLectureId, this.courseName)
       .pipe(
       takeUntil(this.onDestroy$))
       .subscribe(res => {
@@ -163,7 +163,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(res => {
 
-        if (!res['course']['IsReleased'] as Boolean) {
+        if (!res['course']['isReleased'] as Boolean) {
           this._router.navigateByUrl('/courses');
         }
 
@@ -182,6 +182,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
           // if no course matched name param in url
           this._router.navigateByUrl('/courses');
         }
+
+        // sort the lectures by their order in the course
+        this.lectures.sort(function(a, b) {
+          return a.displayOrder - b.displayOrder;
+        });
 
         this.dataLoaded = true;
       });

@@ -5,27 +5,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GamerPilot.Video.Data;
+using gamerpilotPlatform.Model.Lectures;
 
 namespace gamerpilotPlatform.Services
 {
     public class VideoService : IVideoService
     {
-        public AWSSettings Options { get; } //set only via Secret Manager
-        public readonly string ConnString;
+        public AWSSettings options { get; } //set only via Secret Manager
+        public readonly string connString;
         private readonly IConfiguration _configuration;
-        private GamerPilot.Video.Data.Helper _videoHelper;
+        private Helper _videoHelper { get; set; } //change to private later
 
 
         public VideoService(IOptions<AWSSettings> optionsAccessor, IConfiguration configuration)
         {
-            Options = optionsAccessor.Value;
+            options = optionsAccessor.Value;
             _configuration = configuration;
-            ConnString = _configuration.GetConnectionString("VodContext");
+            connString = _configuration.GetConnectionString("VodContext");
 
             try
             {
-                _videoHelper = Helper.Create(ConnString, Options.AWSAccessKey, Options.AWSSecretKey, Options.AWSBucketName, Options.AWSRegion);
-                var x = 1;
+                _videoHelper = Helper.Create(connString, options.AWSAccessKey, options.AWSSecretKey, options.AWSBucketName, options.AWSRegion);
             }
             catch (Exception ex)
             {
@@ -34,12 +34,11 @@ namespace gamerpilotPlatform.Services
             }
         }
 
-        public async Task<GamerPilot.Video.IVideo> AddVideo()
+        public async Task<GamerPilot.Video.IVideo> AddVideo(int instructorId, int lectureId, string videoName, string filePath)
         {
             try
             {
-                return await _videoHelper.AddVideoAsync("test", "test", "testVideoName", "C:\\Users\\inter\\Desktop\\GamerPilotOutro.mp4");
-                
+                return await _videoHelper.AddVideoAsync(instructorId, lectureId, videoName, filePath);                
             }
             catch (Exception)
             {
@@ -48,15 +47,23 @@ namespace gamerpilotPlatform.Services
             }
         }
 
-        public IEnumerable<GamerPilot.Video.IVideo> GetVideos()
+        public IEnumerable<VideoViewModel> GetVideoViewModels(int lectureId)
         {
-            var x = _videoHelper.GetVideos();
-            return x;
+            var viewVms = new List<VideoViewModel>();
+
+            var vids = _videoHelper.GetVideosByLesson(lectureId);
+
+            foreach (var vid in vids)
+            {
+                viewVms.Add(new VideoViewModel
+                {
+                    Id = vid.Id,
+                    Name = vid.Name,
+                    IFramePlayer = vid.GetEmbedHTML(640, 360, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html")
+                });
+            }
+
+            return viewVms;
         }
-
-
-
-
-
     }
 }

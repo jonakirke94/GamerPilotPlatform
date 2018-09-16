@@ -27,6 +27,21 @@
             </div>
           </div>
 
+          <div class="field">
+              <div class="control">
+                  <label class="checkbox-container">
+                      Remember?
+                      <input type="checkbox" id="rememberMe" name="rememberMe" title="Remember Me?" formControlName="rememberMe" checked>
+                      <span class="checkmark"></span>
+                  </label>
+              </div>
+          </div>
+  
+               
+  
+
+          
+
           <span *ngIf="error && loginForm.untouched">
             <p  class="text-danger error-txt">{{error}}</p>
           </span>

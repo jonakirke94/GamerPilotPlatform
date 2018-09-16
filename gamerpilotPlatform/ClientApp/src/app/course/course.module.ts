@@ -16,6 +16,8 @@ import { VideoComponent } from './sidebar/video/video.component';
 import { StatusDirective } from './directives/status.directive';
 import { IconDirective } from './directives/icon.directive';
 import { TagDirective } from './directives/tag.directive';
+import { SanitizeHtmlPipePipe } from './pipes/sanitize-html-pipe.pipe';
+import { ExerciseTagDirective } from './directives/exercise-tag.directive';
 
 
 
@@ -31,6 +33,6 @@ import { TagDirective } from './directives/tag.directive';
     QuizComponent, SummaryComponent, ExercisesComponent,
     LockedContentComponent, LectureComponentComponent,
     VideoComponent, LockedContentComponent,
-    StatusDirective, IconDirective, TagDirective]
+    StatusDirective, IconDirective, TagDirective, SanitizeHtmlPipePipe, ExerciseTagDirective]
 })
 export class CourseModule { }

@@ -60,7 +60,6 @@ export class AuthInterceptor implements HttpInterceptor {
                         }).pipe(
                         switchMap(res => {
                           if (!res) {
-                              console.log('got no token so user has to reload')
                               this.logout();
                           }
                           this._auth.setSession(res);

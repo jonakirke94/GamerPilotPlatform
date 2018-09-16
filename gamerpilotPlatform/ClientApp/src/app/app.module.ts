@@ -16,7 +16,6 @@ import { RouterExtService } from './shared/RouterExtService';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 
-
 @NgModule({
   declarations: [
       AppComponent,
@@ -37,8 +36,7 @@ import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
   ],
    providers: [
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService
-   ],
+    SnotifyService   ],
    exports: [
    ],
    bootstrap: [AppComponent]

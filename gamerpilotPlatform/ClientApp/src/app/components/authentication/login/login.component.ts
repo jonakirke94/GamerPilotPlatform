@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   email: FormControl;
   password: FormControl;
+  rememberMe: FormControl;
   showSpinner = false;
   error = '';
 
@@ -53,13 +54,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     ])),
       (this.password = new FormControl('', [
         Validators.required,
+      ])),
+      (this.rememberMe = new FormControl('', [
       ]));
   }
 
   private createForm() {
     this.loginForm = new FormGroup({
       email: this.email,
-      password: this.password
+      password: this.password,
+      rememberMe: this.rememberMe
     });
   }
 
@@ -70,10 +74,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginForm.valid) {
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
+      const rememberMe = this.loginForm.value.rememberMe;
 
       // set loading to true and then false if error
       this.showSpinner = true;
-      this._auth.login(email, password)
+      this._auth.login(email, password, rememberMe)
       .pipe(
         takeUntil(this.onDestroy$
       ))

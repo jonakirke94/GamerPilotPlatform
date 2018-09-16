@@ -16,7 +16,6 @@ namespace gamerpilotPlatform.Data
         public GamerpilotVodContext(DbContextOptions<GamerpilotVodContext> options)
        : base(options)
         {
-            var x = Model.GetEntityTypes();
         }
         
         public DbSet<User> Users { get; set; }
@@ -51,6 +50,10 @@ namespace gamerpilotPlatform.Data
                 t.UserId,
                 t.CourseId
             });
+
+            //modelBuilder.Entity<GamerPilot.Video.IVideo>()
+            //.HasMany(g => g.)
+            //.WithOne(c => c.cou)
         }
 
     }

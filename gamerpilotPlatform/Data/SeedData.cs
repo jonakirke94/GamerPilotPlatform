@@ -4,40 +4,69 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using gamerpilotPlatform.Services;
 
 namespace gamerpilotPlatform.Data
 {
     public static class SeedData
     {
-        public static void Initialize(GamerpilotVodContext context)
+        public static void Initialize(GamerpilotVodContext context, IVideoService videoService)
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-            // Look for any users.
+            if (!context.Users.Any())
+            {
+                try
+                {
+                    Seed(context, videoService).Wait();
+                }
+                catch (Exception ex)
+                {
 
+                    throw;
+                }
+               
+            } 
+
+
+          
+        }
+
+        public static async Task Seed(GamerpilotVodContext context, IVideoService videoService)
+        {
+
+            /*************************************************/
+            /********** ADD USERS **********************/
+            /*************************************************/
             context.Users.AddRange(
-             new User
-             {
-                 Email = "test@test.dk",
-                 Username = "TestUser",
-                 Password = "AQAAAAEAACcQAAAAENoRYO3DXwVRVZ2JE9/kX+WCIQGGGZDmT9ERFDYTgbMpel4xEPWd6AxuCE/7nDOS/w=="
-             });
+           new User
+           {
+               Email = "test@test.dk",
+               Username = "TestUser",
+               Password = "AQAAAAEAACcQAAAAENoRYO3DXwVRVZ2JE9/kX+WCIQGGGZDmT9ERFDYTgbMpel4xEPWd6AxuCE/7nDOS/w=="
+           });
             context.SaveChanges();
 
+
+
+            /*************************************************/
+            /********** ADD INSTRUCTORS **********************/
+            /*************************************************/
             var instructor1 = new Instructor()
             {
                 Name = "Anne Fiskali",
             };
-            var instructo2 = new Instructor()
+            var instructor2 = new Instructor()
             {
                 Name = "Frederik Røj",
             };
+            context.Instructors.AddRange(instructor1, instructor2);
+            context.SaveChanges();
 
-            context.Instructors.AddRange();
-
-
-            // COURSE INFO
+            /*************************************************/
+            /********** COURSE INFO *** **********************/
+            /*************************************************/
             var infoEntity = new CourseInfo()
             {
                 CourseLength = "36min",
@@ -47,18 +76,22 @@ namespace gamerpilotPlatform.Data
                 Level = "Beginner/Intermediate",
                 LectureType = LectureType.Info,
                 Section = Section.Welcome,
+                DisplayOrder = 1,
             };
 
-            // COURSE INTRODUCTION
+            /*************************************************/
+            /********** COURSE INTRODUCTION ******************/
+            /*************************************************/
             var introductionEntity = new CourseIntroduction()
             {
                 Name = "Course Introduction",
                 Section = Section.Welcome,
                 LectureType = LectureType.CourseIntroduction,
+                DisplayOrder = 2,
                 Description = "In modern workplaces and on good CS:GO teams people are looking for graduates and players that are not only proficient in content, but also in soft skills. One of these skills is communication. Communication skills can be developed through both cooperative learning and direct" +
               " instruction, but highest increases are linked with cooperative settings. CS:GO is a great place to do this. \n \n You can communicate for a variety of purposes and audiences and it takes great awareness to know when to do what.In this course we primarily focus on communication in a context where the purpose is to convey a message in a cooperative situation where information needs to be communicated. " +
               "Mastering communication takes a long time, but by being aware and applying the knowledge you learn in this course you have already taken a big step. Practicing communication in CS: GO can be discouraging at times if your teammates do not put in the same effort as you - Don't worry!" +
-              " As long as you do your part it will be reflected in your results in the long run! <br> When you have finished this course you will be able to: ",
+              " As long as you do your part it will be reflected in your results in the long run! \n \n When you have finished this course you will be able to: ",
 
 
             };
@@ -86,37 +119,39 @@ namespace gamerpilotPlatform.Data
             introductionEntity.LearningGoals.Add(learningGoal3);
             introductionEntity.LearningGoals.Add(learningGoal4);
 
-
-            // REAL LIFE PERSPECTIVE
-            //var video1 = new Video()
-            //{
-            //    Title = "Video 1",
-            //    VideoUrl = "https://www.youtube.com/watch?v=nZXOiv1IHNM"
-            //};
-
-            //context.Videos.Add(video1);
+            /*************************************************/
+            /********** REAL LIFE PERSPECTIVE*****************/
+            /*************************************************/
+            var RealLifeLecture = new CourseVideo()
+            {
+                Name = "A psychologist's view",
+                Section = Section.RealLife,
+                LectureType = LectureType.Video,
+                DisplayOrder = 3,
+                Instructor = instructor1,
+                InstructorId = instructor1.Id
+            };
+            context.Lectures.Add(RealLifeLecture);
             context.SaveChanges();
 
-            var RealLifePersp = new CourseVideo()
-            {
-                Name = "A look into communication from a psychologist",
-                Section = Section.RealLife,
-                LectureType = LectureType.Video
-            };
-            //RealLifePersp.Videos.Add(video1);
+            /*************************************************/
+            /********** VIDEOS *******************************/
+            /*************************************************/
+            await videoService.AddVideo(instructor1.Id, RealLifeLecture.Id, "Into the psychology", "C:\\Users\\inter\\Desktop\\AWS_Videos\\teori-erhvervsliv.MP4");
 
-            // CASE
+            /*************************************************/
+            /********** CASE *********************************/
+            /*************************************************/
             var caseEntity = new CourseCase()
             {
-                Name = "Communication ingame & in real life situations",
+                Name = "A communication case",
                 Section = Section.RealLife,
                 LectureType = LectureType.Case,
+                DisplayOrder = 4,
                 Description = "Effective communication is a vital tool for any person in the modern world. Your ability to communicate your points across can be the difference between success or failure just like it can determine the outcome of a cs:go round. " +
               "Success in any conversation is likely to be achieved through both parties listening to and understanding each other.Considering circumstances surrounding your communications such as the situational and cultural context are crucial and often reveal who’s an efficient communicator and who’s not. " +
               "Let’s take a look at some of the key communication skills that make for a solid communication toolset in the context of a cs:go game and at a workplace"
             };
-
-
             var section1 = new CaseSection()
             {
 
@@ -133,14 +168,14 @@ namespace gamerpilotPlatform.Data
             {
                 Title = "Assertiveness versus aggression",
                 Body = "Assertiveness (often through the use of ‘I’ statements) is stating what you plan to do. Instead of coming across as hostile, you are making a statement about something you feel or perceive. Aggression is completely different and is usually perceived as hostile or unfriendly behaviour. It often uses the word ‘you’. People can become unhappy when you tell them what to do. Even when talking to employees it is wise to soften language when asking them to perform tasks, as they are likely to respond better to requests than orders. In a scenario where you want to nade long A for example try to phrase yourself with “Hey guys let’s through nades long A” rather than the more commanding “EVERYONE go nade long A!”. " +
-              "<br> <br> Consistent assertiveness shows others that you’re confident and open to suggestion, but won’t be taken advantage of, " +
+              "\n \n Consistent assertiveness shows others that you’re confident and open to suggestion, but won’t be taken advantage of, " +
               "leading to a mutually acceptable outcome.Mastering this is another key skill where personal awareness is very important. If you are aware of how others perceive you - you will guaranteed see better results."
             };
             var section4 = new CaseSection()
             {
                 Title = "Speaking style",
-                Body = "Speaking style means the tone, pitch, accent, volume and pace of your voice. Being a skilled communicator you can adjust these based on the situation to convey your points more clearly. <br> <br> The same sentence can be conveyed, and understood, in entirely different ways based on the way in which it is said. People you speak to can be motivated by a positive speaking style, just as they can be put off by a negative style. " +
-              " <br> <br> You should always try to speak with a positive voice -avoid monotone responses, or talking too quickly or slowly.Be as clear as possible and try to engage the listener, as this is far more likely to promote the response you are after than if they leave the conversation deflated. It’s quite common to meet people in matchmaking who quickly becomes discouraged after a couple rounds -" +
+                Body = "Speaking style means the tone, pitch, accent, volume and pace of your voice. Being a skilled communicator you can adjust these based on the situation to convey your points more clearly. \n \n The same sentence can be conveyed, and understood, in entirely different ways based on the way in which it is said. People you speak to can be motivated by a positive speaking style, just as they can be put off by a negative style. " +
+              " \n \n You should always try to speak with a positive voice -avoid monotone responses, or talking too quickly or slowly.Be as clear as possible and try to engage the listener, as this is far more likely to promote the response you are after than if they leave the conversation deflated. It’s quite common to meet people in matchmaking who quickly becomes discouraged after a couple rounds -" +
               " maybe even close to rage quitting the game.Whenever they talk or write ingame their attitude infects the entire team and not only does it make the game less fun it also decreases the team’s performance and splits them instead of working as a unit.You’re 100 times more likely to listen to a self-confident and inspirational player" +
               " who is able to look beyond a couple of bad rounds and see things in a bigger picture."
             };
@@ -158,96 +193,142 @@ namespace gamerpilotPlatform.Data
             caseEntity.Sections.Add(section4);
             caseEntity.Sections.Add(section5);
 
-            // QUIZ
-  
+            /*************************************************/
+            /********** QUIZ *********************************/
+            /*************************************************/
             var question1 = new Question()
             {
-                Text = "This is question1",
-                Answer = "this is answer1",
+                Text = "What is a common downside of not communication properly, according to Røj?",
+                Answer = "You check the same spots as your teammates",
                 Difficulty = "easy",
             };
             var question2 = new Question()
             {
-                Text = "This is question2",
-                Answer = "this is answer2",
+                Text = "If you are frequently surprised during your games, what does this indicate?",
+                Answer = "The picture in your head doesn´t fit the reality of the game",
                 Difficulty = "hard",
             };
-            context.Questions.AddRange(question1, question2);
+            var question3 = new Question()
+            {
+                Text = "What is the effect of good communication according to Røj?",
+                Answer = "It increases your teammates reaction time",
+                Difficulty = "hard",
+            };
+            var question4 = new Question()
+            {
+                Text = "What defines good communication?",
+                Answer = "It is accurate, necessary and well timed",
+                Difficulty = "medium",
+            };
+            var question5 = new Question()
+            {
+                Text = "What is a good program for recording and watching your own play?",
+                Answer = "Steam",
+                Difficulty = "easy",
+            };
+            var question6 = new Question()
+            {
+                Text = "What is one of the simplest ways to get better at CS:GO, according to Røj?",
+                Answer = "Play and keep playing. When done, start again.",
+                Difficulty = "easy",
+            };
+            var question7 = new Question()
+            {
+                Text = "What should you do, if your team has no plan?",
+                Answer = "Take the lead and instantly make a plan",
+                Difficulty = "medium",
+            };
+            context.Questions.AddRange(question1, question2, question3, question4, question5, question6, question7);
             context.SaveChanges();
-
             var courseQuiz = new CourseQuiz()
             {
                 Name = "Quiz",
                 Section = Section.Quiz,
-                LectureType = LectureType.Quiz
+                LectureType = LectureType.Quiz,
+                DisplayOrder = 5
             };
             courseQuiz.Questions.Add(question1);
             courseQuiz.Questions.Add(question2);
+            courseQuiz.Questions.Add(question3);
+            courseQuiz.Questions.Add(question4);
+            courseQuiz.Questions.Add(question5);
+            courseQuiz.Questions.Add(question6);
+            courseQuiz.Questions.Add(question7);
 
-            // PRO CONTENT
-
-            //var video2 = new Video()
-            //{
-            //    Title = "Video 2",
-            //    VideoUrl = "https://www.youtube.com/watch?v=qvvLzd8SA5w",
-            //};
-            //var video3 = new Video()
-            //{
-            //    Title = "Video 3",
-            //    VideoUrl = "https://www.youtube.com/watch?v=O7r5lmYzwrk",
-            //};
-            //context.Videos.Add(video2);
-            //context.Videos.Add(video3);
             context.SaveChanges();
 
             var proContent = new CourseVideo()
             {
                 Name = "Pro CS:GO content",
                 Section = Section.Game,
-                LectureType = LectureType.Video
+                LectureType = LectureType.Video,
+                DisplayOrder = 6,
+                Instructor = instructor2
             };
-            //proContent.Videos.Add(video2);
-            //proContent.Videos.Add(video3);
+            context.Lectures.Add(proContent);
+            context.SaveChanges();
 
-            // EXERCISES
+            await videoService.AddVideo(instructor2.Id, proContent.Id, "Good & bad communication", "C:\\Users\\inter\\Desktop\\AWS_Videos\\good-bad-communication.mp4");
+            await videoService.AddVideo(instructor2.Id, proContent.Id, "How do pros practice communication?", "C:\\Users\\inter\\Desktop\\AWS_Videos\\how-do-pros-practice-communication.mp4");
+            await videoService.AddVideo(instructor2.Id, proContent.Id, "Get in the mind of a pro", "C:\\Users\\inter\\Desktop\\AWS_Videos\\get-in-the-mind of-a-pro.mp4");
+
+            /*************************************************/
+            /********** EXERCISES*****************************/
+            /*************************************************/
             var exercise1 = new Exercise()
             {
-                Description = "THIS IS EXERCISE 1"
+                Description = "Play a game of CS:GO where you put great effort into communicating and keeping a positive atmosphere in the team.",
+                IsRealLife = false
+               
             };
             var exercise2 = new Exercise()
             {
-                Description = "THIS IS EXERCISE 2"
+                Description = "Think about a topic or something that happened today and try to communicate it to a family member or friend keeping all the things you have learned in mind.",
+                IsRealLife = true
+            };
+            var exercise3 = new Exercise()
+            {
+                Description = "Try to put words on what good and bad communication is. Do you know anyone who is good at communication? Ask yourself why",
+                IsRealLife = true
             };
             context.Exercises.Add(exercise1);
             context.Exercises.Add(exercise2);
-            context.SaveChanges();
+            context.Exercises.Add(exercise3);
 
+            context.SaveChanges();
             var exercises = new CourseExercise()
             {
                 Name = "Exercises",
                 Section = Section.Practice,
                 LectureType = LectureType.Practice,
-                Description = "These are exercises in communication",
+                DisplayOrder = 7,
+                Description = "Let's take a look at some exercises you can do to practice your communication:",
             };
             exercises.Exercises.Add(exercise1);
             exercises.Exercises.Add(exercise2);
+            exercises.Exercises.Add(exercise3);
 
-            // SUMMARY
+
+            /*************************************************/
+            /********** SUMMARY ******************************/
+            /*************************************************/
             var summary = new CourseSummary()
             {
-                Name = "This is summary",
+                Name = "Summary",
                 Section = Section.Summary,
                 LectureType = LectureType.Summary,
-                Summary = "This will wraup up the..........",
+                DisplayOrder = 8,
+                Summary = "This wraps up the communication course. Remember improving your communication is a process and doesn't happen overnight. You've already taken a solid step by acquiring knowledge about communication. Good communication is accurate, necessary and well-timed. Those are points you can transfer to other areas in your life such as the classroom or the football field - not just when you play computer",
             };
 
+            /*************************************************/
+            /********** ADD LECTURES *************************/
+            /*************************************************/
 
             context.Lectures.Add(infoEntity);
             context.Lectures.Add(introductionEntity);
-            context.Lectures.Add(RealLifePersp);
             context.Lectures.Add(caseEntity);
             context.Lectures.Add(courseQuiz);
-            context.Lectures.Add(proContent);
             context.Lectures.Add(exercises);
             context.Lectures.Add(summary);
 
@@ -266,7 +347,7 @@ namespace gamerpilotPlatform.Data
                 };
                 course1.Lectures.Add(infoEntity);
                 course1.Lectures.Add(introductionEntity);
-                course1.Lectures.Add(RealLifePersp);
+                course1.Lectures.Add(RealLifeLecture);
                 course1.Lectures.Add(caseEntity);
                 course1.Lectures.Add(courseQuiz);
                 course1.Lectures.Add(proContent);
@@ -281,22 +362,25 @@ namespace gamerpilotPlatform.Data
                  {
                      Name = "Strategy in CS:GO",
                      UrlName = "strategy-in-csgo",
-                     Description = "This course is about strategy in CS:GO..",
+                     Description = "",
                      ImageUrl = "https://picsum.photos/600/600?random",
+                     IsReleased = false,
                  },
                  new Course
                  {
-                     Name = "Strategy1 in CS:GO",
-                     UrlName = "strategy-in-csgo1",
-                     Description = "This course is about strategy in CS:GO..",
+                     Name = "Teamwork in CS:GO",
+                     UrlName = "teamwork-in-csgo",
+                     Description = "",
                      ImageUrl = "https://picsum.photos/600/600?random",
+                     IsReleased = false,
                  },
                  new Course
                  {
-                     Name = "Strategy in CS:GO2",
-                     UrlName = "strategy-in-csgo2",
-                     Description = "This course is about strategy in CS:GO..",
+                     Name = "Problem solving in CS:GO2",
+                     UrlName = "problem-solving-in-csgo",
+                     Description = "",
                      ImageUrl = "https://picsum.photos/600/600?random",
+                     IsReleased = false,
                  }
                 );
                 context.SaveChanges();

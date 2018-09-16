@@ -1,9 +1,20 @@
-<p>
-    {{lecture.description}}
-  </p>
+
+  <h3>
+      <p>{{lecture.name}}</p>
+  </h3>
+  
+  <p class="text-left">{{lecture.description}}</p>
+  
+  <ul>
+      <li class="question-wrapper" *ngFor="let exercise of lecture.exercises">
+          <div class="question__badge" *ngIf="exercise.isRealLife">Real Life</div>
+          <div class="question__badge" *ngIf="!exercise.isRealLife">Ingame</div>
+          <div class="question">
+              <div class="question__tag" appExerciseTag [location]="exercise.isRealLife"></div>
+              <div class="question__heading">
+                  <h6>{{exercise.description}}</h6>
+              </div>
+          </div>
+  </li>
   
   
-  <div *ngFor="let exercise of lecture.exercises">
-    <p>{{exercise.description}}</p>
-  
-  </div>

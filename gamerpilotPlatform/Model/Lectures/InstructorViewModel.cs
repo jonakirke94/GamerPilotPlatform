@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace gamerpilotPlatform.Model.Lectures
 {
-    public class Exercise
+    public class InstructorViewModel
     {
-        public string Id { get; set; }
-        public string Description { get; set; }
-        public Boolean IsRealLife { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

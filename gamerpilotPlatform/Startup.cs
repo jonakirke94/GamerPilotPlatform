@@ -89,7 +89,7 @@ namespace gamerpilotPlatform
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, GamerpilotVodContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, GamerpilotVodContext context, IVideoService videoService)
         {
             if (env.IsDevelopment())
             {
@@ -129,9 +129,9 @@ namespace gamerpilotPlatform
             });
 
 
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
 
-            SeedData.Initialize(context);
+            SeedData.Initialize(context, videoService);
         }
     }
 }

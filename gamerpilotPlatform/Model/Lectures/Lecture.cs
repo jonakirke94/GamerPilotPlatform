@@ -11,15 +11,14 @@ namespace gamerpilotPlatform.Model.Lectures
 
         public string Name { get; set; }
 
+        public int DisplayOrder { get; set; }
+
         public Section Section { get; set; }
 
         public LectureType LectureType { get; set; }
 
         public Instructor Instructor { get; set; }
-        public string InstructorId { get; set; }
-
-        //public CourseIntroduction CourseIntroduction { get; set; }
-        //public string CourseIntroductionId { get; set; }
+        public int? InstructorId { get; set; }
     };
 
     public enum Section { Welcome = 1, RealLife, Quiz, Game, Practice, Summary};

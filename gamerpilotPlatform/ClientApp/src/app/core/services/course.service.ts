@@ -38,7 +38,7 @@ export class CourseService implements OnDestroy {
     .post(this.baseUrl + `api/courses/enroll`, {urlName: name});
   }
 
-  completeLecture(id: number, courseUrlName: string) {
+  completeLecture(id: string, courseUrlName: string) {
     return this.http
     .post(this.baseUrl + `api/courses/complete`, {id: id, urlName: courseUrlName});
   }

@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { filter, debounceTime, takeUntil } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
+import { StorageService } from './core/services/storage.service';
 
 
 
@@ -18,7 +19,15 @@ export class AppComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();
 
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _storage: StorageService) {
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  clearLocalStorage(event) {
+    // destroy tokens if user has not flagged the app to remember him
+    if (!this._storage.rememberMe()) {
+      this._storage.destroyTokens();
+    }
   }
 
   ngOnInit() {

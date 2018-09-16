@@ -35,13 +35,8 @@ namespace gamerpilotPlatform.Controllers
         {
             List<Course> courses = new List<Course>();
 
-            //var x = _videoService.AddVideo().GetAwaiter().GetResult();
-            //var vid = _videoService.GetVideos();
-
-
             try
             {
-      
                 courses = _context.Courses.ToList();
             }
             catch (Exception ex)
@@ -67,7 +62,6 @@ namespace gamerpilotPlatform.Controllers
                 var userId = _tokenService.getClaimsId(authorization);
 
                 course = _context.Courses
-                    .Include(x => x.Instructors)
                     .Include(x => x.Lectures)
                     .SingleOrDefault(x => x.UrlName == urlName);
             
@@ -117,7 +111,8 @@ namespace gamerpilotPlatform.Controllers
                     _context.CourseUsers.Add(new CourseUser
                     {
                         CourseId = courseId,
-                        UserId = userId
+                        UserId = userId,
+                        EnrolledAt = DateTime.Now
                     });
                     _context.SaveChanges();
 
@@ -138,7 +133,6 @@ namespace gamerpilotPlatform.Controllers
         [HttpGet("{name}/[action]/{id}")]
         public IActionResult Lecture([FromHeader]string authorization, string name, int id)
         {
-
             object lecture = null;
 
             try
@@ -158,7 +152,6 @@ namespace gamerpilotPlatform.Controllers
                     return BadRequest("Not enrolled");
                 }
 
-
                 var type = _context.Lectures.SingleOrDefault(x => x.Id == id).GetType().Name;
 
                 switch (type)
@@ -169,8 +162,10 @@ namespace gamerpilotPlatform.Controllers
                         .SingleOrDefault(x => x.Id == id);
                         break;
                     case "CourseInfo":
-                        lecture = _context.Lectures.OfType<CourseInfo>()
+                        var courseInfo = _context.Lectures.OfType<CourseInfo>()
                         .SingleOrDefault(x => x.Id == id);
+                        courseInfo.Instructors = GetCourseInstructors(name);
+                        lecture = courseInfo;
                         break;
                     case "CourseCase":
                         lecture = _context.Lectures.OfType<CourseCase>()
@@ -192,8 +187,10 @@ namespace gamerpilotPlatform.Controllers
                         .SingleOrDefault(x => x.Id == id);
                         break;
                     case "CourseVideo":
-                        lecture = _context.Lectures.OfType<CourseVideo>()
+                        var courseVid = _context.Lectures.OfType<CourseVideo>()
                         .SingleOrDefault(x => x.Id == id);
+                        courseVid.Videos = _videoService.GetVideoViewModels(id);
+                        lecture = courseVid;                       
                         break;
                     default:
                         lecture = _context.Lectures.OfType<CourseInfo>()
@@ -201,8 +198,8 @@ namespace gamerpilotPlatform.Controllers
                         break;
                 }
             }
-            catch (Exception)
-            {
+            catch (Exception ex)
+             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
@@ -212,6 +209,8 @@ namespace gamerpilotPlatform.Controllers
                 data = lecture
             });
         }
+
+
 
         [HttpGet("[action]/{courseUrl}")]
         public IActionResult User([FromHeader]string authorization, string courseUrl)
@@ -279,5 +278,31 @@ namespace gamerpilotPlatform.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        private IEnumerable<InstructorViewModel> GetCourseInstructors(string name)
+        {
+            var course = _context.Courses
+                .Include(x => x.Lectures)
+                .ThenInclude(y => y.Instructor)
+                .SingleOrDefault(x => x.UrlName == name);
+
+            var resultList = new List<InstructorViewModel>();
+
+            foreach (var lecture in course.Lectures)
+            {
+                if (lecture.Instructor != null)
+                {
+                    resultList.Add(new InstructorViewModel
+                    {
+                        Id = lecture.Instructor.Id,
+                        Name = lecture.Instructor.Name
+                    });
+                }
+            }
+
+            return resultList;
+        }
     }
+
+    
 }

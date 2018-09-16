@@ -1,18 +1,21 @@
-﻿using System;
+﻿using GamerPilot.Video;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace gamerpilotPlatform.Model.Lectures
 {
     public class CourseVideo : Lecture
-    {       
-        //public ICollection<Video> Videos { get; set; }
+    {
+        [NotMapped]
+        public IEnumerable<VideoViewModel> Videos { get; set; }
 
-        //public CourseVideo()
-        //{
-        //    Videos = new List<Video>();
-        //}
+        public CourseVideo()
+        {
+            Videos = new List<VideoViewModel>();
+        }
     }
 }
 

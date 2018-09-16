@@ -22,16 +22,12 @@ namespace gamerpilotPlatform.Model
         public Boolean IsReleased { get; set; }
 
         public virtual ICollection<Lecture> Lectures { get; set; }
-
-        public virtual ICollection<Instructor> Instructors { get; set; }
-
         public virtual ICollection<CourseUser> EnrolledUsers { get; set; }
 
 
         public Course()
         {
             Lectures = new List<Lecture>();
-            Instructors = new List<Instructor>();
             EnrolledUsers = new List<CourseUser>();
         }
     }

@@ -36,7 +36,7 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string, rememberMe: boolean) {
     this.logout();
 
     return this.http
@@ -46,7 +46,7 @@ export class AuthService {
       })
       .pipe(
       tap(res => {
-        this.setSession(res);
+        this.setSession(res, rememberMe);
 
       }),
       shareReplay()
@@ -54,7 +54,10 @@ export class AuthService {
   }
 
 
-  setSession(info: any) {
+  setSession(info: any, rememberMe: boolean = false) {
+    if (rememberMe) {
+      this._storage.remember();
+    }
     this._storage.saveTokens(info);
     this.IsAuthed$.next(true);
   }
