@@ -25,9 +25,9 @@ export class AppComponent implements OnInit, OnDestroy {
   @HostListener('window:beforeunload', ['$event'])
   clearLocalStorage(event) {
     // destroy tokens if user has not flagged the app to remember him
-    if (!this._storage.rememberMe()) {
+/*     if (!this._storage.rememberMe()) {
       this._storage.destroyTokens();
-    }
+    } */
   }
 
   ngOnInit() {

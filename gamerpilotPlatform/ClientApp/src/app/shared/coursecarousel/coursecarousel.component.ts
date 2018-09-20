@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter, OnDestroy } from '@angu
 import { CourseService } from '../../core/services/course.service';
 import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -17,7 +18,7 @@ export class CourseCarouselComponent implements OnInit, OnDestroy {
   carouselItems: any = [];
   isDataLoaded = false;
 
-  constructor(private _courseService: CourseService) { }
+  constructor(private _courseService: CourseService, private _router: Router) { }
 
   ngOnInit() {
     this.fetchCourses();
@@ -52,13 +53,16 @@ export class CourseCarouselComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroy$
     ))
     .subscribe(res => {
-      this.courses = res['data'];
-      this.courses.push(res['data'][0]);
-      this.courses.push(res['data'][0]);
-      this.courses.push(res['data'][0]);
-
+      this.courses = res['data'] as Array<any>;
+      this.courses.concat(res['data']);
       this.isDataLoaded = true;
     });
+  }
+
+  goToCourse(url: string, isReleased: boolean) {
+      if (isReleased) {
+        this._router.navigateByUrl(`/courses${url}`);
+      }
   }
 
   ngOnDestroy() {

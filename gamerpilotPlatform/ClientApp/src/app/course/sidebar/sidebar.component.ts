@@ -7,7 +7,6 @@ import { LockedContentComponent} from './locked-content/locked-content.component
 import { takeUntil } from 'rxjs/operators';
 import { SnotifyService } from 'ng-snotify';
 
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -101,7 +100,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
           this.completedLectures = newCompletedLectures.map(x => x.lectureId);
 
           this._toastService.success('Keep it up!', {
-            timeout: 2000,
+            timeout: 3000,
             showProgressBar: true,
             closeOnClick: false,
             pauseOnHover: true
@@ -138,11 +137,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
             pauseOnHover: true,
             buttons: [
               {text: 'Yes', action: (toast) => {
-                console.log('Clicked yes');
+                this._courseService.sendSatisfaction('YES', this.courseName).pipe(
+                  takeUntil(this.onDestroy$))
+                  .subscribe();
                 this._toastService.remove(toast.id);
               }},
               {text: 'No', action: (toast) => {
-                console.log('Clicked no');
+                this._courseService.sendSatisfaction('NO', this.courseName).pipe(
+                  takeUntil(this.onDestroy$))
+                  .subscribe();
                 this._toastService.remove(toast.id);
               }},
             ]

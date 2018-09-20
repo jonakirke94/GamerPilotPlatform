@@ -21,7 +21,7 @@
                
 
                   
-                <div class="carousel-item col-md-3" *ngFor="let course of courses; let i = index" routerLink="/courses/{{course.urlName}}">
+                <div class="carousel-item col-md-3" *ngFor="let course of courses; let i = index" (click)="goToCourse(course.urlName, course.isReleased)">
                     <div class="panel panel-default">
                     <div class="panel-thumbnail">
                         <img class="img-fluid mx-auto d-block" src="{{course.imageUrl}}" alt="slide {{i +1}}">

@@ -26,7 +26,7 @@
     user-select: none;
     border: none;
     display: block;
-    background-color: $eden;
+    background-color: $primary;
     font-size: 18px;
 
     &:hover {
@@ -37,7 +37,7 @@
 
 @mixin title {
     font-family: 'Work Sans Light', helvetica, arial, sans-serif;
-    color: $white;
+    color: white;
     margin-bottom: 15px;
   }
 

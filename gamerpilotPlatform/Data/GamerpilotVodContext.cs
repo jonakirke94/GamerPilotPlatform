@@ -16,8 +16,9 @@ namespace gamerpilotPlatform.Data
         public GamerpilotVodContext(DbContextOptions<GamerpilotVodContext> options)
        : base(options)
         {
+            Database.SetCommandTimeout(150000);
         }
-        
+
         public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseUser> CourseUsers { get; set; }

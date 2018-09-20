@@ -1,16 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent {
 @Input() lecture;
   constructor() { }
-
-  ngOnInit() {
-    console.log(this.lecture);
-  }
 
 }

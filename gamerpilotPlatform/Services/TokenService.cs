@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace gamerpilotPlatform.Services
@@ -14,10 +15,13 @@ namespace gamerpilotPlatform.Services
    public class TokenService : ITokenService
         {
             private readonly IConfiguration _configuration;
+             private readonly ILogger<TokenService> _log;
 
-            public TokenService(IConfiguration configuration)
+
+        public TokenService(IConfiguration configuration, ILogger<TokenService> log)
             {
                 _configuration = configuration;
+                _log = log;
             }
 
             //Generate access token which will be sent with each authorized request by the client
@@ -135,6 +139,7 @@ namespace gamerpilotPlatform.Services
             }
             catch (Exception)
             {
+                _log.LogWarning($"Couldn't get claims id from token {token}");
                 return null;
             }
 

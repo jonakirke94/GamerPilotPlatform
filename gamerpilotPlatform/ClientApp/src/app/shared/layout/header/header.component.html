@@ -16,13 +16,10 @@
               <a routerLink='/'>Home</a>
             </li>
             <li class="nav-link" routerLinkActive="active-link">
-              <a routerLink='/courses'>Kurser</a>
+              <a routerLink='/courses'>Courses</a>
             </li>
             <li class="nav-link" routerLinkActive="active-link">
-              <a routerLink='/learningbasis'>Læringsgrundlag</a>
-            </li>
-            <li class="nav-link" routerLinkActive="active-link">
-              <a href="">Documentation</a>
+              <a routerLink='/learningbasis'>Learning Concept</a>
             </li>
 
             <!-- Only visible on mobile menu-->
@@ -34,7 +31,7 @@
       
 
             <ng-template #authedMobile>
-              <li class="nav-link sign-link-mobile"><a routerLink>Profil</a></li>
+              <li class="nav-link sign-link-mobile"><a disabled>Profil</a></li>
               <li class="nav-link sign-link-mobile"><a routerLink='/login' (click)="logout()">Log out</a></li>
             </ng-template>
 

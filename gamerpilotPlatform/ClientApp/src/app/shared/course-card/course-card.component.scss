@@ -19,7 +19,7 @@
 }
 
 .card:hover {
-    border: 1px solid lighten($blue, 5%);
+    border: 1px solid $tertiary;
 }
 
 .coming-soon {
@@ -34,12 +34,12 @@
     font-size: 120px;
     position: absolute;
     margin-top: -100px;
-    color: $blue;
+    color: $tertiary;
     right: 20px;
 }
 
 .card-body {
-    background-color: lighten($main, 5%);
+    background-color: lighten($secondary, 5%);
 }
 
 .card-text {

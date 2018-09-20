@@ -8,6 +8,7 @@ using gamerpilotPlatform.Model;
 using gamerpilotPlatform.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace gamerpilotPlatform.Controllers
 {
@@ -17,11 +18,14 @@ namespace gamerpilotPlatform.Controllers
         private readonly GamerpilotVodContext _context;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenService _tokenService;
-        public AccountsController(GamerpilotVodContext context, IPasswordHasher passwordHasher, ITokenService tokenService)
+        private readonly ILogger<AccountsController> _log;
+
+        public AccountsController(GamerpilotVodContext context, IPasswordHasher passwordHasher, ITokenService tokenService, ILogger<AccountsController> log)
         {
             _context = context;
             _passwordHasher = passwordHasher;
             _tokenService = tokenService;
+            _log = log;
         }
 
         [HttpPost("[action]")]
@@ -47,6 +51,7 @@ namespace gamerpilotPlatform.Controllers
                 // add to DB
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
+                _log.LogInformation($"New user was created {user.Id}");
 
                 //access Id of newly inserted entity
                 var usersClaims = new[]
@@ -66,7 +71,7 @@ namespace gamerpilotPlatform.Controllers
             return new ObjectResult(new
             {
                 token = jwtToken,
-                refreshToken = refreshToken
+                refreshToken
             });
  
         }
@@ -88,6 +93,7 @@ namespace gamerpilotPlatform.Controllers
 
             user.RefreshToken = refreshToken;
             await _context.SaveChangesAsync();
+            _log.LogInformation($"Saved new refreshtoken for {user.Id}");
 
             return new ObjectResult(new
             {

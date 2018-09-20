@@ -1,21 +1,23 @@
 @import '~sass/variables';
 
 h1 {
-    color: $deepsea;
+    color: $primary;
 }
+
 
 .parent {
     margin: 10px;
     overflow: hidden;
     position: relative;
-    float: left;
     display: inline-block;
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .child {
+    overflow: hidden;
     height: 100%;
     width: 100%;
+    max-width: 600%;
     background-size: cover;
     background-repeat: no-repeat;
     -webkit-transition: all .5s;
@@ -36,7 +38,7 @@ a {
     left: 0;
     bottom: 0;
     right: 0;
-    height: 50px;
+    height: 75px;
     cursor: pointer;
     /*text-decoration: none;*/
 }

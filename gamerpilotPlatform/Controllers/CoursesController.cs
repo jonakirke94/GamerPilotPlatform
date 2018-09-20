@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace gamerpilotPlatform.Controllers
@@ -21,12 +22,14 @@ namespace gamerpilotPlatform.Controllers
         private readonly GamerpilotVodContext _context;
         private readonly IVideoService _videoService;
         private readonly ITokenService _tokenService;
+        private readonly ILogger<CoursesController> _log;
 
-        public CoursesController(GamerpilotVodContext context, IVideoService videoService, ITokenService tokenService)
+        public CoursesController(GamerpilotVodContext context, IVideoService videoService, ITokenService tokenService, ILogger<CoursesController> log)
         {
             _context = context;
             _videoService = videoService;
             _tokenService = tokenService;
+            _log = log;
         }
 
 
@@ -131,6 +134,7 @@ namespace gamerpilotPlatform.Controllers
 
         //GET course/communication-in-csgo/lecture/1
         [HttpGet("{name}/[action]/{id}")]
+        [Authorize]
         public IActionResult Lecture([FromHeader]string authorization, string name, int id)
         {
             object lecture = null;
@@ -203,7 +207,6 @@ namespace gamerpilotPlatform.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-
             return new ObjectResult(new
             {
                 data = lecture
@@ -213,6 +216,7 @@ namespace gamerpilotPlatform.Controllers
 
 
         [HttpGet("[action]/{courseUrl}")]
+        [Authorize]
         public IActionResult User([FromHeader]string authorization, string courseUrl)
         {
             var userId = _tokenService.getClaimsId(authorization);
@@ -229,10 +233,34 @@ namespace gamerpilotPlatform.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult Complete([FromHeader]string authorization, [FromBody]JObject body)
+        public IActionResult Feedback([FromHeader]string authorization, [FromBody]JObject body)
         {
-           
+            try
+            {
+                var urlName = body.Value<String>("urlName");
+                var feedback = body.Value<String>("feedback");
+                var userId = _tokenService.getClaimsId(authorization);
 
+                if (string.IsNullOrWhiteSpace(urlName) || string.IsNullOrWhiteSpace(feedback) || string.IsNullOrWhiteSpace(userId)) {
+                    return BadRequest();
+                }
+
+                var courseUser = _context.CourseUsers.SingleOrDefault(x => x.UserId == userId && x.Course.UrlName == urlName);
+                courseUser.Feedback = feedback;
+                _context.SaveChanges();
+                _log.LogInformation($"Saved feedback for {userId}");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost("[action]")]
+        [Authorize]
+        public IActionResult Complete([FromHeader]string authorization, [FromBody]JObject body)
+        {          
             try
             {
                 var lectureId = body.Value<Int32>("id");
@@ -256,6 +284,8 @@ namespace gamerpilotPlatform.Controllers
                     // add table to users list of completed courses;
                     courseUser.CompletedLectures.Add(completedLecture);
                     _context.SaveChanges();
+                    _log.LogInformation($"User {userId} completed lecture {lectureId}");
+
 
                     var newCompletedLectures = _context.CourseUsers
                         .Include(x => x.CompletedLectures)

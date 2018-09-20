@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
@@ -45,6 +46,8 @@ namespace gamerpilotPlatform
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IPasswordHasher, PasswordHasher>();
             services.AddTransient<IVideoService, VideoService>();
+            services.AddTransient<SeedData>();
+
 
             services.AddDbContext<GamerpilotVodContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("VodContext")));
@@ -89,8 +92,10 @@ namespace gamerpilotPlatform
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, GamerpilotVodContext context, IVideoService videoService)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedData seedData, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile("Logs/myapp-{Date}.txt");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -131,7 +136,7 @@ namespace gamerpilotPlatform
 
             //context.Database.EnsureCreated();
 
-            SeedData.Initialize(context, videoService);
+            seedData.Seed().Wait();
         }
     }
 }

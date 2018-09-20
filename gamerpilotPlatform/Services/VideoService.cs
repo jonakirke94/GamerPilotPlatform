@@ -36,15 +36,7 @@ namespace gamerpilotPlatform.Services
 
         public async Task<GamerPilot.Video.IVideo> AddVideo(int instructorId, int lectureId, string videoName, string filePath)
         {
-            try
-            {
                 return await _videoHelper.AddVideoAsync(instructorId, lectureId, videoName, filePath);                
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
 
         public IEnumerable<VideoViewModel> GetVideoViewModels(int lectureId)

@@ -22,6 +22,8 @@ namespace gamerpilotPlatform.Model
         public bool IsCompleted { get; set; }
         public DateTime EnrolledAt { get; set; }
 
+        public string Feedback { get; set; }
+
         public ICollection<CompletedLectures> CompletedLectures { get; set; }
 
         public CourseUser()

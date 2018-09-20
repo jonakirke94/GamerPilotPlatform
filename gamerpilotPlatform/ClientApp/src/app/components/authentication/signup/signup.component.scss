@@ -3,10 +3,11 @@
 @import '~sass/fonts';
 
 .auth-container {
-    border: 1px solid lighten($deepsea, 5%); 
+    border: 1px solid $tertiary; 
     margin-top: 50px;
     padding: 50px;
-    box-shadow: 10px 10px 40px 0 rgba(0,0,0,.6);
+    box-shadow: 5px 5px 5px 0 rgba(0,0,0,.4);
+    position: relative;
 }
 
 input {
@@ -15,7 +16,7 @@ input {
     color: #414351;
     font-size: 15px;
     border-radius: 0;
-    border: 1px solid $deepsea;
+    border: 1px solid $primary;
     -webkit-appearance: none;
     font-family: sans-serif;
     font-size: 100%;
@@ -33,16 +34,16 @@ input {
 .btn-darkgreen {
     @include btn-gp;
     width: 100%;
-    background-color: $deepsea;
+    background-color: $primary;
     border-radius: 0;
-    border: .0625rem solid $deepsea;
+    border: .0625rem solid $primary;
     padding: 0.8rem 4rem 0.8rem 4rem; //top-right-bot-left
 }
 
 .auth-icon {
-    color: $deepsea;
-    font-size: 96px;
-    padding: 40px;
+    color: $primary;
+    font-size: 72px;
+    padding: 30px;
 }
 
 .auth-title {
@@ -54,7 +55,7 @@ input {
     font-size: 16px;
     text-transform: uppercase;
     font-family: $font-stack;
-    background: $deepsea;
+    background: $primary;
     color: white;
     outline: 0;
 }
@@ -78,10 +79,16 @@ input {
 .link-box-top a {
     margin-top: 10px;
     padding-bottom: 30px;
-    color: $deepsea;
+    color: $primary;
     display: block;
     font-size: 14px;
 }
 
+p {
+    padding: 5px;
+}
 
+strong {
+    cursor: pointer;
+}
 

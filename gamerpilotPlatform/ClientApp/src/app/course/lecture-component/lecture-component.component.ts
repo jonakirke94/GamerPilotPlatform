@@ -6,11 +6,13 @@ import { Lecture } from '../../../models/lecture';
 import { AuthService } from '../../core/services/auth.service';
 import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { flyInOut } from '../../shared/animation';
 
 @Component({
   selector: 'app-lecture-component',
   templateUrl: './lecture-component.component.html',
-  styleUrls: ['./lecture-component.component.scss']
+  styleUrls: ['./lecture-component.component.scss'],
+  animations: [flyInOut]
 })
 export class LectureComponentComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();

@@ -71,11 +71,11 @@
 }
 
 .active-link {
-  color: #4BC16B;
+  color: $primary;
 }
 
 .nav-link:hover {
-  color: #4BC16B;
+  color: $primary;
 }
 
 .nav-btn {
@@ -102,8 +102,8 @@
 }
 
 .nav-btn:hover {
-  border: 1px solid #70DA93;
-  color: #00B275;
+  border: 1px solid $secondary;
+  color: $primary;
 }
 
 .main-nav {
@@ -150,7 +150,7 @@ a {
 
 .nav-link {
   font-size: 18px;
-  color: #032327;
+  color: $secondary;
   line-height: 52px;
 }
 

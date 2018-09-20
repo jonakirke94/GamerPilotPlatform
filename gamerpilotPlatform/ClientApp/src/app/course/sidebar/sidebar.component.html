@@ -26,24 +26,36 @@
                 <span class="topic">Velkommen</span>
             </li>
             <div *ngFor="let lecture of lectures">
-                <li class="item link"  *ngIf="lecture.section == 1" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
+                <li class="item link"  *ngIf="lecture.section == 1 && isLoggedIn && isEnrolled" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">         
                   <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
                   <i class="icon" appIcon [type]="lecture.lectureType"></i>
                   <span class="label">{{lecture.name}} </span>        
-                </li>    
+                </li> 
+
+                <li class="item link disabled"  *ngIf="lecture.section == 1 && (!isLoggedIn || !isEnrolled)" >
+                    <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                    <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                    <span class="label">{{lecture.name}} </span>        
+                </li>
             </div>
-    
+
             <!-- Real life perspective -->
             <li class="item section">
                 <span class="order">2</span>
                 <span class="topic">Real life perspective</span>
             </li>
             <div *ngFor="let lecture of lectures">
-                <li class="item link"  *ngIf="lecture.section == 2" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
-                  <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
-                  <i class="icon" appIcon [type]="lecture.lectureType"></i>
-                  <span class="label">{{lecture.name}} </span>        
-                </li>    
+                <li class="item link"  *ngIf="lecture.section == 2 && isLoggedIn && isEnrolled" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">         
+                    <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                    <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                    <span class="label">{{lecture.name}} </span>        
+                  </li> 
+  
+                  <li class="item link disabled"  *ngIf="lecture.section == 2 && (!isLoggedIn || !isEnrolled)" >
+                      <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                      <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                      <span class="label">{{lecture.name}} </span>        
+                  </li> 
             </div>
     
             <!-- Test your knowledge -->
@@ -52,11 +64,17 @@
                 <span class="topic">Test your knowledge</span>
             </li>
             <div *ngFor="let lecture of lectures">
-                <li class="item link"  *ngIf="lecture.section == 3" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                  <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
-                  <i class="icon" appIcon [type]="lecture.lectureType"></i>
-                  <span class="label">{{lecture.name}} </span>        
-                </li>    
+                <li class="item link"  *ngIf="lecture.section == 3 && isLoggedIn && isEnrolled" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">         
+                    <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                    <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                    <span class="label">{{lecture.name}} </span>        
+                  </li> 
+  
+                  <li class="item link disabled"  *ngIf="lecture.section == 3 && (!isLoggedIn || !isEnrolled)" >
+                      <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                      <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                      <span class="label">{{lecture.name}} </span>        
+                  </li> 
             </div>
     
             <!--  Diving into CS:GO -->
@@ -65,11 +83,17 @@
                 <span class="topic">Diving into CS:GO</span>
             </li>
             <div *ngFor="let lecture of lectures">
-                <li class="item link"  *ngIf="lecture.section == 4" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                  <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
-                  <i class="icon" appIcon [type]="lecture.lectureType"></i>
-                  <span class="label">{{lecture.name}} </span>        
-                </li>    
+                <li class="item link"  *ngIf="lecture.section == 4 && isLoggedIn && isEnrolled" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">         
+                    <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                    <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                    <span class="label">{{lecture.name}} </span>        
+                  </li> 
+  
+                  <li class="item link disabled"  *ngIf="lecture.section == 4 && (!isLoggedIn || !isEnrolled)" >
+                      <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                      <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                      <span class="label">{{lecture.name}} </span>        
+                  </li> 
             </div>
     
               <!--  Put it into practice -->
@@ -78,11 +102,17 @@
                 <span class="topic">Put it into practice</span>
             </li>
             <div *ngFor="let lecture of lectures">
-                <li class="item link"  *ngIf="lecture.section == 5" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">
-                  <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
-                  <i class="icon" appIcon [type]="lecture.lectureType"></i>
-                  <span class="label">{{lecture.name}} </span>        
-                </li>    
+                <li class="item link"  *ngIf="lecture.section == 5 && isLoggedIn && isEnrolled" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">         
+                    <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                    <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                    <span class="label">{{lecture.name}} </span>        
+                  </li> 
+  
+                  <li class="item link disabled"  *ngIf="lecture.section == 5 && (!isLoggedIn || !isEnrolled)" >
+                      <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                      <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                      <span class="label">{{lecture.name}} </span>        
+                  </li> 
             </div>
     
               <!--  Summary -->
@@ -91,11 +121,17 @@
                 <span class="topic">Summary</span>
             </li>
             <div *ngFor="let lecture of lectures">
-                <li class="item link"  *ngIf="lecture.section == 6" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link"  style="border-bottom: 1px solid #D7DADB;">
-                  <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
-                  <i class="icon" appIcon [type]="lecture.lectureType"></i>
-                  <span class="label">{{lecture.name}} </span>        
-                </li>    
+                <li class="item link"  *ngIf="lecture.section == 6 && isLoggedIn && isEnrolled" routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link">         
+                    <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                    <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                    <span class="label">{{lecture.name}} </span>        
+                  </li> 
+  
+                  <li class="item link disabled"  *ngIf="lecture.section == 6 && (!isLoggedIn || !isEnrolled)" >
+                      <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+                      <i class="icon" appIcon [type]="lecture.lectureType"></i>
+                      <span class="label">{{lecture.name}} </span>        
+                  </li> 
             </div>
     
         </ul>

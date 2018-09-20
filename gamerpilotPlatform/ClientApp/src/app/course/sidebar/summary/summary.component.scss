@@ -1,0 +1,12 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
+
+h3 {
+    color: $primary;
+    margin-bottom: 50px;
+}
+
+.line-breaker {
+    white-space: pre-line;
+  }

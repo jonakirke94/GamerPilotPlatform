@@ -1,5 +1,5 @@
 
-<div *ngIf="dataLoaded" class="container">
+<div *ngIf="dataLoaded" class="container" [@flyInOut]> 
 
     <div *ngIf="lecture.lectureType == 1">
     <app-info [lecture]="lecture"></app-info>

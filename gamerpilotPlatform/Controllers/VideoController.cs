@@ -6,6 +6,8 @@ using GamerPilot.Video.Data;
 using Microsoft.Extensions.Configuration;
 using gamerpilotPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
+using gamerpilotPlatform.Model;
+using Microsoft.AspNetCore.Http;
 
 namespace gamerpilotPlatform.Controllers
 {
@@ -22,67 +24,20 @@ namespace gamerpilotPlatform.Controllers
         }
 
 
-
-        [HttpGet]
-        public IEnumerable<int> Get()
+        public async Task<IActionResult> Post([FromBody]PostVideo video)
         {
-            var list = new List<int>
+            try
             {
-                1,
-                2,
-                3,
-                4
-            };
+                await _videoService.AddVideo(video.InstructorId, video.LectureId, video.Name, video.FilePath);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
 
-            return list;
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            }
+
         }
-
-
-
-        public string SQLConnectionString = "INSERT CONN STRING";
-
-        //public async Task UseWithDatabaseAsync()
-        //{
-        //    //Add new video
-        //    var videoByUpload = await GamerPilot.Video.Data.Helper
-        //        .Create(SQLConnectionString, AWSAccessKey, AWSSecretKey, AWSBucketName, AWSRegion)
-        //        .AddVideoAsync(
-        //            instructor: "instructor",
-        //            lesson: "lesson",
-        //            videoName: "videoName",
-        //            filePath: "filePath" //Or use File Stream overload
-        //        );
-
-        //    //Add new video
-        //    var deleteVideo = await GamerPilot.Video.Data.Helper
-        //        .Create(SQLConnectionString, AWSAccessKey, AWSSecretKey, AWSBucketName, AWSRegion)
-        //        .DeleteVideoAsync(id: 1);
-
-        //    //Get all videos
-        //    var videos = await GamerPilot.Video.Data.Helper
-        //        .Create(SQLConnectionString, AWSAccessKey, AWSSecretKey, AWSBucketName, AWSRegion)
-        //        .GetVideosAsync();
-
-        //    //Get video by Id
-        //    var videoById = await GamerPilot.Video.Data.Helper
-        //        .Create(SQLConnectionString, AWSAccessKey, AWSSecretKey, AWSBucketName, AWSRegion)
-        //        .GetVideoAsync(id: 1);
-
-        //    //Get videos by Instructor(s) - Async
-        //    var videoByInstructorAsync = await GamerPilot.Video.Data.Helper
-        //        .Create(SQLConnectionString, AWSAccessKey, AWSSecretKey, AWSBucketName, AWSRegion)
-        //        .GetVideosByInstructorAsync("instructor");
-
-        //    //Get videos by Lessons(s) - Async
-        //    var videoByLessonAsync = await GamerPilot.Video.Data.Helper
-        //        .Create(SQLConnectionString, AWSAccessKey, AWSSecretKey, AWSBucketName, AWSRegion)
-        //        .GetVideosByLessonAsync("lesson");
-
-        //    //Get videos by Lessons(s)
-        //    var videoEmbedHTML = GamerPilot.Video.Data.Helper
-        //        .Create(SQLConnectionString, AWSAccessKey, AWSSecretKey, AWSBucketName, AWSRegion)
-        //        .GetVideoAsync(1).Result
-        //        .GetEmbedHTML(width: 640, height: 360, playerUrl: "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html");
-        //}
     }
 }

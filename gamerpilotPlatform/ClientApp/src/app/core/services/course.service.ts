@@ -8,39 +8,43 @@ export class CourseService implements OnDestroy {
   baseUrl: string;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') _baseUrl: string) {
-    this.baseUrl = _baseUrl;
+    this.baseUrl = _baseUrl + 'api/courses/';
   }
 
 
   getCourse(name: string) {
     return this.http
-    .get(this.baseUrl + `api/courses/${name}`);
+    .get(this.baseUrl + name);
   }
 
   getLecture(name: string, id: string)  {
     return this.http
-    .get(this.baseUrl + `api/courses/${name}/lecture/${id}`);
+    .get(this.baseUrl + `${name}/lecture/${id}`);
   }
 
   getCourses() {
     return this.http
-    .get(this.baseUrl + `api/courses/`);
+    .get(this.baseUrl);
   }
 
   getUserCourse(name: string) {
     return this.http
-    .get(this.baseUrl + `api/courses/user/${name}`);
+    .get(this.baseUrl + `user/${name}`);
   }
 
   enroll(name: string) {
-    console.log('enrollName', name);
     return this.http
-    .post(this.baseUrl + `api/courses/enroll`, {urlName: name});
+    .post(this.baseUrl + `enroll`, {urlName: name});
   }
 
   completeLecture(id: string, courseUrlName: string) {
     return this.http
-    .post(this.baseUrl + `api/courses/complete`, {id: id, urlName: courseUrlName});
+    .post(this.baseUrl + `complete`, {id: id, urlName: courseUrlName});
+  }
+
+  sendSatisfaction(feedback: string, courseUrlName: string) {
+    return this.http
+    .post(this.baseUrl + 'feedback', {feedback: feedback, urlName: courseUrlName});
   }
 
   ngOnDestroy() {

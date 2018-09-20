@@ -6,6 +6,7 @@ using gamerpilotPlatform.Data;
 using gamerpilotPlatform.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace gamerpilotPlatform.Controllers
@@ -15,11 +16,13 @@ namespace gamerpilotPlatform.Controllers
     {
         private readonly ITokenService _tokenService;
         private readonly GamerpilotVodContext _context;
+        private readonly ILogger<TokensController> _log;
 
-        public TokensController(ITokenService tokenService, GamerpilotVodContext context)
+        public TokensController(ITokenService tokenService, GamerpilotVodContext context, ILogger<TokensController> log)
         {
             _tokenService = tokenService;
             _context = context;
+            _log = log;
         }
 
 
@@ -45,6 +48,7 @@ namespace gamerpilotPlatform.Controllers
 
             user.RefreshToken = newRefreshToken;
             await _context.SaveChangesAsync();
+            _log.LogInformation($"Saved new refreshToken for user {user.Id}");
 
             return new ObjectResult(new
             {
@@ -56,16 +60,17 @@ namespace gamerpilotPlatform.Controllers
         [HttpPost, Authorize]
         public async Task<IActionResult> Revoke()
         {
-            var username = User.Identity.Name;
+            //var username = User.Identity.Name;
 
-            var user = _context.Users.SingleOrDefault(u => u.Username == username);
-            if (user == null) return BadRequest();
+            //var user = _context.Users.SingleOrDefault(u => u.Username == username);
+            //if (user == null) return BadRequest();
 
-            user.RefreshToken = null;
+            //user.RefreshToken = null;
 
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
+            //_log.LogInformation($"Saved new refreshToken for user {user.Id}");
 
-            return NoContent();
+            //return NoContent();
         }
 
     }

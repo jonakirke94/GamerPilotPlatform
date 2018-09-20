@@ -54,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         const refreshToken = this._storage.getRefreshToken();
                         // attempt to refresh tokens on the server
                         return this.http
-                        .post(this.baseUrl + 'api/token/refresh', {
+                        .post(this.baseUrl + 'api/tokens/refresh', {
                             token,
                             refreshToken
                         }).pipe(

@@ -31,8 +31,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient,
     private _auth: AuthService,
-    private router: Router,
-    private routerExtService: RouterExtService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -101,13 +100,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       ))
       .subscribe(
         () => {
-            // on successful auth redirect to previous url
-              const previous = this.routerExtService.getPreviousUrl();
-              if (previous) {
-                this.router.navigateByUrl(previous);
-              } else {
-                this.router.navigateByUrl('/');
-              }
+            this.router.navigateByUrl('/');
         },
         err => {
           if (err.status === 409) {
