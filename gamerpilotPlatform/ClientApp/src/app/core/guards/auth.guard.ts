@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { takeUntil } from 'rxjs/operators';
+import { SnotifyService } from 'ng-snotify';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthGuard implements CanActivate, OnDestroy {
   private onDestroy$ = new Subject<void>();
   isLoggedIn: boolean;
 
-  constructor(private _auth: AuthService, private router: Router) {}
+  constructor(private _auth: AuthService, private router: Router, private _toastService: SnotifyService) {}
 
 
   canActivate(
@@ -23,9 +24,15 @@ export class AuthGuard implements CanActivate, OnDestroy {
         takeUntil(this.onDestroy$
       ))
       .subscribe(isLogged => {
-        console.log('Guard was checked');
 
         if (!isLogged) {
+          this._toastService.error('Oops you have to log in or sign up to view that page!', {
+            timeout: 5000,
+            position: 'centerTop',
+            showProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true
+          });
           this.router.navigateByUrl('/login');
         }
           this.isLoggedIn = true;

@@ -8,11 +8,8 @@
                 <div class="carousel-item col-md-3 active">
                     <div class="panel panel-default">
                     <div class="panel-thumbnail">
-                        <img class="img-fluid mx-auto d-block" src="{{courses[0].imageUrl}}" alt="slide 1">
-                
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{courses[0].name}}</h5>
-                        </div>
+                        <img class="img-fluid mx-auto d-block" src="{{courses[0].imageUrl}}" alt="{{courses[0].name}}">
+            
                     </div>
                     
                     </div>
@@ -24,11 +21,7 @@
                 <div class="carousel-item col-md-3" *ngFor="let course of courses; let i = index" (click)="goToCourse(course.urlName, course.isReleased)">
                     <div class="panel panel-default">
                     <div class="panel-thumbnail">
-                        <img class="img-fluid mx-auto d-block" src="{{course.imageUrl}}" alt="slide {{i +1}}">
-                
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{course.name}}</h5>
-                            </div>
+                        <img class="img-fluid mx-auto d-block" src="{{course.imageUrl}}" alt="{{course.name}}">
                     </div>
                     
                     </div>

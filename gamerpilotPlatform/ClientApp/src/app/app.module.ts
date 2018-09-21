@@ -13,8 +13,8 @@ import { SharedModule } from './shared/shared.module';
 import { RouterExtService } from './shared/RouterExtService';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
-import { PrivacyPoliticsComponent } from './privacy-politics/privacy-politics.component';
-import { TermsComponent } from './terms/terms.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { PrivacyPoliticsComponent } from './components/privacy-politics/privacy-politics.component';
 
 @NgModule({
   declarations: [

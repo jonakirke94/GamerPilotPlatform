@@ -1,7 +1,9 @@
-$gutter: 40px;
+@import '~sass/fonts';
 @import '~sass/variables';
 @import '~sass/mixins';
-@import '~sass/fonts';
+
+$gutter: 40px;
+
 
 .disabled {
     cursor: not-allowed !important;
@@ -252,6 +254,7 @@ $gutter: 40px;
             white-space: nowrap; 
             overflow: hidden;
             text-overflow: ellipsis; 
+
         }
 
         .order {
@@ -263,7 +266,10 @@ $gutter: 40px;
 
 
 
-
+.topic {
+    font-family: $font-stack;
+    font-weight: 700;
+}
 
 .item {
     .icon,

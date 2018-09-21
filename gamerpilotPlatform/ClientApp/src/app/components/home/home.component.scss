@@ -160,38 +160,7 @@ h1 {
   
  
   
-/* svg section */
 
-
-
-.svg-wrap {
-  position: relative;
-}
-
-@media (max-width: 1200px) {
-  .svg-wrap {
-    display: none;
-   }
-}
-
-@mixin animation-icon {
-  z-index: 2;
-  font-size: 140px;
-  color: $primary;
-  position: absolute;
-  bottom: 145px;
-
-}
-
-.svg-wrap .animation-icon-left {
-  left: 245px;
-  @include animation-icon;
-}
-
-.svg-wrap .animation-icon-right {
-  right: 245px;
-  @include animation-icon;
-}
 
  /* features */
  

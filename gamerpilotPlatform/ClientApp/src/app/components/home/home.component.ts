@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
     this.nav = document.querySelector('.features-nav');
     this.navOffsetTop = this.nav.offsetTop;
     this.navHeight = this.nav.offsetHeight;
-    const courseElement = <HTMLElement>document.querySelector('#courses');
-    this.courseTop = courseElement.offsetTop;
+    const pageHelpers = <HTMLElement>document.querySelector('#page-helpers');
+    this.courseTop = pageHelpers.offsetTop;
   }
 
    // tslint:disable-next-line:use-life-cycle-interface

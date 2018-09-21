@@ -57,21 +57,21 @@ namespace gamerpilotPlatform.Controllers
             });
         }
 
-        [HttpPost, Authorize]
-        public async Task<IActionResult> Revoke()
-        {
-            //var username = User.Identity.Name;
+        //[HttpPost, Authorize]
+        //public async Task<IActionResult> Revoke()
+        //{
+        //    var username = User.Identity.Name;
 
-            //var user = _context.Users.SingleOrDefault(u => u.Username == username);
-            //if (user == null) return BadRequest();
+        //    var user = _context.Users.SingleOrDefault(u => u.Username == username);
+        //    if (user == null) return BadRequest();
 
-            //user.RefreshToken = null;
+        //    user.RefreshToken = null;
 
-            //await _context.SaveChangesAsync();
-            //_log.LogInformation($"Saved new refreshToken for user {user.Id}");
+        //    await _context.SaveChangesAsync();
+        //    _log.LogInformation($"Saved new refreshToken for user {user.Id}");
 
-            //return NoContent();
-        }
+        //    return NoContent();
+        //}
 
     }
 }

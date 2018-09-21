@@ -94,7 +94,6 @@ namespace gamerpilotPlatform
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedData seedData, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddFile("Logs/myapp-{Date}.txt");
 
             if (env.IsDevelopment())
             {
@@ -102,6 +101,8 @@ namespace gamerpilotPlatform
             }
             else
             {
+                // log to file in production
+                loggerFactory.AddFile("Logs/myapp-{Date}.txt");
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
@@ -127,14 +128,11 @@ namespace gamerpilotPlatform
 
                 if (env.IsDevelopment())
                 {
-                    //delay timeout 2 min to avoid timeout
+                    //delay timeout 5 min to avoid timeout
                     spa.Options.StartupTimeout = new TimeSpan(0, 5, 0);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-
-            //context.Database.EnsureCreated();
 
             seedData.Seed().Wait();
         }

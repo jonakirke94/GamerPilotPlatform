@@ -36,7 +36,7 @@
 
 
 @mixin title {
-    font-family: 'Work Sans Light', helvetica, arial, sans-serif;
+    font-family: $font-stack;
     color: white;
     margin-bottom: 15px;
   }

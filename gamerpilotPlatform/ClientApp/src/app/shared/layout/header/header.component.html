@@ -4,7 +4,7 @@
 <div class="row header-nav-bar home-nav-bar no-gutters">
         <div class="logo-block header-logo-block">
           <a routerLink='/'>
-            <img class="logo header-logo" src="/assets/images/gp-brand.png" alt="logo">
+            <img class="logo header-logo" src="/assets/images/gp-brand.jpg" alt="gamerpilot logo">
          
           <span class="logo-text">GamerPilot</span>
         </a>
@@ -24,16 +24,22 @@
 
             <!-- Only visible on mobile menu-->
             
-            <ng-template *ngIf="!isAuthed; else authedMobile">
+       <!--      <ng-template *ngIf="!isAuthed; else authedMobile">
               <li class="nav-link sign-link-mobile"><a routerLink='/login'>Log in</a></li>
               <li class="nav-link sign-link-mobile"><a routerLink='/signup'>Sign up</a></li>
-            </ng-template>
+            </ng-template> -->
+
+            <li class="nav-link sign-link-mobile" *ngIf="!isAuthed"><a routerLink='/login'>Log in</a></li>
+            <li class="nav-link sign-link-mobile" *ngIf="!isAuthed"><a routerLink='/signup'>Sign up</a></li>
       
 
-            <ng-template #authedMobile>
+
+            <li class="nav-link sign-link-mobile" *ngIf="isAuthed"><a routerLink='/login' (click)="logout()">Log out</a></li>
+
+         <!--    <ng-template #authedMobile>
               <li class="nav-link sign-link-mobile"><a disabled>Profil</a></li>
               <li class="nav-link sign-link-mobile"><a routerLink='/login' (click)="logout()">Log out</a></li>
-            </ng-template>
+            </ng-template> -->
 
           </ul>
         </nav>

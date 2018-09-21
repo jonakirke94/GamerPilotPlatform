@@ -146,6 +146,11 @@ a {
 
 .sign-link-mobile {
   display: block;
+
+  &:last-of-type {
+    border-bottom: 1px solid #DDEAE7;
+
+  }
 }
 
 .nav-link {

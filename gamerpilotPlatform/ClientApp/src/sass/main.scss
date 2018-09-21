@@ -3,12 +3,16 @@
     width: 100%;
     margin: 0 auto 3vh;
     font-size: 44px;
+    font-family: $font-stack;
+    font-weight: 700;
   }
   
   @media (max-width: 768px) {
     .home-title {
       margin: 0 auto 20px;
       font-size: 26px;
+      font-family: $font-stack;
+
     }
   }
   
@@ -56,12 +60,6 @@
         height: 38vh;
         min-width: 320px;
         max-width: 100%;
-/*         position: absolute;
- */   /*      bottom: 3%;
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        transform: translateX(-50%);  */
   }
   
   @media (max-height: 700px) {
@@ -112,7 +110,7 @@
   left: 0;
   width: 25px;
   height: 19px;
-  background: url("/assets/images/checkmark.svg");
+  background: url("/assets/images/checkmark.jpg");
 }
 
 ol, ul {

@@ -6,11 +6,13 @@ import { Subscription, Subject } from 'rxjs';
 import { LockedContentComponent} from './locked-content/locked-content.component';
 import { takeUntil } from 'rxjs/operators';
 import { SnotifyService } from 'ng-snotify';
+import { listAnimations } from '../../shared/animation';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
+  animations: [listAnimations]
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();

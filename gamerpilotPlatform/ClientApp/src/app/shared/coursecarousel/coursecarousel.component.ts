@@ -54,7 +54,9 @@ export class CourseCarouselComponent implements OnInit, OnDestroy {
     ))
     .subscribe(res => {
       this.courses = res['data'] as Array<any>;
-      this.courses.concat(res['data']);
+      this.courses.concat(res['data'] as Array<any>);
+      this.courses.concat(res['data'] as Array<any>);
+      this.courses.concat(res['data'] as Array<any>);
       this.isDataLoaded = true;
     });
   }

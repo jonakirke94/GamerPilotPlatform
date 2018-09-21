@@ -24,20 +24,20 @@ namespace gamerpilotPlatform.Controllers
         }
 
 
-        public async Task<IActionResult> Post([FromBody]PostVideo video)
-        {
-            try
-            {
-                await _videoService.AddVideo(video.InstructorId, video.LectureId, video.Name, video.FilePath);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
+        //public async Task<IActionResult> Post([FromBody]PostVideo video)
+        //{
+        //    try
+        //    {
+        //        await _videoService.AddVideo(video.InstructorId, video.LectureId, video.Name, video.FilePath);
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return StatusCode(StatusCodes.Status500InternalServerError);
+        //        return StatusCode(StatusCodes.Status500InternalServerError);
 
-            }
+        //    }
 
-        }
+        //}
     }
 }

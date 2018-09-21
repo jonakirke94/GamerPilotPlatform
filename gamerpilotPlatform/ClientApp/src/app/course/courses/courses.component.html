@@ -6,11 +6,7 @@
     <div class="col-md-3 course parent" *ngFor="let course of courses; let i = index" (click)="goToCourse(course.isReleased, course.urlName)">
       <div class="panel panel-default child">
         <div class="panel-thumbnail">
-          <img class="img-fluid mx-auto d-block" src="{{course.imageUrl}}" alt="slide {{i +1}}">
-    
-          <div class="carousel-caption d-none d-md-block">
-              <h5>{{course.name}}</h5>
-              </div>
+          <img class="img-fluid mx-auto d-block" src="{{course.imageUrl}}" alt="{{course.name}}">
         </div>   
       </div>
   </div>

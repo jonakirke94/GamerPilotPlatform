@@ -23,12 +23,11 @@ namespace gamerpilotPlatform.Data
         public async Task Seed()
         {
 
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (!context.Users.Any())
             {
-
                 /*************************************************/
                 /********** ADD USERS **********************/
                 /*************************************************/
@@ -130,7 +129,7 @@ namespace gamerpilotPlatform.Data
                 /*************************************************/
                 /********** VIDEOS *******************************/
                 /*************************************************/
-                //videoService.AddVideo(instructor1.Id, RealLifeLecture.Id, "Into the psychology", "C:\\Users\\inter\\Desktop\\AWS_Videos\\teori-erhvervsliv.MP4");
+                await videoService.AddVideo(instructor1.Id, RealLifeLecture.Id, "Into the psychology", "C:\\Users\\inter\\Desktop\\AWS_Videos\\teori-erhvervsliv.MP4");
 
                 /*************************************************/
                 /********** CASE *********************************/
@@ -261,9 +260,9 @@ namespace gamerpilotPlatform.Data
                 context.Lectures.Add(proContent);
                 context.SaveChanges();
 
-                //await videoService.AddVideo(instructor2.Id, proContent.Id, "Good & bad communication", "C:\\Users\\inter\\Desktop\\AWS_Videos\\good-bad-communication.mp4");
-                //await videoService.AddVideo(instructor2.Id, proContent.Id, "How do pros practice communication?", "C:\\Users\\inter\\Desktop\\AWS_Videos\\how-do-pros-practice-communication.mp4");
-                //await videoService.AddVideo(instructor2.Id, proContent.Id, "Get in the mind of a pro", "C:\\Users\\inter\\Desktop\\AWS_Videos\\get-in-the-mind of-a-pro.mp4");
+                await videoService.AddVideo(instructor2.Id, proContent.Id, "Good & bad communication", "C:\\Users\\inter\\Desktop\\AWS_Videos\\good-bad-communication.mp4");
+                await videoService.AddVideo(instructor2.Id, proContent.Id, "How do pros practice communication?", "C:\\Users\\inter\\Desktop\\AWS_Videos\\how-do-pros-practice-communication.mp4");
+                await videoService.AddVideo(instructor2.Id, proContent.Id, "Get in the mind of a pro", "C:\\Users\\inter\\Desktop\\AWS_Videos\\get-in-the-mind of-a-pro.mp4");
 
                 /*************************************************/
                 /********** EXERCISES*****************************/
@@ -336,7 +335,7 @@ namespace gamerpilotPlatform.Data
                         UrlName = "communication-in-csgo",
                         Description = "This course is about communication in CS:GO..",
                         IsReleased = true,
-                        ImageUrl = "https://picsum.photos/600/600?random",
+                        ImageUrl = "assets/images/thumbnails/communication.jpg",
                     };
                     course1.Lectures.Add(infoEntity);
                     course1.Lectures.Add(introductionEntity);
@@ -356,7 +355,7 @@ namespace gamerpilotPlatform.Data
                          Name = "Strategy in CS:GO",
                          UrlName = "strategy-in-csgo",
                          Description = "",
-                         ImageUrl = "https://picsum.photos/600/600?random",
+                         ImageUrl = "assets/images/thumbnails/strategy.jpg",
                          IsReleased = false,
                      },
                      new Course
@@ -364,7 +363,7 @@ namespace gamerpilotPlatform.Data
                          Name = "Teamwork in CS:GO",
                          UrlName = "teamwork-in-csgo",
                          Description = "",
-                         ImageUrl = "https://picsum.photos/600/600?random",
+                         ImageUrl = "assets/images/thumbnails/teamwork.jpg",
                          IsReleased = false,
                      },
                      new Course
@@ -372,7 +371,7 @@ namespace gamerpilotPlatform.Data
                          Name = "Problem solving in CS:GO",
                          UrlName = "problem-solving-in-csgo",
                          Description = "",
-                         ImageUrl = "https://picsum.photos/600/600?random",
+                         ImageUrl = "assets/images/thumbnails/problemsolving.jpg",
                          IsReleased = false,
                      }
                     );

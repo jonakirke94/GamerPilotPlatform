@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CoursesComponent } from './courses/courses.component';
 import { LectureComponentComponent } from './lecture-component/lecture-component.component';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -12,15 +13,7 @@ const routes: Routes = [
     path: ':name',
     component: SidebarComponent,
     children: [
-      {path: 'lectures/:id', component: LectureComponentComponent}
-/*       {path: '', component: InfoComponent},
-      {path: 'introduction', component: IntroductionComponent},
-      {path: 'case', component: CaseComponent},
-      {path: 'professional-view', component: ProfessionalViewComponent},
-      {path: 'professional-content', component: ProfessionalContentComponent},
-      {path: 'quiz', component: QuizComponent},
-      {path: 'exercises', component: ExercisesComponent},
-      {path: 'summary', component: SummaryComponent} */
+      {path: 'lectures/:id', component: LectureComponentComponent, canActivate: [AuthGuard]}
     ]
   }
 ];

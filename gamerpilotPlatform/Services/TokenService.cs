@@ -112,6 +112,7 @@ namespace gamerpilotPlatform.Services
                 // The token failed validation!
                 // TODO: Log it or display an error.
                 // throw new Exception($"Token failed validation: {stvex.Message}");
+                _log.LogWarning($"Token failed validation - {stvex.Message}");
                 return false;
             }
             catch (ArgumentException argex)
@@ -119,6 +120,7 @@ namespace gamerpilotPlatform.Services
                 // The token was not well-formed or was invalid for some other reason.
                 // TODO: Log it or display an error.
                 // throw new Exception($"Token was invalid: {argex.Message}");
+                _log.LogWarning($"Token was invalid - {argex.Message}");           
                 return false;
             }
         }

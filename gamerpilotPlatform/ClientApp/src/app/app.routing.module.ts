@@ -5,8 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/authentication/signup/signup.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
-import { PrivacyPoliticsComponent } from './privacy-politics/privacy-politics.component';
-import { TermsComponent } from './terms/terms.component';
+import { PrivacyPoliticsComponent } from './components/privacy-politics/privacy-politics.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 
 const routes: Routes = [
