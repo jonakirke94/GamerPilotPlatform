@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, Inject} from '@angular/core';
 import { CourseCarouselComponent} from '../../shared/coursecarousel/coursecarousel.component';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
   navHeight;
   courseTop;
 
-  constructor(@Inject(DOCUMENT) document) {
+  constructor(@Inject(DOCUMENT) document, private _router: Router) {
 
   }
 
@@ -98,5 +99,7 @@ export class HomeComponent implements OnInit {
   goCourse(id: string) {
     console.log(id);
   }
+
+
 
 }

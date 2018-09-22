@@ -1,10 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {SanitizeHtmlPipePipe} from '../../pipes/sanitize-html-pipe.pipe';
+import { flyInOut } from '../../../shared/animation';
 
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
-  styleUrls: ['./video.component.scss']
+  styleUrls: ['./video.component.scss'],
+  animations: [flyInOut]
+
 })
 export class VideoComponent implements OnInit {
  @Input() lecture;

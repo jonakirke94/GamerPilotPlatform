@@ -26,13 +26,6 @@ export class AuthGuard implements CanActivate, OnDestroy {
       .subscribe(isLogged => {
 
         if (!isLogged) {
-          this._toastService.error('Oops you have to log in or sign up to view that page!', {
-            timeout: 5000,
-            position: 'centerTop',
-            showProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true
-          });
           this.router.navigateByUrl('/login');
         }
           this.isLoggedIn = true;

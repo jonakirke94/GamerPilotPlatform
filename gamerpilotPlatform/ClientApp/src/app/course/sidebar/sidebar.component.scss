@@ -170,6 +170,8 @@ $gutter: 40px;
 
     &.link {
         cursor: pointer;
+        min-height: 46px;
+
 
         &:hover {
             background-color: #d4ebe9;
@@ -208,6 +210,7 @@ $gutter: 40px;
     .section {
         background-color: #e8e8e8;
         padding: 10px 16px;
+        min-height: 44px;
 
         .order {   
             opacity: 0;

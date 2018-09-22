@@ -6,13 +6,13 @@ import { Subscription, Subject } from 'rxjs';
 import { LockedContentComponent} from './locked-content/locked-content.component';
 import { takeUntil } from 'rxjs/operators';
 import { SnotifyService } from 'ng-snotify';
-import { listAnimations } from '../../shared/animation';
+import { listAnimations, flyInOut } from '../../shared/animation';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  animations: [listAnimations]
+  animations: [listAnimations, flyInOut]
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();
@@ -20,7 +20,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private courseName: string;
   private course;
   private lectures;
-  private dataLoaded: boolean;
+  private sections;
+  private dataLoaded = false;
 
   completedLectures = [];
   currentLectureId: string;
@@ -177,11 +178,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
         if (!enrolledResult) {
           this.course = res['course'];
           this.lectures = this.course.lectures;
+          this.sections = this.course.sections;
+
         } else {
           this.course = res['course'];
           this.lectures = this.course.lectures;
           const completedLectureArr = res['completedLectures'];
           this.completedLectures = completedLectureArr.map(x => x.lectureId);
+          this.sections = this.course.sections;
+
         }
         if (!this.course) {
           // if no course matched name param in url
@@ -189,9 +194,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
         }
 
         // sort the lectures by their order in the course
-        this.lectures.sort(function(a, b) {
+  /*       this.lectures.sort(function(a, b) {
           return a.displayOrder - b.displayOrder;
-        });
+        }); */
 
         this.dataLoaded = true;
       });

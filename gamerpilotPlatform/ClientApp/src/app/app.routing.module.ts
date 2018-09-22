@@ -7,6 +7,8 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
 import { PrivacyPoliticsComponent } from './components/privacy-politics/privacy-politics.component';
 import { TermsComponent } from './components/terms/terms.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { GamertestComponent } from './components/gamertest/gamertest.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
     { path: 'learningbasis', component: LearningbasisComponent },
     { path: 'privacy', component: PrivacyPoliticsComponent },
     { path: 'terms', component: TermsComponent },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'gamertest', component: GamertestComponent },
 
     {
       path: 'courses',

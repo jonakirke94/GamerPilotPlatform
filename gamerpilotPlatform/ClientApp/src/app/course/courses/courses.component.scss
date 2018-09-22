@@ -4,74 +4,83 @@ h1 {
     color: $primary;
 }
 
+hr {
+    border-color: $primary;
+    border-width: 2px;
+    width: 60%;
+    margin-right: 20%;
+}
 
-.parent {
+.loader {
+    height: 290px;
+    width: 415px;
+    background-color: #e8e8e8;
     margin: 10px;
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+
 }
 
-.child {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    max-width: 600%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    -o-transition: all .5s;
-    transition: all .5s;
+.wrapper {
+    @media screen and (max-width: 960px) {
+        padding: 20px 20px;
+    }
+
+    .parent {
+        margin: 10px;
+        overflow: hidden;
+        position: relative;
+        display: inline-block;
+
+        @media screen and (max-width: 960px) {
+            width: 100%; 
+            margin: 20px 0px
+        }
+    
+        &:hover .child, &:focus .child {
+            cursor: pointer;
+            -ms-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -webkit-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+    
+        &:hover .child:before, &:focus .child:before {
+            display: block;
+        }
+    
+        .child {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+    /*         max-width: 600%; */
+            background-size: cover;
+            background-repeat: no-repeat;
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+    
+            &:before {
+                content: "";
+                display: none;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba(5, 85, 68, 0.75);  
+            }
+        }
+    }
+
 }
 
-a {
-    display: none;
-    font-size: 35px;
-    color: #ffffff !important;
-    font-family: sans-serif;
-    text-align: center;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 75px;
-    cursor: pointer;
-    /*text-decoration: none;*/
-}
 
-.parent:hover .child, .parent:focus .child {
-    -ms-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    transform: scale(1.1);
-}
 
-.parent:hover .child:before, .parent:focus .child:before {
-    display: block;
-}
 
-.parent:hover a, .parent:focus a {
-    display: block;
-}
-
-.child:before {
-    content: "";
-    display: none;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(5, 85, 68, 0.75);
-}
 
 /* Media Queries */
-@media screen and (max-width: 960px) {
+/* @media screen and (max-width: 960px) {
     .parent {width: 100%; margin: 20px 0px}
 		.wrapper {padding: 20px 20px;}
-}
+} */

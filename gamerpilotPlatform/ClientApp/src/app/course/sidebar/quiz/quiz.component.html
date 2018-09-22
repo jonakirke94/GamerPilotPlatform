@@ -4,7 +4,7 @@
 
 <p class="text-left">Test your knowledge. If you struggle to answer some of the questions feel free to jump between the lectures and return to complete the quiz later</p>
 
-<ul>
+<ul [@listAnimationSlow]="lecture.questions.length">
     <li class="question-wrapper" *ngFor="let question of lecture.questions">
         <div class="question__badge">{{question.difficulty}}</div>
         <div class="question">

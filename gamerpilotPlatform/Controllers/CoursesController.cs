@@ -59,6 +59,8 @@ namespace gamerpilotPlatform.Controllers
         {
             Course course = null;
 
+            //experiment to return course with a section with respective lectures
+
             try
             {
                 CourseUser isEnrolledEntity = null;
@@ -67,6 +69,8 @@ namespace gamerpilotPlatform.Controllers
                 course = _context.Courses
                     .Include(x => x.Lectures)
                     .SingleOrDefault(x => x.UrlName == urlName);
+                course.Sections = GetSectionFromLectureList(course.Lectures);
+
             
               
                 isEnrolledEntity = _context.CourseUsers
@@ -98,6 +102,70 @@ namespace gamerpilotPlatform.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
          
+        }
+
+        private IEnumerable<Model.Section> GetSectionFromLectureList(IEnumerable<Lecture> lectures)
+        {
+            var sections = new List<Model.Section>();
+            var welcome = new Model.Section()
+            {
+                Name = "Welcome",
+                Order = 1,
+            };
+            var realLife = new Model.Section()
+            {
+                Name = "Real life perspective",
+                Order = 2,
+            };
+            var quiz = new Model.Section()
+            {
+                Name = "Quiz",
+                Order = 3,
+            };
+            var game = new Model.Section()
+            {
+                Name = "Diving into CS:GO",
+                Order = 4,
+            };
+            var practice = new Model.Section()
+            {
+                Name = "Put it into practice",
+                Order = 5,
+            };
+            var summary = new Model.Section()
+            {
+                Name = "Summary",
+                Order = 6,
+            };
+
+            foreach (var lec in lectures)
+            {
+                switch(lec.Section)
+                {
+                    case Model.Lectures.Section.Welcome: welcome.Lectures.Add(lec);
+                    break;
+                    case Model.Lectures.Section.RealLife: realLife.Lectures.Add(lec);
+                    break;
+                    case Model.Lectures.Section.Quiz: quiz.Lectures.Add(lec);
+                    break;
+                    case Model.Lectures.Section.Game: game.Lectures.Add(lec);
+                    break;
+                    case Model.Lectures.Section.Practice: practice.Lectures.Add(lec);
+                    break;
+                    case Model.Lectures.Section.Summary: summary.Lectures.Add(lec);
+                    break;
+
+                }
+            }
+
+            sections.Add(welcome);
+            sections.Add(realLife);
+            sections.Add(quiz);
+            sections.Add(game);
+            sections.Add(practice);
+            sections.Add(summary);
+
+            return sections;
         }
 
         [HttpPost("[action]")]

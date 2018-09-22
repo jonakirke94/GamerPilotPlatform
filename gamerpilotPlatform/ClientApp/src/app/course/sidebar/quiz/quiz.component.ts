@@ -1,9 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { listAnimationSlow } from '../../../shared/animation';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  styleUrls: ['./quiz.component.scss'],
+  animations: [listAnimationSlow]
+
 })
 export class QuizComponent {
   @Input() lecture;

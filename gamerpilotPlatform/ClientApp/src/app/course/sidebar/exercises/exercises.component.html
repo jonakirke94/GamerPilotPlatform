@@ -5,8 +5,8 @@
   
   <p class="text-left">{{lecture.description}}</p>
   
-  <ul>
-      <li class="question-wrapper" *ngFor="let exercise of lecture.exercises">
+  <ul [@listAnimationSlow]="lecture.exercises.length">
+        <li class="question-wrapper" *ngFor="let exercise of lecture.exercises">
           <div class="question__badge" *ngIf="exercise.isRealLife">Real Life</div>
           <div class="question__badge" *ngIf="!exercise.isRealLife">Ingame</div>
           <div class="question">

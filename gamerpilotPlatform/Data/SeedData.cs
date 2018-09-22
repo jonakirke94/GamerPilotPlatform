@@ -67,7 +67,7 @@ namespace gamerpilotPlatform.Data
                     Name = "Course Info",
                     Level = "Beginner/Intermediate",
                     LectureType = LectureType.Info,
-                    Section = Section.Welcome,
+                    Section = Model.Lectures.Section.Welcome,
                     DisplayOrder = 1,
                 };
 
@@ -77,7 +77,7 @@ namespace gamerpilotPlatform.Data
                 var introductionEntity = new CourseIntroduction()
                 {
                     Name = "Course Introduction",
-                    Section = Section.Welcome,
+                    Section = Model.Lectures.Section.Welcome,
                     LectureType = LectureType.CourseIntroduction,
                     DisplayOrder = 2,
                     Description = "In modern workplaces and on good CS:GO teams people are looking for graduates and players that are not only proficient in content, but also in soft skills. One of these skills is communication. Communication skills can be developed through both cooperative learning and direct" +
@@ -117,7 +117,7 @@ namespace gamerpilotPlatform.Data
                 var RealLifeLecture = new CourseVideo()
                 {
                     Name = "A psychologist's view",
-                    Section = Section.RealLife,
+                    Section = Model.Lectures.Section.RealLife,
                     LectureType = LectureType.Video,
                     DisplayOrder = 3,
                     Instructor = instructor1,
@@ -137,7 +137,7 @@ namespace gamerpilotPlatform.Data
                 var caseEntity = new CourseCase()
                 {
                     Name = "A communication case",
-                    Section = Section.RealLife,
+                    Section = Model.Lectures.Section.RealLife,
                     LectureType = LectureType.Case,
                     DisplayOrder = 4,
                     Description = "Effective communication is a vital tool for any person in the modern world. Your ability to communicate your points across can be the difference between success or failure just like it can determine the outcome of a cs:go round. " +
@@ -235,7 +235,7 @@ namespace gamerpilotPlatform.Data
                 var courseQuiz = new CourseQuiz()
                 {
                     Name = "Quiz",
-                    Section = Section.Quiz,
+                    Section = Model.Lectures.Section.Quiz,
                     LectureType = LectureType.Quiz,
                     DisplayOrder = 5
                 };
@@ -252,7 +252,7 @@ namespace gamerpilotPlatform.Data
                 var proContent = new CourseVideo()
                 {
                     Name = "Pro CS:GO content",
-                    Section = Section.Game,
+                    Section = Model.Lectures.Section.Game,
                     LectureType = LectureType.Video,
                     DisplayOrder = 6,
                     Instructor = instructor2
@@ -291,7 +291,7 @@ namespace gamerpilotPlatform.Data
                 var exercises = new CourseExercise()
                 {
                     Name = "Exercises",
-                    Section = Section.Practice,
+                    Section = Model.Lectures.Section.Practice,
                     LectureType = LectureType.Practice,
                     DisplayOrder = 7,
                     Description = "Let's take a look at some exercises you can do to practice your communication:",
@@ -307,7 +307,7 @@ namespace gamerpilotPlatform.Data
                 var summary = new CourseSummary()
                 {
                     Name = "Summary",
-                    Section = Section.Summary,
+                    Section = Model.Lectures.Section.Summary,
                     LectureType = LectureType.Summary,
                     DisplayOrder = 8,
                     Summary = "This wraps up the communication course. Remember improving your communication is a process and doesn't happen overnight. You've already taken a solid step by acquiring knowledge about communication. Good communication is accurate, necessary and well-timed. Those are points you can transfer to other areas in your life such as the classroom or the football field - not just when you play computer",

@@ -1,5 +1,6 @@
 import { Instructor } from './instructor';
 import { Lecture } from './lecture';
+import { Section } from './section';
 
 export class Course {
     id: string;
@@ -12,6 +13,7 @@ export class Course {
     urlName: Date;
     instructors: Instructor[];
     lectures: Lecture[];
+    sections: Section[];
 
     constructor() {}
 }
