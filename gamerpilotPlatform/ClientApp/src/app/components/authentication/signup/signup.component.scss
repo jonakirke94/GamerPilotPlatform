@@ -38,6 +38,7 @@ input {
     border-radius: 0;
     border: .0625rem solid $primary;
     padding: 0.8rem 4rem 0.8rem 4rem; //top-right-bot-left
+    margin-top: 10px;
 }
 
 .auth-icon {
@@ -76,12 +77,17 @@ input {
 }
 
 
-.link-box-top a {
+.link-box {
+    text-align: center;
     margin-top: 10px;
-    padding-bottom: 30px;
-    color: $primary;
-    display: block;
-    font-size: 14px;
+
+    a {
+        margin-top: 10px;
+        padding-bottom: 30px;
+        color: $primary;
+        display: block;
+        font-size: 14px;
+    }
 }
 
 p {

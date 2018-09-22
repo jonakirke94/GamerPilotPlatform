@@ -75,13 +75,14 @@
 
         <div *ngIf="error" class="text-danger error-txt">{{error}}</div>
 
-        <div class="link-box-top text-center">
+        <button class="btn btn-darkgreen" [disabled]="!signupForm.valid">Signup</button>
 
+
+        <div class="link-box">
           <p>By signing up, you agree to our <br><strong routerLink="/terms"> Terms & conditions</strong> & <strong routerLink="/privacy">Privacy policies</strong></p>
         </div>
 
 
-        <button class="btn btn-darkgreen" [disabled]="!signupForm.valid">Signup</button>
 
       </form>
 

@@ -8,6 +8,7 @@
     padding: 50px;
     box-shadow: 5px 3px 3px 0 rgba(0,0,0,.2);
     position: relative;
+    min-width: 400px;
 }
 
 #password, #email {
@@ -87,7 +88,11 @@
     margin-top: 10px;
     padding-top: 15px;
     color: $primary;
-    display: block;
+    display: inline-block;
+
+    &:first-of-type {
+        margin-right: 10px;
+    }
 }
 
 
