@@ -1,0 +1,210 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
+
+.intro {
+    background-color: $primary;
+    padding: 50px;
+    padding-bottom: 100px;
+}
+
+.intro:before {
+    width: 100%;
+    content: " ";
+    background: url("/assets/images/bg-dots.svg") repeat;
+    position: absolute;
+    height:100%;
+}
+
+
+.block-white {
+    @include block;
+    margin-top: 50px;
+    border-left-color: #fff;
+}
+
+.block-white h3 {
+    color: white;
+}
+
+.intro h1 {
+    padding: 100px;
+}
+
+@media screen and (max-width: $mobile) {
+    .intro h1 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.card {
+    width: 320px;
+    margin: auto;
+    margin-top: 100px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 10px 10px 40px 0 rgba(0,0,0,.6);
+}
+
+.card-header {
+    background-color: $tertiary;
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+}
+
+.card-body {
+    background-color: #f8f8f8;
+    padding: 10px;
+    padding-bottom: 25px;
+}
+
+.card-element {
+    margin-top: 15px;
+    text-align: left;
+    margin-left: 15px;
+}
+
+.card-icon {
+    color: $primary;
+    font-size: 20px;
+}
+
+
+/* LIFE SKILLS */
+
+.life-skills {
+    background-color: darken(white, 5%);
+    padding: 50px;
+    padding-bottom: 150px;
+}
+
+.fa-globe-americas {
+    margin-top: 130px;
+    font-size: 158px;
+    color: $secondary;
+}
+
+.block-main {
+    @include block;
+    margin-top: 50px;
+    border-left-color: $primary;
+}
+
+.block-main h3 {
+    color: $secondary;
+    font-weight: bold;
+}
+
+.block-main p {
+    color: $secondary;
+}
+
+/* learning theories*/
+.block-left {
+    background-color: $primary;
+    padding: 100px;
+    margin-top: -50px;
+    margin-bottom: 50px;
+}
+
+.block-left h3, .block-right h3 {
+    color: white;
+}
+
+.block-right {
+    background-color: $primary;
+    padding: 100px;  
+}
+
+hr {
+    border-color: white;
+}
+
+
+
+/* learning concepts */
+
+.container-white {
+    background-color: white;
+    padding: 50px;
+    padding-top: 100px;
+}
+
+.container-white p {
+    color: $secondary;
+}
+
+.container-white h1,h2,h3 {
+    color: $primary;
+}
+
+.container-eden {
+    background-color: $primary;
+    padding: 50px;
+}
+
+.container-deep {
+    background-color:$primary;
+    padding: 50px;
+}
+
+.fa-angle-double-down {
+    color: $secondary;
+    font-size: 28px;
+    padding-bottom: 60px;
+}
+
+.fa-diagnoses {
+    margin-top: 130px;
+    font-size: 158px;
+    color: white;
+}
+
+.container-deep::after {
+    content: "";
+    display: inline-block;
+    width: 34px;
+    height: 130px;
+    margin: auto;
+    top: auto;
+    bottom: -65px;
+    margin-bottom: -120px;
+    background: url("/assets/images/connector.svg") 0 0 no-repeat;
+}
+
+.block-white {
+    @include block;
+    margin-top: 50px;
+    border-left-color: white;
+}
+
+.fa-child {
+    margin-top: 100px;
+    font-size: 158px;
+    color: $primary;
+}
+
+.fa-boxes {
+    margin-top: 200px;
+    font-size: 158px;
+    color: white;
+}
+
+.fa-eye {
+    margin-top: 100px;
+    font-size: 158px;
+    color: blue;
+}
+
+@media screen and (max-width: $mobile) {
+    .fa-child {
+        padding-bottom: 30px;
+    }
+
+    .fa-eye {
+        padding-bottom: 30px;
+    }
+}
+

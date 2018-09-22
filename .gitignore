@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+.vs/config/applicationhost.config
+.vs/gamerpilotPlatform/DesignTimeBuild/.dtbcache
+.vs/gamerpilotPlatform/v15/Server/sqlite3/db.lock
+.vs/gamerpilotPlatform/v15/Server/sqlite3/storage.ide-wal
+.vs/gamerpilotPlatform/v15/Server/sqlite3/storage.ide-shm
+.vs/gamerpilotPlatform/v15/Server/sqlite3/storage.ide
+.vs/gamerpilotPlatform/v15/.suo
+=======
 .vs/gamerpilotPlatform/v15/Server/sqlite3/db.lock
 .vs/gamerpilotPlatform/v15/Server/sqlite3/storage.ide-shm
 .vs/gamerpilotPlatform/v15/Server/sqlite3/storage.ide-wal
+>>>>>>> master

@@ -1,0 +1,30 @@
+<h3>
+    <p>{{lecture.name}}</p>
+</h3>
+
+
+
+<table class="table table-bordered" [@flyInOut]>
+    <tbody>
+        <tr>
+            <td>Level</td>
+            <td>{{lecture.level}}</td>
+        </tr>
+        <tr>
+            <td>Content</td>
+            <td>{{lecture.courseLength}}+</td>
+        </tr>
+        <tr>
+            <td>Language</td>
+            <td>{{lecture.language}}</td>
+        </tr>
+        <tr>
+            <td>21st Century Skill</td>
+            <td>{{lecture.lifeSkill}}</td>
+        </tr>
+        <tr>
+            <td>Producers</td>
+            <td><span *ngFor="let instructor of lecture.instructors">{{instructor.name}}, </span> GamerPilot</td>
+        </tr>
+    </tbody>
+</table>

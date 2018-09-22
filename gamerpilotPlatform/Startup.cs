@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
@@ -18,12 +19,10 @@ namespace gamerpilotPlatform
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            Configuration = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json")
-                .Build();
+            Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -31,14 +30,30 @@ namespace gamerpilotPlatform
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
+            /* aws */
+            services.Configure<AWSSettings>(mySettings =>
+            {
+                mySettings.AWSAccessKey = Configuration["AWSAccessKey"];
+                mySettings.AWSSecretKey = Configuration["AWSSecretKey"];
+                mySettings.AWSBucketName = Configuration["AWSBucketName"];
+                mySettings.AWSRegion = Amazon.RegionEndpoint.EUWest1;
+            });
+
+
             services.AddSingleton(provider => Configuration);
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IPasswordHasher, PasswordHasher>();
+            services.AddTransient<IVideoService, VideoService>();
+            services.AddTransient<SeedData>();
+
 
             services.AddDbContext<GamerpilotVodContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("VodContext")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -77,19 +92,22 @@ namespace gamerpilotPlatform
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, GamerpilotVodContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedData seedData, ILoggerFactory loggerFactory)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                // log to file in production
+                loggerFactory.AddFile("Logs/myapp-{Date}.txt");
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseSpaStaticFiles();
@@ -110,14 +128,13 @@ namespace gamerpilotPlatform
 
                 if (env.IsDevelopment())
                 {
+                    //delay timeout 5 min to avoid timeout
+                    spa.Options.StartupTimeout = new TimeSpan(0, 5, 0);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
 
-
-            context.Database.EnsureCreated();
-
-            SeedData.Initialize(context);
+            seedData.Seed().Wait();
         }
     }
 }

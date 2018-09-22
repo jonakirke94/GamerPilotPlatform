@@ -1,0 +1,125 @@
+ <div class="controls-large">
+  <div  class="page-controls" [class.minimized]="minimized">
+    <i class="fas fa-chevron-circle-left" routerLink="/courses"></i>
+    <i class="small-only fas fa-list" (click)="toggleNav()" [ngClass]="showNav ? 'fa-rotate-90' : ''"></i>
+  </div>
+    <div class="control prev" (click)="previous()" *ngIf="!isFirst()" ><i class="fas fa-arrow-left"></i> Prev</div>
+    <div class="control next" (click)="next()" *ngIf="!isLast()">Next and complete <i class="fas fa-arrow-right"></i></div>
+    <div class="control complete" (click)="complete()" *ngIf="isLast()">Complete<i class="fas fa-flag-checkered"></i></div>
+
+
+</div>
+
+
+<div class="wrapper">
+  <div class="sidebar" [class.minimized]="minimized" *ngIf="dataLoaded">
+      <nav class="main-navigation item no-border">
+        <ul [@listAnimation]="sections.length +1">
+            <li class="item link title" routerLink='./'>
+                <img src="/assets/images/gp-brand.jpg" alt="GamerPilot Logo">        
+                <span class="topic">CS:GO Content</span>
+            </li>
+    
+            <ng-container *ngFor="let section of sections">
+                <li class="item section">
+                    <span class="order">{{section.order}}</span>
+                    <span class="topic">{{section.name}}</span>
+                </li>
+
+                <ng-container *ngFor="let lec of section.lectures">
+                    <li class="item link"  *ngIf="isLoggedIn && isEnrolled" routerLink='./lectures/{{lec.id}}' routerLinkActive="active-link">         
+                        <i class="status" appStatus [completed]="isCompleted(lec.id)" [current]="isCurrent(lec.id)"></i>
+                        <i class="icon" appIcon [type]="lec.lectureType"></i>
+                        <span class="label">{{lec.name}} </span>        
+                    </li> 
+
+                    <li class="item link disabled"  *ngIf="!isLoggedIn || !isEnrolled" >
+                        <i class="status" appStatus [completed]="isCompleted(lec.id)" [current]="isCurrent(lec.id)"></i>
+                        <i class="icon" appIcon [type]="lec.lectureType"></i>
+                        <span class="label">{{lec.name}} </span>        
+                    </li>
+                </ng-container>
+            </ng-container>
+          
+    
+        </ul>
+      </nav>
+      <a class="item sidebar-toggle section" (click)="toggle()">
+          <i class="icon fas" [ngClass]="minimized ? 'fa-long-arrow-alt-right' : 'fa-long-arrow-alt-left'"></i>
+          <span class="label">Minimize</span>
+      </a>
+  </div>
+
+  <!-- LOADER -->
+  <div class="sidebar" [class.minimized]="minimized" *ngIf="!dataLoaded">
+        <nav class="main-navigation item no-border">
+          <ul>
+              <li class="item link title" routerLink='./'>
+                  <img src="/assets/images/gp-brand.jpg" alt="GamerPilot Logo">        
+                  <span class="topic"></span>
+              </li>
+      
+              <ng-container *ngFor="let n of [0,1,2,3,4,5]">
+                <li class="item section">
+                    <span class="order"></span>
+                    <span class="topic"></span>
+                </li>
+  
+                <li class="item link">         
+                    <i class="status"></i>
+                    <i class="icon"></i>
+                    <span class="label"></span>        
+                </li> 
+    
+              </ng-container>
+            
+      
+          </ul>
+        </nav>
+        <a class="item sidebar-toggle section" (click)="toggle()">
+            <i class="icon fas" [ngClass]="minimized ? 'fa-long-arrow-alt-right' : 'fa-long-arrow-alt-left'"></i>
+            <span class="label">Minimize</span>
+        </a>
+    </div>
+
+  <div class="header-dropdown" *ngIf="showNav">
+      <nav class="main-nav">
+        <ul class="nav">
+          <li *ngFor="let lecture of lectures" class="item link nav-link"
+            routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link" (click)="toggleNav()">
+            <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
+            <i class="icon" appIcon [type]="lecture.lectureType"></i>
+            <span class="label">{{lecture.name}} </span>        
+          </li>    
+
+        </ul>
+      </nav>
+  </div>
+          
+          
+  <div class="content">
+
+    <div *ngIf="!isEnrolled || !isLoggedIn">
+      <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
+    </div>
+
+  
+
+    <div *ngIf="!activeChild && isEnrolled && isLoggedIn">
+        <div class="get-started">
+            <p>It seems you are already enrolled ..</p>
+          <button class="btn-start" (click)="goFirstLesson()">Go to first lecture</button>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+
+  
+      
+</div>
+
+
+
+
+

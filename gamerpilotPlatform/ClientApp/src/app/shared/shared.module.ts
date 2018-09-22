@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { RouterExtService } from './RouterExtService';
+import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { CourseCarouselComponent } from './coursecarousel/coursecarousel.component';
 
 
 
@@ -12,18 +17,27 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
   ],
   declarations: [
-
-  ],
+  LoadingSpinnerComponent,
+  HeaderComponent,
+  CourseCarouselComponent,
+  FooterComponent],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    LoadingSpinnerComponent,
+    HeaderComponent,
+    CourseCarouselComponent,
+    FooterComponent
 
-  ]
+  ],
+  providers: [
+    RouterExtService
+  ],
 })
 export class SharedModule {}

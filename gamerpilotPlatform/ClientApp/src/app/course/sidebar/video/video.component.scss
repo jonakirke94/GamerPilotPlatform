@@ -1,0 +1,46 @@
+@import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
+
+h3 {
+    color: $primary;
+    margin-bottom: 50px;
+}
+
+.grid {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    margin-bottom: 50px;
+
+    .video-box {
+        height: 150px;
+        width: 300px;
+        padding: 20px;
+        background: rgb(17,91,71);
+        background: linear-gradient(297deg, rgba(17,91,71,1) 62%, rgba(17,91,71,1) 100%);
+        margin: 10px;
+        text-align: center;
+        color: white;
+        -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+        position: relative;
+
+        i {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+            font-size: 58px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: .9;
+        }
+    }
+}
+
+.active {
+    border: 10px solid lighten($tertiary, 5%);
+}

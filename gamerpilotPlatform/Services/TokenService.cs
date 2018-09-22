@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace gamerpilotPlatform.Services
@@ -13,10 +15,13 @@ namespace gamerpilotPlatform.Services
    public class TokenService : ITokenService
         {
             private readonly IConfiguration _configuration;
+             private readonly ILogger<TokenService> _log;
 
-            public TokenService(IConfiguration configuration)
+
+        public TokenService(IConfiguration configuration, ILogger<TokenService> log)
             {
                 _configuration = configuration;
+                _log = log;
             }
 
             //Generate access token which will be sent with each authorized request by the client
@@ -56,7 +61,10 @@ namespace gamerpilotPlatform.Services
 
                 return new JwtSecurityTokenHandler().WriteToken(jwtToken); ;
             }
-            public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+
+    
+
+        public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
             {
                 var tokenValidationParameters = new TokenValidationParameters
                 {
@@ -77,43 +85,69 @@ namespace gamerpilotPlatform.Services
                 return principal;
             }
 
-            public Boolean Validate(string jwt)
+        public Boolean Validate(string jwt)
+        {
+            var validationParameters = new TokenValidationParameters
             {
-                var validationParameters = new TokenValidationParameters
-                {
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["serverSigningPassword"])),
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero //the default for this setting is 5 minutes
-                };
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["serverSigningPassword"])),
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero //the default for this setting is 5 minutes
+            };
 
-                try
-                {
-                    var claimsPrincipal = new JwtSecurityTokenHandler()
-                        .ValidateToken(jwt, validationParameters, out var rawValidatedToken);
+            try
+            {
+                var claimsPrincipal = new JwtSecurityTokenHandler()
+                    .ValidateToken(jwt, validationParameters, out var rawValidatedToken);
 
-                    return true;
-                    //return (JwtSecurityToken)rawValidatedToken;
-                    // Or, you can return the ClaimsPrincipal
-                    // (which has the JWT properties automatically mapped to .NET claims)
-                }
-                catch (SecurityTokenValidationException stvex)
-                {
-                    // The token failed validation!
-                    // TODO: Log it or display an error.
-                    // throw new Exception($"Token failed validation: {stvex.Message}");
-                    return false;
-                }
-                catch (ArgumentException argex)
-                {
-                    // The token was not well-formed or was invalid for some other reason.
-                    // TODO: Log it or display an error.
-                    // throw new Exception($"Token was invalid: {argex.Message}");
-                    return false;
-                }
+                return true;
+                //return (JwtSecurityToken)rawValidatedToken;
+                // Or, you can return the ClaimsPrincipal
+                // (which has the JWT properties automatically mapped to .NET claims)
+            }
+            catch (SecurityTokenValidationException stvex)
+            {
+                // The token failed validation!
+                // TODO: Log it or display an error.
+                // throw new Exception($"Token failed validation: {stvex.Message}");
+                _log.LogWarning($"Token failed validation - {stvex.Message}");
+                return false;
+            }
+            catch (ArgumentException argex)
+            {
+                // The token was not well-formed or was invalid for some other reason.
+                // TODO: Log it or display an error.
+                // throw new Exception($"Token was invalid: {argex.Message}");
+                _log.LogWarning($"Token was invalid - {argex.Message}");           
+                return false;
             }
         }
+
+        public string getClaimsId(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+
+            //token sent as "Bearer xxxx"
+  
+
+            try
+            {
+                var tokenArr = token.Split(" ");
+                var accessToken = tokenArr[1];
+                var tokenS = handler.ReadToken(accessToken) as JwtSecurityToken;
+                return tokenS.Claims.First(claim => claim.Type == "UserId").Value;
+            }
+            catch (Exception)
+            {
+                _log.LogWarning($"Couldn't get claims id from token {token}");
+                return null;
+            }
+
+        }
+
+
+    }
 
 }

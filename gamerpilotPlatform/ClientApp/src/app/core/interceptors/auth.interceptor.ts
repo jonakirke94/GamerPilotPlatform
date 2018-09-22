@@ -1,4 +1,4 @@
-import { HttpInterceptor, HttpHandler, HttpEvent, HttpRequest, HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { HttpInterceptor, HttpHandler, HttpEvent, HttpRequest, HttpResponse, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/do';
@@ -33,13 +33,15 @@ export class AuthInterceptor implements HttpInterceptor {
 
     private logout() {
         this._auth.logout();
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/login');
     }
 
     intercept(req: HttpRequest<any>,
         next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(this.applyCredentials(req)).pipe(
             catchError(err => {
+                console.log('Caught error in interceptor');
+                console.log(err);
 
                 if (err instanceof HttpErrorResponse) {
 
@@ -52,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         const refreshToken = this._storage.getRefreshToken();
                         // attempt to refresh tokens on the server
                         return this.http
-                        .post(this.baseUrl + 'api/token/refresh', {
+                        .post(this.baseUrl + 'api/tokens/refresh', {
                             token,
                             refreshToken
                         }).pipe(
@@ -64,15 +66,16 @@ export class AuthInterceptor implements HttpInterceptor {
                           // resend request with updated header
                           return next.handle(this.applyCredentials(req));
                         }));
-                    } else {
+                    }
+                    // if 401 redirect to login
+                    if (err.status === 401) {
+                        console.log('logged out');
                         this.logout();
                     }
 
                 }
 
                 return Observable.throw(err);
-
-
             })
 
 

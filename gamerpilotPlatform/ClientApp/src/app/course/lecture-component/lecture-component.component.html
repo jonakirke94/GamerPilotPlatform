@@ -1,0 +1,34 @@
+
+<div *ngIf="dataLoaded" class="container" [@flyInOut]> 
+
+    <div *ngIf="lecture.lectureType == 1">
+    <app-info [lecture]="lecture"></app-info>
+    </div>
+
+    <div *ngIf="lecture.lectureType == 2">
+    <app-introduction [lecture]="lecture"></app-introduction>
+    </div>
+
+    <div *ngIf="lecture.lectureType == 3">
+    <app-case [lecture]="lecture"></app-case>
+    </div>
+
+    <div *ngIf="lecture.lectureType == 4">
+    <app-video [lecture]="lecture"></app-video>
+    </div>
+
+    <div *ngIf="lecture.lectureType == 5">
+    <app-quiz [lecture]="lecture"></app-quiz>
+    </div>
+
+    <div *ngIf="lecture.lectureType == 6">
+    <app-exercises [lecture]="lecture"></app-exercises>
+    </div>
+
+    <div *ngIf="lecture.lectureType == 7">
+    <app-summary [lecture]="lecture"></app-summary>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,24 @@
+<div class="text-center">
+    <h1>Courses</h1>
+
+    <hr>
+ </div>
+
+ <ng-container *ngIf="dataLoaded; else Loader" >
+<div class="row no-gutters wrapper justify-content-center" [@listAnimationSlow]="courses.length">    
+    <div class="col-lg-3 col-md-6 col-sm-6 parent" *ngFor="let course of courses; let i = index" (click)="goToCourse(course.isReleased, course.urlName)">
+      <div class="child">
+          <img class="img-fluid" src="{{course.imageUrl}}" alt="{{course.name}}">
+      </div>
+  </div>
+</div>
+</ng-container>
+
+<ng-template #Loader>
+  <div class="row no-gutters wrapper justify-content-center">    
+    <div class="col-lg-3 col-md-6 col-sm-6 loader" *ngFor="let n of [0,1,2,3,4,5]">
+  </div>
+</div>
+</ng-template>
+
+

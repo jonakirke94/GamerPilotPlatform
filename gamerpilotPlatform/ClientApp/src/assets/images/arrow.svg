@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="16px" viewBox="0 0 26 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>ion-ios-arrow-thin-right - Ionicons</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="VerifyPayments-Home--Desktop-1170px--ver-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-330.000000, -3273.000000)">
+        <g id="//Footer" transform="translate(0.000000, 3114.000000)" fill="#B3B7D3">
+            <g id="Shortcut" transform="translate(230.000000, 80.000000)">
+                <path d="M118.3625,94.8341969 C118.037498,94.5025891 118.037498,94.1709862 118.3625,93.8393783 L123.80625,87.7046638 L100.65,87.7046638 C100.216664,87.7046638 100,87.4835952 100,87.0414514 C100,86.5993076 100.216664,86.378239 100.65,86.378239 L123.80625,86.378239 L118.3625,80.2435245 C118.037498,79.9119166 118.037498,79.5803137 118.3625,79.2487059 C118.687502,78.917098 119.012498,78.917098 119.3375,79.2487059 C123.616688,84.0570197 125.783333,86.4887741 125.8375,86.5440421 C125.945834,86.6545781 126,86.8203795 126,87.0414514 C126,87.2625233 125.945834,87.4283247 125.8375,87.5388607 L119.3375,94.8341969 C119.229166,94.9447329 119.066668,95 118.85,95 C118.633332,95 118.470834,94.9447329 118.3625,94.8341969 Z" id="ion-ios-arrow-thin-right---Ionicons" transform="translate(113.000000, 87.000000) scale(-1, 1) translate(-113.000000, -87.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

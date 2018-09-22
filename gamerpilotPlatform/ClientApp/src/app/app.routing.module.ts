@@ -1,17 +1,32 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BooksComponent } from './components/books/books.component';
 import { AuthGuard } from './core/guards/auth.guard';
-import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
 import { HomeComponent } from './components/home/home.component';
+import { SignupComponent } from './components/authentication/signup/signup.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { LearningbasisComponent } from './components/learningbases/learningbasis.component';
+import { PrivacyPoliticsComponent } from './components/privacy-politics/privacy-politics.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { GamertestComponent } from './components/gamertest/gamertest.component';
+
 
 const routes: Routes = [
     { path: '', component: HomeComponent }, // index
     { path: 'home', component: HomeComponent },
-    { path: 'books', canActivate: [AuthGuard], component: BooksComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'learningbasis', component: LearningbasisComponent },
+    { path: 'privacy', component: PrivacyPoliticsComponent },
+    { path: 'terms', component: TermsComponent },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'gamertest', component: GamertestComponent },
 
-    { path: 'fetch-data', component: FetchDataComponent },
-    { path: '**', redirectTo: 'home' }
+    {
+      path: 'courses',
+      loadChildren: './course/course.module#CourseModule'
+    },
+    { path: '**', redirectTo: 'home' },
 
   ];
 

@@ -1,24 +1,123 @@
+
+
+
+
 <div class="container">
-  <table class="table table-dark table-hover table-striped">
-      <thead class="thead-light">
-          <tr>
-              <th>Name</th>
-              <th>Age</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-              <td>Steve Smith</td>
-              <td>28</td>
-          </tr>
-          <tr>
-              <td>David Warner</td>
-              <td>29</td>
-          </tr>
-          <tr>
-              <td>Joe Root</td>
-              <td>27</td>
-          </tr>
-      </tbody>
-  </table>
+  <h1 class="home-title">Sharpen your CS:GO skills 
+    <br>while practicing real life skills</h1>
+  <p class="subtitle">We combine esport with real life skills</p>
+  <div class="home-buttons">
+    <a href="" class="btn home-btn btn-primary invite-btn" role="button" routerLink="/gamertest">Try our gamertest</a>
+    <a href="https://www.youtube.com/watch?v=2ZiRe1aqc0o" target="_blank" class="btn home-btn btn-secondary">Watch teaser</a>
+  </div>
 </div>
+
+<div class="container">
+</div>
+  <section class="features">
+    <h2 class="section-header features-header">FEATURES</h2>
+    <div class="container">
+      <div class="features-nav" [class.fixed-nav]="fixed">
+        <nav class="features-nav-inner">
+          <ul class="features-nav-list">
+            <li class="features-nav-link section-1-link active">
+              <a (click)="scrollToElement(section1)">
+                <i class="fas fa-code-branch feature-icon"></i>
+                <p class="features-link-text ">21st Century Skills</p>
+              </a>
+            </li>
+            <li class="features-nav-link section-2-link">
+              <a (click)="scrollToElement(section2)">
+                <i class="fas fa-chalkboard-teacher feature-icon"></i>
+                <p class="features-link-text">Our educators</p>
+              </a>
+            </li>
+            <li class="features-nav-link section-3-link">
+              <a (click)="scrollToElement(section3)">
+                <i class="fas fas fa-user-cog feature-icon"></i>
+                <p class="features-link-text">Tailored courses</p>
+              </a>
+            </li>
+          </ul>
+          <div class="features-separator">
+            <div class="lavalamp" style="width: 146px; left: 57px;"></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="features-content">
+      <div id="section1" class="features-item" #section1>
+        <div class="container">
+          <div class="row features-item-row">
+            <div class="features-description">
+              <h3 class="features-title">21st Century Skills</h3>
+              <ul class="checklist">
+                <li class="checklist-item">Get greater benefits from your time</li>
+                <li class="checklist-item">Practice real life skills</li>
+              </ul>
+            </div>
+            <i class="fas fa-code-branch icon-right"></i>
+          </div>
+        </div>
+      </div>
+      <div id="section-2" class="features-item" #section2>
+          <div class="container">
+          <div class="row features-item-row">
+            <i class="fas fa-chalkboard-teacher icon-left"></i>
+            <div class="features-description">
+              <h3 class="features-title">Our educators</h3>
+              <ul class="checklist">
+                <li class="checklist-item">Handpicked among best</li>
+                <li class="checklist-item">Highly skilled in their games</li>
+                <li class="checklist-item">Solid ability to teach</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="section-3" class="features-item" #section3>
+        <div class="container">
+          <div class="row features-item-row">
+            <div class="features-description">
+              <h3 class="features-title">Tailored courses</h3>
+              <ul class="checklist">
+                <li class="checklist-item">Personalized course order</li>
+                <li class="checklist-item">Learn at your level</li>
+                <li class="checklist-item">Watch whenever you want</li>
+              </ul>
+            </div>
+            <i class="fas fa-user-cog icon-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- <div class="container" id="courses">
+  <div class="carousel">
+      <h2 class="section-header features-header" style="padding-bottom: 30px">Courses</h2>
+      <app-coursecarousel></app-coursecarousel>
+
+      <div class="home-buttons" style="padding-top: 50px;">
+          <button class="btn home-btn btn-darkgreen"  routerLink='/courses'>All courses</button>
+      </div>
+  </div>
+</div> -->
+
+ <div class="container" id="page-helpers">
+    <div class="page-navigation">
+      <div class="row page-navigation-row">
+        <a class="page-link" routerLink="/gamertest">
+          <p class="page-link-text page-link-text-left">Take our
+            <span class="page-link-bold block">Gamertest</span>
+          </p>
+        </a>
+        <a class="page-link" routerLink="/courses">
+          <p class="page-link-text page-link-text-right" >Try
+            <span class="page-link-bold block">a free course</span>
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>

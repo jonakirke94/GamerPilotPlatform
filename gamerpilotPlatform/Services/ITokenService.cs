@@ -12,5 +12,6 @@ namespace gamerpilotPlatform.Services
         string GenerateRefreshToken();
         ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
         Boolean Validate(string jwt);
+        string getClaimsId(string token);
     }
 }

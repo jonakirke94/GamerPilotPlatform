@@ -1,28 +1,41 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { takeUntil } from 'rxjs/operators';
+import { SnotifyService } from 'ng-snotify';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, OnDestroy {
+  private onDestroy$ = new Subject<void>();
   isLoggedIn: boolean;
 
-  constructor(private _auth: AuthService, private router: Router) {}
+  constructor(private _auth: AuthService, private router: Router, private _toastService: SnotifyService) {}
 
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-      this._auth.isLoggedIn().subscribe(isLogged => {
+      this._auth.IsAuthed$
+      .pipe(
+        takeUntil(this.onDestroy$
+      ))
+      .subscribe(isLogged => {
+
         if (!isLogged) {
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/login');
         }
           this.isLoggedIn = true;
-        }).unsubscribe();
+        });
 
       return this.isLoggedIn;
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

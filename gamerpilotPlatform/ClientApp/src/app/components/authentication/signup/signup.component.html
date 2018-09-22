@@ -1,0 +1,94 @@
+<div class="row justify-content-center no-gutters">
+  <div class="text-center auth-container" [@flyInOut]>
+
+    <div class="auth-title ">
+      Signup
+    </div>
+
+    <i class="fas fa-user-plus auth-icon"></i>
+
+
+    <div class="content">
+
+
+      <form *ngIf="!showSpinner" [formGroup]="signupForm" novalidate (ngSubmit)="signupUser()">
+
+        <!-- Email -->
+        <div class="field">
+          <div class="control">
+            <input [ngClass]="{'is-invalid': email.invalid  && (email.dirty || email.touched),'is-valid': email.valid && (email.dirty || email.touched)
+                                      }" id="email" type="email" name="email" title="email" placeholder="Email" formControlName="email"
+              autocomplete="email">
+            <span class="text-danger" *ngIf="email.errors  && (email.dirty || email.touched)">
+              <p *ngIf="email.errors.pattern">This email is invalid</p>
+              <p *ngIf="email.errors.required">The email field is required</p>
+            </span>
+          </div>
+        </div>
+
+        <!-- Username -->
+        <div class="field">
+          <div class="control">
+            <input [ngClass]="{'is-invalid': username.invalid  && (username.dirty || username.touched),'is-valid': username.valid && (username.dirty || username.touched)
+                            }" id="username" type="text" name="username" title="username" placeholder="Username" formControlName="username"
+              autocomplete="email">
+            <span class="text-danger" *ngIf="username.errors  && (username.dirty || username.touched)">
+              <p *ngIf="username.errors.required">The name field is required</p>
+            </span>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="field" formGroupName="passwords">
+          <div class="control">
+            <input [ngClass]="{
+                                'is-invalid': password.invalid  && (password.dirty || password.touched),
+                                'is-valid': password.valid && (password.dirty || password.touched)
+                              }" id="password" type="password" name="password" title="password" placeholder="Password" formControlName="password"
+              autocomplete="new-password">
+
+            <span class="text-danger" *ngIf="password.errors  && (password.dirty || password.touched)">
+              <p *ngIf="password.hasError('minlength')">The password needs to be min. 8</p>
+              <p *ngIf="password.errors.required">The password field is required</p>
+            </span>
+          </div>
+        </div>
+
+        <!-- Confirm password -->
+        <div class="field" formGroupName="passwords">
+          <div class="control">
+            <input [ngClass]="{
+                                  'is-invalid': (passwords.errors &&
+                                  passwords.errors.areEqual)  && (confirm.dirty || confirm.touched),
+                                  'is-valid': (!passwords.errors && password.touched) && (confirm.dirty || confirm.touched)
+                                }" id="confirm" type="password" name="confirm" title="confirm password" placeholder="Confirm Password"
+              formControlName="confirm" autocomplete="new-password">
+
+            <span class="text-danger" *ngIf="
+                passwords.errors &&
+                passwords.errors.areEqual &&
+                passwords.controls.password.touched"><p>Passwords do not match</p>
+            </span>
+          </div>
+        </div>
+
+
+        <div *ngIf="error" class="text-danger error-txt">{{error}}</div>
+
+        <button class="btn btn-darkgreen" [disabled]="!signupForm.valid">Signup</button>
+
+
+        <div class="link-box">
+          <p>By signing up, you agree to our <br><strong routerLink="/terms"> Terms & conditions</strong> & <strong routerLink="/privacy">Privacy policies</strong></p>
+        </div>
+
+
+
+      </form>
+
+      <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+    </div>
+
+
+  </div>
+</div>

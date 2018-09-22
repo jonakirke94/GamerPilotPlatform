@@ -1,0 +1,25 @@
+<h3>
+    <p>{{lecture.name}}</p>
+</h3>
+
+<p class="text-left">Test your knowledge. If you struggle to answer some of the questions feel free to jump between the lectures and return to complete the quiz later</p>
+
+<ul [@listAnimationSlow]="lecture.questions.length">
+    <li class="question-wrapper" *ngFor="let question of lecture.questions">
+        <div class="question__badge">{{question.difficulty}}</div>
+        <div class="question">
+            <div class="question__tag" appTag [difficulty]="question.difficulty"></div>
+            <div class="question__heading">
+                <h6>{{question.text}}</h6>
+            </div>
+            <button class="question__button" (click)="toggle($event)">
+                <span> Show answer</span>
+                <i class="fas fa-chevron-down"></i>
+
+            </button>
+            <div class="answer hidden">
+                {{question.answer}}
+            </div>
+        </div>
+</li>
+

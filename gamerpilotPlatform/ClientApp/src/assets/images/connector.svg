@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="131px" viewBox="0 0 34 131" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>element</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="How-it-works" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="11-10-Verify-How-it-works--Desktop-1200px--ver2" transform="translate(-703.000000, -2526.000000)">
+            <g id="//Content" transform="translate(-163.000000, 820.000000)">
+                <g id="achieved" transform="translate(0.000000, 1691.000000)">
+                    <g id="Improved-checkout">
+                        <g id="element" transform="translate(867.000000, 15.000000)">
+                            <path d="M16,0 L16,113.351562" id="Path-5" stroke="#FFFFFF" opacity="0.5"></path>
+                            <circle id="Oval" stroke="#659A85" opacity="0.400000006" cx="16" cy="114" r="16"></circle>
+                            <path d="M16,118 C18.209139,118 20,116.209139 20,114 C20,111.790861 18.209139,110 16,110 C13.790861,110 12,111.790861 12,114 C12,116.209139 13.790861,118 16,118 Z" id="Oval" fill="#FFFFFF"></path>
+                            <path d="M16,8 C18.209139,8 20,6.209139 20,4 C20,1.790861 18.209139,0 16,0 C13.790861,0 12,1.790861 12,4 C12,6.209139 13.790861,8 16,8 Z" id="Oval" fill="#FFFFFF"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
