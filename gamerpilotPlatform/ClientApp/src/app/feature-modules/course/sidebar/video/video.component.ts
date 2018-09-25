@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {SanitizeHtmlPipePipe} from '../../pipes/sanitize-html-pipe.pipe';
 import { flyInOut } from '../../../../shared/animation';
 
 @Component({

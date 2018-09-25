@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { flyInOut } from '../../../shared/animation';
-import { AuthService } from '../../../core/services/auth.service';
 import { RouterExtService } from '../../../shared/RouterExtService';
 import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-spinner.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',

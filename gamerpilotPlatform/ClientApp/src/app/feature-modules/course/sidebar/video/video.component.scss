@@ -2,11 +2,6 @@
 @import '~sass/mixins';
 @import '~sass/fonts';
 
-h3 {
-    color: $primary;
-    margin-bottom: 50px;
-}
-
 .grid {
     display: flex;
     flex-direction: row; 
