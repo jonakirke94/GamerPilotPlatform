@@ -17,22 +17,22 @@ import { listAnimations, flyInOut } from '../../shared/animation';
 export class SidebarComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();
 
-  private courseName: string;
-  private course;
-  private lectures;
-  private sections;
-  private dataLoaded = false;
+  courseName: string;
+  course;
+  lectures;
+  sections;
+  dataLoaded = false;
 
   completedLectures = [];
   currentLectureId: string;
 
-  private activeChild = false;
+  activeChild = false;
 
-  private isLoggedIn;
-  private isEnrolled;
+  isLoggedIn;
+  isEnrolled;
 
-  private minimized = false;
-  private showNav = false;
+  minimized = false;
+  showNav = false;
 
   constructor(
     private _router: Router,

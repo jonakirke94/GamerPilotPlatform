@@ -22,8 +22,6 @@ namespace gamerpilotPlatform.Data
 
         public async Task Seed()
         {
-
-            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (!context.Users.Any())

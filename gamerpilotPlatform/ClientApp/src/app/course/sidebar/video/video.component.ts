@@ -12,8 +12,8 @@ import { flyInOut } from '../../../shared/animation';
 export class VideoComponent implements OnInit {
  @Input() lecture;
  videos = [];
- private selectedVideo;
- private hasVideos: boolean;
+ selectedVideo;
+ hasVideos: boolean;
 
  constructor() { }
 
