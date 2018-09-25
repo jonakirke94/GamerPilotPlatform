@@ -1,12 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Course } from '../../../models/course';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CourseService } from '../../core/services/course.service';
-import { Lecture } from '../../../models/lecture';
-import { AuthService } from '../../core/services/auth.service';
 import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { flyInOut } from '../../shared/animation';
+import { flyInOut } from '../../../shared/animation';
+import { CourseService } from '../../../core/services/course.service';
 
 @Component({
   selector: 'app-lecture-component',

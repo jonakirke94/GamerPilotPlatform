@@ -1,20 +1,16 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 
-import { HeaderComponent } from './shared/layout/header/header.component';
 import { filter, debounceTime, takeUntil } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { StorageService } from './core/services/storage.service';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'app';
   inCourseSection = false;
   private onDestroy$ = new Subject<void>();
 

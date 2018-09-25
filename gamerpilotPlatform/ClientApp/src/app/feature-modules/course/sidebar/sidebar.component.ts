@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
-import { CourseService } from '../../core/services/course.service';
-import { AuthService } from '../../core/services/auth.service';
 import { Subscription, Subject } from 'rxjs';
 import { LockedContentComponent} from './locked-content/locked-content.component';
 import { takeUntil } from 'rxjs/operators';
 import { SnotifyService } from 'ng-snotify';
-import { listAnimations, flyInOut } from '../../shared/animation';
+import { listAnimations, flyInOut } from '../../../shared/animation';
+import { CourseService } from '../../../core/services/course.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -234,7 +234,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   enrollUser(enroll: boolean) {
     if (!this.isLoggedIn) {
-      this._router.navigateByUrl('/login');
+      this._router.navigateByUrl('auth/login');
       return;
     }
 

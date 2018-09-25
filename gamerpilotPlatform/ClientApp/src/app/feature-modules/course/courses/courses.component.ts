@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CourseService } from '../../core/services/course.service';
 import {  Subject } from 'rxjs';
-import { Course } from '../../../models/course';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { listAnimationSlow } from '../../shared/animation';
+import { listAnimationSlow } from '../../../shared/animation';
+import { CourseService } from '../../../core/services/course.service';
+import { Course } from '../../../../models/course';
 
 @Component({
   selector: 'app-courses',

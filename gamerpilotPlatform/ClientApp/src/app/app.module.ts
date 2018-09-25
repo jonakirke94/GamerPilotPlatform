@@ -15,8 +15,6 @@ import { LearningbasisComponent } from './components/learningbases/learningbasis
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyPoliticsComponent } from './components/privacy-politics/privacy-politics.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { GamertestComponent } from './components/gamertest/gamertest.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +23,9 @@ import { GamertestComponent } from './components/gamertest/gamertest.component';
       LearningbasisComponent,
       PrivacyPoliticsComponent,
       TermsComponent,
-      ProfileComponent,
-      GamertestComponent,
   ],
   imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-      CommonModule,
-      HttpClientModule,
-      FormsModule,
       AppRoutingModule,
       CoreModule,
       BrowserAnimationsModule,

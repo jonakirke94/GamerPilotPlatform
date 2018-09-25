@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   showSpinner = false;
   error = '';
 
+  previousUrl: string;
+
 
 
   constructor(
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.createFormControls();
     this.createForm();
+    this.previousUrl = this.routerExtService.getPreviousUrl();
   }
 
   ngOnDestroy() {
@@ -67,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  private loginUser() {
+  loginUser() {
     // clear any existing data
      this._auth.logout();
 
@@ -85,10 +88,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe(() => {
 
       // on successful auth redirect to previous url
-      const previous = this.routerExtService.getPreviousUrl();
-
-      if (previous) {
-        this.router.navigateByUrl(previous);
+      if (this.previousUrl && this.previousUrl !== '/auth/login') {
+          this.router.navigateByUrl(this.previousUrl);
       } else {
         this.router.navigateByUrl('/');
       }

@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate, OnDestroy {
       .subscribe(isLogged => {
 
         if (!isLogged) {
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('/auth/login');
         }
           this.isLoggedIn = true;
         });

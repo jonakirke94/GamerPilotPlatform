@@ -13,18 +13,16 @@ import { ExercisesComponent } from './sidebar/exercises/exercises.component';
 import { LockedContentComponent } from './sidebar/locked-content/locked-content.component';
 import { LectureComponentComponent } from './lecture-component/lecture-component.component';
 import { VideoComponent } from './sidebar/video/video.component';
-import { StatusDirective } from './directives/status.directive';
-import { IconDirective } from './directives/icon.directive';
-import { TagDirective } from './directives/tag.directive';
-import { SanitizeHtmlPipePipe } from './pipes/sanitize-html-pipe.pipe';
-import { ExerciseTagDirective } from './directives/exercise-tag.directive';
+import { SharedModule } from '../../shared/shared.module';
+
+
 
 
 
 @NgModule({
   imports: [
-    CommonModule,
-    CourseRoutingModule
+    CourseRoutingModule,
+    SharedModule
   ],
   declarations: [SidebarComponent,
     IntroductionComponent,
@@ -32,7 +30,6 @@ import { ExerciseTagDirective } from './directives/exercise-tag.directive';
     CaseComponent,
     QuizComponent, SummaryComponent, ExercisesComponent,
     LockedContentComponent, LectureComponentComponent,
-    VideoComponent, LockedContentComponent,
-    StatusDirective, IconDirective, TagDirective, SanitizeHtmlPipePipe, ExerciseTagDirective]
+    VideoComponent, LockedContentComponent]
 })
 export class CourseModule { }

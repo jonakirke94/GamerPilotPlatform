@@ -33,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     private logout() {
         this._auth.logout();
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/auth/login');
     }
 
     intercept(req: HttpRequest<any>,

@@ -6,12 +6,10 @@ import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthenticationModule } from '../components/authentication/authentication.module';
 
 @NgModule({
     imports: [
-      CommonModule,
-      AuthenticationModule
+      CommonModule
     ],
     providers: [
       AuthService,

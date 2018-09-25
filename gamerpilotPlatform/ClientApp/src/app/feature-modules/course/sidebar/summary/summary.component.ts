@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { flyInOut } from '../../../shared/animation';
+import { flyInOut } from '../../../../shared/animation';
 
 @Component({
   selector: 'app-summary',
