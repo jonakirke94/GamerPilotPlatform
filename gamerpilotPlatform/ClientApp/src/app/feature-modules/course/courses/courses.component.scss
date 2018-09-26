@@ -55,10 +55,10 @@ hr {
     /*         max-width: 600%; */
             background-size: cover;
             background-repeat: no-repeat;
-            -webkit-transition: all .5s;
-            -moz-transition: all .5s;
-            -o-transition: all .5s;
-            transition: all .5s;
+            -webkit-transition: all .3s;
+            -moz-transition: all .3s;
+            -o-transition: all .3s;
+            transition: all .3s;
     
             &:before {
                 content: "";
@@ -68,7 +68,7 @@ hr {
                 position: absolute;
                 top: 0;
                 left: 0;
-                background-color: rgba(5, 85, 68, 0.75);  
+                background-color: rgba(5, 85, 68, 0.30);  
             }
         }
     }

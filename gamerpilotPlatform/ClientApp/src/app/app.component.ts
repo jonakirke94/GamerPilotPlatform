@@ -11,7 +11,7 @@ import { StorageService } from './core/services/storage.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  inCourseSection = false;
+  showHeader = false;
   private onDestroy$ = new Subject<void>();
 
 
@@ -32,9 +32,9 @@ export class AppComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroy$)
     ).subscribe(
       x =>  {
-      const regex = /\/courses\/(.\/*)/g;
-      const matches = regex.test(x['url']);
-      this.inCourseSection = matches;
+          const regex = /\/courses\/(.\/*)/g;
+          const match = regex.test(x['url']);
+          this.showHeader = !match;
     });
 
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Inject} from '@angular/core';
+import { Component, OnInit, HostListener, Inject, OnDestroy} from '@angular/core';
 import { CourseCarouselComponent} from '../../shared/coursecarousel/coursecarousel.component';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public fixed = false;
   nav: HTMLElement;
   navOffsetTop;
@@ -98,6 +98,11 @@ export class HomeComponent implements OnInit {
   /* carousel */
   goCourse(id: string) {
     console.log(id);
+  }
+
+  ngOnDestroy() {
+    // reset padding to 0 if page was left while scrollbar was active
+    document.body.style.paddingTop = '0';
   }
 
 
