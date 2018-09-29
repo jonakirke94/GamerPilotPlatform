@@ -37,15 +37,11 @@ export class CourseService implements OnDestroy {
     .post(this.baseUrl + `enroll`, {urlName: name});
   }
 
-  completeLecture(id: string, courseUrlName: string) {
+  completeLecture(id: string, urlName: string, isLastLecture: boolean) {
     return this.http
-    .post(this.baseUrl + `complete`, {id: id, urlName: courseUrlName});
+    .post(this.baseUrl + `complete`, {id, urlName, isLastLecture});
   }
 
-  sendSatisfaction(feedback: string, courseUrlName: string) {
-    return this.http
-    .post(this.baseUrl + 'feedback', {feedback: feedback, urlName: courseUrlName});
-  }
 
   ngOnDestroy() {
 

@@ -51,7 +51,7 @@ namespace gamerpilotPlatform.Controllers
                 // add to DB
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
-                _log.LogInformation($"New user was created {user.Id}");
+                _log.LogInformation($"New user was created {newUser.Id}");
 
                 //access Id of newly inserted entity
                 var usersClaims = new[]
@@ -63,7 +63,7 @@ namespace gamerpilotPlatform.Controllers
 
                 jwtToken = _tokenService.GenerateAccessToken(usersClaims);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

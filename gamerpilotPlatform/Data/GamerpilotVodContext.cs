@@ -16,7 +16,7 @@ namespace gamerpilotPlatform.Data
         public GamerpilotVodContext(DbContextOptions<GamerpilotVodContext> options)
        : base(options)
         {
-            Database.SetCommandTimeout(150000);
+            //Database.SetCommandTimeout(150000);
         }
 
         public DbSet<User> Users { get; set; }
@@ -29,8 +29,9 @@ namespace gamerpilotPlatform.Data
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<CompletedLectures> CompletedLectures { get; set; }
         public DbSet<CaseSection> CaseSections { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
-        
+
 
         // many to many with customized join table
         /* https://stackoverflow.com/questions/7050404/create-code-first-many-to-many-with-additional-fields-in-association-table */

@@ -40,11 +40,8 @@ export class AuthInterceptor implements HttpInterceptor {
         next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(this.applyCredentials(req)).pipe(
             catchError(err => {
-                console.log('Caught error in interceptor');
-                console.log(err);
 
                 if (err instanceof HttpErrorResponse) {
-
 
 
                     if (err.status === 401 && err.headers.get('Token-Expired')) {
@@ -69,7 +66,6 @@ export class AuthInterceptor implements HttpInterceptor {
                     }
                     // if 401 redirect to login
                     if (err.status === 401) {
-                        console.log('logged out');
                         this.logout();
                     }
 

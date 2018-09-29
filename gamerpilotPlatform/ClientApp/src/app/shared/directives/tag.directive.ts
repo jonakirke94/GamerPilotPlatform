@@ -11,7 +11,6 @@ export class TagDirective implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.difficulty === 'easy', 'diff');
     if (this.difficulty === 'easy') {
         this.el.nativeElement.classList.add('easy');
     } else if (this.difficulty === 'medium') {

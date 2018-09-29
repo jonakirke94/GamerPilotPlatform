@@ -14,6 +14,9 @@ import { LockedContentComponent } from './sidebar/locked-content/locked-content.
 import { LectureComponentComponent } from './lecture-component/lecture-component.component';
 import { VideoComponent } from './sidebar/video/video.component';
 import { SharedModule } from '../../shared/shared.module';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { RatingStarComponent } from './helper-components/rating-star/rating-star.component';
+import { NextLectureComponent } from './helper-components/next-lecture/next-lecture.component';
 
 
 
@@ -22,7 +25,7 @@ import { SharedModule } from '../../shared/shared.module';
 @NgModule({
   imports: [
     CourseRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [SidebarComponent,
     IntroductionComponent,
@@ -30,6 +33,6 @@ import { SharedModule } from '../../shared/shared.module';
     CaseComponent,
     QuizComponent, SummaryComponent, ExercisesComponent,
     LockedContentComponent, LectureComponentComponent,
-    VideoComponent, LockedContentComponent]
+    VideoComponent, LockedContentComponent, FeedbackComponent, RatingStarComponent, NextLectureComponent]
 })
 export class CourseModule { }

@@ -17,7 +17,6 @@ export class VideoComponent implements OnInit {
  constructor() { }
 
   ngOnInit() {
-    console.log(this.lecture);
     if (!!this.lecture.videos && this.lecture.videos.length > 0) {
       this.videos = this.lecture.videos;
       this.selectedVideo = this.videos[0];
@@ -26,7 +25,6 @@ export class VideoComponent implements OnInit {
   }
 
   selectVideo(video) {
-    console.log('selected', video);
     this.selectedVideo = video;
   }
 

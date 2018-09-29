@@ -50,7 +50,6 @@
       </a>
   </div>
 
-  <!-- LOADER -->
   <div class="sidebar" [class.minimized]="minimized" *ngIf="!dataLoaded">
         <nav class="main-navigation item no-border">
           <ul>
@@ -99,17 +98,20 @@
           
   <div class="content">
 
+    <!-- Not enrolled or Not logged in-->
     <div *ngIf="!isEnrolled || !isLoggedIn">
       <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
     </div>
 
   
+    <!-- Show first lection-->
+    <div *ngIf="!activeChild && !completedCourse && isEnrolled && isLoggedIn">
+        <app-next-lecture (nextClicked)="goToNextLecture()"></app-next-lecture>
+    </div>
 
-    <div *ngIf="!activeChild && isEnrolled && isLoggedIn">
-        <div class="get-started">
-            <p>It seems you are already enrolled ..</p>
-          <button class="btn-start" (click)="goFirstLesson()">Go to first lecture</button>
-        </div>
+    <!-- Completed course -->
+    <div *ngIf="!activeChild && completedCourse && isEnrolled && isLoggedIn">
+        <app-feedback [feedback]="feedack"></app-feedback>
     </div>
 
     <router-outlet></router-outlet>

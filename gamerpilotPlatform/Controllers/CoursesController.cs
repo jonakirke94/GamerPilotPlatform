@@ -63,26 +63,29 @@ namespace gamerpilotPlatform.Controllers
 
             try
             {
-                CourseUser isEnrolledEntity = null;
+                CourseUser courseUser = null;
                 var userId = _tokenService.getClaimsId(authorization);
 
                 course = _context.Courses
                     .Include(x => x.Lectures)
                     .SingleOrDefault(x => x.UrlName == urlName);
                 course.Sections = GetSectionFromLectureList(course.Lectures);
+                course.EnrolledUsers = null; //avoid showing enrolled users to other people
 
-            
-              
-                isEnrolledEntity = _context.CourseUsers
+
+
+                courseUser = _context.CourseUsers
                     .Include(x => x.CompletedLectures)
+                    .Include(x => x.Feedback)
                     .SingleOrDefault(x => x.Course.UrlName == urlName && x.UserId == userId);
-                
-                if (isEnrolledEntity == null)
+                courseUser.Course.EnrolledUsers = null; //avoid showing enrolled users to other people
+
+                if (courseUser == null)
                 {
                     // if not enrolled just return the course
                     return new ObjectResult(new
                     {
-                        enrolled = isEnrolledEntity == null ? false : true,
+                        enrolled = false,
                         course,
                     });
                 }
@@ -91,9 +94,10 @@ namespace gamerpilotPlatform.Controllers
                     // if enrolled return the course with completed lectures
                     return new ObjectResult(new
                     {
-                        enrolled = isEnrolledEntity == null ? false : true,
+                        enrolled = true,
                         course,
-                        completedLectures = isEnrolledEntity.CompletedLectures
+                        feedback = courseUser.Feedback,
+                        completedLectures = courseUser.CompletedLectures
                     });
                 }
             }
@@ -290,30 +294,56 @@ namespace gamerpilotPlatform.Controllers
             var course = _context.Courses.SingleOrDefault(x => x.UrlName == courseUrl);
 
             //check if user is enrolled
-            var isEnrolled = _context.CourseUsers.Any(x => x.CourseId == course.Id && x.UserId == userId);
+            var courseUser = _context.CourseUsers.SingleOrDefault(x => x.CourseId == course.Id && x.UserId == userId);
 
-                return new ObjectResult(new
-                {
-                    data = isEnrolled,
-                });
+            return new ObjectResult(new
+            {
+                isEnrolled = courseUser == null ? false : true,
+                isCompleted = courseUser.IsCompleted
+            });
    
         }
 
+        //[HttpPost("[action]")]
+        //[Authorize]
+        //public IActionResult Feedback([FromHeader]string authorization, [FromBody]JObject body)
+        //{
+        //    try
+        //    {
+        //        var urlName = body.Value<String>("urlName");
+        //        var feedback = body.Value<String>("feedback");
+        //        var userId = _tokenService.getClaimsId(authorization);
+
+        //        if (string.IsNullOrWhiteSpace(urlName) || string.IsNullOrWhiteSpace(feedback) || string.IsNullOrWhiteSpace(userId)) {
+        //            return BadRequest();
+        //        }
+
+        //        var courseUser = _context.CourseUsers.SingleOrDefault(x => x.UserId == userId && x.Course.UrlName == urlName);
+        //        courseUser.Feedback = feedback;
+        //        _context.SaveChanges();
+        //        _log.LogInformation($"Saved feedback for {userId}");
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError);
+        //    }
+        //}
+
         [HttpPost("[action]")]
         [Authorize]
-        public IActionResult Feedback([FromHeader]string authorization, [FromBody]JObject body)
+        public IActionResult Feedback([FromHeader]string authorization, Feedback feedback)
         {
             try
             {
-                var urlName = body.Value<String>("urlName");
-                var feedback = body.Value<String>("feedback");
                 var userId = _tokenService.getClaimsId(authorization);
 
-                if (string.IsNullOrWhiteSpace(urlName) || string.IsNullOrWhiteSpace(feedback) || string.IsNullOrWhiteSpace(userId)) {
+                if (feedback == null || string.IsNullOrWhiteSpace(userId))
+                {
                     return BadRequest();
                 }
 
-                var courseUser = _context.CourseUsers.SingleOrDefault(x => x.UserId == userId && x.Course.UrlName == urlName);
+                var courseUser = _context.CourseUsers.SingleOrDefault(x => x.UserId == userId && x.Course.UrlName == feedback.CourseUrl);
                 courseUser.Feedback = feedback;
                 _context.SaveChanges();
                 _log.LogInformation($"Saved feedback for {userId}");
@@ -333,6 +363,7 @@ namespace gamerpilotPlatform.Controllers
             {
                 var lectureId = body.Value<Int32>("id");
                 var urlName = body.Value<String>("urlName");
+                var isLastLecture = body.Value<Boolean>("isLastLecture");
 
                 var userId = _tokenService.getClaimsId(authorization);
 
@@ -347,6 +378,13 @@ namespace gamerpilotPlatform.Controllers
                     // save lectureId to completeLecture table
                     var completedLecture = new CompletedLectures { LectureId = lectureId };
                     _context.CompletedLectures.Add(completedLecture);
+
+                    // if the lecture is also the last mark the course as completed
+                    if (isLastLecture)
+                    {
+                        courseUser.IsCompleted = true;
+                    }
+
                     _context.SaveChanges();
 
                     // add table to users list of completed courses;

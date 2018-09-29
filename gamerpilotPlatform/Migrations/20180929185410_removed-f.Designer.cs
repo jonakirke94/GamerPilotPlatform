@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gamerpilotPlatform.Data;
 
 namespace gamerpilotPlatform.Migrations
 {
     [DbContext(typeof(GamerpilotVodContext))]
-    partial class GamerpilotVodContextModelSnapshot : ModelSnapshot
+    [Migration("20180929185410_removed-f")]
+    partial class removedf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,36 +49,13 @@ namespace gamerpilotPlatform.Migrations
 
                     b.Property<DateTime>("EnrolledAt");
 
-                    b.Property<int?>("FeedbackId");
-
                     b.Property<bool>("IsCompleted");
 
                     b.HasKey("UserId", "CourseId");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("FeedbackId");
-
                     b.ToTable("CourseUsers");
-                });
-
-            modelBuilder.Entity("gamerpilotPlatform.Model.Feedback", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("LikelyToRecommend");
-
-                    b.Property<int>("Rating");
-
-                    b.Property<string>("UniqueCourseOpinion");
-
-                    b.Property<string>("WouldPayOpinion");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("gamerpilotPlatform.Model.Instructor", b =>
@@ -324,10 +303,6 @@ namespace gamerpilotPlatform.Migrations
                         .WithMany("EnrolledUsers")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("gamerpilotPlatform.Model.Feedback", "Feedback")
-                        .WithMany()
-                        .HasForeignKey("FeedbackId");
 
                     b.HasOne("gamerpilotPlatform.Model.User", "User")
                         .WithMany("EnrolledUsers")

@@ -27,7 +27,12 @@
     border: none;
     display: block;
     background-color: $primary;
-    font-size: 18px;
+    font-size: 1rem;
+
+    @media (max-width: 768px) {
+        padding: 1rem 3rem 1rem 3rem; //top-right-bot-left
+        font-size: .8rem;
+    }
 
     &:hover {
         cursor: pointer;

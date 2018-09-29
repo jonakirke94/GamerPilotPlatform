@@ -16,13 +16,15 @@ namespace gamerpilotPlatform.Model
         public virtual User User { get; set; }
 
         public string CourseId { get; set; }
+
         [JsonIgnore]
         public virtual Course Course { get; set; }
 
         public bool IsCompleted { get; set; }
+
         public DateTime EnrolledAt { get; set; }
 
-        public string Feedback { get; set; }
+        public Feedback Feedback { get; set; }
 
         public ICollection<CompletedLectures> CompletedLectures { get; set; }
 

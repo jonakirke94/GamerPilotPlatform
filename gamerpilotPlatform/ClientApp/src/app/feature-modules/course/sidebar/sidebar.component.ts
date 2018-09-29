@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   courseName: string;
   course;
   lectures;
+  feedback;
   sections;
   dataLoaded = false;
 
@@ -27,9 +28,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   currentLectureId: string;
 
   activeChild = false;
-
-  isLoggedIn;
-  isEnrolled;
+  isLoggedIn: boolean;
+  isEnrolled: boolean;
+  completedCourse = false;
 
   minimized = false;
   showNav = false;
@@ -48,8 +49,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.listenToChildRoutes();
 
     this._authService.IsAuthed$.subscribe(status => {
-      this.isLoggedIn = status;
-  });
+    this.isLoggedIn = status;
+    });
 
     this.loadSidebar();
   }
@@ -67,7 +68,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this._courseService.getUserCourse(this.courseName).pipe(
       takeUntil(this.onDestroy$))
       .subscribe(res => {
-          this.isEnrolled = res['data'];
+          this.isEnrolled = res['isEnrolled'];
+          this.completedCourse = res['isCompleted'];
           this.loadCourse(this.courseName);
     });
   }
@@ -94,9 +96,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const index = lectureArr.indexOf(Number(this.currentLectureId));
     const isNotCompleted = this.completedLectures.indexOf(Number(this.currentLectureId)) === -1;
 
-    if (index + 1 < lectureArr.length && isNotCompleted) {
+    if (isNotCompleted) {
       // complete lecture on server
-      this._courseService.completeLecture(this.currentLectureId, this.courseName).pipe(
+      this._courseService.completeLecture(this.currentLectureId, this.courseName, false).pipe(
         takeUntil(this.onDestroy$))
         .subscribe(res => {
           const newCompletedLectures = res['data'];
@@ -109,11 +111,32 @@ export class SidebarComponent implements OnInit, OnDestroy {
             pauseOnHover: true
           });
 
+          this.goToNextLecture();
+
         });
+    // if already completed just navigate to the next lecture
+    } else if (index + 1 < lectureArr.length) {
+      // go to next if not on last lecture
+      this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[index + 1]}`);
+    } else {
+      // go to first lecture
+      this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[0]}`);
+    }
+  }
+
+  goToNextLecture() {
+    const lectureArr = this.lectures.map(x => x.id);
+
+    let nextArrIndex: number;
+    for (let i = 0; i < lectureArr.length; i++) {
+      const id = lectureArr[i];
+      if (this.completedLectures.indexOf(Number(id)) === -1) {
+        nextArrIndex = lectureArr.indexOf(Number(id));
+        break;
+      }
     }
 
-    this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[index + 1]}`);
-
+    this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[nextArrIndex]}`);
   }
 
   complete() {
@@ -126,43 +149,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     if (isNotCompleted) {
       // complete lecture on server
-      this._courseService.completeLecture(this.currentLectureId, this.courseName)
+      this._courseService.completeLecture(this.currentLectureId, this.courseName, true)
       .pipe(
       takeUntil(this.onDestroy$))
       .subscribe(res => {
           const newCompletedLectures = res['data'];
           this.completedLectures = newCompletedLectures.map(x => x.lectureId);
+          this.completedCourse = true;
 
-          this._toastService.confirm('If another course was released, would you be willing to pay for it?', 'Congratulations!', {
-            timeout: 10000,
-            showProgressBar: true,
-            closeOnClick: false,
-            pauseOnHover: true,
-            buttons: [
-              {text: 'Yes', action: (toast) => {
-                this._courseService.sendSatisfaction('YES', this.courseName).pipe(
-                  takeUntil(this.onDestroy$))
-                  .subscribe();
-                this._toastService.remove(toast.id);
-              }},
-              {text: 'No', action: (toast) => {
-                this._courseService.sendSatisfaction('NO', this.courseName).pipe(
-                  takeUntil(this.onDestroy$))
-                  .subscribe();
-                this._toastService.remove(toast.id);
-              }},
-            ]
-          });
+          // send to course home view where feedback will be showed
+          this._router.navigateByUrl(`courses/${this.courseName}`);
         });
     }
   }
-
-  goFirstLesson() {
-    const lectureArr = this.lectures.map(x => x.id);
-    this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[0]}`);
-
-  }
-
 
   loadCourse(name: string) {
       this._courseService.getCourse(name)
@@ -173,30 +172,28 @@ export class SidebarComponent implements OnInit, OnDestroy {
           this._router.navigateByUrl('/courses');
         }
 
+
+        this.course = res['course'];
+        this.lectures = this.course.lectures;
+        this.sections = this.course.sections;
         const enrolledResult = res['enrolled'] as boolean;
+        const feedback = res['feedback'];
+        console.log('course', res);
 
-        if (!enrolledResult) {
-          this.course = res['course'];
-          this.lectures = this.course.lectures;
-          this.sections = this.course.sections;
-
-        } else {
-          this.course = res['course'];
-          this.lectures = this.course.lectures;
+        if (enrolledResult) {
           const completedLectureArr = res['completedLectures'];
           this.completedLectures = completedLectureArr.map(x => x.lectureId);
-          this.sections = this.course.sections;
-
         }
+
         if (!this.course) {
           // if no course matched name param in url
           this._router.navigateByUrl('/courses');
         }
 
         // sort the lectures by their order in the course
-  /*       this.lectures.sort(function(a, b) {
+        this.lectures.sort(function(a, b) {
           return a.displayOrder - b.displayOrder;
-        }); */
+        });
 
         this.dataLoaded = true;
       });
@@ -227,7 +224,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
       });
       } else {
         this.activeChild = false;
-
       }
     });
   }
@@ -270,8 +266,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (typeof this.currentLectureId === 'undefined' || typeof this.lectures === 'undefined') {
       return false;
     }  else {
-      return this.lectures.map(x => x.id).indexOf(Number(this.currentLectureId)) === this.lectures.length - 1;
+      /* return this.lectures.map(x => x.id).indexOf(Number(this.currentLectureId)) === this.lectures.length - 1; */
+      return this.lectures.length - this.completedLectures.length  === 1 && !this.isCompleted(this.currentLectureId);
     }
+
   }
 
   isFirst() {
@@ -283,12 +281,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   isInBetween() {
-    if (typeof this.currentLectureId === 'undefined' || typeof this.lectures === 'undefined') {
-      return false;
-    }  else {
-      const index = this.lectures.map(x => x.id).indexOf(Number(this.currentLectureId));
-      return index !== 0 && index !== this.lectures.length - 1;
-    }
+    return !this.isFirst() && !this.isLast();
   }
 
 
