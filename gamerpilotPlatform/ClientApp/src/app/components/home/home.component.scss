@@ -761,10 +761,16 @@ h1 {
   -ms-flex-pack: center;
   justify-content: center;
   flex-direction: row;
-  margin-bottom: 9vh;
+  margin-bottom: 1vh;
   .home-btn:not(:last-child) {
     margin-right: 20px;
   }
+}
+
+.teaser {
+  margin-bottom: 9vh;
+  color: black;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {

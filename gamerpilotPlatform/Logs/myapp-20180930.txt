@@ -1,0 +1,96 @@
+2018-09-30T12:27:29.9813330+02:00  [INF] Entity Framework Core "2.1.0-rc1-32029" initialized '"GamerpilotVodContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2018-09-30T12:27:30.2465570+02:00  [INF] Executed DbCommand ("30"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') SELECT 1 ELSE SELECT 0" (0723d8ff)
+2018-09-30T12:27:30.3528890+02:00  [INF] Executed DbCommand ("16"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u])
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END" (0723d8ff)
+2018-09-30T12:27:30.7460963+02:00 0HLH6NT9T24GV:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44389/   (ca22a1cb)
+2018-09-30T12:27:30.7460963+02:00 0HLH6NT9T24GU:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:52441/  0 (ca22a1cb)
+2018-09-30T12:27:30.7863054+02:00 0HLH6NT9T24GU:00000001 [INF] Request finished in 42.4253ms 200  (791a596a)
+2018-09-30T12:27:31.3198620+02:00 0HLH6NT9T24GV:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The SPA default page middleware could not return the default page '/index.html' because it was not found, and no other middleware handled the request.
+Your application is running in Production mode, so make sure it has been published, or that you have built your SPA manually. Alternatively you may wish to switch to the Development environment.
+
+   at Microsoft.AspNetCore.SpaServices.SpaDefaultPageMiddleware.<>c__DisplayClass0_0.<Attach>b__1(HttpContext context, Func`1 next)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_1.<Use>b__1(HttpContext context)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_2.<Use>b__2()
+   at Microsoft.AspNetCore.SpaServices.SpaDefaultPageMiddleware.<>c__DisplayClass0_0.<Attach>b__0(HttpContext context, Func`1 next)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_1.<Use>b__1(HttpContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-09-30T12:27:31.4352232+02:00 0HLH6NT9T24GV:00000001 [INF] Route matched with "{page = \"/Error\", action = \"\", controller = \"\"}". Executing action "/Error" (a44c0341)
+2018-09-30T12:27:31.4650768+02:00 0HLH6NT9T24GV:00000001 [INF] Executing handler method "OnGet" with arguments (null) - ModelState is Valid (d4ff7456)
+2018-09-30T12:27:31.5201957+02:00 0HLH6NT9T24GV:00000001 [INF] Executed action "/Error" in 79.3743ms (afa2e885)
+2018-09-30T12:27:31.5717375+02:00 0HLH6NT9T24GV:00000001 [INF] Request finished in 810.8123ms 500 text/html; charset=utf-8 (791a596a)
+2018-09-30T12:27:31.7924338+02:00 0HLH6NT9T24GU:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44389/favicon.ico   (ca22a1cb)
+2018-09-30T12:27:31.8144272+02:00 0HLH6NT9T24GU:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The SPA default page middleware could not return the default page '/index.html' because it was not found, and no other middleware handled the request.
+Your application is running in Production mode, so make sure it has been published, or that you have built your SPA manually. Alternatively you may wish to switch to the Development environment.
+
+   at Microsoft.AspNetCore.SpaServices.SpaDefaultPageMiddleware.<>c__DisplayClass0_0.<Attach>b__1(HttpContext context, Func`1 next)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_1.<Use>b__1(HttpContext context)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_2.<Use>b__2()
+   at Microsoft.AspNetCore.SpaServices.SpaDefaultPageMiddleware.<>c__DisplayClass0_0.<Attach>b__0(HttpContext context, Func`1 next)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_1.<Use>b__1(HttpContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-09-30T12:27:31.8198125+02:00 0HLH6NT9T24GU:00000002 [INF] Route matched with "{page = \"/Error\", action = \"\", controller = \"\"}". Executing action "/Error" (a44c0341)
+2018-09-30T12:27:31.8215640+02:00 0HLH6NT9T24GU:00000002 [INF] Executing handler method "OnGet" with arguments (null) - ModelState is Valid (d4ff7456)
+2018-09-30T12:27:31.8347391+02:00 0HLH6NT9T24GU:00000002 [INF] Executed action "/Error" in 2.5604ms (afa2e885)
+2018-09-30T12:27:31.8411674+02:00 0HLH6NT9T24GU:00000002 [INF] Request finished in 61.3063ms 500 text/html; charset=utf-8 (791a596a)
+2018-09-30T12:28:57.4751897+02:00  [INF] Entity Framework Core "2.1.0-rc1-32029" initialized '"GamerpilotVodContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2018-09-30T12:28:57.6740044+02:00  [INF] Executed DbCommand ("28"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') SELECT 1 ELSE SELECT 0" (0723d8ff)
+2018-09-30T12:28:57.7897373+02:00  [INF] Executed DbCommand ("18"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u])
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END" (0723d8ff)
+2018-09-30T12:28:58.0172441+02:00 0HLH6NU3TK403:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44389/   (ca22a1cb)
+2018-09-30T12:28:58.0172441+02:00 0HLH6NU3TK402:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:52441/  0 (ca22a1cb)
+2018-09-30T12:28:58.0525439+02:00 0HLH6NU3TK402:00000001 [INF] Request finished in 35.4793ms 200  (791a596a)
+2018-09-30T12:28:58.2506629+02:00 0HLH6NU3TK403:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The SPA default page middleware could not return the default page '/index.html' because it was not found, and no other middleware handled the request.
+Your application is running in Production mode, so make sure it has been published, or that you have built your SPA manually. Alternatively you may wish to switch to the Development environment.
+
+   at Microsoft.AspNetCore.SpaServices.SpaDefaultPageMiddleware.<>c__DisplayClass0_0.<Attach>b__1(HttpContext context, Func`1 next)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_1.<Use>b__1(HttpContext context)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_2.<Use>b__2()
+   at Microsoft.AspNetCore.SpaServices.SpaDefaultPageMiddleware.<>c__DisplayClass0_0.<Attach>b__0(HttpContext context, Func`1 next)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_1.<Use>b__1(HttpContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-09-30T12:28:58.2850065+02:00 0HLH6NU3TK403:00000001 [INF] Route matched with "{page = \"/Error\", action = \"\", controller = \"\"}". Executing action "/Error" (a44c0341)
+2018-09-30T12:28:58.3022082+02:00 0HLH6NU3TK403:00000001 [INF] Executing handler method "OnGet" with arguments (null) - ModelState is Valid (d4ff7456)
+2018-09-30T12:28:58.3392630+02:00 0HLH6NU3TK403:00000001 [INF] Executed action "/Error" in 43.637ms (afa2e885)
+2018-09-30T12:28:58.3743857+02:00 0HLH6NU3TK403:00000001 [INF] Request finished in 350.3483ms 500 text/html; charset=utf-8 (791a596a)
+2018-09-30T12:28:58.5453495+02:00 0HLH6NU3TK402:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44389/favicon.ico   (ca22a1cb)
+2018-09-30T12:28:58.5578847+02:00 0HLH6NU3TK402:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The SPA default page middleware could not return the default page '/index.html' because it was not found, and no other middleware handled the request.
+Your application is running in Production mode, so make sure it has been published, or that you have built your SPA manually. Alternatively you may wish to switch to the Development environment.
+
+   at Microsoft.AspNetCore.SpaServices.SpaDefaultPageMiddleware.<>c__DisplayClass0_0.<Attach>b__1(HttpContext context, Func`1 next)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_1.<Use>b__1(HttpContext context)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_2.<Use>b__2()
+   at Microsoft.AspNetCore.SpaServices.SpaDefaultPageMiddleware.<>c__DisplayClass0_0.<Attach>b__0(HttpContext context, Func`1 next)
+   at Microsoft.AspNetCore.Builder.UseExtensions.<>c__DisplayClass0_1.<Use>b__1(HttpContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(HttpContext context)
+2018-09-30T12:28:58.5730555+02:00 0HLH6NU3TK402:00000002 [INF] Route matched with "{page = \"/Error\", action = \"\", controller = \"\"}". Executing action "/Error" (a44c0341)
+2018-09-30T12:28:58.5758955+02:00 0HLH6NU3TK402:00000002 [INF] Executing handler method "OnGet" with arguments (null) - ModelState is Valid (d4ff7456)
+2018-09-30T12:28:58.5841739+02:00 0HLH6NU3TK402:00000002 [INF] Executed action "/Error" in 5.3332ms (afa2e885)
+2018-09-30T12:28:58.5874990+02:00 0HLH6NU3TK402:00000002 [INF] Request finished in 43.1316ms 500 text/html; charset=utf-8 (791a596a)
