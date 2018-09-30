@@ -25,6 +25,7 @@ namespace gamerpilotPlatform.Model
         public DateTime EnrolledAt { get; set; }
 
         public Feedback Feedback { get; set; }
+        public int? FeedbackId {get;set; }
 
         public ICollection<CompletedLectures> CompletedLectures { get; set; }
 

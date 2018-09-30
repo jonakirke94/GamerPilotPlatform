@@ -1,5 +1,6 @@
 import { Injectable, Inject, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Feedback } from '../../../models/feedback';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,12 @@ export class CourseService implements OnDestroy {
     return this.http
     .post(this.baseUrl + `complete`, {id, urlName, isLastLecture});
   }
+
+  saveFeedback(feedback: Feedback) {
+    return this.http
+    .post(this.baseUrl + `feedback`, feedback);
+  }
+
 
 
   ngOnDestroy() {

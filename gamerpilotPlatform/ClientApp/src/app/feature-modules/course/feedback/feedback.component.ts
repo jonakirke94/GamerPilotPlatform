@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { CourseService } from '../../../core/services/course.service';
+import { Feedback } from '../../../../models/feedback';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-feedback',
@@ -9,22 +13,29 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 })
 export class FeedbackComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();
-  @Input() feedback;
+  @Input() feedback: Feedback;
   showFeedback = true;
 
   feedbackForm: FormGroup;
   q1: FormControl;
   q2: FormControl;
+  rating = 6;
+  recommendation = 6;
+  courseName: string;
   showSpinner = false;
   error = '';
 
-  constructor() { }
+  constructor(
+    private _coursService: CourseService,
+    private _activeRoute: ActivatedRoute
+    ) { }
 
   ngOnInit() {
+    this.courseName = this._activeRoute.snapshot.paramMap.get('name');
     this.createFormControls();
     this.createForm();
 
-    if (!!this.feedback) {
+    if (this.feedback) {
       this.showFeedback = false;
     }
   }
@@ -37,6 +48,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   private createFormControls() {
     this.q1 = new FormControl();
     this.q2 = new FormControl();
+
   }
 
   private createForm() {
@@ -46,13 +58,29 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     });
   }
 
-  ratingComponentClick(rating: any): void {
-    console.log('rating:' + rating);
+  ratingClick(rating: any): void {
+    this.rating = rating;
+  }
 
+  recommendationClick(recommendation: any): void {
+    this.recommendation = recommendation;
   }
 
   submitFeedback() {
+      const feedback = {} as Feedback;
+      feedback.rating = this.rating;
+      feedback.likelyToRecommend = this.recommendation;
+      feedback.uniqueCourseOpinion = this.feedbackForm.value.q1;
+      feedback.wouldPayOpinion = this.feedbackForm.value.q2;
+      feedback.courseUrl = this.courseName;
 
-    //showFeedback = false;
+      this._coursService.saveFeedback(feedback).pipe(
+        takeUntil(this.onDestroy$
+      ))
+      .subscribe( res => {
+        this.showFeedback = false;
+      }, err => {
+        this.error = 'Server error';
+      });
   }
 }

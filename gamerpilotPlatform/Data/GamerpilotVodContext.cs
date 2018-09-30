@@ -53,10 +53,14 @@ namespace gamerpilotPlatform.Data
                 t.CourseId
             });
 
-            //modelBuilder.Entity<GamerPilot.Video.IVideo>()
-            //.HasMany(g => g.)
-            //.WithOne(c => c.cou)
-        }
+            modelBuilder.Entity<CourseUser>()
+            .HasOne(f => f.Feedback);
+        
+
+        //modelBuilder.Entity<GamerPilot.Video.IVideo>()
+        //.HasMany(g => g.)
+        //.WithOne(c => c.cou)
+    }
 
     }
 }

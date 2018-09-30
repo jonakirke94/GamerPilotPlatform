@@ -96,7 +96,7 @@
   </div>
           
           
-  <div class="content">
+  <div class="content" *ngIf="dataLoaded">
 
     <!-- Not enrolled or Not logged in-->
     <div *ngIf="!isEnrolled || !isLoggedIn">
@@ -111,7 +111,7 @@
 
     <!-- Completed course -->
     <div *ngIf="!activeChild && completedCourse && isEnrolled && isLoggedIn">
-        <app-feedback [feedback]="feedack"></app-feedback>
+        <app-feedback [feedback]="feedback"></app-feedback>
     </div>
 
     <router-outlet></router-outlet>

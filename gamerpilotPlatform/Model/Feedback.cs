@@ -17,8 +17,6 @@ namespace gamerpilotPlatform.Model
         [Required]
         public int LikelyToRecommend { get; set; }
 
-
-
         [Required]
         public string UniqueCourseOpinion { get; set; }
 

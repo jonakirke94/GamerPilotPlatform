@@ -15,21 +15,19 @@
    
       <div class="rating-wrapper">
           <label>What is your overall feeling about the course?</label>
-          <app-rating-star [rating]="6" (ratingClick)='ratingComponentClick($event)'></app-rating-star>
-
+          <app-rating-star [rating]="6" (ratingClick)='ratingClick($event)'></app-rating-star>
       </div>
 
       <div class="rating-wrapper">
           <label>How likely is it you would recommend it to a friend?</label>
-          <app-rating-star [rating]="6"  (ratingClick)='ratingComponentClick($event)'></app-rating-star>
-
+          <app-rating-star [rating]="6" (ratingClick)='recommendationClick($event)'></app-rating-star>
       </div>      
       
       <div class="field">
         <div class="control">
           <label>Did you find the content different from what you can find on Youtube. If yes how?</label>  
           <textarea [ngClass]="{'is-invalid': q1.invalid  && q1.dirty && q1.touched}" id="q1"
-          rows="10"name="q1" title="q1" placeholder="q1" formControlName="q1"></textarea> 
+          rows="10" name="q1" title="q1" placeholder="It was.." formControlName="q1"></textarea> 
         </div>
       </div>
     
@@ -37,12 +35,12 @@
           <div class="control">
             <label>Would you be willing to pay for the next course? If no, what would it take?</label>
             <textarea [ngClass]="{'is-invalid': q2.invalid  && q2.dirty && q1.touched}" id="q2"
-            rows="10"name="q2" title="q2" placeholder="q2" formControlName="q2"></textarea>
+            rows="10"name="q2" title="q2" placeholder="I would.." formControlName="q2"></textarea>
 
           </div>
         </div>
         
-      <span *ngIf="error && feedbackForm.untouched">
+      <span *ngIf="error">
         <p  class="text-danger error-txt">{{error}}</p>
       </span>
     
@@ -57,7 +55,7 @@
 </div>
 <ng-template #showThankyou>
   <div class="container">
-      <div class="wrapper">           
+      <div class="wrapper" style="margin-top: 0;">           
       Thank you for your feedback!
       </div>
   </div>

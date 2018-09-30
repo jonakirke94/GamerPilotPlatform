@@ -7,6 +7,7 @@ import { SnotifyService } from 'ng-snotify';
 import { listAnimations, flyInOut } from '../../../shared/animation';
 import { CourseService } from '../../../core/services/course.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { Feedback } from '../../../../models/feedback';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,7 +21,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   courseName: string;
   course;
   lectures;
-  feedback;
+  feedback: Feedback;
   sections;
   dataLoaded = false;
 
@@ -177,8 +178,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.lectures = this.course.lectures;
         this.sections = this.course.sections;
         const enrolledResult = res['enrolled'] as boolean;
-        const feedback = res['feedback'];
-        console.log('course', res);
+        this.feedback = res['feedback'] as Feedback;
 
         if (enrolledResult) {
           const completedLectureArr = res['completedLectures'];

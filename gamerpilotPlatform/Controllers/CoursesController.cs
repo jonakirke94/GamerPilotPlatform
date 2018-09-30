@@ -78,7 +78,7 @@ namespace gamerpilotPlatform.Controllers
                     .Include(x => x.CompletedLectures)
                     .Include(x => x.Feedback)
                     .SingleOrDefault(x => x.Course.UrlName == urlName && x.UserId == userId);
-                courseUser.Course.EnrolledUsers = null; //avoid showing enrolled users to other people
+
 
                 if (courseUser == null)
                 {
@@ -101,7 +101,7 @@ namespace gamerpilotPlatform.Controllers
                     });
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
@@ -295,11 +295,16 @@ namespace gamerpilotPlatform.Controllers
 
             //check if user is enrolled
             var courseUser = _context.CourseUsers.SingleOrDefault(x => x.CourseId == course.Id && x.UserId == userId);
+            var isCompleted = false;
 
+            if (courseUser != null && courseUser.IsCompleted)
+            {
+                isCompleted = true;
+            }
             return new ObjectResult(new
             {
                 isEnrolled = courseUser == null ? false : true,
-                isCompleted = courseUser.IsCompleted
+                isCompleted = isCompleted
             });
    
         }
@@ -332,7 +337,7 @@ namespace gamerpilotPlatform.Controllers
 
         [HttpPost("[action]")]
         [Authorize]
-        public IActionResult Feedback([FromHeader]string authorization, Feedback feedback)
+        public IActionResult Feedback([FromHeader]string authorization, [FromBody]Feedback feedback)
         {
             try
             {
