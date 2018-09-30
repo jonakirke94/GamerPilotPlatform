@@ -18,11 +18,6 @@ export class CourseService implements OnDestroy {
     .get(this.baseUrl + name);
   }
 
-  getLecture(name: string, id: string)  {
-    return this.http
-    .get(this.baseUrl + `${name}/lecture/${id}`);
-  }
-
   getCourses() {
     return this.http
     .get(this.baseUrl);
@@ -36,11 +31,6 @@ export class CourseService implements OnDestroy {
   enroll(name: string) {
     return this.http
     .post(this.baseUrl + `enroll`, {urlName: name});
-  }
-
-  completeLecture(id: string, urlName: string, isLastLecture: boolean) {
-    return this.http
-    .post(this.baseUrl + `complete`, {id, urlName, isLastLecture});
   }
 
   saveFeedback(feedback: Feedback) {

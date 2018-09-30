@@ -8,6 +8,9 @@ import { listAnimations, flyInOut } from '../../../shared/animation';
 import { CourseService } from '../../../core/services/course.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Feedback } from '../../../../models/feedback';
+import { Course } from '../../../../models/course';
+import { Section } from '../../../../models/section';
+import { LectureService } from '../../../core/services/lecture.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,20 +21,21 @@ import { Feedback } from '../../../../models/feedback';
 export class SidebarComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();
 
-  courseName: string;
-  course;
-  lectures;
+  url: string;
+  course: Course;
+  lectures: any[];
   feedback: Feedback;
-  sections;
-  dataLoaded = false;
-
+  sections: Section[];
   completedLectures = [];
   currentLectureId: string;
 
-  activeChild = false;
-  isLoggedIn: boolean;
-  isEnrolled: boolean;
-  completedCourse = false;
+  courseState = {
+    dataLoaded: false,
+    activeChild: false,
+    isLoggedIn: false,
+    isEnrolled: false,
+    completedCourse: false
+  };
 
   minimized = false;
   showNav = false;
@@ -41,16 +45,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private _activeRoute: ActivatedRoute,
     private _courseService: CourseService,
     private _authService: AuthService,
-    private _toastService: SnotifyService
+    private _toastService: SnotifyService,
+    private _lectureService: LectureService
     ) { }
 
   ngOnInit() {
-    this.courseName = this._activeRoute.snapshot.paramMap.get('name');
+    this.url = this._activeRoute.snapshot.paramMap.get('name');
 
     this.listenToChildRoutes();
 
     this._authService.IsAuthed$.subscribe(status => {
-    this.isLoggedIn = status;
+      this.courseState.isLoggedIn = status;
     });
 
     this.loadSidebar();
@@ -66,17 +71,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   loadSidebar() {
     // check if the user is enrolled and load sidebar accordingly
-    this._courseService.getUserCourse(this.courseName).pipe(
+    this._courseService.getUserCourse(this.url).pipe(
       takeUntil(this.onDestroy$))
       .subscribe(res => {
-          this.isEnrolled = res['isEnrolled'];
-          this.completedCourse = res['isCompleted'];
-          this.loadCourse(this.courseName);
+          this.courseState.isEnrolled = res['isEnrolled'];
+          this.courseState.completedCourse = res['isCompleted'];
+          this.loadCourse(this.url);
     });
   }
 
   previous() {
-    if (!this.activeChild || !this.isEnrolled || !this.isLoggedIn ) {
+    if (!this.courseState.activeChild || !this.courseState.isEnrolled || !this.courseState.isLoggedIn ) {
       return;
     }
 
@@ -84,12 +89,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const index = lectureArr.indexOf(Number(this.currentLectureId));
 
     if (index > 0) {
-      this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[index - 1]}`);
+      this._router.navigateByUrl(`courses/${this.url}/lectures/${lectureArr[index - 1]}`);
     }
   }
 
   next() {
-    if (!this.activeChild || !this.isEnrolled || !this.isLoggedIn ) {
+    if (!this.courseState.activeChild || !this.courseState.isEnrolled || !this.courseState.isLoggedIn ) {
       return;
     }
 
@@ -99,7 +104,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     if (isNotCompleted) {
       // complete lecture on server
-      this._courseService.completeLecture(this.currentLectureId, this.courseName, false).pipe(
+      this._lectureService.completeLecture(this.currentLectureId, this.url, false).pipe(
         takeUntil(this.onDestroy$))
         .subscribe(res => {
           const newCompletedLectures = res['data'];
@@ -118,10 +123,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // if already completed just navigate to the next lecture
     } else if (index + 1 < lectureArr.length) {
       // go to next if not on last lecture
-      this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[index + 1]}`);
+      this._router.navigateByUrl(`courses/${this.url}/lectures/${lectureArr[index + 1]}`);
     } else {
       // go to first lecture
-      this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[0]}`);
+      this._router.navigateByUrl(`courses/${this.url}/lectures/${lectureArr[0]}`);
     }
   }
 
@@ -137,11 +142,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     }
 
-    this._router.navigateByUrl(`courses/${this.courseName}/lectures/${lectureArr[nextArrIndex]}`);
+    this._router.navigateByUrl(`courses/${this.url}/lectures/${lectureArr[nextArrIndex]}`);
   }
 
   complete() {
-    if (!this.activeChild || !this.isEnrolled || !this.isLoggedIn ) {
+    if (!this.courseState.activeChild || !this.courseState.isEnrolled || !this.courseState.isLoggedIn ) {
       return;
     }
 
@@ -150,16 +155,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     if (isNotCompleted) {
       // complete lecture on server
-      this._courseService.completeLecture(this.currentLectureId, this.courseName, true)
+      this._lectureService.completeLecture(this.currentLectureId, this.url, true)
       .pipe(
       takeUntil(this.onDestroy$))
       .subscribe(res => {
           const newCompletedLectures = res['data'];
           this.completedLectures = newCompletedLectures.map(x => x.lectureId);
-          this.completedCourse = true;
+          this.courseState.completedCourse = true;
 
           // send to course home view where feedback will be showed
-          this._router.navigateByUrl(`courses/${this.courseName}`);
+          this._router.navigateByUrl(`courses/${this.url}`);
         });
     }
   }
@@ -168,13 +173,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this._courseService.getCourse(name)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(res => {
+        this.course = res['course'] as Course;
 
-        if (!res['course']['isReleased'] as Boolean) {
+        if (!this.course.isReleased) {
           this._router.navigateByUrl('/courses');
         }
 
-
-        this.course = res['course'];
         this.lectures = this.course.lectures;
         this.sections = this.course.sections;
         const enrolledResult = res['enrolled'] as boolean;
@@ -195,7 +199,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
           return a.displayOrder - b.displayOrder;
         });
 
-        this.dataLoaded = true;
+        this.courseState.dataLoaded = true;
       });
   }
 
@@ -206,10 +210,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((params: Params) => {
            this.currentLectureId = params['id'];
-           this.activeChild = true;
+           this.courseState.activeChild = true;
        });
      } else {
-        this.activeChild = false;
+        this.courseState.activeChild = false;
      }
 
     // listen to router events
@@ -220,28 +224,28 @@ export class SidebarComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.onDestroy$))
         .subscribe((params: Params) => {
           this.currentLectureId = params['id'];
-          this.activeChild = true;
+          this.courseState.activeChild = true;
       });
       } else {
-        this.activeChild = false;
+        this.courseState.activeChild = false;
       }
     });
   }
 
   enrollUser(enroll: boolean) {
-    if (!this.isLoggedIn) {
+    if (!this.courseState.isLoggedIn) {
       this._router.navigateByUrl('auth/login');
       return;
     }
 
-    this._courseService.enroll(this.courseName)
+    this._courseService.enroll(this.url)
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(res => {
-        this.isEnrolled = true;
-        this.loadCourse(this.courseName);
+        this.courseState.isEnrolled = true;
+        this.loadCourse(this.url);
 
         const lectureIds = this.lectures.map(x => x.id);
-        this._router.navigateByUrl(`/courses/${this.courseName}/lectures/${lectureIds[0]}`);
+        this._router.navigateByUrl(`/courses/${this.url}/lectures/${lectureIds[0]}`);
 
         this._toastService.success('Let\'s get started!', {
           timeout: 2000,
@@ -284,6 +288,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
     return !this.isFirst() && !this.isLast();
   }
 
+  showLockedComponent() {
+    return !this.courseState.isEnrolled || !this.courseState.isLoggedIn;
+  }
+
+  showFeedbackComponent() {
+    return !this.courseState.activeChild && this.courseState.completedCourse && this.courseState.isEnrolled && this.courseState.isLoggedIn;
+  }
+
+  showNextLectureComponent() {
+    return !this.courseState.activeChild && !this.courseState.completedCourse && this.courseState.isEnrolled && this.courseState.isLoggedIn;
+  }
 
 
   ngOnDestroy() {

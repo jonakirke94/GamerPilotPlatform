@@ -4,6 +4,7 @@ import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { flyInOut } from '../../../shared/animation';
 import { CourseService } from '../../../core/services/course.service';
+import { LectureService } from '../../../core/services/lecture.service';
 
 @Component({
   selector: 'app-lecture-component',
@@ -26,7 +27,9 @@ export class LectureComponentComponent implements OnInit, OnDestroy {
   constructor(
     private _activeRoute: ActivatedRoute,
     private _courseService: CourseService,
-    private _router: Router) { }
+    private _router: Router,
+    private _lectureService: LectureService
+    ) { }
 
 
   ngOnInit() {
@@ -53,7 +56,7 @@ export class LectureComponentComponent implements OnInit, OnDestroy {
   }
 
   fetchLecture(name: string, id: string) {
-      this._courseService.getLecture(name, id)
+      this._lectureService.getLecture(name, id)
       .pipe(
         takeUntil(this.onDestroy$
       ))

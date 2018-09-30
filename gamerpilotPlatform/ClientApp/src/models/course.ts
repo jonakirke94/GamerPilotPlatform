@@ -2,18 +2,15 @@ import { Instructor } from './instructor';
 import { Lecture } from './lecture';
 import { Section } from './section';
 
-export class Course {
+export interface Course {
     id: string;
-    courseLength: string;
+    description: string;
     imageUrl: string;
-    language: string;
-    level: string;
-    lifeSkill: string;
-    name: Date;
-    urlName: Date;
+    isReleased: boolean;
+    name: string;
+    urlName: string;
     instructors: Instructor[];
-    lectures: Lecture[];
+    lectures: any[];
     sections: Section[];
-
-    constructor() {}
+    completedLectures: number[];
 }
