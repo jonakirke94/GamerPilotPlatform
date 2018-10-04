@@ -83,6 +83,7 @@ namespace gamerpilotPlatform.Controllers
                     case "CourseQuiz":
                         lecture = _context.Lectures.OfType<CourseQuiz>()
                         .Include(x => x.Questions)
+                            .ThenInclude(y => y.Choices)
                         .SingleOrDefault(x => x.Id == id);
                         break;
                     case "CourseSummary":

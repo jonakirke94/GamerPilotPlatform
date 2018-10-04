@@ -10,8 +10,8 @@ using gamerpilotPlatform.Data;
 namespace gamerpilotPlatform.Migrations
 {
     [DbContext(typeof(GamerpilotVodContext))]
-    [Migration("20180929185439_added-feedback")]
-    partial class addedfeedback
+    [Migration("20181002193016_choiceFKrem")]
+    partial class choiceFKrem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,13 +72,15 @@ namespace gamerpilotPlatform.Migrations
 
                     b.Property<int>("Rating");
 
-                    b.Property<string>("UniqueCourseOpinion");
+                    b.Property<string>("UniqueCourseOpinion")
+                        .IsRequired();
 
-                    b.Property<string>("WouldPayOpinion");
+                    b.Property<string>("WouldPayOpinion")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("Feedback");
+                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("gamerpilotPlatform.Model.Instructor", b =>
@@ -201,19 +203,53 @@ namespace gamerpilotPlatform.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Answer");
-
                     b.Property<int?>("CourseQuizId");
 
                     b.Property<string>("Difficulty");
-
-                    b.Property<string>("Text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseQuizId");
 
                     b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.Answer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CourseUserCourseId");
+
+                    b.Property<string>("CourseUserUserId");
+
+                    b.Property<int>("UserChoiceId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseUserUserId", "CourseUserCourseId");
+
+                    b.ToTable("Answers");
+                });
+
+            modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.Choice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsCorrect");
+
+                    b.Property<string>("QuestionId");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Choices");
                 });
 
             modelBuilder.Entity("gamerpilotPlatform.Model.User", b =>
@@ -381,6 +417,20 @@ namespace gamerpilotPlatform.Migrations
                     b.HasOne("gamerpilotPlatform.Model.Lectures.CourseQuiz")
                         .WithMany("Questions")
                         .HasForeignKey("CourseQuizId");
+                });
+
+            modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.Answer", b =>
+                {
+                    b.HasOne("gamerpilotPlatform.Model.CourseUser")
+                        .WithMany("Answers")
+                        .HasForeignKey("CourseUserUserId", "CourseUserCourseId");
+                });
+
+            modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.Choice", b =>
+                {
+                    b.HasOne("gamerpilotPlatform.Model.Lectures.Question")
+                        .WithMany("Choices")
+                        .HasForeignKey("QuestionId");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gamerpilotPlatform.Data;
 
 namespace gamerpilotPlatform.Migrations
 {
     [DbContext(typeof(GamerpilotVodContext))]
-    partial class GamerpilotVodContextModelSnapshot : ModelSnapshot
+    [Migration("20181004183653_subbmissionTime")]
+    partial class subbmissionTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,15 +222,11 @@ namespace gamerpilotPlatform.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ChoiceId");
-
                     b.Property<int?>("QuizAttemptId");
 
                     b.Property<int>("UserChoiceId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChoiceId");
 
                     b.HasIndex("QuizAttemptId");
 
@@ -442,10 +440,6 @@ namespace gamerpilotPlatform.Migrations
 
             modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.Answer", b =>
                 {
-                    b.HasOne("gamerpilotPlatform.Model.Lectures.Quiz.Choice", "Choice")
-                        .WithMany()
-                        .HasForeignKey("ChoiceId");
-
                     b.HasOne("gamerpilotPlatform.Model.Lectures.Quiz.QuizAttempt")
                         .WithMany("Answers")
                         .HasForeignKey("QuizAttemptId");

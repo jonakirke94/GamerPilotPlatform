@@ -2,7 +2,7 @@
 
 namespace gamerpilotPlatform.Migrations
 {
-    public partial class removedf : Migration
+    public partial class choiceFKrem : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

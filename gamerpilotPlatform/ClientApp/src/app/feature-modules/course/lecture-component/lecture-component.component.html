@@ -18,7 +18,7 @@
     </div>
 
     <div *ngIf="lecture.lectureType == 5">
-    <app-quiz [lecture]="lecture"></app-quiz>
+    <app-quiz [lecture]="lecture" [url]="courseName"></app-quiz>
     </div>
 
     <div *ngIf="lecture.lectureType == 6">

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using gamerpilotPlatform.Services;
+using gamerpilotPlatform.Model.Lectures.Quiz;
+using Microsoft.EntityFrameworkCore;
 
 namespace gamerpilotPlatform.Data
 {
@@ -22,6 +24,7 @@ namespace gamerpilotPlatform.Data
 
         public async Task Seed()
         {
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (!context.Users.Any())
@@ -183,69 +186,7 @@ namespace gamerpilotPlatform.Data
                 caseEntity.Sections.Add(section4);
                 caseEntity.Sections.Add(section5);
 
-                /*************************************************/
-                /********** QUIZ *********************************/
-                /*************************************************/
-                var question1 = new Question()
-                {
-                    Text = "What is a common downside of not communication properly, according to Røj?",
-                    Answer = "You check the same spots as your teammates",
-                    Difficulty = "easy",
-                };
-                var question2 = new Question()
-                {
-                    Text = "If you are frequently surprised during your games, what does this indicate?",
-                    Answer = "The picture in your head doesn´t fit the reality of the game",
-                    Difficulty = "hard",
-                };
-                var question3 = new Question()
-                {
-                    Text = "What is the effect of good communication according to Røj?",
-                    Answer = "It increases your teammates reaction time",
-                    Difficulty = "hard",
-                };
-                var question4 = new Question()
-                {
-                    Text = "What defines good communication?",
-                    Answer = "It is accurate, necessary and well timed",
-                    Difficulty = "medium",
-                };
-                var question5 = new Question()
-                {
-                    Text = "What is a good program for recording and watching your own play?",
-                    Answer = "Steam",
-                    Difficulty = "easy",
-                };
-                var question6 = new Question()
-                {
-                    Text = "What is one of the simplest ways to get better at CS:GO, according to Røj?",
-                    Answer = "Play and keep playing. When done, start again.",
-                    Difficulty = "easy",
-                };
-                var question7 = new Question()
-                {
-                    Text = "What should you do, if your team has no plan?",
-                    Answer = "Take the lead and instantly make a plan",
-                    Difficulty = "medium",
-                };
-                context.Questions.AddRange(question1, question2, question3, question4, question5, question6, question7);
-                context.SaveChanges();
-                var courseQuiz = new CourseQuiz()
-                {
-                    Name = "Quiz",
-                    Section = Model.Lectures.Section.Quiz,
-                    LectureType = LectureType.Quiz,
-                    DisplayOrder = 5
-                };
-                courseQuiz.Questions.Add(question1);
-                courseQuiz.Questions.Add(question2);
-                courseQuiz.Questions.Add(question3);
-                courseQuiz.Questions.Add(question4);
-                courseQuiz.Questions.Add(question5);
-                courseQuiz.Questions.Add(question6);
-                courseQuiz.Questions.Add(question7);
-
-                context.SaveChanges();
+                
 
                 var proContent = new CourseVideo()
                 {
@@ -318,7 +259,6 @@ namespace gamerpilotPlatform.Data
                 context.Lectures.Add(infoEntity);
                 context.Lectures.Add(introductionEntity);
                 context.Lectures.Add(caseEntity);
-                context.Lectures.Add(courseQuiz);
                 context.Lectures.Add(exercises);
                 context.Lectures.Add(summary);
 
@@ -339,7 +279,6 @@ namespace gamerpilotPlatform.Data
                     course1.Lectures.Add(introductionEntity);
                     course1.Lectures.Add(RealLifeLecture);
                     course1.Lectures.Add(caseEntity);
-                    course1.Lectures.Add(courseQuiz);
                     course1.Lectures.Add(proContent);
                     course1.Lectures.Add(exercises);
                     course1.Lectures.Add(summary);
@@ -375,6 +314,108 @@ namespace gamerpilotPlatform.Data
                     );
                     context.SaveChanges();
                 }
+
+            }
+
+
+            if (!context.Questions.Any())
+            {
+                var quiz = new CourseQuiz()
+                {
+                    Name = "Quiz",
+                    Section = Model.Lectures.Section.Quiz,
+                    LectureType = LectureType.Quiz,
+                    DisplayOrder = 5
+                };
+
+                //question 1
+                var choice1 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "This is choice1",
+                };
+                var choice2 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "This is choice2",
+                };
+                var choice3 = new Choice()
+                {
+                    IsCorrect = true,
+                    Text = "This is choice3",
+                };
+                var choice4 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "This is choice4",
+                };
+                context.Choices.Add(choice1);
+                context.Choices.Add(choice2);
+                context.Choices.Add(choice3);
+                context.Choices.Add(choice4);
+                var question1 = new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "This is QUESTION NUMERO 1"
+                };
+                question1.Choices.Add(choice1);
+                question1.Choices.Add(choice2);
+                question1.Choices.Add(choice3);
+                question1.Choices.Add(choice4);
+
+                // question 2
+                var choice5 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "This is choice5",
+                };
+                var choice6 = new Choice()
+                {
+                    IsCorrect = true,
+                    Text = "This is choice6",
+                };
+                var choice7 = new Choice()
+                {
+                    IsCorrect = true,
+                    Text = "This is choice7",
+                };
+                var choice8 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "This is choice8",
+                };
+                context.Choices.Add(choice5);
+                context.Choices.Add(choice6);
+                context.Choices.Add(choice7);
+                context.Choices.Add(choice8);
+
+                var question2 = new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "This is QUESTION NUMERO 2"
+                };
+                question2.Choices.Add(choice5);
+                question2.Choices.Add(choice6);
+                question2.Choices.Add(choice7);
+                question2.Choices.Add(choice8);
+
+                quiz.Questions.Add(question1);
+                quiz.Questions.Add(question2);
+
+
+
+                //add to lectures
+                context.Lectures.Add(quiz);
+
+                //add to course
+                var course = context.Courses
+                    .Include(x => x.Lectures)
+                    .SingleOrDefault(x => x.Name == "Communication in CS:GO");
+                course.Lectures.Add(quiz);
+
+                context.SaveChanges();
+
+
 
             }
 

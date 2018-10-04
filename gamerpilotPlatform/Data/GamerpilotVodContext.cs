@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using gamerpilotPlatform.Model;
 using gamerpilotPlatform.Model.Lectures;
-
+using gamerpilotPlatform.Model.Lectures.Quiz;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -25,14 +26,17 @@ namespace gamerpilotPlatform.Data
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<LearningGoal> LearningGoals { get; set; }
-        public DbSet<Question> Questions { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<CompletedLectures> CompletedLectures { get; set; }
         public DbSet<CaseSection> CaseSections { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
 
-
-
+        // quiz    
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Choice> Choices { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<QuizAttempt> QuizAttempts { get; set; }
+        
         // many to many with customized join table
         /* https://stackoverflow.com/questions/7050404/create-code-first-many-to-many-with-additional-fields-in-association-table */
 

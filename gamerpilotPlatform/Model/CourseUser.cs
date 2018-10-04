@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using gamerpilotPlatform.Model.Lectures;
 using System.Threading.Tasks;
+using gamerpilotPlatform.Model.Lectures.Quiz;
 
 namespace gamerpilotPlatform.Model
 {
@@ -29,11 +30,15 @@ namespace gamerpilotPlatform.Model
 
         public ICollection<CompletedLectures> CompletedLectures { get; set; }
 
+        public ICollection<QuizAttempt> QuizAttempts { get; set; }
+
         public CourseUser()
         {
             CompletedLectures = new List<CompletedLectures>();
+            QuizAttempts = new List<QuizAttempt>();
         }
  
 
     }
 }
+

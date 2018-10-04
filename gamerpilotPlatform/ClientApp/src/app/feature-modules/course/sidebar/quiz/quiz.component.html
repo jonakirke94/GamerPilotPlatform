@@ -2,24 +2,68 @@
     <p>{{lecture.name}}</p>
 </h3>
 
-<p class="text-left">Test your knowledge. If you struggle to answer some of the questions feel free to jump between the lectures and return to complete the quiz later</p>
+<div class="description">
+    <p>Test your knowledge. If you struggle to answer some of the questions feel free to jump between the lectures and return to complete the quiz later.</p>
+</div>
 
-<ul [@listAnimationSlow]="lecture.questions.length">
-    <li class="question-wrapper" *ngFor="let question of lecture.questions">
-        <div class="question__badge">{{question.difficulty}}</div>
-        <div class="question">
-            <div class="question__tag" appTag [difficulty]="question.difficulty"></div>
-            <div class="question__heading">
-                <h6>{{question.text}}</h6>
-            </div>
-            <button class="question__button" (click)="toggle($event)">
-                <span> Show answer</span>
-                <i class="fas fa-chevron-down"></i>
+<div class="question-wrapper">
+    <div class="question">
+        
+        <ng-container *ngIf="!loading && !showResult">
+            <h1>{{currentQuestion.questionText}}</h1>
 
-            </button>
-            <div class="answer hidden">
-                {{question.answer}}
-            </div>
+    
+            <div class="wrapper">
+                <ng-container *ngFor="let choice of currentQuestion.choices">
+                    <div class="choice" (click)="selectChoice(choice)">{{choice.text}}</div>
+                </ng-container>
+            </div>                        
+        </ng-container>
+
+        <ng-container *ngIf="!loading && showResult">
+                <div class="wrapper">
+
+                <ng-container *ngFor="let result of results" [@listAnimationSlow]="results.length">
+                        <div class="answer correct" *ngIf="result.choice.isCorrect; else wrong">
+                                <i class="fas fa-check"></i>
+                                <div>
+                                    <p class="muted text-muted">{{result.question.questionText}}</p>
+                                    <span>{{result.choice.text}}</span>
+                                </div>
+
+                        </div>
+                        <ng-template #wrong>
+                            <div class="answer wrong">
+                                <i class="fas fa-times"></i>
+                                <div>
+                                    <p class="muted text-muted">{{result.question.questionText}}</p>
+                                    <span>{{result.choice.text}}</span>
+                                </div>
+                           
+                            </div>
+                        </ng-template>
+                    </ng-container>
+
+                    <button type="button" class="btn btn-primary" (click)="tryAgain()">Try again</button>
+                    </div>
+        </ng-container>
+        
+      
+        <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+       
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-</li>
 
+    </div>
+
+    <p>Previous attempts</p>
+    <ng-container *ngFor="let attempt of attempts; let i = index">
+            <div class="attempt" (click)="showAnswers(attempt.answers, true, i)" [ngClass]="{'selected': i == selectedAttemptIndex}">
+            {{attempt.submissionTime | date: 'dd/MM/yyyy HH:mm'}}</div>
+    </ng-container>
+
+
+
+</div>

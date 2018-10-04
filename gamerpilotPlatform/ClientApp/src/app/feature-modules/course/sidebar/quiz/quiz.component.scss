@@ -2,116 +2,181 @@
 @import '~sass/mixins';
 @import '~sass/fonts';
 
-ul {
-    margin-top: 100px;
-    list-style-type: none;
-    padding: 0;
+
+.description {
+    padding: 0rem 4rem;
+    color: #343539;
+    font-family: $font-stack;
+    margin-bottom: 1rem;
 }
 
 .question-wrapper {
-    margin-bottom: 60px;
+    margin-bottom: 5px;
     display: block;
     position: relative;
 
-    .question__badge {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: -7px;
-        padding: 5px 10px;
-        border-radius: 30px;
-        text-transform: uppercase;
-        font-size: 13px;
-        font-weight: 700;
-        background: #fff;
-        color: #51526f;
-        line-height: 1;
-        outline: 0;
-        border-top: 1px solid #e3e6f0;
-        z-index: 1;
-    }
+ 
     
     .question {
         position: relative;
         background: #fff;
-        padding: 8% 5%;
-        border-radius: 12px;
+        padding: 2rem 1rem 1rem 1rem;
         box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
         line-height: 1.8;
         font-size: 18px;
         margin-bottom: 20px;
-        overflow: hidden;
+        overflow: hidden;  
 
-        .answer {
-            transition: all .6s linear;
-
-            &.hidden {
-                opacity: 0;
-                transition: all .6s linear;
-            }
-        }
-
-        .question__heading h6 {
+        h1 {
             font-family: $font-stack;
-            font-weight: bolder;
-            color: #51526f;
-            margin-top: 0;
-            line-height: 1.3;
-            font-size: 22px;
+            color: #2d9176;
+            font-size: 2rem;
         }
-        
-        .question__button {
-            margin-top: 30px;
-            margin-bottom: 30px;
-            width: 180px;
-            background: #fff;
-            border: none;
-            color: #8385aa;
-            border: 1px solid #c8cbf2;
-            font-weight: 700;
-            font-size: 17px;
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: background .12s,color .12s,border-color .12s;
-            outline: 0;
-           
-            &:hover {
-                background-color: $primary;
-                color: white;
-                cursor: pointer;
+
+        .wrapper {
+            padding: 1rem 2rem 1rem 2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+
+            @media only screen and (min-width : 1200px) {
+                padding: 2rem 4rem 2rem 4rem;
+                flex-direction: row;
+                justify-content: space-evenly;
             }
-            span {
-                padding-right: 5px;       
-            }       
-        }
-             
-        .question__tag {
-            position: absolute;
-            top: 0;
-            right: -65px;
-            transform: rotate(45deg);
-            color: #fff;
-            width: 125px;
-            height: 40px;
-        }
+
+            .choice {
+                background: #e9ecef;
+                text-align: center;
+                margin-bottom: 1rem;
+                width: 100%;
+                padding: 2rem 1rem;
+                box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
+                transition: .5s ease;
+                border: 5px solid transparent;
+
+                &:hover {
+                    cursor: pointer;
+                    border-bottom: 5px solid $tertiary;
+                }
+
+                &:focus {
+                    border: 5px solid $tertiary;
+                }
+
+              
+
+                @media only screen and (min-width : 1200px) {
+                    width: 48%;
+                }
+            }
+
+            .answer {
+                background: #e9ecef;
+                text-align: center;
+                margin-bottom: 1rem;
+                width: 100%;
+                padding: .5rem 2rem 1rem 2rem;
+                box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
+                transition: .5s ease;
+                font-size: 1rem;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                position: relative;
+
+                i {
+                    align-self: center;
+                    /* margin-right: auto; */
+                }
+
+                div {
+                    align-self: center;
+                    
+                    //margin-left: auto;
+                }
+
+                .muted {
+                    font-size: 1rem;
+                    margin-bottom: 0;
+                }
+
+                &.correct {
+                    i, span {
+                        color: $tertiary;
+                    }                
+                }
+
+                &.wrong {
+                    i, span {
+                        color: lighten(red, 15%);
+                    }
+                }
+
+                
+                @media only screen and (min-width : 1200px) {
+                    font-size: 2rem;
+                    flex-direction: row;
+
+                    i {
+                        left: 50px;
+                        position: absolute;
+                    }
+
+                    .muted {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }        
+    }   
+}
+
+
+.attempt {
+    text-decoration: underline;
+    padding-bottom: .5rem;
+    
+    &:hover {
+        cursor: pointer;
     }
 }
 
-.easy {
-    background: linear-gradient(130deg,#56a15c,#a5d275);
+
+.progress-bar {
+    background-color: #6cb29f;
+    width: 0;
+    max-width: 0;
+    animation: progress 3s ease-in-out forwards;
 }
 
-.medium{
-    background: linear-gradient(130deg,#f53d02,#ff7d55);
+@keyframes progress {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  } 
+
+
+.selected {
+    color: $tertiary;
 }
 
-.hard {
-    background: linear-gradient(130deg, $secondary, $quaternary);
+.btn-primary {
+    background-color: $tertiary;
+    border-color: $tertiary;
+    border-radius: 0;
+    margin-left: auto;
+
+    &:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(10, 75, 32, 0.5);
+    }
 }
 
-.fa-rotate-180 {
-    transition: all .3s linear;
-
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active {
+    background-color: $tertiary;
+    border-color: $tertiary;
 }
-
-

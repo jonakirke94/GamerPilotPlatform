@@ -14,8 +14,6 @@ import { TagDirective } from './directives/tag.directive';
 import { SanitizeHtmlPipePipe } from './pipes/sanitize-html-pipe.pipe';
 import { ExerciseTagDirective } from './directives/exercise-tag.directive';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
