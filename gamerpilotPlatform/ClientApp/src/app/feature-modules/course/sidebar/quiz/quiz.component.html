@@ -23,7 +23,7 @@
         <ng-container *ngIf="!loading && showResult">
                 <div class="wrapper">
 
-                <ng-container *ngFor="let result of results" [@listAnimationSlow]="results.length">
+                <ng-container *ngFor="let result of results">
                         <div class="answer correct" *ngIf="result.choice.isCorrect; else wrong">
                                 <i class="fas fa-check"></i>
                                 <div>
@@ -53,14 +53,14 @@
 
        
         <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            <div appQuiz [width]="progress" class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
 
     </div>
 
     <p>Previous attempts</p>
     <ng-container *ngFor="let attempt of attempts; let i = index">
-            <div class="attempt" (click)="showAnswers(attempt.answers, true, i)" [ngClass]="{'selected': i == selectedAttemptIndex}">
+            <div class="attempt" (click)="showAnswers(attempt.answers, true, i)" [ngClass]="{'selected': i == selectedAttemptIndex && showResult}">
             {{attempt.submissionTime | date: 'dd/MM/yyyy HH:mm'}}</div>
     </ng-container>
 

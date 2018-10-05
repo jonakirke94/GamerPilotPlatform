@@ -13,6 +13,7 @@ import { IconDirective } from './directives/icon.directive';
 import { TagDirective } from './directives/tag.directive';
 import { SanitizeHtmlPipePipe } from './pipes/sanitize-html-pipe.pipe';
 import { ExerciseTagDirective } from './directives/exercise-tag.directive';
+import { QuizDirective } from './directives/quiz.directive';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { ExerciseTagDirective } from './directives/exercise-tag.directive';
   LoadingSpinnerComponent,
   HeaderComponent,
   CourseCarouselComponent,
-  FooterComponent, StatusDirective, IconDirective, TagDirective, SanitizeHtmlPipePipe, ExerciseTagDirective],
+  FooterComponent, StatusDirective, IconDirective, TagDirective, SanitizeHtmlPipePipe, ExerciseTagDirective, QuizDirective],
   exports: [
     CommonModule,
     FormsModule,
@@ -36,7 +37,7 @@ import { ExerciseTagDirective } from './directives/exercise-tag.directive';
     LoadingSpinnerComponent,
     HeaderComponent,
     CourseCarouselComponent,
-    FooterComponent, StatusDirective, IconDirective, TagDirective, SanitizeHtmlPipePipe, ExerciseTagDirective
+    FooterComponent, StatusDirective, IconDirective, TagDirective, SanitizeHtmlPipePipe, ExerciseTagDirective, QuizDirective
 
   ],
   providers: [

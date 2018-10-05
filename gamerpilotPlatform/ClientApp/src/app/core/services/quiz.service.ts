@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Choice } from '../../../models/choice';
+import { Choice } from '../../../models/quiz/choice';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

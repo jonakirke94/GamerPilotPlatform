@@ -1,4 +1,4 @@
-import { Choice } from './choice';
+import { Choice } from './quiz/choice';
 
 export interface Question {
     questionText: string;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 import { flyInOut } from '../../../../shared/animation';
 
 @Component({
@@ -8,7 +8,7 @@ import { flyInOut } from '../../../../shared/animation';
   animations: [flyInOut]
 
 })
-export class VideoComponent implements OnInit {
+export class VideoComponent implements OnChanges {
  @Input() lecture;
  videos = [];
  selectedVideo;
@@ -16,7 +16,7 @@ export class VideoComponent implements OnInit {
 
  constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
     if (!!this.lecture.videos && this.lecture.videos.length > 0) {
       this.videos = this.lecture.videos;
       this.selectedVideo = this.videos[0];

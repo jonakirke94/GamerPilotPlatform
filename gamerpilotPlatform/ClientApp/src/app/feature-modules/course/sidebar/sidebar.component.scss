@@ -116,6 +116,14 @@ $gutter: 40px;
     
 }
 
+.active-link {
+    background-color: #d4ebe9;
+
+    &:focus, &:active, &:visited  {
+        outline: 0;
+    }
+}
+
 /* Large screen */ 
 .main-navigation {
     ul {
@@ -154,10 +162,6 @@ $gutter: 40px;
     @media only screen and (max-width : 1200px) {
         display: none;
     }
-}
-
-.link-active {
-    background-color: red;
 }
 
 .item {

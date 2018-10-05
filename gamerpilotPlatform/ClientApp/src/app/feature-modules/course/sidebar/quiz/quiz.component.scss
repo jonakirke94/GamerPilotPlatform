@@ -148,18 +148,8 @@
     background-color: #6cb29f;
     width: 0;
     max-width: 0;
-    animation: progress 3s ease-in-out forwards;
+    animation: width 3s ease;
 }
-
-@keyframes progress {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  } 
-
 
 .selected {
     color: $tertiary;

@@ -1,19 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { listAnimationSlow } from '../../../../shared/animation';
 import { Question } from '../../../../../models/question';
-import { Choice } from '../../../../../models/choice';
+import { Choice } from '../../../../../models/quiz/choice';
 import {LoadingSpinnerComponent} from '../../../../shared/loading-spinner/loading-spinner.component';
 import { QuizService } from '../../../../core/services/quiz.service';
 import { ActivatedRoute } from '@angular/router';
+import { Attempt } from '../../../../../models/quiz/attempt';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
-  animations: [listAnimationSlow]
-
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, OnDestroy {
+  private onDestroy$ = new Subject<void>();
+
   @Input() lecture;
   @Input() url: string;
 
@@ -22,9 +25,9 @@ export class QuizComponent implements OnInit {
 
   currentIndex = 0;
   userAnswers: string[] = [];
-  attempts: any;
-  bar: HTMLElement;
+  attempts: Attempt[] = [];
   results: {question: Question, choice: Choice}[] = [];
+  progress = 0;
 
   showResult = false;
   loading = false;
@@ -36,16 +39,16 @@ export class QuizComponent implements OnInit {
   ngOnInit() {
     this.questions = this.lecture.questions;
     this.currentQuestion = this.questions[0];
-    this.bar = document.querySelector('.progress-bar');
-
 
     this.fetchAttempts();
   }
 
   fetchAttempts() {
-    this._quizService.getAttempts(this.url).subscribe(res => {
-      this.attempts = res;
-      console.log(res);
+    this._quizService.getAttempts(this.url)
+    .pipe(takeUntil(this.onDestroy$))
+    .subscribe(res => {
+      this.attempts = res as Attempt[];
+      this.attempts.reverse();
     });
   }
 
@@ -57,8 +60,8 @@ export class QuizComponent implements OnInit {
   next() {
     const nextIndex = this.currentIndex + 1;
     if (nextIndex < this.questions.length) {
-      const progress = ((this.questions.indexOf(this.currentQuestion) + 1) / (this.questions.length)) * 100 + '%';
-      this.setProgress(progress);
+      const currProgress = ((this.questions.indexOf(this.currentQuestion) + 1) / (this.questions.length)) * 100 ;
+      this.progress = currProgress;
       this.currentIndex++;
       this.currentQuestion = this.questions[nextIndex];
 
@@ -67,21 +70,18 @@ export class QuizComponent implements OnInit {
     }
   }
 
-  setProgress(progress: string) {
-    this.bar.style.width = progress;
-    this.bar.style.maxWidth = progress;
-  }
-
   complete() {
     this.loading = true;
     this.showAnswers(this.userAnswers, false);
 
-    this._quizService.submitAnswers(this.userAnswers, this.url).subscribe( () => {
+    this._quizService.submitAnswers(this.userAnswers, this.url)
+    .pipe(takeUntil(this.onDestroy$))
+    .subscribe( () => {
 
       this.fetchAttempts();
 
       this.loading = false;
-      this.setProgress('100%');
+      this.progress = 100;
     });
 
   }
@@ -90,7 +90,8 @@ export class QuizComponent implements OnInit {
     this.showResult = false;
     this.userAnswers = [];
     this.currentIndex = 0;
-    this.setProgress('0%');
+    this.currentQuestion = this.questions[0];
+    this.progress = 0;
   }
 
   showAnswers(answers: any[], fromServer: boolean, selectedIndex: number = this.attempts.length) {
@@ -112,6 +113,11 @@ export class QuizComponent implements OnInit {
        });
      }
 
-    this.setProgress('100%');
+    this.progress = 100;
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }
