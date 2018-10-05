@@ -12,6 +12,15 @@
         </div>
     </div>
   </div>
+
+  <div *ngIf="videos.length > 1">
+    <div class="links">
+      <a *ngFor="let video of videos" (click)="selectVideo(video)" [ngClass]="selectedVideo.id == video.id ? 'active-link' : ''" [@flyInOut]>
+            {{video.name}}
+      </a>
+  </div>
+</div>
+
     
   <div [innerHTML]="selectedVideo.iFramePlayer | sanitizeHtmlPipe"></div>
 

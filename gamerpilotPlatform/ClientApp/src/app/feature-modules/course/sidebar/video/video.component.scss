@@ -4,38 +4,66 @@
 
 .grid {
     display: flex;
-    flex-direction: row; 
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    -webkit-align-items: stretch; 
+    align-items: stretch; 
+    flex-flow: wrap;
     margin-bottom: 50px;
+    display: none;
+
+    @media only screen and (min-width : 1200px) {
+        display: inline-flex;
+    }
 
     .video-box {
-        height: 150px;
         width: 300px;
-        padding: 20px;
-        background: rgb(17,91,71);
-        background: linear-gradient(297deg, rgba(17,91,71,1) 62%, rgba(17,91,71,1) 100%);
+        min-height: 85px;
+        padding: 5px;
         margin: 10px;
         text-align: center;
-        color: white;
-        -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
-        -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
-        box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+        color: #6cb29f;
+        background-color: #e9ecef;
+        box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
+        border: 5px solid transparent;
+        transition: .3s ease-in-out;
         position: relative;
+        
 
         i {
             position: absolute;
             right: 5px;
             bottom: 5px;
-            font-size: 58px;
+            font-size: 28px;
         }
 
         &:hover {
             cursor: pointer;
-            opacity: .9;
+            border: 5px solid #6cb29f;     
         }
     }
 }
 
+.links {
+    display: none;
+
+    a {
+        cursor: pointer;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+ 
+
+    @media only screen and (max-width : 1200px) {
+        display: block;
+    }
+}
+
+.active-link {
+    color: $tertiary !important;
+}
+
 .active {
-    border: 10px solid lighten($tertiary, 5%);
+    border-bottom: 5px solid #6cb29f !important;
 }

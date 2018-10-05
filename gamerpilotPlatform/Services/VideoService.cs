@@ -51,7 +51,8 @@ namespace gamerpilotPlatform.Services
                 {
                     Id = vid.Id,
                     Name = vid.Name,
-                    IFramePlayer = vid.GetEmbedHTML(640, 360, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html")
+                    IFramePlayer = vid.GetEmbedHTML(640, 360, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html"),
+                    IFramePlayerSmall = vid.GetEmbedHTML(320, 180, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html"),
                 });
             }
 

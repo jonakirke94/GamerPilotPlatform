@@ -13,6 +13,7 @@ export class VideoComponent implements OnChanges {
  videos = [];
  selectedVideo;
  hasVideos: boolean;
+ showSmall = false;
 
  constructor() { }
 
@@ -21,6 +22,7 @@ export class VideoComponent implements OnChanges {
       this.videos = this.lecture.videos;
       this.selectedVideo = this.videos[0];
       this.hasVideos = true;
+      console.log(this.lecture.videos);
     }
   }
 
