@@ -30,14 +30,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.nav = document.querySelector('.features-nav');
     this.navOffsetTop = this.nav.offsetTop;
     this.navHeight = this.nav.offsetHeight;
-    const pageHelpers = <HTMLElement>document.querySelector('#page-helpers');
-    this.courseTop = pageHelpers.offsetTop;
+    const testimonials = <HTMLElement>document.querySelector('#testimonials');
+    this.courseTop = testimonials.offsetTop;
   }
 
    // tslint:disable-next-line:use-life-cycle-interface
     @HostListener('window:scroll', [])
     onWindowScroll() {
-      if (window.pageYOffset > this.navOffsetTop && (window.scrollY + this.navHeight) <= this.courseTop) {
+      if (window.pageYOffset > this.navOffsetTop && (window.scrollY + this.navHeight) <= this.courseTop && window.innerWidth > 768) {
          document.body.style.paddingTop = (this.navHeight + 16) + 'px';
          this.fixed = true;
       } else {

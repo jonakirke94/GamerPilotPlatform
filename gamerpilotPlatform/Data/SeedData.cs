@@ -48,7 +48,7 @@ namespace gamerpilotPlatform.Data
                 /*************************************************/
                 var instructor1 = new Instructor()
                 {
-                    Name = "Anne Fiskali",
+                    Name = "Anne Fiskaali",
                 };
                 var instructor2 = new Instructor()
                 {
@@ -193,7 +193,7 @@ namespace gamerpilotPlatform.Data
                     Name = "Pro CS:GO content",
                     Section = Model.Lectures.Section.Game,
                     LectureType = LectureType.Video,
-                    DisplayOrder = 6,
+                    DisplayOrder = 5,
                     Instructor = instructor2
                 };
                 context.Lectures.Add(proContent);
@@ -325,84 +325,269 @@ namespace gamerpilotPlatform.Data
                     Name = "Quiz",
                     Section = Model.Lectures.Section.Quiz,
                     LectureType = LectureType.Quiz,
-                    DisplayOrder = 5
+                    DisplayOrder = 6
                 };
 
                 //question 1
+                var question1 = new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "What defines good communication according to Anne Fiskaali?"
+                };
                 var choice1 = new Choice()
                 {
                     IsCorrect = false,
-                    Text = "This is choice1",
+                    Text = "It makes sure you always know what to do",
                 };
                 var choice2 = new Choice()
                 {
-                    IsCorrect = false,
-                    Text = "This is choice2",
+                    IsCorrect = true,
+                    Text = "It´s accurate, necessary and well timed",
                 };
                 var choice3 = new Choice()
                 {
-                    IsCorrect = true,
-                    Text = "This is choice3",
+                    IsCorrect = false,
+                    Text = "Good communication is not having two snipers on your team",
                 };
                 var choice4 = new Choice()
                 {
                     IsCorrect = false,
-                    Text = "This is choice4",
+                    Text = "Avoiding teamfire",
                 };
                 context.Choices.Add(choice1);
                 context.Choices.Add(choice2);
                 context.Choices.Add(choice3);
                 context.Choices.Add(choice4);
-                var question1 = new Question()
-                {
-                    Difficulty = "Easy",
-                    QuestionText = "This is QUESTION NUMERO 1"
-                };
+
                 question1.Choices.Add(choice1);
                 question1.Choices.Add(choice2);
                 question1.Choices.Add(choice3);
                 question1.Choices.Add(choice4);
 
                 // question 2
+                var question2 = new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "What should you do, if your team has no plan?"
+                };
                 var choice5 = new Choice()
                 {
-                    IsCorrect = false,
-                    Text = "This is choice5",
+                    IsCorrect = true,
+                    Text = "Take the lead and instantly make one",
                 };
                 var choice6 = new Choice()
                 {
-                    IsCorrect = true,
-                    Text = "This is choice6",
+                    IsCorrect = false,
+                    Text = "Be silent. Better not mess anything up",
                 };
                 var choice7 = new Choice()
                 {
                     IsCorrect = true,
-                    Text = "This is choice7",
+                    Text = "Wait and see if things solve themselves",
                 };
                 var choice8 = new Choice()
                 {
                     IsCorrect = false,
-                    Text = "This is choice8",
+                    Text = "Run to the nearest bombsite and hope it turns out well",
                 };
                 context.Choices.Add(choice5);
                 context.Choices.Add(choice6);
                 context.Choices.Add(choice7);
                 context.Choices.Add(choice8);
 
-                var question2 = new Question()
-                {
-                    Difficulty = "Easy",
-                    QuestionText = "This is QUESTION NUMERO 2"
-                };
                 question2.Choices.Add(choice5);
                 question2.Choices.Add(choice6);
                 question2.Choices.Add(choice7);
                 question2.Choices.Add(choice8);
 
+
+                // question 3
+                var question3 = new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "What is a good program for recording and watching your own play?"
+                };
+                var choice9 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "Steam ",
+                };
+                var choice10 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "Hola!",
+                };
+                var choice11 = new Choice()
+                {
+                    IsCorrect = true,
+                    Text = "Plays",
+                };
+                var choice12 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "Discord",
+                };
+                context.Choices.Add(choice9);
+                context.Choices.Add(choice10);
+                context.Choices.Add(choice11);
+                context.Choices.Add(choice12);
+
+                question2.Choices.Add(choice9);
+                question2.Choices.Add(choice10);
+                question2.Choices.Add(choice11);
+                question2.Choices.Add(choice12);
+
+                // question 4
+                var question4 = new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "What is the effect of good communication according to Roj?"
+                };
+                var choice13 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "Your teammates know which weapons to buy",
+                };
+                var choice14 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "You avoid friendly fire",
+                };
+                var choice15 = new Choice()
+                {
+                    IsCorrect = true,
+                    Text = "It increases your teammates reaction time",
+                };
+                var choice16 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "You don’t block any of your teammates",
+                };
+                context.Choices.Add(choice13);
+                context.Choices.Add(choice14);
+                context.Choices.Add(choice15);
+                context.Choices.Add(choice16);
+
+                question2.Choices.Add(choice13);
+                question2.Choices.Add(choice14);
+                question2.Choices.Add(choice15);
+                question2.Choices.Add(choice16);
+
+                // question 5
+                var question5 = new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "What is one of the simplest ways to get better at CS:GO according to Roj?"
+                };
+                var choice17 = new Choice()
+                {
+                    IsCorrect = true,
+                    Text = "Play and keep playing. When done, start again",
+                };
+                var choice18 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "Listen to CS:GO tutorials while you sleep",
+                };
+                var choice19 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "Buy new gaming gear",
+                };
+                var choice20 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "Play without sound to sharpen your focus",
+                };
+                context.Choices.Add(choice17);
+                context.Choices.Add(choice18);
+                context.Choices.Add(choice19);
+                context.Choices.Add(choice20);
+
+                question2.Choices.Add(choice17);
+                question2.Choices.Add(choice18);
+                question2.Choices.Add(choice19);
+                question2.Choices.Add(choice20);
+
+                // question 6
+                var question6 = new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "What´s a common downside of not communication according to Roj?"
+                };
+                var choice21 = new Choice()
+                {
+                    IsCorrect = true,
+                    Text = "You check the same spots as your teammates",
+                };
+                var choice22= new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "You all run like headless chickens",
+                };
+                var choice23 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "You run to the wrong bomb sites",
+                };
+                var choice24= new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "You flash your teammates",
+                };
+                context.Choices.Add(choice21);
+                context.Choices.Add(choice22);
+                context.Choices.Add(choice23);
+                context.Choices.Add(choice24);
+
+                question2.Choices.Add(choice21);
+                question2.Choices.Add(choice22);
+                question2.Choices.Add(choice23);
+                question2.Choices.Add(choice24);
+
+                // question 7
+                var question7= new Question()
+                {
+                    Difficulty = "Easy",
+                    QuestionText = "If you are frequently surprised during your games, what is this an indication of?"
+                };
+                var choice25 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "You are too easily scared",
+                };
+                var choice26 = new Choice()
+                {
+                    IsCorrect = true,
+                    Text = "The picture in your head doesn't fit the reality of the game",
+                };
+                var choice27 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "You run too fast into combat",
+                };
+                var choice28 = new Choice()
+                {
+                    IsCorrect = false,
+                    Text = "You forget to pay attention",
+                };
+                context.Choices.Add(choice21);
+                context.Choices.Add(choice22);
+                context.Choices.Add(choice23);
+                context.Choices.Add(choice24);
+
+                question2.Choices.Add(choice21);
+                question2.Choices.Add(choice22);
+                question2.Choices.Add(choice23);
+                question2.Choices.Add(choice24);
+
                 quiz.Questions.Add(question1);
                 quiz.Questions.Add(question2);
-
-
+                quiz.Questions.Add(question3);
+                quiz.Questions.Add(question4);
+                quiz.Questions.Add(question5);
+                quiz.Questions.Add(question6);
+                quiz.Questions.Add(question7);
 
                 //add to lectures
                 context.Lectures.Add(quiz);
