@@ -1,9 +1,7 @@
-<div class="row justify-content-center no-gutters">
+<div class="row justify-content-center no-gutters auth-bg">
   <div class="text-center auth-container" [@flyInOut]>
 
-    <div class="auth-title ">
-      Signup
-    </div>
+    <p class="title">Get started!</p>
 
 <!--     <i class="fas fa-user-plus auth-icon"></i> -->
 
@@ -75,19 +73,24 @@
 
         <div *ngIf="error" class="text-danger error-txt">{{error}}</div>
 
-        <button class="btn btn-darkgreen" [disabled]="!signupForm.valid">Signup</button>
+        <button class="btn btn-primary" [disabled]="!signupForm.valid">Signup</button>
 
 
-        <div class="link-box">
+        <!-- <div class="link-box">
           <p>By signing up, you agree to our <br><strong routerLink="/terms"> Terms & conditions</strong> & <strong routerLink="/privacy">Privacy policies</strong></p>
         </div>
-
+ -->
 
 
       </form>
 
       <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
     </div>
+
+    <div class="auth-footer">
+      <p>By signing up, you agree to our <br> <a routerLink="/terms">Terms & conditions</a> & <a routerLink="/privacy">Privacy policies</a></p>
+    </div>
+
 
 
   </div>

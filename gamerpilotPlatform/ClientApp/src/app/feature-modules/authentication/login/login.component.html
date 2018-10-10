@@ -1,9 +1,7 @@
-<div class="row justify-content-center no-gutters">
+<div class="row justify-content-center no-gutters auth-bg">
 <div class="text-center auth-container" [@flyInOut]>
 
-    <div class="auth-title ">
-      Login
-    </div>
+    <p class="title">Welcome back!</p>
 
 <!--     <i class="fas fa-user auth-icon"></i> -->
 
@@ -13,7 +11,7 @@
         <form [formGroup]="loginForm" novalidate (ngSubmit)="loginUser()">
           <div class="field">
             <div class="control">
-              <input [ngClass]="{'is-invalid': email.invalid  && email.dirty && email.touched}" id="email" type="email" name="email" title="email" placeholder="Email" formControlName="email" autocomplete="email">
+              <input [ngClass]="{'is-invalid': email.invalid  && email.dirty && email.touched}" id="email" type="email" name="email" title="email" placeholder="Email Address" formControlName="email" autocomplete="email">
               <span class="text-danger" *ngIf="email.errors  && (email.dirty || email.touched)">
                 <p *ngIf="email.errors.pattern">Please enter a valid email</p>
               </span>
@@ -42,20 +40,17 @@
           </span>
 
 
-          <button class="btn btn-deepsea" [disabled]="!loginForm.valid">Login</button>
-
-          <div class="link-box text-center">
-            <a href="">Forgot</a> 
-            <a style="padding-right: 10px">&bull;</a>
-            <a routerLink="/signup">Signup</a> 
-          </div>
-
+          <button class="btn btn-primary" [disabled]="!loginForm.valid">Log in</button>
         </form>
-
 
       </span>
       <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
     </div>
+
+    <div class="auth-footer">
+            <p>Don't have an account?  <a routerLink="/auth/signup">Sign up</a></p>
+    </div>
+
 
 
 

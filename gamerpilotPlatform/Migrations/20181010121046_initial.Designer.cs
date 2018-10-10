@@ -10,8 +10,8 @@ using gamerpilotPlatform.Data;
 namespace gamerpilotPlatform.Migrations
 {
     [DbContext(typeof(GamerpilotVodContext))]
-    [Migration("20181004122930_questionText")]
-    partial class questionText
+    [Migration("20181010121046_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -222,15 +222,13 @@ namespace gamerpilotPlatform.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CourseUserCourseId");
-
-                    b.Property<string>("CourseUserUserId");
+                    b.Property<int?>("QuizAttemptId");
 
                     b.Property<int>("UserChoiceId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseUserUserId", "CourseUserCourseId");
+                    b.HasIndex("QuizAttemptId");
 
                     b.ToTable("Answers");
                 });
@@ -252,6 +250,25 @@ namespace gamerpilotPlatform.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Choices");
+                });
+
+            modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.QuizAttempt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CourseUserCourseId");
+
+                    b.Property<string>("CourseUserUserId");
+
+                    b.Property<DateTime>("SubmissionTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseUserUserId", "CourseUserCourseId");
+
+                    b.ToTable("QuizAttempts");
                 });
 
             modelBuilder.Entity("gamerpilotPlatform.Model.User", b =>
@@ -423,9 +440,9 @@ namespace gamerpilotPlatform.Migrations
 
             modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.Answer", b =>
                 {
-                    b.HasOne("gamerpilotPlatform.Model.CourseUser")
+                    b.HasOne("gamerpilotPlatform.Model.Lectures.Quiz.QuizAttempt")
                         .WithMany("Answers")
-                        .HasForeignKey("CourseUserUserId", "CourseUserCourseId");
+                        .HasForeignKey("QuizAttemptId");
                 });
 
             modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.Choice", b =>
@@ -433,6 +450,13 @@ namespace gamerpilotPlatform.Migrations
                     b.HasOne("gamerpilotPlatform.Model.Lectures.Question")
                         .WithMany("Choices")
                         .HasForeignKey("QuestionId");
+                });
+
+            modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.QuizAttempt", b =>
+                {
+                    b.HasOne("gamerpilotPlatform.Model.CourseUser")
+                        .WithMany("QuizAttempts")
+                        .HasForeignKey("CourseUserUserId", "CourseUserCourseId");
                 });
 #pragma warning restore 612, 618
         }

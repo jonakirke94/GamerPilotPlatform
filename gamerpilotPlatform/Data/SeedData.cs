@@ -130,7 +130,7 @@ namespace gamerpilotPlatform.Data
                 /*************************************************/
                 /********** VIDEOS *******************************/
                 /*************************************************/
-                await videoService.AddVideo(instructor1.Id, RealLifeLecture.Id, "Into the psychology", "C:\\Users\\inter\\Desktop\\AWS_Videos\\teori-erhvervsliv.MP4");
+                //await videoService.AddVideo(instructor1.Id, RealLifeLecture.Id, "Into the psychology", "C:\\Users\\inter\\Desktop\\AWS_Videos\\teori-erhvervsliv.MP4");
 
                 /*************************************************/
                 /********** CASE *********************************/
@@ -199,9 +199,9 @@ namespace gamerpilotPlatform.Data
                 context.Lectures.Add(proContent);
                 context.SaveChanges();
 
-                await videoService.AddVideo(instructor2.Id, proContent.Id, "Good & bad communication", "C:\\Users\\inter\\Desktop\\AWS_Videos\\good-bad-communication.mp4");
-                await videoService.AddVideo(instructor2.Id, proContent.Id, "How do pros practice communication?", "C:\\Users\\inter\\Desktop\\AWS_Videos\\how-do-pros-practice-communication.mp4");
-                await videoService.AddVideo(instructor2.Id, proContent.Id, "Get in the mind of a pro", "C:\\Users\\inter\\Desktop\\AWS_Videos\\get-in-the-mind of-a-pro.mp4");
+                //await videoService.AddVideo(instructor2.Id, proContent.Id, "Good & bad communication", "C:\\Users\\inter\\Desktop\\AWS_Videos\\good-bad-communication.mp4");
+               // await videoService.AddVideo(instructor2.Id, proContent.Id, "How do pros practice communication?", "C:\\Users\\inter\\Desktop\\AWS_Videos\\how-do-pros-practice-communication.mp4");
+               // await videoService.AddVideo(instructor2.Id, proContent.Id, "Get in the mind of a pro", "C:\\Users\\inter\\Desktop\\AWS_Videos\\get-in-the-mind of-a-pro.mp4");
 
                 /*************************************************/
                 /********** EXERCISES*****************************/
@@ -432,10 +432,10 @@ namespace gamerpilotPlatform.Data
                 context.Choices.Add(choice11);
                 context.Choices.Add(choice12);
 
-                question2.Choices.Add(choice9);
-                question2.Choices.Add(choice10);
-                question2.Choices.Add(choice11);
-                question2.Choices.Add(choice12);
+                question3.Choices.Add(choice9);
+                question3.Choices.Add(choice10);
+                question3.Choices.Add(choice11);
+                question3.Choices.Add(choice12);
 
                 // question 4
                 var question4 = new Question()
@@ -468,10 +468,10 @@ namespace gamerpilotPlatform.Data
                 context.Choices.Add(choice15);
                 context.Choices.Add(choice16);
 
-                question2.Choices.Add(choice13);
-                question2.Choices.Add(choice14);
-                question2.Choices.Add(choice15);
-                question2.Choices.Add(choice16);
+                question4.Choices.Add(choice13);
+                question4.Choices.Add(choice14);
+                question4.Choices.Add(choice15);
+                question4.Choices.Add(choice16);
 
                 // question 5
                 var question5 = new Question()
@@ -504,10 +504,10 @@ namespace gamerpilotPlatform.Data
                 context.Choices.Add(choice19);
                 context.Choices.Add(choice20);
 
-                question2.Choices.Add(choice17);
-                question2.Choices.Add(choice18);
-                question2.Choices.Add(choice19);
-                question2.Choices.Add(choice20);
+                question5.Choices.Add(choice17);
+                question5.Choices.Add(choice18);
+                question5.Choices.Add(choice19);
+                question5.Choices.Add(choice20);
 
                 // question 6
                 var question6 = new Question()
@@ -540,10 +540,10 @@ namespace gamerpilotPlatform.Data
                 context.Choices.Add(choice23);
                 context.Choices.Add(choice24);
 
-                question2.Choices.Add(choice21);
-                question2.Choices.Add(choice22);
-                question2.Choices.Add(choice23);
-                question2.Choices.Add(choice24);
+                question6.Choices.Add(choice21);
+                question6.Choices.Add(choice22);
+                question6.Choices.Add(choice23);
+                question6.Choices.Add(choice24);
 
                 // question 7
                 var question7= new Question()
@@ -571,15 +571,15 @@ namespace gamerpilotPlatform.Data
                     IsCorrect = false,
                     Text = "You forget to pay attention",
                 };
-                context.Choices.Add(choice21);
-                context.Choices.Add(choice22);
-                context.Choices.Add(choice23);
-                context.Choices.Add(choice24);
+                context.Choices.Add(choice25);
+                context.Choices.Add(choice26);
+                context.Choices.Add(choice27);
+                context.Choices.Add(choice28);
 
-                question2.Choices.Add(choice21);
-                question2.Choices.Add(choice22);
-                question2.Choices.Add(choice23);
-                question2.Choices.Add(choice24);
+                question7.Choices.Add(choice25);
+                question7.Choices.Add(choice26);
+                question7.Choices.Add(choice27);
+                question7.Choices.Add(choice28);
 
                 quiz.Questions.Add(question1);
                 quiz.Questions.Add(question2);

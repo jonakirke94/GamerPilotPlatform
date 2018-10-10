@@ -186,14 +186,14 @@ namespace gamerpilotPlatform.Controllers
                 Name = "Real life perspective",
                 Order = 2,
             };
-            var quiz = new Model.Section()
-            {
-                Name = "Quiz",
-                Order = 3,
-            };
             var game = new Model.Section()
             {
                 Name = "Diving into CS:GO",
+                Order = 3,
+            };
+            var quiz = new Model.Section()
+            {
+                Name = "Quiz",
                 Order = 4,
             };
             var practice = new Model.Section()

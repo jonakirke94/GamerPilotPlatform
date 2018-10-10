@@ -181,6 +181,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
         this.lectures = this.course.lectures;
         this.sections = this.course.sections;
+
+        // sort the sectins by their order in the course
+        this.sections.sort(function(a, b) {
+          return a.order - b.order;
+        });
+
         const enrolledResult = res['enrolled'] as boolean;
         this.feedback = res['feedback'] as Feedback;
 

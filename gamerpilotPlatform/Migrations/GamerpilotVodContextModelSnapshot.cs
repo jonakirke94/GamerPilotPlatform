@@ -220,15 +220,11 @@ namespace gamerpilotPlatform.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ChoiceId");
-
                     b.Property<int?>("QuizAttemptId");
 
                     b.Property<int>("UserChoiceId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChoiceId");
 
                     b.HasIndex("QuizAttemptId");
 
@@ -442,10 +438,6 @@ namespace gamerpilotPlatform.Migrations
 
             modelBuilder.Entity("gamerpilotPlatform.Model.Lectures.Quiz.Answer", b =>
                 {
-                    b.HasOne("gamerpilotPlatform.Model.Lectures.Quiz.Choice", "Choice")
-                        .WithMany()
-                        .HasForeignKey("ChoiceId");
-
                     b.HasOne("gamerpilotPlatform.Model.Lectures.Quiz.QuizAttempt")
                         .WithMany("Answers")
                         .HasForeignKey("QuizAttemptId");

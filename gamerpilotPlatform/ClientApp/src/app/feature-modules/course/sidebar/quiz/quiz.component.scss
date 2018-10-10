@@ -116,11 +116,13 @@
 
                 
                 @media only screen and (min-width : 1200px) {
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     flex-direction: row;
 
                     i {
-                        left: 50px;
+                        font-size: 2rem;
+                        left: 20px;
+                        top: 20px;
                         position: absolute;
                     }
 

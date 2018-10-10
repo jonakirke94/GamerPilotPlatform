@@ -24,7 +24,7 @@ h1 {
   }
 
   .large-container {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("assets/images/banner.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("assets/images/banner.png");
     background-repeat: no-repeat;
     background-position: center;
    
@@ -577,6 +577,7 @@ ul {
   font-size: 44px;
   font-family: $font-stack;
   font-weight: 700;
+  color: white;
 }
 
 @media (max-width: 768px) {
@@ -591,6 +592,7 @@ ul {
 .subtitle {
   margin-bottom: 3.8vh;
   font-size: 23px;
+  color: white;
 }
 
 @media (max-width: 768px) {
