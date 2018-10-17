@@ -42,6 +42,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     ))
     .subscribe(res => {
       this.courses = res['data'];
+      console.log(this.courses);
       this.courses.sort(function(a, b) {
           if (a.isReleased) {
             return -1;
