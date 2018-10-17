@@ -12,4 +12,8 @@ export class GamertestComponent implements OnInit {
   ngOnInit() {
   }
 
+  setValue(event) {
+    console.log(event);
+  }
+
 }

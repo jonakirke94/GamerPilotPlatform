@@ -12,46 +12,20 @@
             </div>
 
             <div class="question">
-              This is question one of many questions to come               
+              This is question one of many questions to come        
               
-              <label>
-                  <input type="checkbox" />
-                  <div class="circle">
-                    <div class="circle--inner circle--inner__1" ></div>
-                    <div class="circle--inner circle--inner__2" ></div>
-                    <div class="circle--inner circle--inner__3" ></div>
-                    <div class="circle--inner circle--inner__4" ></div>
-                    <div class="circle--inner circle--inner__5" ></div>
-                    <div class="circle--outer" ></div>
-                  </div>
-                  <svg>
-                    <defs>
-                      <filter id="gooey">
-                        <feGaussianBlur
-                          in="SourceGraphic"
-                          result="blur"
-                          stdDeviation="3"
-                        />
-                        <feColorMatrix
-                          in="blur"
-                          mode="matrix"
-                          values="
-                            1 0 0 0 0
-                            0 1 0 0 0
-                            0 0 1 0 0
-                            0 0 0 18 -7
-                          "
-                          result="gooey"
-                        />
-                        <feBlend
-                          in2="gooey"
-                          in="SourceGraphic"
-                          result="mix"
-                        />
-                      </filter>
-                    </defs>
-                  </svg>
-                </label>
+              <div class="radio-buttons">
+
+                <app-test-checkbox (change)="setValue($event)" [label]="'meget uenig'" [value]=1></app-test-checkbox>
+                <app-test-checkbox (change)="setValue($event)" [label]="'uenig'" [value]=2></app-test-checkbox>
+                <app-test-checkbox (change)="setValue($event)" [label]="'ved ikke'" [value]=3></app-test-checkbox>
+                <app-test-checkbox (change)="setValue($event)" [label]="'enig'" [value]=4></app-test-checkbox>
+                <app-test-checkbox (change)="setValue($event)" [label]="'meget enig'" [value]=5></app-test-checkbox>
+
+              </div>
+     
+
+       
        
             </div>
 
