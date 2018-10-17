@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.nav = document.querySelector('.features-nav');
     this.navOffsetTop = this.nav.offsetTop;
     this.navHeight = this.nav.offsetHeight;
-    const testimonials = <HTMLElement>document.querySelector('#testimonials');
+    const testimonials = <HTMLElement>document.querySelector('#page-helpers');
     this.courseTop = testimonials.offsetTop;
   }
 
