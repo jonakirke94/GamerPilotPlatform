@@ -16,7 +16,9 @@
 
 body {
   font-family: $font-stack;
+  //background-color: hsl(24, 20%, 95%);
 }
+
 
 h1 {
   @include title;
