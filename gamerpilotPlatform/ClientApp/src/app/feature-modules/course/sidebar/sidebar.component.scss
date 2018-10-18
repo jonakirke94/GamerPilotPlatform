@@ -11,7 +11,9 @@ $gutter: 40px;
 
 .wrapper {
     display: flex;
-    flex-direction:  column;
+    flex-direction: column;
+    min-height: 100%;
+    align-items: stretch;
 
     @media only screen and (min-width : 1200px) {
         flex-direction: row;
@@ -35,8 +37,9 @@ $gutter: 40px;
 
 
 .content {
-    padding: $gutter;
+/*     padding: $gutter; */
     flex: 1;
+    min-height: 100%;
 }
 
 .controls-large, .controls-small {
@@ -149,15 +152,13 @@ $gutter: 40px;
     background-color: #f7f7f7;
     color: black;
     flex-direction: column;
-    height: 100%;
     transition: width, filter;
     transition-duration: 0.5s;
     width: $gutter * 9;
     box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.15);
     border-right: 1px solid #D7DADB;
     border-bottom: 1px solid #D7DADB;
-
-
+    flex-shrink: 1;
 
     @media only screen and (max-width : 1200px) {
         display: none;

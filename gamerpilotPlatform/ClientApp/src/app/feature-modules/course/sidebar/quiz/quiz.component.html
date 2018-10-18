@@ -58,7 +58,7 @@
 
     </div>
 
-    <p>Previous attempts</p>
+    <p *ngIf="attempts.length > 0">Previous attempts</p>
     <ng-container *ngFor="let attempt of attempts; let i = index">
             <div class="attempt" (click)="showAnswers(attempt.answers, true, i)" [ngClass]="{'selected': i == selectedAttemptIndex && showResult}">
             {{attempt.submissionTime | date: 'dd/MM/yyyy HH:mm'}}</div>

@@ -93,7 +93,7 @@ namespace gamerpilotPlatform.Controllers
                     case "CourseVideo":
                         var courseVid = _context.Lectures.OfType<CourseVideo>()
                         .SingleOrDefault(x => x.Id == id);
-                        courseVid.Videos = _videoService.GetVideoViewModels(id);
+                        courseVid.Videos = GetVideoViewModels(id);
                         lecture = courseVid;
                         break;
                     default:
@@ -111,6 +111,26 @@ namespace gamerpilotPlatform.Controllers
             {
                 data = lecture
             });
+        }
+
+        private IEnumerable<VideoViewModel> GetVideoViewModels(int lectureId)
+        {
+            var viewVms = new List<VideoViewModel>();
+            var videos = _videoService.GetVideos(lectureId);
+
+            foreach (var vid in videos)
+            {
+                var instructor = _context.Instructors.SingleOrDefault(x => x.Id == vid.InstructorId);
+                viewVms.Add(new VideoViewModel
+                {                    
+                    Id = vid.Id,
+                    Name = vid.Name,
+                    InstructorName = instructor.Name,
+                    IFramePlayer = vid.GetEmbedHTML(640, 360, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html"),
+                    //IFramePlayerSmall = vid.GetEmbedHTML(320, 180, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html"),
+                });
+            }
+            return viewVms;
         }
 
         [HttpPost("[action]")]

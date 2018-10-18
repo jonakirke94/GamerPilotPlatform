@@ -39,24 +39,11 @@ namespace gamerpilotPlatform.Services
                 return await _videoHelper.AddVideoAsync(instructorId, lectureId, videoName, filePath);                
         }
 
-        public IEnumerable<VideoViewModel> GetVideoViewModels(int lectureId)
+        public IEnumerable<GamerPilot.Video.IVideo> GetVideos(int lectureId)
         {
-            var viewVms = new List<VideoViewModel>();
 
-            var vids = _videoHelper.GetVideosByLesson(lectureId);
-
-            foreach (var vid in vids)
-            {
-                viewVms.Add(new VideoViewModel
-                {
-                    Id = vid.Id,
-                    Name = vid.Name,
-                    IFramePlayer = vid.GetEmbedHTML(640, 360, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html"),
-                    IFramePlayerSmall = vid.GetEmbedHTML(320, 180, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html"),
-                });
-            }
-
-            return viewVms;
+            return _videoHelper.GetVideosByLesson(lectureId);
         }
     }
 }
+

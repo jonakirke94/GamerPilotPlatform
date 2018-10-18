@@ -99,17 +99,17 @@
   <div class="content" *ngIf="courseState.dataLoaded">
     
     <!-- Not enrolled or Not logged in-->
-    <div *ngIf="showLockedComponent()">
+    <div class="container" *ngIf="showLockedComponent()">
       <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
     </div>
 
     <!-- Show next lecture-->
-    <div *ngIf="showNextLectureComponent()">
+    <div class="container" *ngIf="showNextLectureComponent()">
         <app-next-lecture (nextClicked)="goToNextLecture()"></app-next-lecture>
     </div>
 
     <!-- Completed course -->
-    <div *ngIf="showFeedbackComponent()">
+    <div class="container" *ngIf="showFeedbackComponent()">
         <app-feedback [feedback]="feedback"></app-feedback>
     </div>
 

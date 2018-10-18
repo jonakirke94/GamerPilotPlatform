@@ -2,68 +2,96 @@
 @import '~sass/mixins';
 @import '~sass/fonts';
 
-.grid {
+.video-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    .video-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        margin-top: 100px;
+
+        @media only screen and (max-width : 768px) {
+            flex-direction: column;
+        }
+    }
+
+}
+
+.video-bar {
+    width: 100%;
+    background-color: #e8e8e8;
+    padding-top: 0;
+    display: flex;
+    flex-direction: row wrap;
+    justify-content: space-evenly;
+
+
+}
+
+@media screen and (min-width: 768px) {
+    .video-bar {
+        width: 100%;
+        justify-content: flex-start;
+    }
+  }
+
+  .author {
+    color: #4f4f4f;
+    font-weight: 700;
+
+  }
+
+.video {
+    background-color: #f7f7f7;
+    padding: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    -webkit-align-items: stretch; 
-    align-items: stretch; 
-    flex-flow: wrap;
-    margin-bottom: 50px;
-    display: none;
-
-    @media only screen and (min-width : 1200px) {
-        display: inline-flex;
-    }
-
-    .video-box {
-        width: 300px;
-        min-height: 85px;
-        padding: 5px;
-        margin: 10px;
-        text-align: center;
-        color: #6cb29f;
-        background-color: #e9ecef;
-        box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
-        border: 5px solid transparent;
-        transition: .3s ease-in-out;
-        position: relative;
-        
-
-        i {
-            position: absolute;
-            right: 5px;
-            bottom: 5px;
-            font-size: 28px;
-        }
-
-        &:hover {
-            cursor: pointer;
-            border: 5px solid #6cb29f;     
-        }
-    }
-}
-
-.links {
-    display: none;
-
-    a {
+    
+    &:hover {
         cursor: pointer;
-        display: block;
-        margin-bottom: 1rem;
     }
 
- 
+    &.active {
+        border-bottom: 5px solid $tertiary;
+    } 
+}
 
-    @media only screen and (max-width : 1200px) {
-        display: block;
+.video:nth-child(even) {
+    background-color: white;
+}
+
+.video-info, img {
+    display: inline-block;
+    
+}
+
+.video-info {
+    padding-left: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .video-info {
+        display: none;
     }
+
 }
 
-.active-link {
-    color: $tertiary !important;
+.placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #198669;
+    position: relative;
 }
 
-.active {
-    border-bottom: 5px solid #6cb29f !important;
+.fa-play-circle {
+    position: absolute;
+    font-size: 3rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
 }

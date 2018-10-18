@@ -22,7 +22,6 @@ export class VideoComponent implements OnChanges {
       this.videos = this.lecture.videos;
       this.selectedVideo = this.videos[0];
       this.hasVideos = true;
-      console.log(this.lecture.videos);
     }
   }
 
