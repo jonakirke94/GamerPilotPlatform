@@ -13,21 +13,21 @@
           <img class="close-btn mobile-menu-toggle" hidden src="/assets/images/close-icon.svg" alt="Close button" role="button" (click)="toggle()">
           <ul class="nav home-nav">
             <li class="nav-link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
-              <a routerLink='/'>Home</a>
+              <a routerLink='/' (click)="toggle()">Home</a>
             </li>
             <li class="nav-link" routerLinkActive="active-link">
-              <a routerLink='/courses'>Courses</a>
+              <a routerLink='/courses' (click)="toggle()">Courses</a>
             </li>
             <li class="nav-link" routerLinkActive="active-link">
-              <a routerLink='/learningbasis'>Learning Concept</a>
+              <a routerLink='/learningbasis' (click)="toggle()">Learning Concept</a>
             </li>
 
             <!-- Only visible on mobile menu-->
-            <li class="nav-link sign-link-mobile" *ngIf="!isAuthed"><a routerLink='/auth/login'>Log in</a></li>
-            <li class="nav-link sign-link-mobile" *ngIf="!isAuthed"><a routerLink='/auth/signup'>Sign up</a></li>
+            <li class="nav-link sign-link-mobile" *ngIf="!isAuthed" (click)="toggle()"><a routerLink='/auth/login'>Log in</a></li>
+            <li class="nav-link sign-link-mobile" *ngIf="!isAuthed" (click)="toggle()"><a routerLink='/auth/signup'>Sign up</a></li>
       
-            <li class="nav-link sign-link-mobile" *ngIf="isAuthed"><a routerLink='/profile'>Profile</a></li>
-            <li class="nav-link sign-link-mobile" *ngIf="isAuthed"><a routerLink='/auth/login' (click)="logout()">Log out</a></li>
+            <li class="nav-link sign-link-mobile" *ngIf="isAuthed" (click)="toggle()"><a routerLink='/profile'>Profile</a></li>
+            <li class="nav-link sign-link-mobile" *ngIf="isAuthed" (click)="toggle()"><a routerLink='/auth/login' (click)="logout()">Log out</a></li>
 
           </ul>
         </nav>

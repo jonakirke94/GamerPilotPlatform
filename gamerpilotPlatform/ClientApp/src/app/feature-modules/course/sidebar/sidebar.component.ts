@@ -79,7 +79,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this._courseService.hasFeedback$.pipe(
       takeUntil(this.onDestroy$))
       .subscribe(res => {
-      this.courseState.hasFeedback = res;
+      this.courseState.hasFeedback = res as boolean;
     });
   }
 
@@ -313,6 +313,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   showNextLectureComponent() {
     return !this.courseState.activeChild && !this.courseState.completedCourse && this.courseState.isEnrolled && this.courseState.isLoggedIn;
+  }
+
+  showCompletedComponent() {
+    return !this.courseState.activeChild && this.courseState.completedCourse;
+  }
+
+  goToFirst() {
+    const lectureArr = this.lectures.map(x => x.id);
+    this._router.navigateByUrl(`courses/${this.url}/lectures/${lectureArr[0]}`);
   }
 
 

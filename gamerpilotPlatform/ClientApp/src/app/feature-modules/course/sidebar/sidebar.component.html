@@ -90,7 +90,7 @@
                 </li> 
     
               </ng-container>
-            
+           
       
           </ul>
         </nav>
@@ -109,6 +109,12 @@
             <i class="icon" appIcon [type]="lecture.lectureType"></i>
             <span class="label">{{lecture.name}} </span>        
           </li>    
+          <li class="item link nav-link" *ngIf="courseState.isLoggedIn && courseState.isEnrolled" (click)="toggleNav()" routerLink='./feedback' routerLinkActive="active-link" >
+                <i class="status" appStatus [completed]="courseState.hasFeedback"></i>
+                <i class="icon fas fa-file-alt"></i>
+                <span class="label">Feedback</span>        
+            </li>
+          
 
         </ul>
       </nav>
@@ -127,6 +133,11 @@
         <app-next-lecture (nextClicked)="goToNextLecture()"></app-next-lecture>
     </div>
 
+    <!-- Show completeed-->
+    <div class="container" *ngIf="showCompletedComponent()">
+        <app-completed-course [url]="url" [hasFeedback]="courseState.hasFeedback" (firstClicked)="goToFirst()"></app-completed-course>
+    </div>
+    
     <router-outlet></router-outlet>
   </div>
 

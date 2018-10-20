@@ -17,6 +17,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { RatingStarComponent } from './helper-components/rating-star/rating-star.component';
 import { NextLectureComponent } from './helper-components/next-lecture/next-lecture.component';
+import { CompletedCourseComponent } from './helper-components/completed-course/completed-course.component';
 
 
 
@@ -33,6 +34,6 @@ import { NextLectureComponent } from './helper-components/next-lecture/next-lect
     CaseComponent,
     QuizComponent, SummaryComponent, ExercisesComponent,
     LockedContentComponent, LectureComponentComponent,
-    VideoComponent, LockedContentComponent, FeedbackComponent, RatingStarComponent, NextLectureComponent]
+    VideoComponent, LockedContentComponent, FeedbackComponent, RatingStarComponent, NextLectureComponent, CompletedCourseComponent]
 })
 export class CourseModule { }

@@ -127,14 +127,15 @@ namespace gamerpilotPlatform.Controllers
         }
 
         [HttpGet("[action]/{courseUrl}")]
-        [Authorize]
         public IActionResult User([FromHeader]string authorization, string courseUrl)
         {
             var userId = _tokenService.getClaimsId(authorization);
             var course = _context.Courses.SingleOrDefault(x => x.UrlName == courseUrl);
 
             //check if user is enrolled
-            var courseUser = _context.CourseUsers.SingleOrDefault(x => x.CourseId == course.Id && x.UserId == userId);
+            var courseUser = _context.CourseUsers
+                .Include(x => x.Feedback)                
+                .SingleOrDefault(x => x.CourseId == course.Id && x.UserId == userId);
             var isCompleted = false;
 
             if (courseUser != null && courseUser.IsCompleted)
@@ -144,7 +145,9 @@ namespace gamerpilotPlatform.Controllers
             return new ObjectResult(new
             {
                 isEnrolled = courseUser == null ? false : true,
-                isCompleted = isCompleted
+                isCompleted,
+                feedback = courseUser?.Feedback == null ? false : true,
+
             });
    
         }

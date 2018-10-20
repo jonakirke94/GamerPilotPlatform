@@ -8,6 +8,11 @@
     color: #343539;
     font-family: $font-stack;
     margin-bottom: 1rem;
+    font-size: 1rem;
+
+    @media only screen and (max-width : 768px) {
+        padding: 0rem;
+    }
 }
 
 .question-wrapper {
@@ -23,7 +28,7 @@
         padding: 2rem 1rem 1rem 1rem;
         box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
         line-height: 1.8;
-        font-size: 18px;
+        font-size: 1rem;
         margin-bottom: 20px;
         overflow: hidden;  
 
@@ -31,10 +36,15 @@
             font-family: $font-stack;
             color: #2d9176;
             font-size: 2rem;
+          
+            @media only screen and (max-width : 768px) {
+                font-size: 1rem;
+                line-height: 2;
+            }
         }
 
         .wrapper {
-            padding: 1rem 2rem 1rem 2rem;
+            padding: 1rem 0rem;
             margin-bottom: 1rem;
             display: flex;
             flex-wrap: wrap;
@@ -55,6 +65,10 @@
                 box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
                 transition: .5s ease;
                 border: 5px solid transparent;
+
+                @media only screen and (max-width : 768px) {
+                    padding: 1rem;
+                }
 
                 &:hover {
                     cursor: pointer;
