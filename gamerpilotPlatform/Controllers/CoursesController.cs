@@ -127,6 +127,7 @@ namespace gamerpilotPlatform.Controllers
         }
 
         [HttpGet("[action]/{courseUrl}")]
+        [Authorize]
         public IActionResult User([FromHeader]string authorization, string courseUrl)
         {
             var userId = _tokenService.getClaimsId(authorization);
@@ -149,6 +150,7 @@ namespace gamerpilotPlatform.Controllers
         }
 
         [HttpGet("[action]/{courseUrl}")]
+        [Authorize]
         public IActionResult HasFeedback([FromHeader]string authorization, string courseUrl)
         {
             var userId = _tokenService.getClaimsId(authorization);
