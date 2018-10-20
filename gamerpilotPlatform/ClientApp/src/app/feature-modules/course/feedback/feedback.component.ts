@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { CourseService } from '../../../core/services/course.service';
 import { Feedback } from '../../../../models/feedback';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
+import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-spinner.component';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-feedback',
@@ -13,12 +15,13 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class FeedbackComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject<void>();
-  @Input() feedback: Feedback;
   showFeedback = true;
 
   feedbackForm: FormGroup;
-  q1: FormControl;
-  q2: FormControl;
+  radioYoutube: FormControl;
+  radioPay: FormControl;
+  youtubeResponse: FormControl;
+  howMuch: FormControl;
   rating = 6;
   recommendation = 6;
   courseName: string;
@@ -26,18 +29,42 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   error = '';
 
   constructor(
-    private _coursService: CourseService,
+    private _courseService: CourseService,
     private _activeRoute: ActivatedRoute
     ) { }
 
   ngOnInit() {
-    this.courseName = this._activeRoute.snapshot.paramMap.get('name');
     this.createFormControls();
     this.createForm();
+    this.fetchUrl();
 
-    if (this.feedback) {
+
+
+ /*    if (this.feedback) {
       this.showFeedback = false;
-    }
+    } */
+  }
+
+  fetchUrl() {
+    this._activeRoute.params
+    .pipe(
+      takeUntil(this.onDestroy$
+    ))
+    .subscribe((params: Params) => {
+      this._activeRoute.parent.params
+    .pipe(
+      takeUntil(this.onDestroy$
+    ))
+    .subscribe((parentParams: Params) => {
+        this.courseName = parentParams['name'];
+        this._courseService.hasFeedback(this.courseName).pipe(
+          takeUntil(this.onDestroy$
+        ))
+        .subscribe(res => {
+          this.showFeedback = !res as boolean;
+        });
+      });
+    });
   }
 
   ngOnDestroy() {
@@ -46,15 +73,20 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   }
 
   private createFormControls() {
-    this.q1 = new FormControl();
-    this.q2 = new FormControl();
+    this.radioYoutube = new FormControl();
+    this.radioPay = new FormControl();
+    this.howMuch = new FormControl();
+    this.youtubeResponse = new FormControl();
+
 
   }
 
   private createForm() {
     this.feedbackForm = new FormGroup({
-      q1: this.q1,
-      q2: this.q2
+      differentFromYoutube: this.radioYoutube,
+      willingToPay: this.radioPay,
+      howMuch: this.howMuch,
+      youtubeResponse: this.youtubeResponse
     });
   }
 
@@ -68,17 +100,22 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
   submitFeedback() {
       const feedback = {} as Feedback;
-      feedback.rating = this.rating;
-      feedback.likelyToRecommend = this.recommendation;
-      feedback.uniqueCourseOpinion = this.feedbackForm.value.q1;
-      feedback.wouldPayOpinion = this.feedbackForm.value.q2;
-      feedback.courseUrl = this.courseName;
+      feedback.Rating = this.rating;
+      feedback.LikelyToRecommend = this.recommendation;
+      feedback.DifferentFromYoutube = this.radioYoutube.value === 'true' ? true : false;
+      feedback.WillingToPay = this.radioPay.value === 'true' ? true : false;
+      feedback.HowMuch = this.howMuch.value === null ? 0 : this.howMuch.value;
+      feedback.YoutubeResponse = this.youtubeResponse.value === null ? '' : this.youtubeResponse.value;
+      feedback.CourseUrl = this.courseName;
 
-      this._coursService.saveFeedback(feedback).pipe(
+      console.log(feedback, 'FEEDBBACK');
+
+      this._courseService.saveFeedback(feedback).pipe(
         takeUntil(this.onDestroy$
       ))
       .subscribe( res => {
         this.showFeedback = false;
+        this._courseService.hasFeedback$.next(true);
       }, err => {
         this.error = 'Server error';
       });

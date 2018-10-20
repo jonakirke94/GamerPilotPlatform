@@ -40,6 +40,25 @@
                     </li>
                 </ng-container>
             </ng-container>
+
+            <!-- FEEDBACK -->
+            <li class="item section">
+                <span class="topic">Feedback</span>
+            </li>
+
+            <li class="item link" *ngIf="courseState.isLoggedIn && courseState.isEnrolled" routerLink='./feedback' routerLinkActive="active-link">         
+                <i class="status" appStatus [completed]="courseState.hasFeedback"></i>
+                <i class="icon fas fa-file-alt"></i>
+                <span class="label">Give your opinion</span>        
+            </li> 
+
+            <li class="item link disabled"  *ngIf="!courseState.isLoggedIn || !courseState.isEnrolled" >
+                <i class="status" appStatus [completed]="courseState.hasFeedback"></i>
+                <i class="icon fas fa-file-alt"></i>
+                <span class="label">Give your opinion</span>        
+            </li>
+            <!-- FEEDBACK END-->
+            
           
     
         </ul>
@@ -106,11 +125,6 @@
     <!-- Show next lecture-->
     <div class="container" *ngIf="showNextLectureComponent()">
         <app-next-lecture (nextClicked)="goToNextLecture()"></app-next-lecture>
-    </div>
-
-    <!-- Completed course -->
-    <div class="container" *ngIf="showFeedbackComponent()">
-        <app-feedback [feedback]="feedback"></app-feedback>
     </div>
 
     <router-outlet></router-outlet>

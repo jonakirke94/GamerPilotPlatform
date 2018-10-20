@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gamerpilotPlatform.Data;
 
 namespace gamerpilotPlatform.Migrations
 {
     [DbContext(typeof(GamerpilotVodContext))]
-    partial class GamerpilotVodContextModelSnapshot : ModelSnapshot
+    [Migration("20181020131528_feedback")]
+    partial class feedback
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,6 +75,9 @@ namespace gamerpilotPlatform.Migrations
                     b.Property<int>("LikelyToRecommend");
 
                     b.Property<int>("Rating");
+
+                    b.Property<string>("UniqueCourseOpinion")
+                        .IsRequired();
 
                     b.Property<bool>("WillingToPay");
 

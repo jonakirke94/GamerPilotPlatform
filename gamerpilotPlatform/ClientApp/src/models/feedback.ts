@@ -1,7 +1,9 @@
 export interface Feedback {
-    rating: number;
-    likelyToRecommend: number;
-    uniqueCourseOpinion: string;
-    wouldPayOpinion: string;
-    courseUrl: string;
+    Rating: number;
+    LikelyToRecommend: number;
+    DifferentFromYoutube: boolean;
+    WillingToPay: boolean;
+    HowMuch: number;
+    YoutubeResponse: string;
+    CourseUrl: string;
 }

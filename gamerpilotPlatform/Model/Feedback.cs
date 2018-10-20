@@ -17,13 +17,16 @@ namespace gamerpilotPlatform.Model
         [Required]
         public int LikelyToRecommend { get; set; }
 
-        [Required]
-        public string UniqueCourseOpinion { get; set; }
+        public bool DifferentFromYoutube { get; set; }
 
-        [Required]
-        public string WouldPayOpinion { get; set; }
+        public bool WillingToPay { get; set; }
+
+        public int HowMuch { get; set; }
+
+        public string YoutubeResponse { get; set; }
 
         [NotMapped]
         public string CourseUrl { get; set; }
     }
 }
+

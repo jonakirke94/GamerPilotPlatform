@@ -4,6 +4,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { CoursesComponent } from './courses/courses.component';
 import { LectureComponentComponent } from './lecture-component/lecture-component.component';
 import { AuthGuard } from '../../core/guards/auth.guard';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
     path: ':name',
     component: SidebarComponent,
     children: [
-      {path: 'lectures/:id', component: LectureComponentComponent, canActivate: [AuthGuard]}
+      {path: 'lectures/:id', component: LectureComponentComponent, canActivate: [AuthGuard]},
+      {path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard]}
     ]
   }
 ];

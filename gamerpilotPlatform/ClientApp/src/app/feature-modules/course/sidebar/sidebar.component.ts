@@ -7,7 +7,6 @@ import { SnotifyService } from 'ng-snotify';
 import { listAnimations, flyInOut } from '../../../shared/animation';
 import { CourseService } from '../../../core/services/course.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Feedback } from '../../../../models/feedback';
 import { Course } from '../../../../models/course';
 import { Section } from '../../../../models/section';
 import { LectureService } from '../../../core/services/lecture.service';
@@ -24,7 +23,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   url: string;
   course: Course;
   lectures: any[];
-  feedback: Feedback;
   sections: Section[];
   completedLectures = [];
   currentLectureId: string;
@@ -34,7 +32,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     activeChild: false,
     isLoggedIn: false,
     isEnrolled: false,
-    completedCourse: false
+    completedCourse: false,
+    hasFeedback: false,
   };
 
   minimized = false;
@@ -54,11 +53,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     this.listenToChildRoutes();
 
-    this._authService.IsAuthed$.subscribe(status => {
+    this._authService.IsAuthed$
+    .pipe(
+      takeUntil(this.onDestroy$))
+    .subscribe(status => {
       this.courseState.isLoggedIn = status;
     });
 
     this.loadSidebar();
+
+    this.subscribeToFeedback();
+
   }
 
   toggle() {
@@ -69,6 +74,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.showNav = !this.showNav;
   }
 
+  subscribeToFeedback() {
+    // listen when feedback is subbmitted so sidebbar can be updated
+    this._courseService.hasFeedback$.pipe(
+      takeUntil(this.onDestroy$))
+      .subscribe(res => {
+      this.courseState.hasFeedback = res;
+    });
+  }
+
   loadSidebar() {
     // check if the user is enrolled and load sidebar accordingly
     this._courseService.getUserCourse(this.url).pipe(
@@ -76,6 +90,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .subscribe(res => {
           this.courseState.isEnrolled = res['isEnrolled'];
           this.courseState.completedCourse = res['isCompleted'];
+          this.courseState.hasFeedback = res['feedback'];
           this.loadCourse(this.url);
     });
   }
@@ -163,8 +178,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
           this.completedLectures = newCompletedLectures.map(x => x.lectureId);
           this.courseState.completedCourse = true;
 
-          // send to course home view where feedback will be showed
-          this._router.navigateByUrl(`courses/${this.url}`);
+          // send to feedback;
+          this._router.navigateByUrl(`courses/${this.url}/feedback`);
         });
     }
   }
@@ -188,8 +203,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
         });
 
         const enrolledResult = res['enrolled'] as boolean;
-        this.feedback = res['feedback'] as Feedback;
-
         if (enrolledResult) {
           const completedLectureArr = res['completedLectures'];
           this.completedLectures = completedLectureArr.map(x => x.lectureId);
@@ -296,10 +309,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   showLockedComponent() {
     return !this.courseState.isEnrolled || !this.courseState.isLoggedIn;
-  }
-
-  showFeedbackComponent() {
-    return !this.courseState.activeChild && this.courseState.completedCourse && this.courseState.isEnrolled && this.courseState.isLoggedIn;
   }
 
   showNextLectureComponent() {
