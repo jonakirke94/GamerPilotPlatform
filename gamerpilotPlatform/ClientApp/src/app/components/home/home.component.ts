@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   courseTop;
 
   constructor(@Inject(DOCUMENT) document, private _router: Router) {
-
   }
 
   ngOnInit() {

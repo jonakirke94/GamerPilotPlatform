@@ -30,7 +30,7 @@ import { PrivacyPoliticsComponent } from './components/privacy-politics/privacy-
       CoreModule,
       BrowserAnimationsModule,
       SharedModule,
-      SnotifyModule
+      SnotifyModule,
   ],
    providers: [
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
