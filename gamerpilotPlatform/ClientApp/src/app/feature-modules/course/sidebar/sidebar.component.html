@@ -42,7 +42,7 @@
             </ng-container>
 
             <!-- FEEDBACK -->
-            <li class="item section">
+            <li class="item section" *ngIf="courseState.isLoggedIn && courseState.isEnrolled">
                 <span class="topic">Feedback</span>
             </li>
 
@@ -51,12 +51,6 @@
                 <i class="icon fas fa-file-alt"></i>
                 <span class="label">Give your opinion</span>        
             </li> 
-
-            <li class="item link disabled"  *ngIf="!courseState.isLoggedIn || !courseState.isEnrolled" >
-                <i class="status" appStatus [completed]="courseState.hasFeedback"></i>
-                <i class="icon fas fa-file-alt"></i>
-                <span class="label">Give your opinion</span>        
-            </li>
             <!-- FEEDBACK END-->
             
           

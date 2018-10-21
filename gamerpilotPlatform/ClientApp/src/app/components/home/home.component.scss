@@ -29,6 +29,8 @@ h1 {
     max-width: 100%;;
     position: relative;
     min-height: 600px;
+    display: flex;
+    justify-content: center;
 
     &:before {
       width: 100%;
@@ -43,6 +45,7 @@ h1 {
    
 
     .hero {
+      
 
       .headlines {
         text-align: center;
