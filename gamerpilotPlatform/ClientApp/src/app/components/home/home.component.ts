@@ -1,8 +1,7 @@
 import { Component, OnInit, HostListener, Inject, OnDestroy} from '@angular/core';
-import { CourseCarouselComponent} from '../../shared/coursecarousel/coursecarousel.component';
+// import { CourseCarouselComponent} from '../../shared/coursecarousel/coursecarousel.component';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-home',
