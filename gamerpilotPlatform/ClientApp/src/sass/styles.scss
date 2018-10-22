@@ -7,6 +7,10 @@
 @import "~ng-snotify/styles/material";
 
 
+p, li, td {
+  font-size: 1rem;
+}
+
 .snotify-icon {
   object-fit: cover;
   width: 100%;

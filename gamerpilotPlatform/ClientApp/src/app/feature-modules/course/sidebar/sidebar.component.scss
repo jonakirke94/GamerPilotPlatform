@@ -50,6 +50,7 @@ $gutter: 40px;
     top: 0;
     left: 0;
     width: 100%; 
+    z-index: 99999;
     
     .control {
         flex-grow: 1;
