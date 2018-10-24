@@ -2,7 +2,7 @@ export interface Feedback {
     Rating: number;
     LikelyToRecommend: number;
     DifferentFromYoutube: boolean;
-    WillingToPay: boolean;
+    InterestedInMore: boolean;
     HowMuch: number;
     YoutubeResponse: string;
     CourseUrl: string;

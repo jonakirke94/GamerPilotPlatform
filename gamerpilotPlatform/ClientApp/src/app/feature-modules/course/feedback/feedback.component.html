@@ -40,22 +40,22 @@
           </div>
 
           <div class="field">
-              <label>Would you be willing to pay for the next course?</label>
+              <label>Are you interested in the next course?</label>
               <div class="control radio-wrapper">
                 <label class="radio-container">Yes
-                    <input type="radio" name="willingToPay" value="true"  formControlName="willingToPay">
+                    <input type="radio" name="interestedInMore" value="true"  formControlName="interestedInMore">
                     <span class="checkmark"></span>
                 </label>
                 <label class="radio-container">No
-                    <input type="radio" name="willingToPay" value="false" formControlName="willingToPay">
+                    <input type="radio" name="interestedInMore" value="false" formControlName="interestedInMore">
                     <span class="checkmark"></span>
                 </label>
               </div>
           </div>
         
-          <div class="field" *ngIf="feedbackForm.value.willingToPay === 'true'">
+          <div class="field" *ngIf="feedbackForm.value.interestedInMore === 'true'">
               <div class="control">
-                 <label>How much? ($USD)</label>
+                 <label>How much would you pay? ($USD)</label>
                 <input type="number" name="howMuch" step="5" placeholder="$20" formControlName="howMuch">
               </div>
           </div>             

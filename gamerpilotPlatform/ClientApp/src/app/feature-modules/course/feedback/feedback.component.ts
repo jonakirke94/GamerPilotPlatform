@@ -6,7 +6,6 @@ import { Feedback } from '../../../../models/feedback';
 import { ActivatedRoute, Params } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-spinner.component';
-import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-feedback',
@@ -19,7 +18,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
   feedbackForm: FormGroup;
   radioYoutube: FormControl;
-  radioPay: FormControl;
+  interestedInMore: FormControl;
   youtubeResponse: FormControl;
   howMuch: FormControl;
   rating = 6;
@@ -37,12 +36,6 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     this.createFormControls();
     this.createForm();
     this.fetchUrl();
-
-
-
- /*    if (this.feedback) {
-      this.showFeedback = false;
-    } */
   }
 
   fetchUrl() {
@@ -74,7 +67,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
   private createFormControls() {
     this.radioYoutube = new FormControl();
-    this.radioPay = new FormControl();
+    this.interestedInMore = new FormControl();
     this.howMuch = new FormControl();
     this.youtubeResponse = new FormControl();
 
@@ -84,7 +77,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   private createForm() {
     this.feedbackForm = new FormGroup({
       differentFromYoutube: this.radioYoutube,
-      willingToPay: this.radioPay,
+      interestedInMore: this.interestedInMore,
       howMuch: this.howMuch,
       youtubeResponse: this.youtubeResponse
     });
@@ -103,13 +96,10 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       feedback.Rating = this.rating;
       feedback.LikelyToRecommend = this.recommendation;
       feedback.DifferentFromYoutube = this.radioYoutube.value === 'true' ? true : false;
-      feedback.WillingToPay = this.radioPay.value === 'true' ? true : false;
+      feedback.InterestedInMore = this.interestedInMore.value === 'true' ? true : false;
       feedback.HowMuch = this.howMuch.value === null ? 0 : this.howMuch.value;
       feedback.YoutubeResponse = this.youtubeResponse.value === null ? '' : this.youtubeResponse.value;
       feedback.CourseUrl = this.courseName;
-
-      console.log(feedback, 'FEEDBBACK');
-
       this._courseService.saveFeedback(feedback).pipe(
         takeUntil(this.onDestroy$
       ))

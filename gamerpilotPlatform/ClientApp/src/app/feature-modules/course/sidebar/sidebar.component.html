@@ -4,10 +4,8 @@
     <i class="small-only fas fa-list" (click)="toggleNav()" [ngClass]="showNav ? 'fa-rotate-90' : ''"></i>
   </div>
     <div class="control prev" (click)="previous()" *ngIf="!isFirst()" ><i class="fas fa-arrow-left"></i> Prev</div>
-    <div class="control next" (click)="next()" *ngIf="!isLast()">Next and complete <i class="fas fa-arrow-right"></i></div>
+    <div class="control next " [class.control-animation]="isFirst()" (click)="next()" *ngIf="!isLast()">Next and complete <i class="fas fa-arrow-right"></i></div>
     <div class="control complete" (click)="complete()" *ngIf="isLast()">Complete<i class="fas fa-flag-checkered"></i></div>
-
-
 </div>
 
 
