@@ -187,7 +187,7 @@ namespace gamerpilotPlatform.Controllers
                     HowMuch = feedback.HowMuch,
                     LikelyToRecommend = feedback.LikelyToRecommend,
                     Rating = feedback.Rating,
-                    WillingToPay = feedback.WillingToPay,
+                    InterestedInMore = feedback.InterestedInMore,
                     YoutubeResponse = feedback.YoutubeResponse
                 };
                 _context.Feedbacks.Add(userFeedback);

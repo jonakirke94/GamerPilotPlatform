@@ -58,6 +58,7 @@ $gutter: 40px;
         white-space: nowrap; 
         overflow: hidden;
         text-overflow: ellipsis; 
+        position: relative;
 
         &:hover {
             cursor: pointer;
@@ -361,3 +362,34 @@ $gutter: 40px;
     }
 }
   
+
+.control-animation {
+  -webkit-animation: blink 2s linear infinite;
+  -moz-animation: blink 2s linear infinite;
+  animation: blink 2s linear infinite;
+}
+
+
+
+@keyframes blink {  
+    0% { 
+        background-color: lighten($primary, 10%); 
+    }
+    50% {
+        background-color: lighten($primary, 5%); 
+    }
+    100% {  
+        background-color: $primary; 
+    }
+  }
+  @-webkit-keyframes blink {
+    0% { 
+        background-color: lighten($primary, 10%); 
+    }
+    50% {
+        background-color: lighten($primary, 5%); 
+    }
+    100% {  
+        background-color: $primary; 
+    }
+  }

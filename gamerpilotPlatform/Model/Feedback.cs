@@ -19,7 +19,7 @@ namespace gamerpilotPlatform.Model
 
         public bool DifferentFromYoutube { get; set; }
 
-        public bool WillingToPay { get; set; }
+        public bool InterestedInMore { get; set; }
 
         public int HowMuch { get; set; }
 
