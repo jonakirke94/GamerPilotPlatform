@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, OnInit } from '@angular/core';
 import { flyInOut } from '../../../../shared/animation';
 import { FlowplayerComponent } from '../flowplayer/flowplayer.component';
-import { Video } from 'src/models/video';
+import { Video } from '../../../../../models/video';
 
 
 @Component({
