@@ -190,8 +190,8 @@ namespace gamerpilotPlatform.Controllers
                     InterestedInMore = feedback.InterestedInMore,
                     YoutubeResponse = feedback.YoutubeResponse
                 };
-                _context.Feedbacks.Add(userFeedback);
-                _context.SaveChanges();
+                //_context.Feedbacks.Add(userFeedback);
+                //_context.SaveChanges();
 
                 courseUser.Feedback = feedback;
                 _context.SaveChanges();

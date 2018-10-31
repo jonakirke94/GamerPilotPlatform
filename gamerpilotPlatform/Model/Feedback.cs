@@ -21,7 +21,7 @@ namespace gamerpilotPlatform.Model
 
         public bool InterestedInMore { get; set; }
 
-        public int HowMuch { get; set; }
+        public string HowMuch { get; set; }
 
         public string YoutubeResponse { get; set; }
 
