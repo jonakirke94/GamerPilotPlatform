@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Video } from '../../../../../models/video';
 declare var flowplayer: any;
 
 @Component({
@@ -7,16 +8,20 @@ declare var flowplayer: any;
 	styleUrls: ['./flowplayer.component.scss']
 })
 export class FlowplayerComponent implements OnChanges, OnDestroy {
-	@Input() video;
+	@Input() video: Video;
 	player: any;
 	stopwatch: any;
 	rest = 0;
 	runTimer = false;
 	seconds = 0;
+	trackingVideo: Video;
 
 	constructor() { }
 
 	ngOnChanges() {
+		if (!this.trackingVideo) {
+			this.trackingVideo = this.video;
+		}
 		this.destroyPlayer();
 		this.createPlayer();
 	}
@@ -56,24 +61,21 @@ export class FlowplayerComponent implements OnChanges, OnDestroy {
 		}, 1000);
 	}
 
-	success() {
-		console.log('was successfully tracked');
-	}
-
 	destroyPlayer() {
-
 		if (this.player) {
 			(<any>window).gtag('event', 'Video', {
-				'event_category': 'Videos',
+				'event_category': 'GamerPilot Videos',
 				'event_action': 'Seconds played',
 				'event_label': this.video.name,
 				'value': this.seconds,
-				'event_callback': this.success()
 			});
 			clearInterval(this.stopwatch);
 			this.seconds = 0;
 			this.player.unload();
 			this.player.shutdown();
+
+			// after tracking set current video to be tracked;
+			this.trackingVideo = this.video;
 		}
 	}
 

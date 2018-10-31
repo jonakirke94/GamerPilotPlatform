@@ -1,6 +1,7 @@
 import { Component, OnChanges, Input, OnInit } from '@angular/core';
 import { flyInOut } from '../../../../shared/animation';
 import { FlowplayerComponent } from '../flowplayer/flowplayer.component';
+import { Video } from 'src/models/video';
 
 
 @Component({
@@ -11,8 +12,8 @@ import { FlowplayerComponent } from '../flowplayer/flowplayer.component';
 })
 export class VideoComponent implements OnChanges {
 	@Input() lecture;
-	videos = [];
-	selectedVideo;
+	videos: Video[] = [];
+	selectedVideo: Video;
 	hasVideos: boolean;
 	showSmall = false;
 
@@ -21,7 +22,7 @@ export class VideoComponent implements OnChanges {
 
 ngOnChanges() {
 		if (!!this.lecture.videos && this.lecture.videos.length > 0) {
-			this.videos = this.lecture.videos;
+			this.videos = this.lecture.videos as Video[];
 			this.selectedVideo = this.videos[0];
 			this.hasVideos = true;
 		}
