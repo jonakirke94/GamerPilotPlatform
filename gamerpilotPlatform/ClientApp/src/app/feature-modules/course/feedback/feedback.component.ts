@@ -68,7 +68,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   private createFormControls() {
     this.radioYoutube = new FormControl();
     this.interestedInMore = new FormControl();
-    this.howMuch = new FormControl();
+		this.howMuch = new FormControl(0);
     this.youtubeResponse = new FormControl();
 
 
@@ -80,7 +80,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       interestedInMore: this.interestedInMore,
       howMuch: this.howMuch,
       youtubeResponse: this.youtubeResponse
-    });
+		});		
   }
 
   ratingClick(rating: any): void {
@@ -97,7 +97,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       feedback.LikelyToRecommend = this.recommendation;
       feedback.DifferentFromYoutube = this.radioYoutube.value === 'true' ? true : false;
       feedback.InterestedInMore = this.interestedInMore.value === 'true' ? true : false;
-      feedback.HowMuch = this.howMuch.value === null ? 0 : this.howMuch.value;
+      feedback.HowMuch = this.howMuch.value;
       feedback.YoutubeResponse = this.youtubeResponse.value === null ? '' : this.youtubeResponse.value;
       feedback.CourseUrl = this.courseName;
       this._courseService.saveFeedback(feedback).pipe(

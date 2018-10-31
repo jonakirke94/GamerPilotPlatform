@@ -54,10 +54,31 @@
           </div>
         
           <div class="field" *ngIf="feedbackForm.value.interestedInMore === 'true'">
-              <div class="control">
+      <!--         <div class="control">
                  <label>How much would you pay? ($USD)</label>
                 <input type="number" name="howMuch" step="5" placeholder="$20" formControlName="howMuch">
-              </div>
+							</div> -->
+							<label>How much would you pay? ($USD)</label>
+              <div class="control radio-wrapper">
+
+								<label class="radio-container">$0
+									<input type="radio" name="howMuch" value=0 formControlName="howMuch">
+									<span class="checkmark"></span>
+								</label>
+								<label class="radio-container">$5
+										<input type="radio" name="howMuch" value=5 formControlName="howMuch">
+										<span class="checkmark"></span>
+								</label>
+								<label class="radio-container">$10
+									<input type="radio" name="howMuch" value=10 formControlName="howMuch">
+									<span class="checkmark"></span>
+							</label>
+								<label class="radio-container">More than $10
+									<input type="radio" name="howMuch" value=">10" formControlName="howMuch">
+									<span class="checkmark"></span>
+							</label>
+							<pre>How much: {{howMuch.value}}</pre>
+							</div>
           </div>             
             <span *ngIf="error">
               <p  class="text-danger error-txt">{{error}}</p>
