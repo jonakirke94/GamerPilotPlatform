@@ -18,6 +18,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { RatingStarComponent } from './helper-components/rating-star/rating-star.component';
 import { NextLectureComponent } from './helper-components/next-lecture/next-lecture.component';
 import { CompletedCourseComponent } from './helper-components/completed-course/completed-course.component';
+import { FlowplayerComponent } from './sidebar/flowplayer/flowplayer.component';
 
 
 
@@ -33,7 +34,7 @@ import { CompletedCourseComponent } from './helper-components/completed-course/c
     CoursesComponent, InfoComponent,
     CaseComponent,
     QuizComponent, SummaryComponent, ExercisesComponent,
-    LockedContentComponent, LectureComponentComponent,
+    LockedContentComponent, LectureComponentComponent, FlowplayerComponent,
     VideoComponent, LockedContentComponent, FeedbackComponent, RatingStarComponent, NextLectureComponent, CompletedCourseComponent]
 })
 export class CourseModule { }

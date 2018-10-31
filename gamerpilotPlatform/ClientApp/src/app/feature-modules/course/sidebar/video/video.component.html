@@ -14,9 +14,7 @@
   </div>
 
   <div class="video-content">
-    <div class="embed-responsive embed-responsive-16by9" [innerHTML]="selectedVideo.iFramePlayer | sanitizeHtmlPipe"></div>
+		<app-flowplayer class="embed-responsive embed-responsive-16by9" [video]="selectedVideo"></app-flowplayer>
   </div>
 
 </div>
-
-

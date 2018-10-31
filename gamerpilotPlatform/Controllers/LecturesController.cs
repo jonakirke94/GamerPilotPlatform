@@ -126,8 +126,7 @@ namespace gamerpilotPlatform.Controllers
                     Id = vid.Id,
                     Name = vid.Name,
                     InstructorName = instructor.Name,
-                    IFramePlayer = vid.GetEmbedHTML("https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html"),
-                    //IFramePlayerSmall = vid.GetEmbedHTML(320, 180, "https://s3-eu-west-1.amazonaws.com/gamerpilot/player/player.html"),
+                    Url = vid.GetPlayerUrl(),
                 });
             }
             return viewVms;
