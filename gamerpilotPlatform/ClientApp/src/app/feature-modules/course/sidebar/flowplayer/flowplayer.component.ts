@@ -24,6 +24,7 @@ export class FlowplayerComponent implements OnChanges, OnDestroy {
 		}
 		this.destroyPlayer();
 		this.createPlayer();
+
 	}
 
 	ngOnDestroy() {
@@ -47,12 +48,12 @@ export class FlowplayerComponent implements OnChanges, OnDestroy {
 		});
 
 		this.player.on('pause', (e, api) => {
-			clearInterval(this.stopwatch);
+			this.stopTimer();
 		});
 
 		this.player.on('resume', (e, api) => {
 			this.startTimer();
-});
+		});
 	}
 
 	startTimer() {
@@ -61,15 +62,32 @@ export class FlowplayerComponent implements OnChanges, OnDestroy {
 		}, 1000);
 	}
 
+	stopTimer() {
+		clearInterval(this.stopwatch);
+		this.stopwatch = null;
+	}
+
+	unsubscribe() {
+		this.player.off('resume');
+		this.player.off('pause');
+	}
+
 	destroyPlayer() {
 		if (this.player) {
-			(<any>window).gtag('event', 'Video', {
-				'event_category': 'GamerPilot Videos',
-				'event_action': 'Seconds played',
-				'event_label': this.video.name,
-				'value': this.seconds,
-			});
-			clearInterval(this.stopwatch);
+
+			// only send analytics if the video has been played
+			if (this.seconds > 0) {
+				const time = this.seconds;
+				(<any>window).gtag('event', 'Video', {
+					'event_category': 'GP Course Videos',
+					'event_action': 'Seconds played',
+					'event_label': this.trackingVideo.name,
+					'value': time,
+				});
+			}
+			this.stopTimer();
+			this.unsubscribe();
+
 			this.seconds = 0;
 			this.player.unload();
 			this.player.shutdown();
