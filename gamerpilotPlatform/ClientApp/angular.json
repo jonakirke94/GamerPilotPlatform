@@ -23,7 +23,8 @@
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
 							"src/sass/styles.scss",
-							"node_modules/flowplayer/dist/skin/skin.css"
+							"node_modules/flowplayer/dist/skin/skin.css",
+							"node_modules/font-awesome/scss/font-awesome.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.js",

@@ -4,7 +4,7 @@
   <div class="video-bar" *ngIf="hasVideos">
     <div class="video" *ngFor="let video of videos" (click)="selectVideo(video)" [ngClass]="selectedVideo.id == video.id ? 'active' : ''">
       <div class="placeholder">
-        <i class="far fa-play-circle"></i>
+				<fa-icon [icon]="['far', 'play-circle']" class="play-circle"></fa-icon>
       </div>
       <div class="video-info">
         <div class="title">{{video.name}}</div>

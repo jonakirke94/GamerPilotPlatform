@@ -35,11 +35,12 @@
         h1 {
             font-family: $font-stack;
             color: #2d9176;
-            font-size: 2rem;
+						font-size: 2rem;
+						padding: 2rem 1rem;
           
             @media only screen and (max-width : 768px) {
                 font-size: 1rem;
-                line-height: 2;
+								line-height: 2;
             }
         }
 
@@ -100,7 +101,7 @@
                 flex-direction: column;
                 position: relative;
 
-                i {
+                .icon {
                     align-self: center;
                     /* margin-right: auto; */
                 }
@@ -117,13 +118,13 @@
                 }
 
                 &.correct {
-                    i, span {
+										.icon, span {
                         color: $tertiary;
                     }                
                 }
 
                 &.wrong {
-                    i, span {
+										.icon, span {
                         color: lighten(red, 15%);
                     }
                 }
@@ -133,7 +134,7 @@
                     font-size: 1.5rem;
                     flex-direction: row;
 
-                    i {
+                    .icon {
                         font-size: 2rem;
                         left: 20px;
                         top: 20px;

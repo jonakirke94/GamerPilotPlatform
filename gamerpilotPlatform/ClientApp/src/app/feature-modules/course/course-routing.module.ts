@@ -8,20 +8,20 @@ import { FeedbackComponent } from './feedback/feedback.component';
 
 
 const routes: Routes = [
-  {
-    path: '', component: CoursesComponent },
-    {
-    path: ':name',
-    component: SidebarComponent,
-    children: [
-      {path: 'lectures/:id', component: LectureComponentComponent, canActivate: [AuthGuard]},
-      {path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard]}
-    ]
-  }
+	{
+		path: '', component: CoursesComponent },
+		{
+		path: ':name',
+		component: SidebarComponent,
+		children: [
+			{path: 'lectures/:id', component: LectureComponentComponent, canActivate: [AuthGuard]},
+			{path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard]}
+		]
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class CourseRoutingModule { }

@@ -1,16 +1,16 @@
 import { Directive, Input, ElementRef, OnChanges } from '@angular/core';
 
 @Directive({
-  selector: '[appQuiz]'
+	selector: '[appQuiz]'
 })
 export class QuizDirective implements OnChanges {
-  @Input() width;
+	@Input() width;
 
-  constructor(private el: ElementRef) {}
+	constructor(private el: ElementRef) {}
 
-  ngOnChanges() {
-    this.el.nativeElement.style.width = this.width + '%';
-    this.el.nativeElement.style.maxWidth = this.width + '%';
-  }
+	ngOnChanges() {
+		this.el.nativeElement.style.width = this.width + '%';
+		this.el.nativeElement.style.maxWidth = this.width + '%';
+	}
 
 }

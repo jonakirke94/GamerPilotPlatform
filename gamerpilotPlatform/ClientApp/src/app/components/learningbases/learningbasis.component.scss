@@ -82,7 +82,7 @@
     padding-bottom: 150px;
 }
 
-.fa-globe-americas {
+.globe-america {
     margin-top: 130px;
     font-size: 158px;
     color: $secondary;
@@ -152,13 +152,13 @@ hr {
     padding: 50px;
 }
 
-.fa-angle-double-down {
+.angle-double-down {
     color: $secondary;
     font-size: 28px;
     padding-bottom: 60px;
 }
 
-.fa-diagnoses {
+.diagnoses {
     margin-top: 130px;
     font-size: 158px;
     color: white;
@@ -182,30 +182,21 @@ hr {
     border-left-color: white;
 }
 
-.fa-child {
+.child {
     margin-top: 100px;
     font-size: 158px;
     color: $primary;
 }
 
-.fa-boxes {
+.boxes {
     margin-top: 200px;
     font-size: 158px;
     color: white;
 }
 
-.fa-eye {
-    margin-top: 100px;
-    font-size: 158px;
-    color: blue;
-}
 
 @media screen and (max-width: $mobile) {
-    .fa-child {
-        padding-bottom: 30px;
-    }
-
-    .fa-eye {
+    .child {
         padding-bottom: 30px;
     }
 }

@@ -13,7 +13,8 @@
 
 <ul>
     <li *ngFor="let lg of lecture.learningGoals">
-        <i class="fas fa-dot-circle"></i>{{lg.goal}}
+				<fa-icon [icon]="['fas', 'dot-circle']" class="dot-circle"></fa-icon>
+				{{lg.goal}}
     </li>
 </ul>
 

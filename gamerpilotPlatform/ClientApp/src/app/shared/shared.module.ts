@@ -8,40 +8,37 @@ import { RouterExtService } from './RouterExtService';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { CourseCarouselComponent } from './coursecarousel/coursecarousel.component';
-import { StatusDirective } from './directives/status.directive';
-import { IconDirective } from './directives/icon.directive';
 import { TagDirective } from './directives/tag.directive';
-import { SanitizeHtmlPipePipe } from './pipes/sanitize-html-pipe.pipe';
 import { ExerciseTagDirective } from './directives/exercise-tag.directive';
 import { QuizDirective } from './directives/quiz.directive';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule,
-  ],
-  declarations: [
-  LoadingSpinnerComponent,
-  HeaderComponent,
-  CourseCarouselComponent,
-  FooterComponent, StatusDirective, IconDirective, TagDirective, SanitizeHtmlPipePipe, ExerciseTagDirective, QuizDirective],
-  exports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule,
-    LoadingSpinnerComponent,
-    HeaderComponent,
-    CourseCarouselComponent,
-    FooterComponent, StatusDirective, IconDirective, TagDirective, SanitizeHtmlPipePipe, ExerciseTagDirective, QuizDirective
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule,
+		RouterModule,
+	],
+	declarations: [
+	LoadingSpinnerComponent,
+	HeaderComponent,
+	CourseCarouselComponent,
+	FooterComponent, TagDirective, ExerciseTagDirective, QuizDirective],
+	exports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule,
+		RouterModule,
+		LoadingSpinnerComponent,
+		HeaderComponent,
+		CourseCarouselComponent,
+		FooterComponent, TagDirective, ExerciseTagDirective, QuizDirective
 
-  ],
-  providers: [
-    RouterExtService,
-  ],
-})
+	],
+	providers: [
+		RouterExtService,
+	],
+	})
 export class SharedModule {}

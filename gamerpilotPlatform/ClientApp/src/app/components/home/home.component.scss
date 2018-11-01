@@ -610,25 +610,12 @@ ul {
   background-color: $tertiary;
   margin: 57.74px 0;
 
-  &.tilt-right {
-    transform: rotate(20deg);
-    i {
-      transform: rotate(-20deg);
-    }
-  }
-
-  &.tilt-left {
-    transform: rotate(-20deg);
-    i {
-      transform: rotate(20deg);
-    }
-  }
-  
-
-  i {
+  .hexagon-icon {
     font-size: 56px;
-    color: #fff;
-    margin-top: 30px;
+		position: absolute;
+		color: white;
+		left: 50%;
+		transform: translateX(-50%);
   }
 }
 
@@ -721,10 +708,38 @@ ul {
       color: #4f4f4f;
       margin-top: 1.5rem;
 
-      i {
+      .p-right {
         padding-right: .5rem;
       }
     }
   
   }
+}
+
+
+ 
+.checklist {
+
+	li {
+		font-size: 20px;
+		line-height: 1.8;
+		letter-spacing: 0;
+		position: relative;
+		padding-left: 40px;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 10px;
+			left: 0;
+			width: 25px;
+			height: 19px;
+			background: url("/assets/images/checkmark.jpg");
+		}
+	}
+
+}
+
+ol, li {
+	list-style-type: none;
 }

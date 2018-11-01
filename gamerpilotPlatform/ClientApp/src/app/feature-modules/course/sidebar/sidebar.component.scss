@@ -66,7 +66,7 @@ $gutter: 40px;
         }
         
 
-        i {
+        .control-icon {
             padding-right: 5px;
             padding-left: 5px;
         }
@@ -92,7 +92,7 @@ $gutter: 40px;
             width: $gutter * 3;
         }
 
-        i {
+        .nav-icon {
             color: white;
             font-size: 26px;
             padding-top: 4px;
@@ -183,7 +183,10 @@ $gutter: 40px;
 
     &.link {
         cursor: pointer;
-        min-height: 46px;
+				min-height: 46px;
+				background: linear-gradient(45deg, rgb(253, 253, 253), rgb(209, 209, 209));
+
+
 
 
         &:hover {
@@ -200,7 +203,9 @@ $gutter: 40px;
     }
 
     .status {
-        padding: 13px;
+				padding: 13px;
+				padding-left: 1.5rem;
+				padding-right: 1.5rem;
         font-size: 20px;
         color: $primary;
 
@@ -221,9 +226,12 @@ $gutter: 40px;
     }
 
     .section {
-        background-color: #e9ecef;
+        /* background-color: #e9ecef; */
         padding: 10px 16px;
-        min-height: 44px;
+				min-height: 44px;
+				background: linear-gradient(90deg, rgb(218, 217, 217), rgb(209, 205, 205));
+				color: rgb(255, 247, 247);
+
 
         .order {   
             opacity: 0;
@@ -232,7 +240,8 @@ $gutter: 40px;
 
     .icon {
         font-size: 16px;
-        text-align: center;
+				text-align: center;
+				padding-right: 3rem;
         width: 45px;
         color: #425252;
         &:before {
@@ -262,7 +271,11 @@ $gutter: 40px;
         .label {
             opacity: 0;
         }
-    }
+		}
+		
+		.status {
+			padding-right: .5rem;
+		}
 
     .section, .title {
         .topic {
