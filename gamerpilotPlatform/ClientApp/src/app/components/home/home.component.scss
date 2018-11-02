@@ -28,7 +28,9 @@ h1 {
     width: 100%;
     max-width: 100%;;
     position: relative;
-    min-height: 600px;
+		min-height: 600px;
+		display: flex;
+		justify-content: center;
 
     &:before {
       width: 100%;

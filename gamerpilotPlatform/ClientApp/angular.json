@@ -16,16 +16,16 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "progress": true,
-            "polyfills": "src/polyfills.ts",
+						"polyfills": "src/polyfills.ts",
+						"extractCss": true,
             "assets": [
               "src/assets"
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
 							"src/sass/styles.scss",
-							"node_modules/flowplayer/dist/skin/skin.css",
-							"node_modules/font-awesome/scss/font-awesome.scss"
-            ],
+							"node_modules/flowplayer/dist/skin/skin.css"
+						],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
@@ -38,7 +38,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": false,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -50,7 +49,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
-            }
+						}
           }
         },
         "serve": {
@@ -61,7 +60,7 @@
           "configurations": {
             "production": {
               "browserTarget": "gamerpilotPlatform:build:production"
-            }
+						}		
           }
         },
         "extract-i18n": {
