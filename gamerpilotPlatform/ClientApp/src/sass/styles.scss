@@ -4,7 +4,6 @@
 @import './mixins';
 @import "~ng-snotify/styles/material";
 
-
 body, html {
 	font-family: $font-stack;
 	width: 100%;
@@ -12,8 +11,6 @@ body, html {
 	margin: 0px;
 	padding: 0px;
 }
-
-
 
 * {
 	box-sizing: border-box;
@@ -39,10 +36,6 @@ a {
   height: 100%;
   object-position: center;
 }
-
-
-
-
 
 h1 {
   @include title;

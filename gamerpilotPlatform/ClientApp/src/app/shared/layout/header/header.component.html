@@ -1,48 +1,52 @@
+<nav>
+	<a routerLink='/' class="logo">
+		<img src="/assets/images/gp-brand.png" alt="gamerpilot logo">
+		<span>GamerPilot</span>
+	</a>
+	<ul class="navs" [ngClass]="{active: active}">
+		<li routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+			<a routerLink='/' (click)="toggle()">Home</a>
+		</li>
+		<li routerLinkActive="active-link">
+			<a routerLink='/courses' (click)="toggle()">Courses</a>
+		</li>
+		<li routerLinkActive="active-link">
+			<a routerLink='/learningbasis' (click)="toggle()">Learning Concept</a>
+		</li>
 
+		<!-- Mobile only -->
+		<li class="mobile" *ngIf="!isAuthed" (click)="toggle()">
+			<a routerLink='/auth/login'>Log in</a>
+		</li>
+		<li class="mobile" *ngIf="!isAuthed" (click)="toggle()">
+			<a routerLink='/auth/signup'>Sign up</a>
+		</li>
 
-<header class="header home-header">
-<div class="row header-nav-bar home-nav-bar">
-          <a routerLink='/' class="logo-block">
-            <img class="logo header-logo" src="/assets/images/gp-brand.jpg" alt="gamerpilot logo">
-         
-          <span class="logo-text">GamerPilot</span>
-        	</a>
-        <nav class="main-nav">
-          <img class="close-btn mobile-menu-toggle" hidden src="/assets/images/close-icon.svg" alt="Close button" role="button" (click)="toggle()">
-          <ul class="nav">
-            <li class="nav-link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
-              <a routerLink='/' (click)="toggle()">Home</a>
-            </li>
-            <li class="nav-link" routerLinkActive="active-link">
-              <a routerLink='/courses' (click)="toggle()">Courses</a>
-            </li>
-            <li class="nav-link" routerLinkActive="active-link">
-              <a routerLink='/learningbasis' (click)="toggle()">Learning Concept</a>
-            </li>
+		<li class="mobile" *ngIf="isAuthed" (click)="toggle()">
+			<a routerLink='/profile'>Profile</a>
+		</li>
+		
+		<li class="mobile" *ngIf="isAuthed" (click)="toggle()">
+			<a routerLink='/auth/login' (click)="logout()">Log out</a>
+		</li>
+		<!-- Mobile only end -->
 
-            <!-- Only visible on mobile menu-->
-            <li class="nav-link sign-link-mobile" *ngIf="!isAuthed" (click)="toggle()"><a routerLink='/auth/login'>Log in</a></li>
-            <li class="nav-link sign-link-mobile" *ngIf="!isAuthed" (click)="toggle()"><a routerLink='/auth/signup'>Sign up</a></li>
-      
-            <li class="nav-link sign-link-mobile" *ngIf="isAuthed" (click)="toggle()"><a routerLink='/profile'>Profile</a></li>
-            <li class="nav-link sign-link-mobile" *ngIf="isAuthed" (click)="toggle()"><a routerLink='/auth/login' (click)="logout()">Log out</a></li>
+		<!-- Desktop only -->
 
-          </ul>
-        </nav>
+			<!-- Not authed-->
+			<a *ngIf="!isAuthed" routerLink='/auth/login' class="nav-btn desktop" role="button" >Log in</a>
+			<a *ngIf="!isAuthed" routerLink='/auth/signup' class="nav-btn desktop" role="button">Sign up</a>
 
-        <!-- Show for non authenticated users-->
-        <span style="margin-left: auto" *ngIf="!isAuthed; else Authed">
-          <a routerLink='/auth/login' class="btn nav-btn sign-link-desktop" role="button" >Log in</a>
-          <a routerLink='/auth/signup' class="btn nav-btn sign-link-desktop" role="button">Sign up</a>
-        </span>
+			<!-- Authed-->
+			<a *ngIf="isAuthed" routerLink='/profile' class="nav-btn desktop" role="button">Profile</a>
+			<a *ngIf="isAuthed" routerLink='/auth/login' (click)="logout()" class="nav-btn desktop" role="button">Log out</a>
+		<!-- Desktop only end -->
+	</ul>
 
-        <!-- Show for authenticated users-->
-        <ng-template #Authed>
-          <a routerLink='/profile' class="btn nav-btn sign-link-desktop" role="button">Profile</a>
-          <a routerLink='/auth/login' (click)="logout()" class="btn nav-btn sign-link-desktop" role="button">Log out</a>
-        </ng-template>
-           
-        <img class="mobile-menu-toggle" hidden src="/assets/images/mobile-menu-icon.svg" alt="Mobile menu button" role="button" (click)="toggle()">
-      </div>
-    </header>
-
+	
+	<div class="burger" (click)="toggle()" [ngClass]="{active: active}">
+			<div class="bar1"></div>
+			<div class="bar2"></div>
+			<div class="bar3"></div>
+	</div>
+</nav>

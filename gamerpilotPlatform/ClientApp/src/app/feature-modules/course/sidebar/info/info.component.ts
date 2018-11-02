@@ -3,14 +3,14 @@ import { flyInOut } from '../../../../shared/animation';
 
 
 @Component({
-  selector: 'app-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.scss'],
-  animations: [flyInOut]
+	selector: 'app-info',
+	templateUrl: './info.component.html',
+	styleUrls: ['./info.component.scss'],
+	animations: [flyInOut]
 
 })
 export class InfoComponent {
-  @Input() lecture;
+	@Input() lecture;
 
-  constructor() { }
-}
+	constructor() { }
+	}
