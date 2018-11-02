@@ -123,26 +123,31 @@
       </nav>
   </div>
           
-          
-  <div class="content" *ngIf="courseState.dataLoaded">
-    
-    <!-- Not enrolled or Not logged in-->
-    <div class="container" *ngIf="showLockedComponent()">
-      <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
-    </div>
-
-    <!-- Show next lecture-->
-    <div class="container" *ngIf="showNextLectureComponent()">
-        <app-next-lecture (nextClicked)="goToNextLecture()"></app-next-lecture>
-    </div>
-
-    <!-- Show completeed-->
-    <div class="container" *ngIf="showCompletedComponent()">
-        <app-completed-course [url]="url" [hasFeedback]="courseState.hasFeedback" (firstClicked)="goToFirst()"></app-completed-course>
-    </div>
-    
+					
+	
+  <div class="content" *ngIf="courseState.dataLoaded; else loading">
+					<!-- Not enrolled or Not logged in-->
+			<div class="container" *ngIf="showLockedComponent()">
+					<app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
+				</div>
+		
+				<!-- Show next lecture-->
+				<div class="container" *ngIf="showNextLectureComponent()">
+						<app-next-lecture (nextClicked)="goToNextLecture()"></app-next-lecture>
+				</div>
+		
+				<!-- Show completeed-->
+				<div class="container" *ngIf="showCompletedComponent()">
+						<app-completed-course [url]="url" [hasFeedback]="courseState.hasFeedback" (firstClicked)="goToFirst()"></app-completed-course>
+				</div>
     <router-outlet></router-outlet>
-  </div>
+	</div>
+	
+	<ng-template #loading>
+		<div class="content container" *ngIf="!courseState.dataLoaded">
+				<app-loading-spinner></app-loading-spinner>
+		</div>
+</ng-template>
 
   
       

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { LockedContentComponent} from './locked-content/locked-content.component';
 import { takeUntil } from 'rxjs/operators';
 import { SnotifyService } from 'ng-snotify';
@@ -12,6 +12,7 @@ import { Section } from '../../../../models/section';
 import { LectureService } from '../../../core/services/lecture.service';
 import { StatusComponent} from '../helper-components/status/status.component';
 import { LectureIconComponent} from '../helper-components/lecture-icon/lecture-icon.component';
+import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-spinner.component';
 
 
 
