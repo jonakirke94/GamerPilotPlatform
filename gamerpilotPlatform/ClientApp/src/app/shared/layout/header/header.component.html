@@ -1,17 +1,15 @@
 
 
 <header class="header home-header">
-<div class="row header-nav-bar home-nav-bar no-gutters">
-        <div class="logo-block header-logo-block">
-          <a routerLink='/'>
+<div class="row header-nav-bar home-nav-bar">
+          <a routerLink='/' class="logo-block">
             <img class="logo header-logo" src="/assets/images/gp-brand.jpg" alt="gamerpilot logo">
          
           <span class="logo-text">GamerPilot</span>
-        </a>
-        </div>
+        	</a>
         <nav class="main-nav">
           <img class="close-btn mobile-menu-toggle" hidden src="/assets/images/close-icon.svg" alt="Close button" role="button" (click)="toggle()">
-          <ul class="nav home-nav">
+          <ul class="nav">
             <li class="nav-link" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
               <a routerLink='/' (click)="toggle()">Home</a>
             </li>

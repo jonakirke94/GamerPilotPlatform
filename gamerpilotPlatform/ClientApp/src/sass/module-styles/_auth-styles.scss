@@ -1,0 +1,125 @@
+$text-light: hsl(24, 12%, 30%);
+$text-dark: hsl(24, 24%, 11%);
+$bg-light:hsl(24, 20%, 95%);
+$border: hsl(24, 9%, 82%);
+$bg-dark: hsl(24, 21%, 93%);
+
+.auth-bg {
+	background-color: $bg-light;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 150px;
+	padding-bottom: 150px;
+
+	.auth-container {
+		border: 1px solid $border;
+		border-radius: 7px;
+		border-top: 8px solid $tertiary;
+		min-width: 400px;
+		padding-top: 30px;
+		max-width: 500px;
+		position: relative;
+		background-color: white;
+
+		.content {
+				padding: 0px 50px 50px 50px;
+				box-sizing: border-box;
+
+				.field {
+					margin-bottom: 15px;
+					
+					input[type="email"], input[type="password"], input[type="text"]  {
+						border: none;
+						border-radius: 5px;
+						padding: 0 25px;
+						color: #414351;
+						font-size: 15px;
+						border: 1px solid $bg-dark;
+						-webkit-appearance: none;
+						font-family: sans-serif;
+						font-size: 100%;
+						line-height: 1.15;
+						height: 48px;
+						width: 100%;
+						color: $text-light;
+						box-sizing: border-box;
+			
+						&:focus {
+							outline-offset: 0;
+							outline: none;
+						}
+				}
+			}
+
+			.text-danger {
+				text-align: left;
+				color: $danger;
+				display: block;
+				padding-top: 0px;
+				clear: both;
+
+				p {
+					margin-top: 0;
+					margin-bottom: 1rem;
+				}
+
+			}
+
+			.submit {
+				font-size: 14px;
+				font-weight: 700;
+				line-height: 1.2;
+				letter-spacing: 0.93px;
+				display: block;
+				width: 100%;
+				padding: 14px 0 14px;
+				background-image: linear-gradient(45deg, $primary, $tertiary);
+				color: #ffffff;
+				border: none;
+				border-radius: 0.25rem;
+				transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+				
+				&:hover {
+					background-image: linear-gradient(-45deg, $primary 0%, $tertiary 100%);
+				}
+				
+				&:disabled {
+					opacity: 0.65;
+				}
+			}
+
+		}
+
+		.title {
+				color: $text-dark;
+				font-size: 1.5rem;
+				text-align: center;
+		}
+
+		.auth-footer {
+				width: 100%;
+				background-color: $bg-dark;
+				padding: 25px;
+				border-bottom-left-radius: 7px;
+				border-bottom-right-radius: 7px;
+				box-sizing: border-box;
+				text-align: center;
+
+				p {
+						color: $text-light;
+						margin-bottom: 0;
+						margin-top: 0;
+
+						a {
+								color: $text-dark;
+								border-bottom: 2px solid $text-dark;
+								
+								&:hover {
+										text-decoration: none;
+								}
+						}
+				}
+		}
+	}
+}
