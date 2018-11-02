@@ -10,7 +10,7 @@
     <p class="line-breaker">{{lecture.description}}</p>
 
 
-    <div *ngFor="let section of lecture.sections" [@flyInOut]>
+    <div *ngFor="let section of sections" [@flyInOut]>
 
         <h4>
 					<fa-icon [icon]="['fas', 'rocket']" class="rocket"></fa-icon>
@@ -19,6 +19,19 @@
 
         <div class="section-body">
             <p class="line-breaker">{{section.body}}</p>
+          
+        </div>
+		</div>
+		
+		<div [@flyInOut]>
+
+        <h4>
+					<fa-icon [icon]="['fas', 'rocket']" class="rocket"></fa-icon>
+					{{summary.title}}
+				</h4>  
+
+        <div class="section-body">
+            <p class="line-breaker">{{summary.body}}</p>
           
         </div>
     </div>

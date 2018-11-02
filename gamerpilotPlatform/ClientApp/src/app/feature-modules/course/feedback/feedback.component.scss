@@ -21,7 +21,7 @@ $bg-dark: hsl(24, 21%, 93%);
     border-radius: 7px;
     border-top: 8px solid $tertiary;
     min-width: 400px;
-    max-width: 800px;
+    max-width: 700px;
     padding-top: 30px;
     position: relative;
     margin: 0 auto;
@@ -32,7 +32,8 @@ $bg-dark: hsl(24, 21%, 93%);
 
     .title {
         color: $text-dark;
-        font-size: 1.5rem;
+				font-size: 1.5rem;
+				text-align: center;
     }
 
     .auth-footer {
@@ -85,16 +86,17 @@ input[type="number"], input[type="text"]  {
 }
 
 .btn-primary {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.93px;
-    display: block;
-    width: 100%;
-    padding: 14px 0 14px;
-    background-image: linear-gradient(45deg, $primary, $tertiary);
-    color: #ffffff;
-    border: none;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: 0.93px;
+	display: block;
+	width: 100%;
+	padding: 14px 0 14px;
+	background-image: linear-gradient(45deg, $primary, $tertiary);
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
 
   &:hover {
     background-image: linear-gradient(-45deg, $primary 0%, $tertiary 100%);
@@ -117,18 +119,23 @@ input[type="number"], input[type="text"]  {
 }
 
 .radio-wrapper {
-    text-align: left;
+		text-align: left;
+		margin-top: 10px;
 }
 
 .radio-container {
     display: inline-block;
     position: relative;
     padding-left: 35px;
-    margin-bottom: 12px;
-    margin-left: 12px;
+		margin-bottom: 12px;
+		margin-left: 12px;
     cursor: pointer;
     font-size: 1rem;
-    user-select: none;
+		user-select: none;
+		
+		&.first {
+			margin-left: 0;
+		}
 }
 
 /* Hide the browser's default radio button */
