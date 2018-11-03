@@ -25,9 +25,10 @@ import { faQuoteLeft, faCodeBranch, faChalkboardTeacher, faUserCog, faChessRook,
 	faCircle, faAdjust, faFileAlt, faLongArrowAltRight, faLongArrowAltLeft,
 	faTable, faVideo, faBrain, faFileSignature, faFlagCheckered, faArrowRight,
 	faArrowLeft, faLock, faUnlock, faChevronCircleLeft, faList,
-	faDotCircle, faRocket, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
+	faDotCircle, faRocket, faTimes, faCheck, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farCircle, faPlayCircle} from '@fortawesome/free-regular-svg-icons';
 
+library.add(faAngleDown);
 library.add(faTimes);
 library.add(faCheck);
 library.add(faRocket);

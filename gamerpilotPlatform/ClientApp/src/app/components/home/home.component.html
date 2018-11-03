@@ -1,25 +1,31 @@
 
 
 
-
 <div class="large-container">
-    <div class="container no-gutters hero">
-      <div class="headlines">
-          <h1 class="home-title">Boost your performance</h1>
-          <h2 class="subtitle">We combine esport with real life skills</h2>
-      </div>
-    
-      <div class="call-to-actions">
-        <a class="btn btn-primary" role="button" href="https://www.youtube.com/watch?v=2ZiRe1aqc0o" target="_blank">Watch teaser</a>
-        <a class="btn btn-secondary" role="button" routerLink="/courses/communication-in-csgo">Try course</a>
-        
-       </div>
-  
-    </div>
-  </div>
+	<div class="container hero">
+			<div class="info">
+					<h1>Boost your CS:GO <br> performance</h1>	
+					<h2>We combine esport with real life skills</h2>
+					<div class="call-to-actions">
+							<a class="btn btn-primary" role="button" href="https://www.youtube.com/watch?v=2ZiRe1aqc0o" target="_blank">Watch teaser</a>
+							<a class="btn btn-secondary" role="button" routerLink="/courses/communication-in-csgo">Try course</a>
+					</div>
+				</div>
+		
+				<div class="content">
+					 <div class="box">
+							<img src="/assets/images/course-preview.jpg" alt="Hero banner">
+					 </div>
+				</div>
+	</div>
+</div>
+
+<section class="read-more">
+		<button (click)="scrollTestimonial()" class="btn-circle"><fa-icon [icon]="['fas', 'angle-down']" size="2x"></fa-icon></button>
+</section>
     
   <!-- Testimonials -->
-  <div class="container">
+  <div class="container" id="testimonials">
       <h2 class="section-header" style="margin-top: 50px;">Other People Say</h2>
   
     <div class="testimonial-wrapper">
