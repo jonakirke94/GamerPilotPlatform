@@ -2,6 +2,11 @@
 @import '~sass/mixins';
 @import '~sass/fonts';
 
+fieldset {
+	border: none;
+	padding-left: 0;
+}
+
 .rating {
     float:left; 
     margin-top: -10px;

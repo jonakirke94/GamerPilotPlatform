@@ -1,11 +1,12 @@
  <div class="controls-large">
   <div  class="page-controls" [class.minimized]="minimized">
-    <i class="fas fa-chevron-circle-left" routerLink="/courses"></i>
-    <i class="small-only fas fa-list" (click)="toggleNav()" [ngClass]="showNav ? 'fa-rotate-90' : ''"></i>
+		<fa-icon [icon]="['fas', 'chevron-circle-left']" routerLink="/courses" class="nav-icon"></fa-icon>
+		<fa-icon *ngIf="!showNav" [icon]="['fas', 'list']" (click)="toggleNav()"  class="small-only nav-icon"></fa-icon>
+		<fa-icon *ngIf="showNav" [icon]="['fas', 'list']" [rotate]="90" (click)="toggleNav()"  class="small-only nav-icon"></fa-icon>
   </div>
-    <div class="control prev" (click)="previous()" *ngIf="!isFirst()" ><i class="fas fa-arrow-left"></i> Prev</div>
-    <div class="control next " [class.control-animation]="isFirst()" (click)="next()" *ngIf="!isLast()">Next and complete <i class="fas fa-arrow-right"></i></div>
-    <div class="control complete" (click)="complete()" *ngIf="isLast()">Complete<i class="fas fa-flag-checkered"></i></div>
+    <div class="control prev" (click)="previous()" *ngIf="!isFirst()"><fa-icon [icon]="['fas', 'arrow-left']" class="control-icon"></fa-icon> Prev</div>
+    <div class="control next " [class.control-animation]="isFirst()" (click)="next()" *ngIf="!isLast()">Next and complete <fa-icon [icon]="['fas', 'arrow-right']" class="control-icon"></fa-icon></div>
+    <div class="control complete" (click)="complete()" *ngIf="isLast()">Complete<fa-icon [icon]="['fas', 'flag-checkered']" class="control-icon"></fa-icon></div>
 </div>
 
 
@@ -14,8 +15,8 @@
       <nav class="main-navigation item no-border">
         <ul [@listAnimation]="sections.length +1">
             <li class="item link title" routerLink='./'>
-                <img src="/assets/images/gp-brand.jpg" alt="GamerPilot Logo">        
-                <span class="topic">CS:GO Content</span>
+                <img src="/assets/images/gp-brand.png" alt="GamerPilot Logo">        
+                <span class="topic">{{course.name}}</span>
             </li>
     
             <ng-container *ngFor="let section of sections">
@@ -26,29 +27,36 @@
 
                 <ng-container *ngFor="let lec of section.lectures">
                     <li class="item link"  *ngIf="courseState.isLoggedIn && courseState.isEnrolled" routerLink='./lectures/{{lec.id}}' routerLinkActive="active-link">         
-                        <i class="status" appStatus [completed]="isCompleted(lec.id)" [current]="isCurrent(lec.id)"></i>
-                        <i class="icon" appIcon [type]="lec.lectureType"></i>
+												<app-status class="status" [completed]="isCompleted(lec.id)" [current]="isCurrent(lec.id)"></app-status>
+												<app-lecture-icon [type]="lec.lectureType" class="icon"></app-lecture-icon>
                         <span class="label">{{lec.name}} </span>        
                     </li> 
 
                     <li class="item link disabled"  *ngIf="!courseState.isLoggedIn || !courseState.isEnrolled" >
-                        <i class="status" appStatus [completed]="isCompleted(lec.id)" [current]="isCurrent(lec.id)"></i>
-                        <i class="icon" appIcon [type]="lec.lectureType"></i>
+												<app-status class="status" [completed]="isCompleted(lec.id)" [current]="isCurrent(lec.id)"></app-status>
+												<app-lecture-icon [type]="lec.lectureType" class="icon"></app-lecture-icon>
                         <span class="label">{{lec.name}} </span>        
                     </li>
                 </ng-container>
             </ng-container>
 
             <!-- FEEDBACK -->
-            <li class="item section" *ngIf="courseState.isLoggedIn && courseState.isEnrolled">
-                <span class="topic">Feedback</span>
+            <li class="item section">
+							<span class="order">{{sections.length + 1}}</span>
+							<span class="topic">Feedback</span>
             </li>
 
             <li class="item link" *ngIf="courseState.isLoggedIn && courseState.isEnrolled" routerLink='./feedback' routerLinkActive="active-link">         
-                <i class="status" appStatus [completed]="courseState.hasFeedback"></i>
-                <i class="icon fas fa-file-alt"></i>
+								<app-status class="status" [completed]="courseState.hasFeedback"></app-status>
+								<fa-icon [icon]="['fas', 'file-alt']" class="icon"></fa-icon>
                 <span class="label">Give your opinion</span>        
             </li> 
+
+            <li class="item link disabled"  *ngIf="!courseState.isLoggedIn || !courseState.isEnrolled" >
+								<app-status class="status" [completed]="courseState.hasFeedback"></app-status>
+								<fa-icon [icon]="['fas', 'file-alt']" class="icon"></fa-icon>
+                <span class="label">Give your opinion</span>        
+            </li>
             <!-- FEEDBACK END-->
             
           
@@ -56,7 +64,8 @@
         </ul>
       </nav>
       <a class="item sidebar-toggle section" (click)="toggle()">
-          <i class="icon fas" [ngClass]="minimized ? 'fa-long-arrow-alt-right' : 'fa-long-arrow-alt-left'"></i>
+					<fa-icon *ngIf="minimized" [icon]="['fas', 'long-arrow-alt-right']" class="icon"></fa-icon>
+					<fa-icon *ngIf="!minimized" [icon]="['fas', 'long-arrow-alt-left']" class="icon"></fa-icon>
           <span class="label">Minimize</span>
       </a>
   </div>
@@ -65,7 +74,6 @@
         <nav class="main-navigation item no-border">
           <ul>
               <li class="item link title" routerLink='./'>
-                  <img src="/assets/images/gp-brand.jpg" alt="GamerPilot Logo">        
                   <span class="topic"></span>
               </li>
       
@@ -87,7 +95,8 @@
           </ul>
         </nav>
         <a class="item sidebar-toggle section" (click)="toggle()">
-            <i class="icon fas" [ngClass]="minimized ? 'fa-long-arrow-alt-right' : 'fa-long-arrow-alt-left'"></i>
+						<fa-icon *ngIf="minimized" [icon]="['fas', 'long-arrow-alt-right']" class="icon"></fa-icon>
+						<fa-icon *ngIf="!minimized" [icon]="['fas', 'long-arrow-alt-left']" class="icon"></fa-icon>
             <span class="label">Minimize</span>
         </a>
     </div>
@@ -97,13 +106,15 @@
         <ul class="nav">
           <li *ngFor="let lecture of lectures" class="item link nav-link"
             routerLink='./lectures/{{lecture.id}}' routerLinkActive="active-link" (click)="toggleNav()">
-            <i class="status" appStatus [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></i>
-            <i class="icon" appIcon [type]="lecture.lectureType"></i>
+						<app-status class="status" [completed]="isCompleted(lecture.id)" [current]="isCurrent(lecture.id)"></app-status>
+
+						<app-lecture-icon [type]="lecture.lectureType" class="icon"></app-lecture-icon>
             <span class="label">{{lecture.name}} </span>        
           </li>    
           <li class="item link nav-link" *ngIf="courseState.isLoggedIn && courseState.isEnrolled" (click)="toggleNav()" routerLink='./feedback' routerLinkActive="active-link" >
-                <i class="status" appStatus [completed]="courseState.hasFeedback"></i>
-                <i class="icon fas fa-file-alt"></i>
+								<app-status class="status" [completed]="courseState.hasFeedback"></app-status>
+
+								<fa-icon [icon]="['fas', 'file-alt']" class="icon"></fa-icon>
                 <span class="label">Feedback</span>        
             </li>
           
@@ -112,26 +123,31 @@
       </nav>
   </div>
           
-          
-  <div class="content" *ngIf="courseState.dataLoaded">
-    
-    <!-- Not enrolled or Not logged in-->
-    <div class="container" *ngIf="showLockedComponent()">
-      <app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
-    </div>
-
-    <!-- Show next lecture-->
-    <div class="container" *ngIf="showNextLectureComponent()">
-        <app-next-lecture (nextClicked)="goToNextLecture()"></app-next-lecture>
-    </div>
-
-    <!-- Show completeed-->
-    <div class="container" *ngIf="showCompletedComponent()">
-        <app-completed-course [url]="url" [hasFeedback]="courseState.hasFeedback" (firstClicked)="goToFirst()"></app-completed-course>
-    </div>
-    
+					
+	
+  <div class="content" *ngIf="courseState.dataLoaded; else loading">
+					<!-- Not enrolled or Not logged in-->
+			<div class="container" *ngIf="showLockedComponent()">
+					<app-locked-content (enrolled)="enrollUser($event)"></app-locked-content>
+				</div>
+		
+				<!-- Show next lecture-->
+				<div class="container" *ngIf="showNextLectureComponent()">
+						<app-next-lecture (nextClicked)="goToNextLecture()"></app-next-lecture>
+				</div>
+		
+				<!-- Show completeed-->
+				<div class="container" *ngIf="showCompletedComponent()">
+						<app-completed-course [url]="url" [hasFeedback]="courseState.hasFeedback" (firstClicked)="goToFirst()"></app-completed-course>
+				</div>
     <router-outlet></router-outlet>
-  </div>
+	</div>
+	
+	<ng-template #loading>
+		<div class="content container" *ngIf="!courseState.dataLoaded">
+				<app-loading-spinner></app-loading-spinner>
+		</div>
+</ng-template>
 
   
       

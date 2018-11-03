@@ -1,15 +1,13 @@
 <div class="container">
             
-<!--   <h1>Courses</h1> -->
-
   <div class="course-wrapper">
 
     <ng-container *ngIf="dataLoaded; else Loader" >     
       <div class="course-card" *ngFor="let course of courses; let i = index" (click)="goToCourse(course.isReleased, course.urlName)" [@listAnimationSlow]="courses.length">
           <div class="card-up info-color"></div>
           <div class="avatar">
-              <div class="circle">                        
-                  <i class="{{course.icon}} course-icon"></i>
+              <div class="circle">     
+									<fa-icon [icon]="['fas', course.icon]" class="course-icon"></fa-icon>     
               </div>
           </div>
           <div class="card-body">

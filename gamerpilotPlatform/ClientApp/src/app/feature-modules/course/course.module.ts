@@ -18,23 +18,24 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { RatingStarComponent } from './helper-components/rating-star/rating-star.component';
 import { NextLectureComponent } from './helper-components/next-lecture/next-lecture.component';
 import { CompletedCourseComponent } from './helper-components/completed-course/completed-course.component';
-import { FlowplayerComponent } from './sidebar/flowplayer/flowplayer.component';
-
-
-
-
+import { FlowplayerComponent } from './helper-components/flowplayer/flowplayer.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StatusComponent } from './helper-components/status/status.component';
+import { LectureIconComponent } from './helper-components/lecture-icon/lecture-icon.component';
 
 @NgModule({
-  imports: [
-    CourseRoutingModule,
-    SharedModule,
-  ],
-  declarations: [SidebarComponent,
-    IntroductionComponent,
-    CoursesComponent, InfoComponent,
-    CaseComponent,
-    QuizComponent, SummaryComponent, ExercisesComponent,
-    LockedContentComponent, LectureComponentComponent, FlowplayerComponent,
-    VideoComponent, LockedContentComponent, FeedbackComponent, RatingStarComponent, NextLectureComponent, CompletedCourseComponent]
+	imports: [
+		CourseRoutingModule,
+		SharedModule,
+		FontAwesomeModule
+	],
+	declarations: [SidebarComponent,
+		IntroductionComponent,
+		CoursesComponent, InfoComponent,
+		CaseComponent,
+		QuizComponent, SummaryComponent, ExercisesComponent,
+		LockedContentComponent, LectureComponentComponent, FlowplayerComponent,
+		VideoComponent, LockedContentComponent, FeedbackComponent, RatingStarComponent,
+		NextLectureComponent, CompletedCourseComponent, StatusComponent, LectureIconComponent]
 })
 export class CourseModule { }

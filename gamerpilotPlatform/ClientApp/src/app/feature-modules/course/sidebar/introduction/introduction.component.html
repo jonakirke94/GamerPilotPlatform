@@ -8,13 +8,11 @@
 <hr>
 
 <div class="text-left" [@flyInOut]>
-
-        <p class="line-breaker">{{lecture.description}}</p>
-
-<ul>
-    <li *ngFor="let lg of lecture.learningGoals">
-        <i class="fas fa-dot-circle"></i>{{lg.goal}}
-    </li>
-</ul>
-
+	<p class="line-breaker">{{lecture.description}}</p>
+	<ul>
+		<li *ngFor="let lg of lecture.learningGoals">
+				<fa-icon [icon]="['fas', 'dot-circle']" class="dot-circle"></fa-icon>
+				{{lg.goal}}
+		</li>
+	</ul>
 </div>

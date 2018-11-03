@@ -1,10 +1,7 @@
-<div class="row justify-content-center no-gutters auth-bg">
-  <div class="text-center auth-container" [@flyInOut]>
+<div class="auth-bg">
+  <div class="auth-container" [@flyInOut]>
 
     <p class="title">Get started!</p>
-
-<!--     <i class="fas fa-user-plus auth-icon"></i> -->
-
 
     <div class="content">
 
@@ -71,16 +68,9 @@
         </div>
 
 
-        <div *ngIf="error" class="text-danger error-txt">{{error}}</div>
+        <div *ngIf="error" class="text-danger">{{error}}</div>
 
-        <button class="btn btn-primary" [disabled]="!signupForm.valid">Signup</button>
-
-
-        <!-- <div class="link-box">
-          <p>By signing up, you agree to our <br><strong routerLink="/terms"> Terms & conditions</strong> & <strong routerLink="/privacy">Privacy policies</strong></p>
-        </div>
- -->
-
+        <button class="submit" [disabled]="!signupForm.valid">Signup</button>
 
       </form>
 
