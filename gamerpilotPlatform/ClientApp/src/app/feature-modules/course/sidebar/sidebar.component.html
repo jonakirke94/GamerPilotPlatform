@@ -16,7 +16,7 @@
         <ul [@listAnimation]="sections.length +1">
             <li class="item link title" routerLink='./'>
                 <img src="/assets/images/gp-brand.png" alt="GamerPilot Logo">        
-                <span class="topic">CS:GO Content</span>
+                <span class="topic">{{course.name}}</span>
             </li>
     
             <ng-container *ngFor="let section of sections">
@@ -42,7 +42,8 @@
 
             <!-- FEEDBACK -->
             <li class="item section">
-                <span class="topic">Feedback</span>
+							<span class="order">{{sections.length + 1}}</span>
+							<span class="topic">Feedback</span>
             </li>
 
             <li class="item link" *ngIf="courseState.isLoggedIn && courseState.isEnrolled" routerLink='./feedback' routerLinkActive="active-link">         
@@ -73,7 +74,6 @@
         <nav class="main-navigation item no-border">
           <ul>
               <li class="item link title" routerLink='./'>
-                  <img src="/assets/images/gp-brand.jpg" alt="GamerPilot Logo">        
                   <span class="topic"></span>
               </li>
       

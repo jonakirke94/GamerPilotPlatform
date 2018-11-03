@@ -32,7 +32,6 @@
     "core-js": "^2.5.7",
     "flowplayer": "^7.2.7",
     "ng-snotify": "^4.3.1",
-    "popper.js": "^1.14.4",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
     "web-animations-js": "^2.3.1",
