@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-gamertest',
-  templateUrl: './gamertest.component.html',
-  styleUrls: ['./gamertest.component.scss']
+	selector: 'app-gamertest',
+	templateUrl: './gamertest.component.html',
+	styleUrls: ['./gamertest.component.scss']
 })
 export class GamertestComponent implements OnInit {
 
-  constructor() { }
+constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  setValue(event) {
-    console.log(event);
-  }
+	setValue(event) {
+		console.log(event);
+	}
 
 }

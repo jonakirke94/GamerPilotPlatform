@@ -56,7 +56,11 @@ input[type=radio] {
     transform-origin: 50% 50%;
     animation-name: circle__out;
     animation-duration: 1000ms;
-    animation-timing-function: ease;
+		animation-timing-function: ease;
+		
+		&:hover {
+			cursor: pointer;
+		}
   }
   
   .circle--outer {
@@ -73,7 +77,8 @@ input[type=radio] {
     width: 70px / $scale;
     height: 70px / $scale;
     border-radius: 50%;
-    background: $tertiary;
+		background-image: linear-gradient(45deg, $tertiary, lighten($tertiary, 10%));
+
   }
   
   @keyframes circle--inner__in {
