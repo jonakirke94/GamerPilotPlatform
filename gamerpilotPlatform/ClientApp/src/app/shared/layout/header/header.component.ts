@@ -3,31 +3,30 @@ import { AuthService } from '../../../core/services/auth.service';
 import { Router, } from '@angular/router';
 
 @Component({
-  selector: 'app-layout-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+	selector: 'app-layout-header',
+	templateUrl: './header.component.html',
+	styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isAuthed: boolean;
+	isAuthed: boolean;
+	active = false;
 
-  constructor(private _auth: AuthService,
-    private router: Router) {
+	constructor(private _auth: AuthService,
+		private router: Router) {
+	}
 
-      }
+	ngOnInit() {
+		this._auth.IsAuthed$.subscribe(status => {
+			this.isAuthed = status;
+		});
+	}
 
-  ngOnInit() {
-    this._auth.IsAuthed$.subscribe(status => {
-        this.isAuthed = status;
-    });
-  }
+	toggle() {
+		this.active = !this.active;
+	}
 
-
-  toggle() {
-    document.querySelector('.main-nav').classList.toggle('active');
-  }
-
-  logout() {
-    this._auth.logout();
-  }
+	logout() {
+		this._auth.logout();
+	}
 
 }

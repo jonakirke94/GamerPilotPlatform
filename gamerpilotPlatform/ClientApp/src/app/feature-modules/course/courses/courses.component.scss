@@ -1,86 +1,187 @@
 @import '~sass/variables';
+@import '~sass/mixins';
+@import '~sass/fonts';
 
 h1 {
     color: $primary;
-}
-
-hr {
-    border-color: $primary;
-    border-width: 2px;
-    width: 60%;
-    margin-right: 20%;
+    font-family: $font-stack;
 }
 
 .loader {
     height: 290px;
-    width: 415px;
+    width: 400px;
+    min-width: 400px;
     background-color: #e8e8e8;
-    margin: 10px;
-
+    margin-bottom: 100px;
 }
 
-.wrapper {
-    @media screen and (max-width: 960px) {
-        padding: 20px 20px;
-    }
-
-    .parent {
-        margin: 10px;
-        overflow: hidden;
+.course-wrapper {
+    display: flex;
+    flex-wrap: row;
+    -webkit-flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 50px;
+   
+    .course-card {
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+        border: 0;
+        font-weight: 400;
         position: relative;
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+        width: 400px;
+        min-width: 400px;
+        margin-bottom: 100px;
+        position: relative;
 
-        @media screen and (max-width: 960px) {
-            width: 100%; 
-            margin: 20px 0px
-        }
-    
-        &:hover .child, &:focus .child {
+        &:hover {
             cursor: pointer;
-            -ms-transform: scale(1.1);
-            -moz-transform: scale(1.1);
-            -webkit-transform: scale(1.1);
-            -o-transform: scale(1.1);
-            transform: scale(1.1);
         }
-    
-        &:hover .child:before, &:focus .child:before {
-            display: block;
-        }
-    
-        .child {
+
+        .card-up {
             overflow: hidden;
-            height: 100%;
-            width: 100%;
-    /*         max-width: 600%; */
+            height: 120px;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+            background-image: url("/assets/images/csgo_banner.png");
             background-size: cover;
-            background-repeat: no-repeat;
-            -webkit-transition: all .3s;
-            -moz-transition: all .3s;
-            -o-transition: all .3s;
-            transition: all .3s;
-    
-            &:before {
-                content: "";
-                display: none;
-                height: 100%;
+        }
+       
+        .avatar {
+            margin: 0 auto;
+            border-radius: 50%;
+            width: 120px;
+            margin-top: -60px;
+            overflow: hidden;
+            background-color: #fff;
+
+            img {
                 width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                background-color: rgba(5, 85, 68, 0.30);  
+                max-width: 100%;
+                height: auto;
+            }
+
+            .circle {
+                width: 100%;
+                max-width: 100%;
+                background-color: $tertiary;
+                border: 10px solid white;
+                height: 120px;
+                border-radius: 50%;
+                box-sizing: border-box;
+                position: relative;
+            
+                .course-icon {
+                    position: absolute;
+                    font-size: 2rem;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: white;
+                }
             }
         }
+
+        .card-body {
+            text-align: center;
+            flex: 1 1 auto;
+            padding: 1.25rem;
+            padding-top: 0;
+
+            h4 {
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                font-family: $font-stack;
+
+            }
+
+            hr {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                border: 0;
+                border-top: 1px solid rgba(0,0,0,.1);
+                box-sizing: content-box;
+                height: 0;
+                overflow: visible;
+            }
+
+            p {
+                color: #4f4f4f;
+                margin-top: 1.5rem;
+                font-family: $font-stack;
+
+            }
+        }
+
+        
     }
 
+.coming-soon {
+    color: #dc3545 !important;
+    position: absolute;
+    right: 0;
+    transition: .3s ease-in;
+    bottom: -40px;
+    opacity: 0;
 }
 
 
 
+.course-card:hover .coming-soon {
+    opacity: 1;
+}
 
+.course-card::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 0;
+	height: 0;
+	background: rgba(255,255,255,.2);
+	border-radius: 100%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+.course-card:hover::before {
+	-webkit-animation: circle .75s;
+	animation: circle .75s;
+}
 
-/* Media Queries */
-/* @media screen and (max-width: 960px) {
-    .parent {width: 100%; margin: 20px 0px}
-		.wrapper {padding: 20px 20px;}
-} */
+}
+
+@-webkit-keyframes circle {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}
+@keyframes circle {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}

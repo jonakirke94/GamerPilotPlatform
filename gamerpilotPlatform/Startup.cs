@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using Microsoft.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace gamerpilotPlatform
@@ -97,6 +98,7 @@ namespace gamerpilotPlatform
 
             if (env.IsDevelopment())
             {
+                app.UseStaticFiles();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -105,10 +107,21 @@ namespace gamerpilotPlatform
                 loggerFactory.AddFile("Logs/myapp-{Date}.txt");
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    OnPrepareResponse = ctx =>
+                    {
+                        // https://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/
+                        const int durationInSeconds = 60 * 60 * 24 * 7; // 1 week
+                        ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+                            "public,max-age=" + durationInSeconds;
+                    }
+                });
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
+
             app.UseAuthentication();
             app.UseSpaStaticFiles();
 

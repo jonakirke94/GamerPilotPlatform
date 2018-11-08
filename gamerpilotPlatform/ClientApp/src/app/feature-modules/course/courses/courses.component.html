@@ -1,24 +1,30 @@
-<div class="text-center">
-    <h1>Courses</h1>
+<div class="container">
+            
+  <div class="course-wrapper">
 
-    <hr>
- </div>
-
- <ng-container *ngIf="dataLoaded; else Loader" >
-<div class="row no-gutters wrapper justify-content-center" [@listAnimationSlow]="courses.length">    
-    <div class="col-lg-3 col-md-6 col-sm-6 parent" *ngFor="let course of courses; let i = index" (click)="goToCourse(course.isReleased, course.urlName)">
-      <div class="child">
-          <img class="img-fluid" src="{{course.imageUrl}}" alt="{{course.name}}">
+    <ng-container *ngIf="dataLoaded; else Loader" >     
+      <div class="course-card" *ngFor="let course of courses; let i = index" (click)="goToCourse(course.isReleased, course.urlName)" [@listAnimationSlow]="courses.length">
+          <div class="card-up info-color"></div>
+          <div class="avatar">
+              <div class="circle">     
+									<fa-icon [icon]="['fas', course.icon]" class="course-icon"></fa-icon>     
+              </div>
+          </div>
+          <div class="card-body">
+              <h4>{{course.name}}</h4>
+              <hr>
+              <p>{{course.description}}</p>
+              <p class="coming-soon" *ngIf="!course.isReleased">Coming soon</p>
+          </div>
       </div>
-  </div>
-</div>
-</ng-container>
+    </ng-container>
+      
+    <ng-template #Loader>
+      <div class="loader" *ngFor="let n of [0,1,2,3]"></div>
+    </ng-template>    
 
-<ng-template #Loader>
-  <div class="row no-gutters wrapper justify-content-center">    
-    <div class="col-lg-3 col-md-6 col-sm-6 loader" *ngFor="let n of [0,1,2,3,4,5]">
   </div>
 </div>
-</ng-template>
+
 
 

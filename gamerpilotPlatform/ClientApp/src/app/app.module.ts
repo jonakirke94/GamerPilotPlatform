@@ -15,33 +15,38 @@ import { LearningbasisComponent } from './components/learningbases/learningbasis
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyPoliticsComponent } from './components/privacy-politics/privacy-politics.component';
+import { IconModule } from './modules/icon.module';
+
+
+
 
 @NgModule({
-  declarations: [
-      AppComponent,
-      HomeComponent,
-      LearningbasisComponent,
-      PrivacyPoliticsComponent,
-      TermsComponent,
-  ],
-  imports: [
-      BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-      AppRoutingModule,
-      CoreModule,
-      BrowserAnimationsModule,
-      SharedModule,
-      SnotifyModule
-  ],
-   providers: [
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService   ],
-   exports: [
-   ],
-   bootstrap: [AppComponent]
+	declarations: [
+			AppComponent,
+			HomeComponent,
+			LearningbasisComponent,
+			PrivacyPoliticsComponent,
+			TermsComponent,
+	],
+	imports: [
+			BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+			AppRoutingModule,
+			CoreModule,
+			BrowserAnimationsModule,
+			SharedModule,
+			SnotifyModule,
+			IconModule
+	],
+		providers: [
+		{ provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+		SnotifyService   ],
+		exports: [
+		],
+		bootstrap: [AppComponent]
 
 })
 export class AppModule {
-    constructor(private routerExtService: RouterExtService) {}
+	constructor(private routerExtService: RouterExtService) {}
 
 }
 

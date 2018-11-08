@@ -4,12 +4,14 @@
 
     <div class="inner">
         <div>
-            <i class="fa fa-lock"></i>
+						<fa-icon [icon]="['fas', 'lock']"></fa-icon>
             Lecture contents locked
         </div>
        
 
-        <button (click)="enroll()" class="btn-locked">Enroll in course to unlock <i class="fas fa-unlock hover-icon"></i></button>
+        <button (click)="enroll()" class="btn-locked">Enroll in course to unlock 
+						<fa-icon [icon]="['fas', 'unlock']" class="hover-icon"></fa-icon>
+				</button>
 
         <p>If you're already enrolled, <a routerLink="/auth/login">you'll need to login</a></p>
         

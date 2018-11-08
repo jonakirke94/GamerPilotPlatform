@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using gamerpilotPlatform.Data;
@@ -33,9 +34,11 @@ namespace gamerpilotPlatform.Controllers
             var refreshToken = data["refreshToken"].ToString();
 
             var principal = _tokenService.GetPrincipalFromExpiredToken(token);
-            var username = principal.Identity.Name; //this is mapped to the Name claim by default
+            var handler = new JwtSecurityTokenHandler();
+            var tokenAsJwt = handler.ReadToken(token) as JwtSecurityToken;
+            var userId = tokenAsJwt.Claims.First(claim => claim.Type == "UserId").Value;
 
-            var user = _context.Users.SingleOrDefault(u => u.Username == username);
+            var user = _context.Users.SingleOrDefault(u => u.Id == userId);
 
             //if the user wasn't found or matched the users refresh token the users needs to re-authenticate
             if (user == null || user.RefreshToken != refreshToken) return BadRequest();

@@ -1,67 +1,95 @@
-<div class="container" *ngIf="showFeedback; else showThankyou">
+ <div class="auth-bg">
+  <div class="auth-container">
+  
+      <p class="title" *ngIf="showFeedback">Give your opinion!</p> 
+      <div class="content">
+        <span *ngIf="!showSpinner">
+  
 
-
-
-<h3>
-    Tell us what you think
-</h3>
-
-<div class="wrapper">
-
-  <div class="inner" >
-      
-      
-    <form [formGroup]="feedbackForm" novalidate (ngSubmit)="submitFeedback()">
+          <form [formGroup]="feedbackForm" novalidate (ngSubmit)="submitFeedback()" *ngIf="showFeedback; else showThankyou">
    
-      <div class="rating-wrapper">
-          <label>What is your overall feeling about the course?</label>
-          <app-rating-star [rating]="6" (ratingClick)='ratingClick($event)'></app-rating-star>
-      </div>
-
-      <div class="rating-wrapper">
-          <label>How likely is it you would recommend it to a friend?</label>
-          <app-rating-star [rating]="6" (ratingClick)='recommendationClick($event)'></app-rating-star>
-      </div>      
+            <div class="rating-wrapper">
+                <label>What is your overall feeling about the course?</label>
+                <app-rating-star [rating]="6" (ratingClick)='ratingClick($event)'></app-rating-star>
+            </div>
       
-      <div class="field">
-        <div class="control">
-          <label>Did you find the content different from what you can find on Youtube. If yes how?</label>  
-          <textarea [ngClass]="{'is-invalid': q1.invalid  && q1.dirty && q1.touched}" id="q1"
-          rows="10" name="q1" title="q1" placeholder="It was.." formControlName="q1"></textarea> 
-        </div>
-      </div>
-    
-      <div class="field">
-          <div class="control">
-            <label>Would you be willing to pay for the next course? If no, what would it take?</label>
-            <textarea [ngClass]="{'is-invalid': q2.invalid  && q2.dirty && q1.touched}" id="q2"
-            rows="10"name="q2" title="q2" placeholder="I would.." formControlName="q2"></textarea>
-
+            <div class="rating-wrapper">
+                <label>How likely is it you would recommend it to a friend?</label>
+                <app-rating-star [rating]="6" (ratingClick)='recommendationClick($event)'></app-rating-star>
+            </div>
+            
+            <div class="field">
+              <label>Did you find the content different from what you find on Youtube?</label>
+              <div class="control radio-wrapper">
+                <label class="radio-container first">Yes
+                  <input type="radio" name="differentFromYoutube" value="true" formControlName="differentFromYoutube">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">No
+                    <input type="radio" name="differentFromYoutube" value="false" formControlName="differentFromYoutube">
+                    <span class="checkmark"></span>
+                </label>
+              </div>
           </div>
-        </div>
+
+          <div class="field" *ngIf="feedbackForm.value.differentFromYoutube === 'false'">
+              <div class="control">
+                 <label>What would you like to see differently?</label>
+                <input type="text" name="youtubeResponse" formControlName="youtubeResponse">
+              </div>
+          </div>
+
+          <div class="field">
+              <label>Are you interested in the next course?</label>
+              <div class="control radio-wrapper">
+                <label class="radio-container first">Yes
+                    <input type="radio" name="interestedInMore" value="true"  formControlName="interestedInMore">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="radio-container">No
+                    <input type="radio" name="interestedInMore" value="false" formControlName="interestedInMore">
+                    <span class="checkmark"></span>
+                </label>
+              </div>
+          </div>
         
-      <span *ngIf="error">
-        <p  class="text-danger error-txt">{{error}}</p>
-      </span>
-    
-      <button class="btn btn-deepsea" [disabled]="!feedbackForm.valid">Submit</button>
-      
-      </form>
+          <div class="field" *ngIf="feedbackForm.value.interestedInMore === 'true'">
+							<label>How much would you pay? ($USD)</label>
+              <div class="control radio-wrapper">
 
-    </div>
+								<label class="radio-container first">$0
+									<input type="radio" name="howMuch" value=0 formControlName="howMuch">
+									<span class="checkmark"></span>
+								</label>
+								<label class="radio-container">$5
+										<input type="radio" name="howMuch" value=5 formControlName="howMuch">
+										<span class="checkmark"></span>
+								</label>
+								<label class="radio-container">$10
+									<input type="radio" name="howMuch" value=10 formControlName="howMuch">
+									<span class="checkmark"></span>
+							</label>
+								<label class="radio-container">More than $10
+									<input type="radio" name="howMuch" value=">10" formControlName="howMuch">
+									<span class="checkmark"></span>
+							</label>
+							</div>
+          </div>             
+            <span *ngIf="error">
+              <p  class="text-danger error-txt">{{error}}</p>
+            </span>
+          
+            <button class="btn btn-primary" [disabled]="!feedbackForm.valid">Submit</button>
+            
+            </form>
 
-</div>
-
-</div>
-<ng-template #showThankyou>
-  <div class="container">
-      <div class="wrapper" style="margin-top: 0;">           
-      Thank you for your feedback!
-      </div>
+            <ng-template #showThankyou>
+                <div>
+                    Thank you for your feedback!
+                </div>
+              </ng-template>
+        </span>
+        <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+      </div>    
   </div>
-  </ng-template>
-
-
-
-
-
+  </div>

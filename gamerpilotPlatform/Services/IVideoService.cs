@@ -9,9 +9,10 @@ namespace gamerpilotPlatform.Services
 {
     public interface IVideoService
     {
-        IEnumerable<VideoViewModel> GetVideoViewModels(int lectureId);
+        IEnumerable<GamerPilot.Video.IVideo> GetVideos(int lectureId);
         Task<GamerPilot.Video.IVideo> AddVideo(int instructorId, int lectureId, string videoName, string filePath);
     }
 }
+
 
 

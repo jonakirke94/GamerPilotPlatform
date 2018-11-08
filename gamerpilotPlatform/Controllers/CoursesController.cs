@@ -82,7 +82,7 @@ namespace gamerpilotPlatform.Controllers
                 {
                     enrolled = courseUser == null ? false : true,
                     course,
-                    feedback = courseUser?.Feedback,
+                    feedback = courseUser?.Feedback == null ? false : true,
                     completedLectures = courseUser?.CompletedLectures,
                 });
 
@@ -133,7 +133,9 @@ namespace gamerpilotPlatform.Controllers
             var course = _context.Courses.SingleOrDefault(x => x.UrlName == courseUrl);
 
             //check if user is enrolled
-            var courseUser = _context.CourseUsers.SingleOrDefault(x => x.CourseId == course.Id && x.UserId == userId);
+            var courseUser = _context.CourseUsers
+                .Include(x => x.Feedback)                
+                .SingleOrDefault(x => x.CourseId == course.Id && x.UserId == userId);
             var isCompleted = false;
 
             if (courseUser != null && courseUser.IsCompleted)
@@ -143,9 +145,25 @@ namespace gamerpilotPlatform.Controllers
             return new ObjectResult(new
             {
                 isEnrolled = courseUser == null ? false : true,
-                isCompleted = isCompleted
+                isCompleted,
+                feedback = courseUser?.Feedback == null ? false : true,
+
             });
    
+        }
+
+        [HttpGet("[action]/{courseUrl}")]
+        [Authorize]
+        public IActionResult HasFeedback([FromHeader]string authorization, string courseUrl)
+        {
+            var userId = _tokenService.getClaimsId(authorization);
+            var courseUser = _context.CourseUsers
+                .Include(x => x.Feedback)
+                .SingleOrDefault(x => x.UserId == userId && x.Course.UrlName == courseUrl);
+
+            return Ok(courseUser.Feedback != null);
+
+
         }
 
         [HttpPost("[action]")]
@@ -162,6 +180,19 @@ namespace gamerpilotPlatform.Controllers
                 }
 
                 var courseUser = _context.CourseUsers.SingleOrDefault(x => x.UserId == userId && x.Course.UrlName == feedback.CourseUrl);
+
+                var userFeedback = new Feedback()
+                {
+                    DifferentFromYoutube = feedback.DifferentFromYoutube,
+                    HowMuch = feedback.HowMuch,
+                    LikelyToRecommend = feedback.LikelyToRecommend,
+                    Rating = feedback.Rating,
+                    InterestedInMore = feedback.InterestedInMore,
+                    YoutubeResponse = feedback.YoutubeResponse
+                };
+                //_context.Feedbacks.Add(userFeedback);
+                //_context.SaveChanges();
+
                 courseUser.Feedback = feedback;
                 _context.SaveChanges();
                 _log.LogInformation($"Saved feedback for {userId}");

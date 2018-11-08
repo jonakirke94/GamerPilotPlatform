@@ -26,7 +26,7 @@ namespace gamerpilotPlatform.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("ImageUrl");
+                    b.Property<string>("Icon");
 
                     b.Property<bool>("IsReleased");
 
@@ -66,15 +66,17 @@ namespace gamerpilotPlatform.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("DifferentFromYoutube");
+
+                    b.Property<string>("HowMuch");
+
+                    b.Property<bool>("InterestedInMore");
+
                     b.Property<int>("LikelyToRecommend");
 
                     b.Property<int>("Rating");
 
-                    b.Property<string>("UniqueCourseOpinion")
-                        .IsRequired();
-
-                    b.Property<string>("WouldPayOpinion")
-                        .IsRequired();
+                    b.Property<string>("YoutubeResponse");
 
                     b.HasKey("Id");
 
@@ -425,7 +427,7 @@ namespace gamerpilotPlatform.Migrations
                         .HasForeignKey("CourseId");
 
                     b.HasOne("gamerpilotPlatform.Model.Instructor", "Instructor")
-                        .WithMany("Lectures")
+                        .WithMany()
                         .HasForeignKey("InstructorId");
                 });
 

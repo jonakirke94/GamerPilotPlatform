@@ -10,7 +10,7 @@ using gamerpilotPlatform.Data;
 namespace gamerpilotPlatform.Migrations
 {
     [DbContext(typeof(GamerpilotVodContext))]
-    [Migration("20181010121046_initial")]
+    [Migration("20181017193353_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

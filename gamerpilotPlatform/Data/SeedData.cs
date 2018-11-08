@@ -25,7 +25,7 @@ namespace gamerpilotPlatform.Data
         public async Task Seed()
         {
             //context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
 
             if (!context.Users.Any())
             {
@@ -271,9 +271,9 @@ namespace gamerpilotPlatform.Data
                     {
                         Name = "Communication in CS:GO",
                         UrlName = "communication-in-csgo",
-                        Description = "This course is about communication in CS:GO..",
+                        Description = "We take a closer look at how you can improve your communication skills both in CS:GO and in real life",
                         IsReleased = true,
-                        ImageUrl = "assets/images/thumbnails/communication.jpg",
+                        Icon = "fas fa-comments"
                     };
                     course1.Lectures.Add(infoEntity);
                     course1.Lectures.Add(introductionEntity);
@@ -291,25 +291,26 @@ namespace gamerpilotPlatform.Data
                      {
                          Name = "Strategy in CS:GO",
                          UrlName = "strategy-in-csgo",
-                         Description = "",
-                         ImageUrl = "assets/images/thumbnails/strategy.jpg",
+                         Description = "Strategy is an essential skill in both CS:GO and in many real life situations. Learn more",
                          IsReleased = false,
+                         Icon = "fas fa-chess-rook"
+
                      },
                      new Course
                      {
                          Name = "Teamwork in CS:GO",
                          UrlName = "teamwork-in-csgo",
-                         Description = "",
-                         ImageUrl = "assets/images/thumbnails/teamwork.jpg",
+                         Description = "We take a closer look at Teamwork",
                          IsReleased = false,
+                         Icon = "fas fa-people-carry"
                      },
                      new Course
                      {
                          Name = "Problem solving in CS:GO",
-                         UrlName = "problem-solving-in-csgo",
+                         UrlName = "In this course we dive into problem solving in CS:GO and how you can apply your skills in real life",
                          Description = "",
-                         ImageUrl = "assets/images/thumbnails/problemsolving.jpg",
                          IsReleased = false,
+                         Icon = "fas fa-lightbulb"
                      }
                     );
                     context.SaveChanges();

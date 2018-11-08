@@ -1,0 +1,13 @@
+
+<div class="wrapper">
+    <h3>You already completed this course!</h3>
+
+    <div class="inner">
+
+        <button class="btn-locked" *ngIf="!hasFeedback" (click)="goToFeedback()">Give feedback</button>      
+        <button class="btn-locked" *ngIf="hasFeedback" (click)="first()">Revisit first lecture</button>      
+
+    </div>
+
+</div>
+

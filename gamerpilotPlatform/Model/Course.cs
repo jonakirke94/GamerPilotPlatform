@@ -18,7 +18,9 @@ namespace gamerpilotPlatform.Model
 
         public string Description { get; set; }
 
-        public string ImageUrl { get; set; }
+        //public string ImageUrl { get; set; }
+
+        public string Icon { get; set; }
 
         public Boolean IsReleased { get; set; }
 

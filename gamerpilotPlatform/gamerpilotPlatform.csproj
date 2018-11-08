@@ -23,6 +23,12 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE;RELEASE;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   
 
 
@@ -44,7 +50,6 @@
     <Folder Include="ClientApp\src\app\core\interceptors\" />
     <Folder Include="ClientApp\src\app\core\guards\" />
     <Folder Include="ClientApp\src\app\core\services\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

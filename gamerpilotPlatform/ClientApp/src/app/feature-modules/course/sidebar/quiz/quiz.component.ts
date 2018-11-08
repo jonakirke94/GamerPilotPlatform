@@ -38,7 +38,6 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.questions = this.lecture.questions;
-    console.log(this.questions);
     this.currentQuestion = this.questions[0];
 
     this.fetchAttempts();

@@ -1,9 +1,7 @@
-<div class="row justify-content-center no-gutters auth-bg">
-<div class="text-center auth-container" [@flyInOut]>
+<div class="auth-bg">
+<div class="auth-container" [@flyInOut]>
 
     <p class="title">Welcome back!</p>
-
-<!--     <i class="fas fa-user auth-icon"></i> -->
 
     <div class="content">
       <span *ngIf="!showSpinner">
@@ -36,11 +34,11 @@
           </div>
             
           <span *ngIf="error && loginForm.untouched">
-            <p  class="text-danger error-txt">{{error}}</p>
+            <p class="text-danger">{{error}}</p>
           </span>
 
 
-          <button class="btn btn-primary" [disabled]="!loginForm.valid">Log in</button>
+          <button class="submit" [disabled]="!loginForm.valid">Log in</button>
         </form>
 
       </span>

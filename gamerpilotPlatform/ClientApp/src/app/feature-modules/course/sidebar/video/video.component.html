@@ -1,29 +1,20 @@
-<h3>
-    <p>{{lecture.name}}</p>
-</h3>
 
-<div *ngIf="hasVideos">
 
-  <div *ngIf="videos.length > 1">
-    <div class="grid">
-        <div class="video-box" *ngFor="let video of videos" (click)="selectVideo(video)" [ngClass]="selectedVideo.id == video.id ? 'active' : ''" [@flyInOut]>
-              <p>{{video.name}}</p>
-              <i class="far fa-play-circle"></i>
-        </div>
-    </div>
+<div class="video-wrapper">
+  <div class="video-bar" *ngIf="hasVideos">
+    <div class="video" *ngFor="let video of videos" (click)="selectVideo(video)" [ngClass]="selectedVideo.id == video.id ? 'active' : ''">
+      <div class="placeholder">
+				<fa-icon [icon]="['far', 'play-circle']" class="play-circle"></fa-icon>
+      </div>
+      <div class="video-info">
+        <div class="title">{{video.name}}</div>
+        <div class="author">{{video.instructorName}}</div>
+      </div>
+    </div>  
   </div>
 
-  <div *ngIf="videos.length > 1">
-    <div class="links">
-      <a *ngFor="let video of videos" (click)="selectVideo(video)" [ngClass]="selectedVideo.id == video.id ? 'active-link' : ''" [@flyInOut]>
-            {{video.name}}
-      </a>
+  <div class="video-content">
+		<app-flowplayer class="embed-responsive embed-responsive-16by9" [video]="selectedVideo"></app-flowplayer>
   </div>
-</div>
-
-    
-  <div [innerHTML]="selectedVideo.iFramePlayer | sanitizeHtmlPipe"></div>
 
 </div>
-
-

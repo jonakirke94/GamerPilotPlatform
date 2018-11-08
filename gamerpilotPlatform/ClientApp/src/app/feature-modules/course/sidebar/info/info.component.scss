@@ -1,7 +1,41 @@
-.table-bordered>tbody>tr:nth-child(odd) {
-    background-color: lighten(lightgray, 5%);
+.table-bordered {
+	border: 1px solid #dee2e6;
+	
+	tbody {
+		 tr:nth-child(odd) {
+			background-color: lighten(lightgray, 5%);
+		}
+	}
+}
+.table {
+	width: 100%;
+	margin-bottom: 1rem;
+	background-color: transparent;
+	border-collapse: collapse;
+	display: table;
+	border-spacing: 2px;
+
+	tbody {
+		display: table-row-group;
+		vertical-align: middle;
+		border-color: inherit;	
+
+		tr {
+			display: table-row;
+			vertical-align: inherit;
+			border-color: inherit;
+
+			td {
+				padding: 0.75rem;
+				vertical-align: top;
+				line-height: 24px;
+			}
+		}
+	}
 }
 
-.table-bordered td {
-    border: none;
-}
+
+
+
+
+

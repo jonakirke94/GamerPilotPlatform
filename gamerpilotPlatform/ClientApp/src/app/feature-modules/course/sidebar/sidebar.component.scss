@@ -4,14 +4,16 @@
 
 $gutter: 40px;
 
-
 .disabled {
     cursor: not-allowed !important;
  }
 
 .wrapper {
     display: flex;
-    flex-direction:  column;
+    flex-direction: column;
+    min-height: 100%;
+    align-items: stretch;
+		padding-top: 52px;
 
     @media only screen and (min-width : 1200px) {
         flex-direction: row;
@@ -19,7 +21,8 @@ $gutter: 40px;
 
     
     .sidebar-toggle {
-        background-color: #e8e8e8;
+			background-color: #e9ecef;
+				padding-left: 10px;
         cursor: pointer;
         display: flex;
         margin-top: auto;
@@ -27,27 +30,39 @@ $gutter: 40px;
         border-top: 1px solid getColor('border', 'primary');
     
         .label {
-            text-transform: uppercase;
-            font-size: typeScale(1);
+					font-family: Roboto;
+					font-weight: 500;
+					padding: 10px 16px;
+					padding-left: 0;
+					text-transform: uppercase;
+					font-size: typeScale(1);
         }
     }
 }
 
-
 .content {
-    padding: $gutter;
     flex: 1;
+    min-height: 100%;
 }
 
-.controls-large, .controls-small {
+.controls-large {
     display: flex;
     flex-direction: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    z-index: 99999;
     
     .control {
         flex-grow: 1;
         padding: 16px;
         color: #fff;
         text-align: center;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        position: relative;
 
         &:hover {
             cursor: pointer;
@@ -55,7 +70,7 @@ $gutter: 40px;
         }
         
 
-        i {
+        .control-icon {
             padding-right: 5px;
             padding-left: 5px;
         }
@@ -75,13 +90,14 @@ $gutter: 40px;
         background-color: $secondary;    
         border-right: 1px solid #D7DADB;
         transition: width, filter;
-        transition-duration: 0.5s;
+				transition-duration: 0.5s;
+				box-sizing: border-box;
 
         @media only screen and (max-width : 1200px) {
             width: $gutter * 3;
         }
 
-        i {
+        .nav-icon {
             color: white;
             font-size: 26px;
             padding-top: 4px;
@@ -149,15 +165,13 @@ $gutter: 40px;
     background-color: #f7f7f7;
     color: black;
     flex-direction: column;
-    height: 100%;
     transition: width, filter;
     transition-duration: 0.5s;
     width: $gutter * 9;
     box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.15);
-    border-right: 1px solid #D7DADB;
-    border-bottom: 1px solid #D7DADB;
-
-
+    border-right: 1px solid hsl(24, 9%, 82%);
+		border-bottom: 1px solid hsl(24, 9%, 82%);
+    flex-shrink: 1;
 
     @media only screen and (max-width : 1200px) {
         display: none;
@@ -173,15 +187,12 @@ $gutter: 40px;
     }
 
     &.link {
-        cursor: pointer;
-        min-height: 46px;
-
-
-        &:hover {
-            background-color: #d4ebe9;
-        }
-
-      
+			min-height: 46px;
+			background: #F6F6F6;
+			&:hover {
+					background-color: #d4ebe9;
+					cursor: pointer;
+			}     
     }
 
     .icon,
@@ -191,7 +202,9 @@ $gutter: 40px;
     }
 
     .status {
-        padding: 13px;
+				padding: 13px;
+				padding-left: 1.5rem;
+				padding-right: 1.5rem;
         font-size: 20px;
         color: $primary;
 
@@ -214,7 +227,9 @@ $gutter: 40px;
     .section {
         background-color: #e9ecef;
         padding: 10px 16px;
-        min-height: 44px;
+				min-height: 44px;
+
+
 
         .order {   
             opacity: 0;
@@ -223,7 +238,8 @@ $gutter: 40px;
 
     .icon {
         font-size: 16px;
-        text-align: center;
+				text-align: center;
+				padding-right: 3rem;
         width: 45px;
         color: #425252;
         &:before {
@@ -253,7 +269,11 @@ $gutter: 40px;
         .label {
             opacity: 0;
         }
-    }
+		}
+		
+		.status {
+			padding-right: .5rem;
+		}
 
     .section, .title {
         .topic {
@@ -274,14 +294,17 @@ $gutter: 40px;
 
 
 .topic {
-    font-family: $font-stack;
-    font-weight: 700;
+	font-family: Roboto;
+	font-weight: 500;
 }
 
 .item {
     .icon,
     .label {
-        display: block;
+				display: block;
+				font-family: Roboto;
+				font-weight: 500;
+				color: rgb(70, 67, 67);
     }
 
     .label {
@@ -298,14 +321,9 @@ $gutter: 40px;
     position: absolute;
     top: 56px;
     width: 100%;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
+    z-index: 99999;
 
     @media only screen and (min-width : 1200px) {
         display: none;
@@ -321,18 +339,8 @@ $gutter: 40px;
     }
     
     .nav {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
         justify-content: center;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
         flex-direction: column;
         margin-top: 0;
         width: 100%;
@@ -358,3 +366,32 @@ $gutter: 40px;
     }
 }
   
+
+.control-animation {
+  animation: blink 2s linear infinite;
+}
+
+
+
+@keyframes blink {  
+    0% { 
+        background-color: lighten($primary, 10%); 
+    }
+    50% {
+        background-color: lighten($primary, 5%); 
+    }
+    100% {  
+        background-color: $primary; 
+    }
+  }
+  @-webkit-keyframes blink {
+    0% { 
+        background-color: lighten($primary, 10%); 
+    }
+    50% {
+        background-color: lighten($primary, 5%); 
+    }
+    100% {  
+        background-color: $primary; 
+    }
+  }

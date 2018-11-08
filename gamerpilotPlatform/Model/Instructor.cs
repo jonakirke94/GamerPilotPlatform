@@ -15,6 +15,7 @@ namespace gamerpilotPlatform.Model
 
         public string Name { get; set; }
 
+        [NotMapped]
         public ICollection<Lecture> Lectures { get; set; }
 
         [NotMapped]

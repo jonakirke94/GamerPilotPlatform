@@ -8,6 +8,11 @@
     color: #343539;
     font-family: $font-stack;
     margin-bottom: 1rem;
+    font-size: 1rem;
+
+    @media only screen and (max-width : 768px) {
+        padding: 0rem;
+    }
 }
 
 .question-wrapper {
@@ -23,18 +28,27 @@
         padding: 2rem 1rem 1rem 1rem;
         box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
         line-height: 1.8;
-        font-size: 18px;
+        font-size: 1rem;
         margin-bottom: 20px;
         overflow: hidden;  
 
         h1 {
             font-family: $font-stack;
             color: #2d9176;
-            font-size: 2rem;
+						font-size: 2rem;
+						padding: 1rem 4rem;
+						margin-top: 0;
+						margin-bottom: 0;
+						min-height: 150px;
+          
+            @media only screen and (max-width : 768px) {
+                font-size: 1rem;
+								line-height: 2;
+            }
         }
 
         .wrapper {
-            padding: 1rem 2rem 1rem 2rem;
+            padding: 1rem 0rem;
             margin-bottom: 1rem;
             display: flex;
             flex-wrap: wrap;
@@ -55,6 +69,10 @@
                 box-shadow: 0 0.4rem 0.8rem -0.1rem rgba(0,32,128,.1), 0 0 0 1px #f0f2f7;
                 transition: .5s ease;
                 border: 5px solid transparent;
+
+                @media only screen and (max-width : 768px) {
+                    padding: 1rem;
+                }
 
                 &:hover {
                     cursor: pointer;
@@ -86,7 +104,7 @@
                 flex-direction: column;
                 position: relative;
 
-                i {
+                .icon {
                     align-self: center;
                     /* margin-right: auto; */
                 }
@@ -103,13 +121,13 @@
                 }
 
                 &.correct {
-                    i, span {
+										.icon, span {
                         color: $tertiary;
                     }                
                 }
 
                 &.wrong {
-                    i, span {
+										.icon, span {
                         color: lighten(red, 15%);
                     }
                 }
@@ -119,7 +137,7 @@
                     font-size: 1.5rem;
                     flex-direction: row;
 
-                    i {
+                    .icon {
                         font-size: 2rem;
                         left: 20px;
                         top: 20px;
@@ -145,12 +163,26 @@
     }
 }
 
+.progress {
+	display: flex;
+	height: 1rem;
+	overflow: hidden;
+	font-size: 0.75rem;
+	background-color: #e9ecef;
+	border-radius: 0.25rem;
+}
 
 .progress-bar {
-    background-color: #6cb29f;
-    width: 0;
-    max-width: 0;
-    animation: width 3s ease;
+	background-color: #6cb29f;
+	width: 0;
+	max-width: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	transition: width 0.6s ease;
 }
 
 .selected {
@@ -158,14 +190,22 @@
 }
 
 .btn-primary {
-    background-color: $tertiary;
-    border-color: $tertiary;
-    border-radius: 0;
-    margin-left: auto;
-
-    &:not(:disabled):not(.disabled):active:focus {
-        box-shadow: 0 0 0 0.2rem rgba(10, 75, 32, 0.5);
-    }
+	font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.93px;
+  display: block;
+  min-width: 230px;
+  padding: 16px 0 16px;
+  text-transform: uppercase;
+	z-index: 2;
+	border-radius: 0.25rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	background-image: linear-gradient(45deg, $primary, $tertiary);
+  color: #ffffff;
+	border: none;
+	margin-left: auto;
+	cursor: pointer;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active {

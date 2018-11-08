@@ -2,38 +2,192 @@
 @import '~sass/mixins';
 @import '~sass/fonts';
 
-/* beautify css later */ 
+$text-light: hsl(24, 12%, 30%);
+$text-dark: hsl(24, 24%, 11%);
+$bg-light:hsl(24, 20%, 95%);
+$border: hsl(24, 9%, 82%);
+$bg-dark: hsl(24, 21%, 93%);
 
-.wrapper {
-    margin-top: 50px;
-    min-height: 20px;
-    padding: 19px;
-    margin-bottom: 20px;
-    background-color: #f5f5f5;
-    border: 1px solid #e3e3e3;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+.auth-bg {
+    background-color: $bg-light;
+    min-height: 100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
 
-    .inner {
-        font-size: 18px;
-        color: #8c8c8c;
-        padding: 50px;
-        text-align: left;
+.auth-container {
+    border: 1px solid $border;
+    background-color: white;
+    border-radius: 7px;
+    border-top: 8px solid $tertiary;
+    min-width: 400px;
+    max-width: 700px;
+    padding-top: 30px;
+    position: relative;
+    margin: 0 auto;
 
-        @media (max-width: 990px) {
-            padding: 20px;
-          }
-          
-        @media (max-width: 768px) {
-            padding: 0px;
+    .content {
+        padding: 0px 50px 50px 50px;
+    }
+
+    .title {
+        color: $text-dark;
+				font-size: 1.5rem;
+				text-align: center;
+    }
+
+    .auth-footer {
+        width: 100%;
+        background-color: $bg-dark;
+        padding: 25px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+
+        p {
+            color: $text-light;
+            margin-bottom: 0;
+
+            a {
+                color: $text-dark;
+                border-bottom: 2px solid $text-dark;
+                
+                &:hover {
+                    text-decoration: none;
+                }
+            }
         }
     }
 }
 
-label {
-    display:block;
-    margin-bottom: 0;
+.field {
+    margin-bottom: 15px;
+    clear: both;
 }
+
+input[type="number"], input[type="text"]  {
+    border: none;
+    border-radius: 5px;
+    padding: 0 25px;
+    color: #414351;
+    font-size: 15px;
+    border: 1px solid $bg-dark;
+    -webkit-appearance: none;
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    height: 48px;
+    width: 100%;
+    color: $text-light;
+}
+
+.text-danger {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.btn-primary {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: 0.93px;
+	display: block;
+	width: 100%;
+	padding: 14px 0 14px;
+	background-image: linear-gradient(45deg, $primary, $tertiary);
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+
+  &:hover {
+    background-image: linear-gradient(-45deg, $primary 0%, $tertiary 100%);
+  }
+}
+
+.error-txt {
+    display: block;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    clear: both;
+}
+
+.is-valid {
+    border-left: 8px solid $success;
+}
+
+.is-invalid {
+    border-left: 8px solid $danger;
+}
+
+.radio-wrapper {
+		text-align: left;
+		margin-top: 10px;
+}
+
+.radio-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+		margin-bottom: 12px;
+		margin-left: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+		user-select: none;
+		
+		&.first {
+			margin-left: 0;
+		}
+}
+
+/* Hide the browser's default radio button */
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-container input:checked ~ .checkmark {
+    background-color: $tertiary;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+ 
 
 .rating-wrapper {
     clear: both;     
@@ -56,37 +210,8 @@ textarea {
     height: 100px;
 }
 
-.text-danger {
+label {
+    display:block;
+    margin-bottom: 5px;
     text-align: left;
-    margin-top: 5px;
 }
-
-.btn-deepsea {
-    @include btn-gp;
-    width: 100%;
-    background-color: $primary;
-    border-radius: 0;
-    margin-top: 10px;
-    border: .0625rem solid $primary;
-    padding: 0.8rem 4rem 0.8rem 4rem; //top-right-bot-left
-}
-
-.field {
-    clear: both;
-}
-
-.error-txt {
-    display: block;
-    padding-top: 0px;
-    padding-bottom: 10px;
-    clear: both;
-}
-
-.is-valid {
-    border-left: 8px solid $success;
-}
-
-.is-invalid {
-    border-left: 8px solid $danger;
-}
-

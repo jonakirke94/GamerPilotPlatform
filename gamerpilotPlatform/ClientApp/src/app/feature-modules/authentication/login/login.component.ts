@@ -11,94 +11,94 @@ import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  animations: [flyInOut]
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.scss'],
+	animations: [flyInOut]
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private onDestroy$ = new Subject<void>();
+	private onDestroy$ = new Subject<void>();
 
-  loginForm: FormGroup;
-  email: FormControl;
-  password: FormControl;
-  rememberMe: FormControl;
-  showSpinner = false;
-  error = '';
+	loginForm: FormGroup;
+	email: FormControl;
+	password: FormControl;
+	rememberMe: FormControl;
+	showSpinner = false;
+	error = '';
 
-  previousUrl: string;
+	previousUrl: string;
 
 
 
-  constructor(
-    private http: HttpClient,
-    private _auth: AuthService,
-    private router: Router,
-    private elementRef: ElementRef,
-    private routerExtService: RouterExtService,
-  ) {}
+	constructor(
+		private http: HttpClient,
+		private _auth: AuthService,
+		private router: Router,
+		private elementRef: ElementRef,
+		private routerExtService: RouterExtService,
+	) {}
 
-  ngOnInit() {
-    this.createFormControls();
-    this.createForm();
-    this.previousUrl = this.routerExtService.getPreviousUrl();
-  }
+	ngOnInit() {
+		this.createFormControls();
+		this.createForm();
+		this.previousUrl = this.routerExtService.getPreviousUrl();
+	}
 
-  ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
-  }
+	ngOnDestroy() {
+		this.onDestroy$.next();
+		this.onDestroy$.complete();
+	}
 
-  private createFormControls() {
-    (this.email = new FormControl('', [
-      Validators.required,
-      Validators.pattern('[^ @]*@[^ *]*')
-    ])),
-      (this.password = new FormControl('', [
-        Validators.required,
-      ])),
-      (this.rememberMe = new FormControl('', [
-      ]));
-  }
+	private createFormControls() {
+		(this.email = new FormControl('', [
+			Validators.required,
+			Validators.pattern('[^ @]*@[^ *]*')
+		])),
+			(this.password = new FormControl('', [
+				Validators.required,
+			])),
+			(this.rememberMe = new FormControl('', [
+			]));
+	}
 
-  private createForm() {
-    this.loginForm = new FormGroup({
-      email: this.email,
-      password: this.password,
-      rememberMe: this.rememberMe
-    });
-  }
+	private createForm() {
+		this.loginForm = new FormGroup({
+			email: this.email,
+			password: this.password,
+			rememberMe: this.rememberMe
+		});
+	}
 
-  loginUser() {
-    // clear any existing data
-     this._auth.logout();
+	loginUser() {
+		// clear any existing data
+			this._auth.logout();
 
-    if (this.loginForm.valid) {
-      const email = this.loginForm.value.email;
-      const password = this.loginForm.value.password;
-      const rememberMe = this.loginForm.value.rememberMe;
+		if (this.loginForm.valid) {
+			const email = this.loginForm.value.email;
+			const password = this.loginForm.value.password;
+			const rememberMe = this.loginForm.value.rememberMe;
 
-      // set loading to true and then false if error
-      this.showSpinner = true;
-      this._auth.login(email, password, rememberMe)
-      .pipe(
-        takeUntil(this.onDestroy$
-      ))
-      .subscribe(() => {
+			// set loading to true and then false if error
+			this.showSpinner = true;
+			this._auth.login(email, password, rememberMe)
+			.pipe(
+				takeUntil(this.onDestroy$
+			))
+			.subscribe(() => {
 
-      // on successful auth redirect to previous url
-      if (this.previousUrl && this.previousUrl !== '/auth/login') {
-          this.router.navigateByUrl(this.previousUrl);
-      } else {
-        this.router.navigateByUrl('/');
-      }
-      },
-      err => {
-        this.error = err.status === 400 ? 'Please check your email and password' : 'Server Error';
-        this.showSpinner = false;
-      });
-    }
+			// on successful auth redirect to previous url
+			if (this.previousUrl && this.previousUrl !== '/auth/login') {
+					this.router.navigateByUrl(this.previousUrl);
+			} else {
+				this.router.navigateByUrl('/');
+			}
+			},
+			err => {
+				this.error = err.status === 400 ? 'Please check your email and password' : 'Server Error';
+				this.showSpinner = false;
+			});
+		}
 
-    this.loginForm.reset();
-  }
+		this.loginForm.reset();
+	}
 }

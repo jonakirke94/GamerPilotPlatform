@@ -1,33 +1,36 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input, OnInit } from '@angular/core';
 import { flyInOut } from '../../../../shared/animation';
+import { FlowplayerComponent } from '../../helper-components/flowplayer/flowplayer.component';
+import { Video } from '../../../../../models/video';
+
 
 @Component({
-  selector: 'app-video',
-  templateUrl: './video.component.html',
-  styleUrls: ['./video.component.scss'],
-  animations: [flyInOut]
-
+	selector: 'app-video',
+	templateUrl: './video.component.html',
+	styleUrls: ['./video.component.scss'],
+	animations: [flyInOut]
 })
 export class VideoComponent implements OnChanges {
- @Input() lecture;
- videos = [];
- selectedVideo;
- hasVideos: boolean;
- showSmall = false;
+	@Input() lecture;
+	videos: Video[] = [];
+	selectedVideo: Video;
+	hasVideos: boolean;
+	showSmall = false;
 
- constructor() { }
+ constructor() {
+	}
 
-  ngOnChanges() {
-    if (!!this.lecture.videos && this.lecture.videos.length > 0) {
-      this.videos = this.lecture.videos;
-      this.selectedVideo = this.videos[0];
-      this.hasVideos = true;
-      console.log(this.lecture.videos);
-    }
-  }
+ngOnChanges() {
+		if (!!this.lecture.videos && this.lecture.videos.length > 0) {
+			this.videos = this.lecture.videos as Video[];
+			this.selectedVideo = this.videos[0];
+			this.hasVideos = true;
+		}
+	}
 
-  selectVideo(video) {
-    this.selectedVideo = video;
-  }
-
+	selectVideo(video) {
+		this.selectedVideo = video;
+	}
 }
+
+
