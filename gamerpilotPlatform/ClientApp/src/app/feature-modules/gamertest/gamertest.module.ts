@@ -4,15 +4,16 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { GamertestRoutingModule } from './gamertest-routing.module';
 import { GamertestComponent } from './gamertest/gamertest.component';
-import { TestCheckboxComponent } from './test-checkbox/test-checkbox.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
 		imports: [
 			CommonModule,
 			GamertestRoutingModule,
-			SharedModule
+			SharedModule,
+			FontAwesomeModule
 		],
-		declarations: [GamertestComponent, TestCheckboxComponent,
+		declarations: [GamertestComponent,
 		]
 	})
 export class GamertestModule { }

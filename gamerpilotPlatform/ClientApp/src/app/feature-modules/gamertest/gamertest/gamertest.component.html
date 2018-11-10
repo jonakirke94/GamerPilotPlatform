@@ -27,7 +27,7 @@
 
 
 
-				<div class="question" *ngIf="showQuestion()">
+				<ng-container *ngIf="showQuestion()">
 
 					<div class="table">
 						<div class="radio-container">
@@ -59,12 +59,15 @@
 						</div>
 					</div>
 
-					<button class="btn-primary" (click)="next()" [disabled]="!hasValue">{{buttonText}}</button>
+					<button class="btn-primary" (click)="next()" [disabled]="!hasValue">
+						{{buttonText}}					
+						<fa-icon [icon]="['fas', 'long-arrow-alt-right']" class="icon"></fa-icon>
+					</button>
 
-				</div>
+				</ng-container>
 
 				<div *ngIf="generatingResult">
-						<app-loading-spinner style="margin-top: -100px"></app-loading-spinner>
+						<app-loading-spinner></app-loading-spinner>
 						<p>Generating result..</p>
 				</div>
 			
@@ -76,7 +79,7 @@
 			</div>
 
 			<div class="progress" *ngIf="showQuestion() || showResult || generatingResult">
-					<div appQuiz [width]="progress" class="progress-bar" role="progressbar"></div>
+					<div appProgress [width]="progress" class="progress-bar" role="progressbar"></div>
 			</div>
 
 		</div>

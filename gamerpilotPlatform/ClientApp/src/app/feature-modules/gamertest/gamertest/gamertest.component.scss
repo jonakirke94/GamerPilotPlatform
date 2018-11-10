@@ -8,13 +8,6 @@ $bg-light:hsl(24, 20%, 95%);
 $border: hsl(24, 9%, 82%);
 $bg-dark: hsl(24, 21%, 93%);
 
-h3 {
-    color: $primary;
-    margin-bottom: 50px;
-    width: 100%;
-    text-align: center;
-}
-
 .wrapper {
 	display: flex;
 	justify-content: center;
@@ -33,7 +26,6 @@ h3 {
     border-top: 8px solid $tertiary;
     min-width: 400px;
 		position: relative;
-
 
     .header {
 				background-color: $bg-light;
@@ -58,36 +50,117 @@ h3 {
             display: inline-block;
             font-size: 2rem;
             align-self: center; 
-        }
-        
+        }      
 		}
-
 		
 		.content {
 			background-color: $bg-light;
 			padding: 50px;
 			padding-top: 0;
 			overflow: hidden;
-		}
 
-		.result {
-			p {
-				margin-top: 0;
+			.table {
+				position: relative;
+				display: flex;
+				flex-direction: row;
+			
+				.radio-container {
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					position: relative;
+					margin-bottom: 50px;
+
+					.option-input {
+						appearance: none;
+						position: relative;
+						top: 13.33333px;
+						right: 0;
+						bottom: 0;
+						left: 0;
+						height: 40px;
+						width: 40px;
+						transition: all 0.15s ease-out 0s;
+						background: #cbd1d8;
+						border: none;
+						color: #fff;
+						display: inline-block;
+						margin-right: 0.5rem;
+						outline: none;
+						position: relative;
+						z-index: 1000;
+						
+						&:hover {
+							background: $primary;
+							cursor: pointer;
+						}
+					
+						&:checked {
+							background: $primary;
+					
+							&:before {
+								height: 40px;
+								width: 40px;
+								position: absolute;
+								content: '✔';
+								display: inline-block;
+								font-size: 26.66667px;
+								text-align: center;
+								line-height: 40px;
+							}
+					
+							&:after {
+								animation: click-wave 0.65s;
+								background: $primary;
+								content: '';
+								display: block;
+								position: relative;
+								z-index: 100;
+							}
+						}
+					
+						&.radio {
+							border-radius: 50%;
+					
+							&:after {
+								border-radius: 50%;
+							}
+						}
+					}
+				}
+			}
+
+			.result {
+				p {
+					margin-top: 0;
+				}
 			}
 		}
 
-}
-
-.radio-buttons {
-    display: flex;
-    flex-direction: column;
-		margin-top: 50px;
-		margin-bottom: 50px;
-    position: relative;
-
-    @media (min-width: 768px) { 
-    	flex-direction: row;
-    }
+		.progress {
+			display: flex;
+			height: 1rem;
+			overflow: hidden;
+			font-size: 0.75rem;
+			background-color: #e9ecef;
+			border-bottom-left-radius: 7px;
+			border-bottom-right-radius: 7px;
+		
+			.progress-bar {
+				background-color: #6cb29f;
+				width: 0;
+				max-width: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				color: #fff;
+				text-align: center;
+				white-space: nowrap;
+				transition: width 0.6s ease;
+			}
+		}
 }
 
 .btn-primary {
@@ -118,101 +191,18 @@ h3 {
 		cursor: default;
 	}
 
-
-}
-
-
-
-.table {
-	position: relative;
-	display: flex;
-	flex-direction: row;
-
-	.radio-container {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		position: relative;
-		margin-bottom: 50px;
+	.icon {
+		padding-left: 20px;
 	}
 }
 
 
 
-.option-input {
-  appearance: none;
-  position: relative;
-  top: 13.33333px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 40px;
-  width: 40px;
-  transition: all 0.15s ease-out 0s;
-  background: #cbd1d8;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  margin-right: 0.5rem;
-  outline: none;
-  position: relative;
-  z-index: 1000;
-}
-.option-input:hover {
-  background: $primary;
-}
-.option-input:checked {
-  background: $primary;
-}
-.option-input:checked::before {
-  height: 40px;
-  width: 40px;
-  position: absolute;
-  content: '✔';
-  display: inline-block;
-  font-size: 26.66667px;
-  text-align: center;
-  line-height: 40px;
-}
-.option-input:checked::after {
-  -webkit-animation: click-wave 0.65s;
-  -moz-animation: click-wave 0.65s;
-  animation: click-wave 0.65s;
-  background: $primary;
-  content: '';
-  display: block;
-  position: relative;
-  z-index: 100;
-}
-.option-input.radio {
-  border-radius: 50%;
-}
-.option-input.radio::after {
-  border-radius: 50%;
-}
 
-.progress {
-	display: flex;
-	height: 1rem;
-	overflow: hidden;
-	font-size: 0.75rem;
-	background-color: #e9ecef;
-	border-bottom-left-radius: 7px;
-	border-bottom-right-radius: 7px;
-}
 
-.progress-bar {
-	background-color: #6cb29f;
-	width: 0;
-	max-width: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	color: #fff;
-	text-align: center;
-	white-space: nowrap;
-	transition: width 0.6s ease;
-}
+
+
+
+
+
+
