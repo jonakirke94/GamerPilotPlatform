@@ -7,11 +7,12 @@ import { GamertestComponent } from './gamertest/gamertest.component';
 import { TestCheckboxComponent } from './test-checkbox/test-checkbox.component';
 
 @NgModule({
-    imports: [
-      CommonModule,
-      GamertestRoutingModule,
-    ],
-    declarations: [GamertestComponent, TestCheckboxComponent,
-    ]
-  })
+		imports: [
+			CommonModule,
+			GamertestRoutingModule,
+			SharedModule
+		],
+		declarations: [GamertestComponent, TestCheckboxComponent,
+		]
+	})
 export class GamertestModule { }

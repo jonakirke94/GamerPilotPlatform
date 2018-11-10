@@ -9,7 +9,6 @@ input[type=radio] {
   }
   
   .circle {
-    position: relative;
     width: 100px / $scale;
     height: 100px / $scale;
   }
@@ -134,12 +133,17 @@ input[type=radio] {
   .circle--inner__5 { transform-origin: 75% -30%; }
 
 .radio {
-    text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 2rem;
+		position: relative;
+		border: 1px solid red;
 }
 
   span {
       font-size: 1rem;
-      color: $tertiary;
-      display: block;
-      margin-bottom: 1rem;
+			color: $tertiary;
+			padding-bottom: 1rem;
+			border: 1px solid blue;
   }

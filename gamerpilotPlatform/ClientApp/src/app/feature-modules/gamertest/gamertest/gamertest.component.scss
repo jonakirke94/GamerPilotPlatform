@@ -32,79 +32,187 @@ h3 {
     border-radius: 7px;
     border-top: 8px solid $tertiary;
     min-width: 400px;
-    position: relative;
+		position: relative;
+
 
     .header {
-        padding-top: 50px;
-        padding-bottom: 50px;
-        text-align: left;
-        background-color: white;
+				background-color: $bg-light;
         display: flex;
-        flex-direction: row;
-        align-items: center;
+				flex-direction: row;
+				align-items: center;
+				padding: 50px;
+				p {
+					font-family: $font-stack;
+					margin-top: 0;
+					color: $text-dark;
+					text-align: left;
+				}
+				
+				img {
+					max-height: 100px;
+					padding-right: 50px;
+				}
 
-        .progress {
-						background-image: linear-gradient(45deg, $tertiary, lighten($tertiary, 10%));
-						height: 120px;
-						width: 120px;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						margin-left: 50px;
-						align-self: flex-start;
-						
-						p {
-							color: white;
-							font-size: 2rem;
-						}
-
-          
-        }
-
-        .question {
+        .question-text {
             color: black;
             display: inline-block;
             font-size: 2rem;
-            margin-left: 50px;
-            align-self: flex-start; 
-            
+            align-self: center; 
         }
         
-    }
+		}
 
-}
+		
+		.content {
+			background-color: $bg-light;
+			padding: 50px;
+			padding-top: 0;
+			overflow: hidden;
+		}
 
+		.result {
+			p {
+				margin-top: 0;
+			}
+		}
 
-@-ms-keyframes spin {
-    from { -ms-transform: rotate(0deg); }
-    to { -ms-transform: rotate(360deg); }
-}
-@-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
-}
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
 }
 
 .radio-buttons {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    margin-top: 50px;
+		margin-top: 50px;
+		margin-bottom: 50px;
     position: relative;
 
     @media (min-width: 768px) { 
-    flex-direction: row;
-    justify-content: space-evenly;
+    	flex-direction: row;
     }
+}
+
+.btn-primary {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: 0.93px;
+	display: block;
+	width: 180px;
+	padding: 12px 0 12px;
+	text-transform: uppercase;
+	text-align: center;
+	border-radius: 0.25rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	margin-left: auto;
+	background-image: linear-gradient(45deg, $primary, $tertiary);
+	color: #ffffff;
+	border: none;
+
+	&:hover {
+		background-image: linear-gradient(-45deg, $primary 0%, $tertiary 100%);
+		cursor: pointer;
+	}
+	
+	&:disabled {
+		background-image: none;
+		opacity: .65;
+		cursor: default;
+	}
+
+
+}
+
+
+
+.table {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+
+	.radio-container {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		margin-bottom: 50px;
+	}
+}
+
+
+
+.option-input {
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: $primary;
+}
+.option-input:checked {
+  background: $primary;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: $primary;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+
+.progress {
+	display: flex;
+	height: 1rem;
+	overflow: hidden;
+	font-size: 0.75rem;
+	background-color: #e9ecef;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+}
+
+.progress-bar {
+	background-color: #6cb29f;
+	width: 0;
+	max-width: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	transition: width 0.6s ease;
 }

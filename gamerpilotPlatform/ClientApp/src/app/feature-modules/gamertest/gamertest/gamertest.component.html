@@ -1,37 +1,87 @@
-
 <div class="wrapper">
 
-  <div class="container">
+	<div class="container">
 
-      <div class="bg">
+		<div class="bg">
 
-          <div class="header">
-      
-            <div class="progress">
-							<p>1 / 5</p>
-						</div>
-						
-            <div class="question">
-              This is question one of many questions to come        
-              
-              <div class="radio-buttons">
+			<div class="header">
 
-                <app-test-checkbox (change)="setValue($event)" [label]="'meget uenig'" [value]=1></app-test-checkbox>
-                <app-test-checkbox (change)="setValue($event)" [label]="'uenig'" [value]=2></app-test-checkbox>
-                <app-test-checkbox (change)="setValue($event)" [label]="'ved ikke'" [value]=3></app-test-checkbox>
-                <app-test-checkbox (change)="setValue($event)" [label]="'enig'" [value]=4></app-test-checkbox>
-                <app-test-checkbox (change)="setValue($event)" [label]="'meget enig'" [value]=5></app-test-checkbox>
+				<img src="/assets/images/gp-brand.png" alt="gamerpilot logo">
 
-              </div>
-            </div>
-      
-          </div>
-            
+				<div *ngIf="showIntro">
+					<p>
+						Ever wondered what kind of gamer you are? We've created a gamer test in cooperation with a skilled psychologist
+						to help you map
+						your gaming profile. To ensure the most accurate result we encourage you to answer the questions as honest as
+						possible.
+					</p>
+					<button class="btn-primary" (click)="start()">Begin test</button>
 				</div>
-				
-				<button class="btn next">Next</button>
 
-  </div>
+				<div class="question-text" *ngIf="showQuestion()">
+					{{questions[currentIndex].text}}
+				</div>
+			</div>
+
+			<div class="content" *ngIf="!this.showIntro">
+
+
+
+				<div class="question" *ngIf="showQuestion()">
+
+					<div class="table">
+						<div class="radio-container">
+							<label for="">Very accurate</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('1')" name="radio" />
+							</label>
+						</div>
+						<div class="radio-container">
+							<label for="">Moderately inaccurate</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('2')" name="radio" />
+							</label> </div>
+						<div class="radio-container">
+							<label for="">Neither</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('3')" name="radio" />
+							</label> </div>
+						<div class="radio-container">
+							<label for="">Moderatley accurate</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('4')" name="radio" />
+							</label> </div>
+						<div class="radio-container">
+							<label for="">Very inaccurate</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('5')" name="radio" />
+							</label>
+						</div>
+					</div>
+
+					<button class="btn-primary" (click)="next()" [disabled]="!hasValue">{{buttonText}}</button>
+
+				</div>
+
+				<div *ngIf="generatingResult">
+						<app-loading-spinner style="margin-top: -100px"></app-loading-spinner>
+						<p>Generating result..</p>
+				</div>
+			
+
+				<div *ngIf="showResult" class="result">
+					<p>{{result}}</p>
+				</div>
+
+			</div>
+
+			<div class="progress" *ngIf="showQuestion() || showResult || generatingResult">
+					<div appQuiz [width]="progress" class="progress-bar" role="progressbar"></div>
+			</div>
+
+		</div>
+
+	</div>
 
 
 </div>
