@@ -24,7 +24,6 @@ $bg-dark: hsl(24, 21%, 93%);
     border: 1px solid $border;
     border-radius: 7px;
     border-top: 8px solid $tertiary;
-    min-width: 400px;
 		position: relative;
 
     .header {
@@ -33,11 +32,21 @@ $bg-dark: hsl(24, 21%, 93%);
 				flex-direction: row;
 				align-items: center;
 				padding: 50px;
+
+				@media only screen and (max-width : 768px) {
+					flex-direction: column;
+					padding: 10px;
+				}			
+
 				p {
 					font-family: $font-stack;
 					margin-top: 0;
 					color: $text-dark;
 					text-align: left;
+
+					@media only screen and (max-width : 768px) {
+						margin-top: 50px;
+					}	
 				}
 				
 				img {
@@ -49,7 +58,11 @@ $bg-dark: hsl(24, 21%, 93%);
             color: black;
             display: inline-block;
             font-size: 2rem;
-            align-self: center; 
+						align-self: center; 
+										
+						@media only screen and (max-width : 768px) {
+							margin-top: 50px;
+						}			
         }      
 		}
 		
@@ -63,6 +76,7 @@ $bg-dark: hsl(24, 21%, 93%);
 				position: relative;
 				display: flex;
 				flex-direction: row;
+				flex-wrap: wrap;
 			
 				.radio-container {
 					flex: 1;
@@ -72,6 +86,10 @@ $bg-dark: hsl(24, 21%, 93%);
 					align-items: center;
 					position: relative;
 					margin-bottom: 50px;
+
+					.label {
+						height: 30px;
+					}
 
 					.option-input {
 						appearance: none;
@@ -149,7 +167,7 @@ $bg-dark: hsl(24, 21%, 93%);
 			border-bottom-right-radius: 7px;
 		
 			.progress-bar {
-				background-color: #6cb29f;
+				background-color: $tertiary;
 				width: 0;
 				max-width: 0;
 				display: flex;
