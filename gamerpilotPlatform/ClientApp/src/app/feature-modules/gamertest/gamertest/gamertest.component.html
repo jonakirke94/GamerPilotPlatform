@@ -26,7 +26,7 @@
 
 				<div *ngIf="showResult" class="result">
 					<h3>
-							 {{result.category}}
+							 {{result.category}} - {{result.role}}
 							<fa-icon [icon]="['fas', 'fist-raised']" class="title-icon"></fa-icon>
 					</h3>
 				</div>
@@ -82,11 +82,6 @@
 			
 
 				<div *ngIf="showResult" class="result">
-					<p>According to our test, you scored the highest in personality trait: <span class="highlight">{{result.category}}
-							.</span>
-						Your optimal role: <span class="highlight">{{result.role}}
-							</span>
-					</p>
 					<hr>
 					<h4>
 						{{result.category}}
