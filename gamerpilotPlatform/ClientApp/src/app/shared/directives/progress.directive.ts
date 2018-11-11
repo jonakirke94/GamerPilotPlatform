@@ -1,9 +1,9 @@
 import { Directive, Input, ElementRef, OnChanges } from '@angular/core';
 
 @Directive({
-	selector: '[appQuiz]'
+	selector: '[appProgress]'
 })
-export class QuizDirective implements OnChanges {
+export class ProgressDirective implements OnChanges {
 	@Input() width;
 
 	constructor(private el: ElementRef) {}

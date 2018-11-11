@@ -39,7 +39,7 @@ namespace gamerpilotPlatform.Data
                    Username = "TestUser",
                    Password = "AQAAAAEAACcQAAAAENoRYO3DXwVRVZ2JE9/kX+WCIQGGGZDmT9ERFDYTgbMpel4xEPWd6AxuCE/7nDOS/w=="
                });
-                    context.SaveChanges();
+                context.SaveChanges();
 
 
 
@@ -186,7 +186,7 @@ namespace gamerpilotPlatform.Data
                 caseEntity.Sections.Add(section4);
                 caseEntity.Sections.Add(section5);
 
-                
+
 
                 var proContent = new CourseVideo()
                 {
@@ -200,8 +200,8 @@ namespace gamerpilotPlatform.Data
                 context.SaveChanges();
 
                 //await videoService.AddVideo(instructor2.Id, proContent.Id, "Good & bad communication", "C:\\Users\\inter\\Desktop\\AWS_Videos\\good-bad-communication.mp4");
-               // await videoService.AddVideo(instructor2.Id, proContent.Id, "How do pros practice communication?", "C:\\Users\\inter\\Desktop\\AWS_Videos\\how-do-pros-practice-communication.mp4");
-               // await videoService.AddVideo(instructor2.Id, proContent.Id, "Get in the mind of a pro", "C:\\Users\\inter\\Desktop\\AWS_Videos\\get-in-the-mind of-a-pro.mp4");
+                // await videoService.AddVideo(instructor2.Id, proContent.Id, "How do pros practice communication?", "C:\\Users\\inter\\Desktop\\AWS_Videos\\how-do-pros-practice-communication.mp4");
+                // await videoService.AddVideo(instructor2.Id, proContent.Id, "Get in the mind of a pro", "C:\\Users\\inter\\Desktop\\AWS_Videos\\get-in-the-mind of-a-pro.mp4");
 
                 /*************************************************/
                 /********** EXERCISES*****************************/
@@ -521,7 +521,7 @@ namespace gamerpilotPlatform.Data
                     IsCorrect = true,
                     Text = "You check the same spots as your teammates",
                 };
-                var choice22= new Choice()
+                var choice22 = new Choice()
                 {
                     IsCorrect = false,
                     Text = "You all run like headless chickens",
@@ -531,7 +531,7 @@ namespace gamerpilotPlatform.Data
                     IsCorrect = false,
                     Text = "You run to the wrong bomb sites",
                 };
-                var choice24= new Choice()
+                var choice24 = new Choice()
                 {
                     IsCorrect = false,
                     Text = "You flash your teammates",
@@ -547,7 +547,7 @@ namespace gamerpilotPlatform.Data
                 question6.Choices.Add(choice24);
 
                 // question 7
-                var question7= new Question()
+                var question7 = new Question()
                 {
                     Difficulty = "Easy",
                     QuestionText = "If you are frequently surprised during your games, what is this an indication of?"
@@ -605,6 +605,47 @@ namespace gamerpilotPlatform.Data
 
             }
 
+            if (!context.GamerProfiles.Any())
+            {
+                var profile1 = new GamerProfile
+                {
+                    Category = "Agreeableness",
+                    Role = "Support player",
+                    RoleDescription = "You are known to be kind, sharing, cooperative, warm and considerate. You value teamwork and generally have an optimistic view of others.",
+                    Strengths = "As someone high in agreeableness you're flexible and willing to make compromises in cooperative situations.This makes you an especially valuable support player.Examples of how highly agreeable support players improve their team’s chances of success, are their willingness to give up kills, for helping out teammates in tight spots, and to drop weapons for skilled teammates short on cash.This willingness to share and compromise in terms of kill - count and cash will ultimately serve to increase their team’s chances of success.",
+                    Weaknesses = "The desire for friendliness and team harmony can be valuable in any team, however such considerations may prevent you from sharing tactical and strategic opinions which goes against that of the majority."
+                };
+                context.GamerProfiles.Add(profile1);
+                var profile2 = new GamerProfile
+                {
+                    Category = "Conscientiousness",
+                    Role = "Team leader",
+                    RoleDescription = "you're more careful and forward-thinking than most you meet online and in real-life but high conscientiousness also implies a general desire to do tasks well, and to take obligations to others seriously.You tend to be efficient, organized and attentive to detail as opposed to easy-going and disorderly.",
+                    Strengths = "You possess excellent strategist and leadership qualities. An example would be your orientation to detail, which likely makes you more aware of when and how you should spend cash in-game, and when to save or drop for teammates.This is important when trying make the most of the teams total cash sum. As a result, you create a team - wide material advantage.In addition you inspire teammates by making them more conscientious themselves.This leads to better coordination, strategy and teamwork.",
+                    Weaknesses = "Your flair for detail, coordination and planning makes you a great strategist, but you only really become a great leader, when able to get your team onbord.For someone high in conscientiousness, unresponsive teammates can become a huge frustration, impacting their own performance negatively - but this dosen't mean you should totally give up on strat calling, however! in fact, the key here is effective communication..."
+                };
+                context.GamerProfiles.Add(profile2);
+                var profile3 = new GamerProfile
+                {
+                    Category = "Extraversion",
+                    Role = "Entry fragger",
+                    RoleDescription = "As someone high in Extraversion you love to play with high stakes. You seek plays and moves that get's your adrenaline pumping, often surprising opponents with risky moves.High risk is a natural part of your play, which turns the discomfort of others to your advantage.",
+                    Strengths = "Being a fearless player, you have a laser like focus in clutch situations and the ability to act effectively without delay due to fear or shock.As an extrovert you are likely optimistic, high in positive emotion, outgoing and effective at communication.These are great attributes for any entry fragger.Being first to get information about opposing players, they should be able to pass this to their team in an effective manner.",
+                    Weaknesses = "Rushing in and getting quick pickoffs is great but doesn’t work every time. Often you'll find yourself getting picked off uneccesarily due to overconfidence.Practice structure and listening to your teammates."
+                };
+                context.GamerProfiles.Add(profile3);
+                var profile4 = new GamerProfile
+                {
+                    Category = "Openess",
+                    Role = "Lurker",
+                    RoleDescription = "You generally enjoy venturing beyond your comfort zone and to seek out the unknown. As a person you are original, imaginative, have broad interests, and are not afraid to take risks in your quests for new experiences, skills and knowledge.",
+                    Strengths = "As someone high in openess you enjoy exploring the game world, thinking about and trying new strategies, tactics, and ways in which to oursmart your opponents. You're innovative, knowledgable, and generally like to think for yourself and define your own unique playstyle.  This makes you incredibly unpredictable in-game, and a great fit for the lurking playstyle, where your creativity and cool-headedness makes you great at flanking and picking off opponents when they least suspect it.",
+                    Weaknesses = "While your unpredictable, creative and individualized playstyle can make you a nightmare to play against, it's important to recognize when to simply help out your teammates in conventional ways. While this may seem boring to you, it will often make a huge difference - especially when playing in a group of people you don't know."
+                };
+                context.GamerProfiles.Add(profile4);
+
+                await context.SaveChangesAsync();
+            }
         }
     }
 

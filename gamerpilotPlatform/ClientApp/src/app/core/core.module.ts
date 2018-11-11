@@ -8,19 +8,19 @@ import { AuthGuard } from './guards/auth.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
-    imports: [
-      CommonModule
-    ],
-    providers: [
-      AuthService,
-      StorageService,
-      AuthGuard,
-      {
-          provide: HTTP_INTERCEPTORS,
-          useClass: AuthInterceptor,
-          multi: true
-      },
-    ],
-    declarations: []
-  })
-  export class CoreModule { }
+	imports: [
+		CommonModule
+	],
+	providers: [
+		AuthService,
+		StorageService,
+		AuthGuard,
+		{
+				provide: HTTP_INTERCEPTORS,
+				useClass: AuthInterceptor,
+				multi: true
+		},
+	],
+	declarations: []
+})
+export class CoreModule { }
