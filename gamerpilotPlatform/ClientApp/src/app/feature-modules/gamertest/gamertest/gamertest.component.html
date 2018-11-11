@@ -23,6 +23,13 @@
 				<div class="question-text" *ngIf="showQuestion()">
 					{{questions[currentIndex].text}}
 				</div>
+
+				<div *ngIf="showResult" class="result">
+					<h3>
+							 {{result.category}}
+							<fa-icon [icon]="['fas', 'fist-raised']" class="title-icon"></fa-icon>
+					</h3>
+				</div>
 			</div>
 
 			<div class="content" *ngIf="!this.showIntro">
@@ -75,8 +82,49 @@
 			
 
 				<div *ngIf="showResult" class="result">
-					<p>{{result}}</p>
+					<p>According to our test, you scored the highest in personality trait: <span class="highlight">{{result.category}}
+							.</span>
+						Your optimal role: <span class="highlight">{{result.role}}
+							</span>
+					</p>
+					<hr>
+					<h4>
+						{{result.category}}
+					</h4>
+				
+					<p>{{result.roleDescription}}</p>
+						<hr>
+					<h4>
+						Strengths
+					</h4>
+				
+					<p>{{result.strengths}}</p>
+						<hr>
+					<h4>
+						Weaknesses
+					</h4>
+					<p>{{result.weaknesses}}</p>
+
+					<hr>
+					<h4>
+						What's next?
+					</h4>
+					<p>Communication is a fundamental part of all roles and mastering it will greatly improve your results both as an individual and as a team.
+						We've created a detailed course just for that. On top of practicing your ingame skills the course also highlights ways to practice your skills
+						and transfer them to real life. The time of people claiming gaming is waste of time is over!
+
+						<a href="">Try our communication course for free</a>
+
+					</p>
+
+					<button class="btn-primary btn-lg" routerLink="/courses/communication-in-csgo">
+						Communication course
+						<fa-icon [icon]="['fas', 'long-arrow-alt-right']" class="icon"></fa-icon>
+					</button>
 				</div>
+
+			
+
 
 			</div>
 

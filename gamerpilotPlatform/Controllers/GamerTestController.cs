@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using gamerpilotPlatform.Data;
 using gamerpilotPlatform.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,13 @@ namespace gamerpilotPlatform.Controllers
     [Route("api/[controller]")]
     public class GamerTestController : Controller
     {
+        private readonly GamerpilotVodContext _context;
+
+        public GamerTestController(GamerpilotVodContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public IEnumerable<TestQuestion> Get()
         {
@@ -90,31 +98,6 @@ namespace gamerpilotPlatform.Controllers
                     Category = "conscientiousness",
                     PlusKey = false
                 },
-                // neuroticism
-                new TestQuestion
-                {
-                    Text = "I have frequent mood swings",
-                    Category = "neuroticism",
-                    PlusKey = true
-                },
-                new TestQuestion
-                {
-                    Text = "I get upset easily",
-                    Category = "neuroticism",
-                    PlusKey = true
-                },
-                new TestQuestion
-                {
-                    Text = "I am relaxed most of the time",
-                    Category = "neuroticism",
-                    PlusKey = false
-                },
-                new TestQuestion
-                {
-                    Text = "I seldom feel sad",
-                    Category = "neuroticism",
-                    PlusKey = false
-                },
                 // intellect or imagination
                 new TestQuestion
                 {
@@ -167,11 +150,6 @@ namespace gamerpilotPlatform.Controllers
                     Score = GetCategoryScore(answers, "conscientiousness"),
                     Category = "conscientiousness"
                 },
-               new TestScore
-                {
-                    Score = GetCategoryScore(answers, "neuroticism"),
-                    Category = "neuroticism"
-                },
                 new TestScore
                 {
                     Score = GetCategoryScore(answers, "intellect-or-imagination"),
@@ -184,11 +162,15 @@ namespace gamerpilotPlatform.Controllers
             var highest = scores.FirstOrDefault();
             var description = GetDescription(highest.Category);
 
-
-            return new ObjectResult(new
+            // save result to db 
+            _context.TestResults.Add(new TestResults
             {
-                description
+                DateCreated = DateTime.Now,
+                GamerProfile = description,
             });
+            await _context.SaveChangesAsync();
+
+            return Ok(description);
         }
 
         private int GetWeightedValue(TestQuestion answer)
@@ -229,24 +211,26 @@ namespace gamerpilotPlatform.Controllers
             return score;
         }
 
-        private string GetDescription(string category)
+        private GamerProfile GetDescription(string category)
         {
-            var desc = "";
+            GamerProfile profile = null;
             switch (category)
             {
-                case "surgency-or-extraversion": desc = "surgency-or-extraversion";
+                case "surgency-or-extraversion":
+                    profile = _context.GamerProfiles.SingleOrDefault(x => x.Category == "Extraversion");
                     break;
-                case "agreeableness": desc = "agreeableness";
+                case "agreeableness":
+                    profile = _context.GamerProfiles.SingleOrDefault(x => x.Category == "Agreeableness");
                     break;
-                case "conscientiousness": desc = "conscientiousness";
+                case "conscientiousness":
+                    profile = _context.GamerProfiles.SingleOrDefault(x => x.Category == "Conscientiousness");
                     break;
-                case "neuroticism": desc = "neuroticism";
-                    break;
-                case "intellect-or-imagination": desc = "intellect-or-imagination";
+                case "intellect-or-imagination":
+                    profile = _context.GamerProfiles.SingleOrDefault(x => x.Category == "Openess");
                     break;
             }
 
-            return desc;
+        return profile;
         }
 
 

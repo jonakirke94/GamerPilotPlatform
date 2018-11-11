@@ -4,6 +4,7 @@ import {LoadingSpinnerComponent} from '../../../shared/loading-spinner/loading-s
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TestQuestion } from '../../../../models/test-question';
+import { GamerProfile } from '../../../../models/gamerProfile';
 
 @Component({
 	selector: 'app-gamertest',
@@ -24,7 +25,7 @@ constructor(private _gamertestService: GamertestService) { }
 	hasValue = false;
 	selectedValue: number;
 	buttonText = 'Next';
-	result = '';
+	result: GamerProfile;
 	progress = 0;
 
 	ngOnInit() {
@@ -88,7 +89,7 @@ constructor(private _gamertestService: GamertestService) { }
 			takeUntil(this.onDestroy$
 		))
 		.subscribe(res => {
-			this.result = res['description'];
+			this.result = res as GamerProfile;
 			this.generatingResult = false;
 			this.showResult = true;
 		});

@@ -63,7 +63,18 @@ $bg-dark: hsl(24, 21%, 93%);
 						@media only screen and (max-width : 768px) {
 							margin-top: 50px;
 						}			
-        }      
+				}      
+				
+				.result {
+					text-align: center;
+					width: 100%;
+
+					h3 {			
+							.title-icon {
+								padding-left: 20px;
+							}						
+					}
+				}
 		}
 		
 		.content {
@@ -75,6 +86,42 @@ $bg-dark: hsl(24, 21%, 93%);
 			@media only screen and (max-width : 768px) {
 				padding-bottom: 0;
 			}			
+
+			.result {
+				text-align: left;
+
+				p {
+					font-family: Roboto;
+					line-height: 25px;
+
+					a {
+						color: $primary;
+						font-weight: 700; 
+					}
+				}
+
+				.highlight {
+					color: $primary;
+					font-weight: 700;
+				}
+
+				h4 {
+					color: $primary;
+					font-weight: 700;
+					font-family: Roboto;
+					font-size: 22px;
+					text-align: center;
+				}
+
+				hr {
+					width: 80%;
+					margin-left: 10%;
+					margin-top: 15px;
+					margin-bottom: 15px;
+					color: $primary;
+					border: 1px solid $primary;
+				}
+			}
 
 			.table {
 				position: relative;
@@ -214,6 +261,11 @@ $bg-dark: hsl(24, 21%, 93%);
 		margin-top: 30px;
 		margin-bottom: 30px;
 	}			
+
+	&.btn-lg {
+		margin-top: 50px;
+		padding: 18px 0 18px;
+	}
 
 	&:hover {
 		background-image: linear-gradient(-45deg, $primary 0%, $tertiary 100%);

@@ -30,6 +30,8 @@ namespace gamerpilotPlatform.Data
         public DbSet<CompletedLectures> CompletedLectures { get; set; }
         public DbSet<CaseSection> CaseSections { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<GamerProfile> GamerProfiles { get; set; }
+        public DbSet<TestResults> TestResults { get; set; }
 
         // quiz    
         public DbSet<Question> Questions { get; set; }
