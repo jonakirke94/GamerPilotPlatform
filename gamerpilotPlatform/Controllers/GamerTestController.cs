@@ -76,7 +76,7 @@ namespace gamerpilotPlatform.Controllers
                 // conscientiousness
                 new TestQuestion
                 {
-                    Text = "I get chores done right away",
+                    Text = "I get things done right away",
                     Category = "conscientiousness",
                     PlusKey = true
                 },
@@ -101,7 +101,7 @@ namespace gamerpilotPlatform.Controllers
                 // intellect or imagination
                 new TestQuestion
                 {
-                    Text = "I have a vivid imagination",
+                    Text = "I have a rich imagination",
                     Category = "intellect-or-imagination",
                     PlusKey = true
                 },
@@ -157,9 +157,7 @@ namespace gamerpilotPlatform.Controllers
                 }
             };
 
-            scores.OrderBy(o => o.Score);
-
-            var highest = scores.FirstOrDefault();
+            var highest = scores.OrderByDescending(o => o.Score).FirstOrDefault();
             var description = GetDescription(highest.Category);
 
             // save result to db 
