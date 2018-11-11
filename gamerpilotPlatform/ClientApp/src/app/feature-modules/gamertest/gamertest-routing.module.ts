@@ -6,11 +6,11 @@ import { GamertestComponent } from './gamertest/gamertest.component';
 
 
 const routes: Routes = [
-    { path: '', component: GamertestComponent },
+		{ path: '', component: GamertestComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class GamertestRoutingModule { }

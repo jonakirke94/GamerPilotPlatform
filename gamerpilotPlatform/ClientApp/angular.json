@@ -23,8 +23,7 @@
             ],
             "styles": [
 							"src/sass/styles.scss",
-							"node_modules/flowplayer/dist/skin/skin.css"
-						],
+							"node_modules/flowplayer/dist/skin/skin.css"						],
             "scripts": [
 							"node_modules/flowplayer/dist/flowplayer.min.js"
             ]

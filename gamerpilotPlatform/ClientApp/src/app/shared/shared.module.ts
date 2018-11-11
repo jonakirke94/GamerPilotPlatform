@@ -10,7 +10,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { CourseCarouselComponent } from './coursecarousel/coursecarousel.component';
 import { TagDirective } from './directives/tag.directive';
 import { ExerciseTagDirective } from './directives/exercise-tag.directive';
-import { QuizDirective } from './directives/quiz.directive';
+import { ProgressDirective } from './directives/progress.directive';
 
 @NgModule({
 	imports: [
@@ -24,7 +24,7 @@ import { QuizDirective } from './directives/quiz.directive';
 	LoadingSpinnerComponent,
 	HeaderComponent,
 	CourseCarouselComponent,
-	FooterComponent, TagDirective, ExerciseTagDirective, QuizDirective],
+	FooterComponent, TagDirective, ExerciseTagDirective, ProgressDirective],
 	exports: [
 		CommonModule,
 		FormsModule,
@@ -34,7 +34,7 @@ import { QuizDirective } from './directives/quiz.directive';
 		LoadingSpinnerComponent,
 		HeaderComponent,
 		CourseCarouselComponent,
-		FooterComponent, TagDirective, ExerciseTagDirective, QuizDirective
+		FooterComponent, TagDirective, ExerciseTagDirective, ProgressDirective
 
 	],
 	providers: [

@@ -1,3 +1,135 @@
-<h3>
-  Coming soon!
-</h3>
+<div class="wrapper">
+
+	<div class="container">
+
+		<div class="bg">
+
+			<div class="header">
+
+				<img src="/assets/images/gp-brand.png" alt="gamerpilot logo">
+
+				<div *ngIf="showIntro">
+					<h3>Try our Gamertest</h3>
+					<p>
+						Ever wondered what kind of gamer you are? We've created a gamer test in cooperation with a skilled psychologist
+						to help you map your personality to your gamer profile. <br> <br>
+						
+						In the test you are presented a sequence of scenarios where you have to select the accuracy. To ensure the most precise result
+						we encourage you to answer the questions as honest as possible.
+					</p>
+					<button class="btn-primary" (click)="start()">Begin test</button>
+				</div>
+
+				<div class="question-text" *ngIf="showQuestion()">
+					{{questions[currentIndex].text}}
+				</div>
+
+				<div *ngIf="showResult" class="result">
+					<h3>
+							 {{result.category}} - {{result.role}}
+							<fa-icon [icon]="['fas', 'fist-raised']" class="title-icon"></fa-icon>
+					</h3>
+				</div>
+			</div>
+
+			<div class="content" *ngIf="!this.showIntro">
+
+
+
+				<ng-container *ngIf="showQuestion()">
+
+					<div class="table">
+						<div class="radio-container">
+							<label class="label">Very accurate</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('1')" name="radio" />
+							</label>
+						</div>
+						<div class="radio-container">
+							<label class="label">Moderately inaccurate</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('2')" name="radio" />
+							</label> </div>
+						<div class="radio-container">
+							<label class="label">Neither</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('3')" name="radio" />
+							</label> </div>
+						<div class="radio-container">
+							<label class="label">Moderatley accurate</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('4')" name="radio" />
+							</label> </div>
+						<div class="radio-container">
+							<label class="label">Very inaccurate</label>
+							<label>
+								<input type="radio" class="option-input radio" (change)="select('5')" name="radio" />
+							</label>
+						</div>
+					</div>
+
+					<button class="btn-primary" (click)="next()" [disabled]="!hasValue">
+						{{buttonText}}					
+						<fa-icon [icon]="['fas', 'long-arrow-alt-right']" class="icon"></fa-icon>
+					</button>
+
+				</ng-container>
+
+				<div *ngIf="generatingResult">
+						<app-loading-spinner></app-loading-spinner>
+						<p>Generating result..</p>
+				</div>
+			
+
+				<div *ngIf="showResult" class="result">
+					<hr>
+					<h4>
+						{{result.category}}
+					</h4>
+				
+					<p>{{result.roleDescription}}</p>
+						<hr>
+					<h4>
+						Strengths
+					</h4>
+				
+					<p>{{result.strengths}}</p>
+						<hr>
+					<h4>
+						Weaknesses
+					</h4>
+					<p>{{result.weaknesses}}</p>
+
+					<hr>
+					<h4>
+						What's next?
+					</h4>
+					<p>Communication is a fundamental part of all roles and mastering it will greatly improve your results both as an individual and as a team.
+						We've created a detailed course just for that. On top of practicing your ingame skills the course also highlights ways to practice your skills
+						and transfer them to real life. The time of people claiming gaming is waste of time is over!
+
+						<a href="">Try our communication course for free</a>
+
+					</p>
+
+					<button class="btn-primary btn-lg" routerLink="/courses/communication-in-csgo">
+						Communication course
+						<fa-icon [icon]="['fas', 'long-arrow-alt-right']" class="icon"></fa-icon>
+					</button>
+				</div>
+
+			
+
+
+			</div>
+
+			<div class="progress" *ngIf="showQuestion() || showResult || generatingResult">
+					<div appProgress [width]="progress" class="progress-bar" role="progressbar"></div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+</div>

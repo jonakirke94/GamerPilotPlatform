@@ -31,10 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
 	constructor(
-		private http: HttpClient,
 		private _auth: AuthService,
 		private router: Router,
-		private elementRef: ElementRef,
 		private routerExtService: RouterExtService,
 	) {}
 
